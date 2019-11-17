@@ -1,0 +1,39 @@
+@keyframes rotate {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.big-cicle {
+  margin-left: 10px;
+  margin-top: 10px;
+  width: 400px;
+  height: 400px;
+  border-radius: 50%;
+  border: 1px solid red;
+  position: relative;
+  .small-cicle{
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    border: 1px solid red;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+  }
+  .point {
+    position: absolute;
+    left: 195px;
+    width: 10px;
+    height: 10px;
+    border: 1px solid green;
+    border-radius: 50%;
+    background: green;
+    top: 40px;  //0,40
+    transform-origin: center 160px;
+    animation: rotate 10s linear infinite;
+  }
+}
