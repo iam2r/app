@@ -1,0 +1,120 @@
+/*
+    designWidth/oneRemForDesignWidth = screenWidth/oneRemForScreenWidth恒成立
+    已知screenWidth = 100vw，designWidth = 750px时，oneRemForDesignWidth = 100px
+    求oneRemForScreenWidth
+    oneRemForScreenWidth = screenWidth/（designWidth/oneRemForDesignWidth）
+                       = 100vw/（750px/100px）
+*/
+
+html {
+    $k: $designWidth/$oneRemForDesignWidth;
+    font-family: $yh;
+    font-size:calc(100vw/#{$k});
+    @media screen and (max-width: $minScreenWidth) {
+        font-size: $minScreenWidth/#{$k}
+    }
+    @media screen and (min-width:$maxScreenWidth) {
+        font-size: $maxScreenWidth/#{$k}
+    }
+}
+
+body {
+    font-size: 16PX;
+    //恢复默认字体大小
+}
+
+html,
+body,
+#app {
+    width: 100%;
+    height: 100%;
+}
+
+.container {
+    max-width: $maxScreenWidth;
+    min-width: $minScreenWidth;
+    width: $containerWidth;
+    margin: 0 auto;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+// $yh:"Microsoft yahei";
+// html {
+//     font-family: $yh;
+   
+//     font-size: 10PX;
+
+//     @media screen and (max-width:1050PX) {
+//         font-size: 35.5PX
+//     }
+//     @media screen and (min-width:1050PX) and (max-width:1099PX) {
+//         font-size: 35.5PX
+//     }
+//     @media screen and (min-width:1100PX) and (max-width:1149PX) {
+//         font-size: 36PX
+//     }
+//     @media screen and (min-width:1150PX) and (max-width:1199PX) {
+//         font-size: 37.5PX
+//     }
+//     @media screen and (min-width:1200PX) and (max-width:1249PX){
+//         font-size: 39PX
+//     }
+//     @media screen and (min-width:1250PX) and (max-width:1299PX){
+//         font-size: 40PX
+//     }
+//     @media screen and (min-width:1300PX) and (max-width:1349PX) {
+//         font-size: 41PX
+//     }
+//     @media screen and (min-width:1350PX) and (max-width:1399PX) {
+//         font-size: 42PX
+//     }
+//     @media screen and (min-width:1400PX) and (max-width:1449PX) {
+//         font-size: 43PX
+//     }
+//     @media screen and (min-width:1450PX) and (max-width:1499PX) {
+//         font-size: 44PX
+//     }
+//     @media screen and (min-width:1500PX) and (max-width:1545PX) {
+//         font-size: 45PX
+//     }
+//     @media screen and (min-width:1550PX) and (max-width:1599PX) {
+//         font-size: 46PX
+//     }
+//     @media screen and (min-width:1600PX) and (max-width:1649PX) {
+//         font-size: 47PX
+//     }
+//     @media screen and (min-width:1650PX) and (max-width:1699PX) {
+//         font-size: 48PX
+//     }
+//     @media screen and (min-width:1700PX) and (max-width:1749PX) {
+//         font-size: 49PX
+//     }
+
+//     @media screen and (min-width:1599PX) {
+//         font-size: 50PX
+//     }
+// }
+
+// html,
+// body {
+//     min-height: 100%;
+// }
+
+// body {
+//     font-size: 12px;//会被转成rem
+// }
+
+
+
+
+
