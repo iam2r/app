@@ -5,9 +5,9 @@
 const path = require("path");
 const fs = require('fs-extra')
 
-let appName = '_test';
+let appName = 'iam2r';
 let titleMap = {
-    '_test': '',
+    'iam2r': '',
 }
 
 
@@ -24,30 +24,15 @@ module.exports = {
     staticPath:path.resolve(__dirname,'../dist'),
     dev: {
         publicPath: "/",
-        // port: 8080,
         assetsSubDirectory: "assets",
         proxy: {
-            '/test': {
-                target: 'https://www.iamzr.tk/', //设置你调用的接口域名和端口号       项目中/api代表https://www.iamzr.tk/api
-                changeOrigin: true,
-                pathRewrite: { //将/api字符串替换为空。
-                    // '/api': '' // 访问'https://www.iamzr.tk/user/add'，直接写‘/ api / user / add’即可
-                }
-            },
-            '/history-api': {
-                target: 'http://lobby-egame-rng.sgplay.biz', //设置你调用的接口域名和端口号       项目中/api代表https://www.iamzr.tk/api
-                changeOrigin: true,
-                pathRewrite: { //将/api字符串替换为空。
-                    '^/history-api': '' // 访问'https://www.iamzr.tk/user/add'，直接写‘/ api / user / add’即可
-                }
-            },
+          
         }
     },
     build: {
         publicPath: `./`,
         assetsSubDirectory: "assets",
         cacheGroups: {
-
             config: {
                 test: /[\\/]apps[\\/]\w+[\\/]config\.js/,
                 name: 'config',
