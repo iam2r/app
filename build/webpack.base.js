@@ -29,7 +29,7 @@ process.env.BUILD_MODE = (() => {
         }
     }
 })();
-process.env.APP_NAME = utils.getAppName('blog');
+process.env.APP_NAME = utils.getAppName('_test');
 
 const createEntryAndHtml = pageList => pageList.reduce((pre, page) => {
     let html = new HtmlWebpackPlugin({
