@@ -67,9 +67,11 @@
   },
   "dependencies": {
     "core-js": "^3.4.1",
+    "lodash": "^4.17.15",
     "minireset.css": "0.0.6",
     "normalize.css": "^8.0.1",
     "regenerator-runtime": "^0.13.3",
+    "vant": "^2.2.13",
     "vconsole": "^3.3.4",
     "vue": "^2.6.10",
     "vue-class-component": "^7.1.0",

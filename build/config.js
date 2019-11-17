@@ -5,9 +5,9 @@
 const path = require("path");
 const fs = require('fs-extra')
 
-let appName = 'iam2r';
+let appName = 'blog';
 let titleMap = {
-    'iam2r': '',
+    'blog': '',
 }
 
 
