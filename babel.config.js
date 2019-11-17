@@ -35,7 +35,7 @@ const presets = [
 
 const appsTypes = {
     react: ['test-react'],
-    vue: ['iam2r','vant_study']
+    vue: ['blog','vant_study']
 }
 
 appsTypes.react.includes(process.env.APP_NAME) && presets.push("@babel/preset-react");

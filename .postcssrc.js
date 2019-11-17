@@ -3,7 +3,7 @@ let plugins = {
 };
 switch (process.env.APP_NAME) {
 
-	case 'iam2r':
+	case 'blog':
 		plugins = {
 			...plugins,
 			'autoprefixer':{
