@@ -1,4 +1,3 @@
-const utils = require("./build/utils");
 const {
     polyfills,
     demandList
@@ -13,7 +12,8 @@ let envOptions = {
     },
     // exclude: utils.isModernBuild() ? [] : polyfills,
 }
-if (utils.isModernBuild()) {
+let isModern = process.env.BUILD_MODE == 'modern';
+if (isModern) {
     delete envOptions.corejs;
     envOptions = {
         ...envOptions,
@@ -35,23 +35,23 @@ const presets = [
 
 const appsTypes = {
     react: ['test-react'],
-    vue: ['blog','vant_study']
+    vue: ['blog', 'test-vue','vant_study']
 }
 
 appsTypes.react.includes(process.env.APP_NAME) && presets.push("@babel/preset-react");
 appsTypes.vue.includes(process.env.APP_NAME) && presets.push("@vue/babel-preset-jsx");
 
 const plugins = [
-        ...demandList,
-        "@babel/plugin-syntax-jsx",
-        "@babel/plugin-syntax-dynamic-import"
-    ]
+    ...demandList,
+    "@babel/plugin-syntax-jsx",
+    "@babel/plugin-syntax-dynamic-import"
+]
 
 
-    // polyfills 为node_modules/core-js/modules下js文件名列表 如['es.array.every','es.array.flat'] 等  会强行注入这些方法
-    !utils.isModernBuild() && plugins.push([require("./build/plugin/babel/polyfillsPlugin"), {
-        polyfills
-    }])
+// polyfills 为node_modules/core-js/modules下js文件名列表 如['es.array.every','es.array.flat'] 等  会强行注入这些方法
+!isModern && plugins.push([require("./build/plugin/babel/polyfillsPlugin"), {
+    polyfills
+}])
 
 module.exports = {
     presets,

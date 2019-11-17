@@ -16,34 +16,29 @@ const {
     ProvidePlugin,
     DefinePlugin
 } = require("webpack");
-const {
-    isModern,
-    isModernBuild
-} = utils.getModernConfig();
 
-const getBuildMode = (options = {
-    normal: !isModern,
-    legacy: isModern && !isModernBuild,
-    modernBuild: isModern && isModernBuild
-}) => {
-    for (const key in options) {
-        if (options[key]) {
+const BUILDMODE = config.build.mode;
+
+process.env.BUILD_MODE = (() => {
+    let mode = utils.getBuildMode();
+    for (const key in mode) {
+        if (mode[key]) {
             return key
         } else {
             continue
         }
     }
-}
-process.env.BUILD_MODE = getBuildMode();
-process.env.APP_NAME = config.appName;
+})();
+process.env.APP_NAME = utils.getAppName('blog');
+
 const createEntryAndHtml = pageList => pageList.reduce((pre, page) => {
     let html = new HtmlWebpackPlugin({
         template: path.resolve(__dirname, `../public/${page}.html`),
-        title: config.htmlTitle || ``,
+        title: config.titleMap[process.env.APP_NAME] || ``,
         filename: `${page}.html`,
         inject: "body",
         parmas: {
-            appName: config.appName ? config.appName : '',
+            appName: process.env.APP_NAME ? process.env.APP_NAME : '',
         },
         minify: {
             removeComments: !utils.isDev(),
@@ -58,9 +53,9 @@ const createEntryAndHtml = pageList => pageList.reduce((pre, page) => {
     pre.html.push(html)
     return pre
 }, {
-        entry: {},
-        html: []
-    });
+    entry: {},
+    html: []
+});
 
 
 
@@ -199,15 +194,15 @@ const plugins = [
 
 const copyWebpackOptions = [{
     from: path.resolve(__dirname, `../public`),
-    to: config.staticPath + "/" + config.appName,
+    to: config.staticPath + "/" + process.env.APP_NAME,
     toType: 'dir',
     ignore: [
         'index.html',
         '.DS_Store'
     ]
 }, {
-    from: path.resolve(__dirname, `../src/apps/${config.appName}/_public`),
-    to: config.staticPath + "/" + config.appName,
+    from: path.resolve(__dirname, `../src/apps/${process.env.APP_NAME}/_public`),
+    to: config.staticPath + "/" + process.env.APP_NAME,
     toType: 'dir',
     ignore: [
         '.DS_Store'
@@ -232,10 +227,10 @@ module.exports = {
         child_process: 'empty'
     },
     output: {
-        path: config.staticPath + "/" + config.appName,
+        path: config.staticPath + "/" + process.env.APP_NAME,
         publicPath: utils.isDev() ? config.dev.publicPath : config.build.publicPath,
-        filename: utils.isDev() ? "js/[name].js" : `js/[name]${process.env.BUILD_MODE == 'legacy' ? '-legacy' : ''}.[contenthash:8].js`,
-        chunkFilename: utils.isDev() ? "js/[name].js" : `js/[name]${process.env.BUILD_MODE == 'legacy' ? '-legacy' : ''}.[contenthash:8].js`
+        filename: utils.isDev() ? "js/[name].js" : `js/[name]${process.env.BUILD_MODE == BUILDMODE.legacy ? `-${BUILDMODE.legacy}` : ''}.[contenthash:8].js`,
+        chunkFilename: utils.isDev() ? "js/[name].js" : `js/[name]${process.env.BUILD_MODE == BUILDMODE.legacy ? `-${BUILDMODE.legacy}` : ''}.[contenthash:8].js`
     },
 
     resolve: {
@@ -249,7 +244,7 @@ module.exports = {
         ],
         alias: {
             '@': path.resolve(__dirname, `../src`),
-            'appdir':path.resolve(__dirname, `../src/apps/${config.appName}`)
+            'appdir': path.resolve(__dirname, `../src/apps/${process.env.APP_NAME}`)
         } //配置别名可以加快webpack查找模块的速度
     },
     module: {
@@ -259,7 +254,7 @@ module.exports = {
             test: /\.(j|t)sx?$/,
             exclude: [
                 filepath => {
-                    if (process.env.BUILD_MODE == 'modernBuild') { //modernBuild模式时全部走loader
+                    if (process.env.BUILD_MODE == BUILDMODE.modern) { //modern模式时全部走loader
                         return false
                     }
                     return /node_modules/.test(filepath)
@@ -274,7 +269,7 @@ module.exports = {
                 use: [{
                     loader: 'cache-loader',
                     options: {
-                        cacheIdentifier: utils.isDev() ? 'dev' : process.env.BUILD_MODE == 'modernBuild' ? 'modernBuild' : 'legacy',
+                        cacheIdentifier: utils.isDev() ? 'dev' : process.env.BUILD_MODE == BUILDMODE.modern ? BUILDMODE.modern : BUILDMODE.legacy,
                         cacheDirectory: path.resolve(__dirname, '../node_modules/.cache/babel-loader')
                     }
                 },
@@ -298,7 +293,7 @@ module.exports = {
             use: [{
                 loader: 'cache-loader',
                 options: {
-                    cacheIdentifier: utils.isDev() ? 'dev' : process.env.BUILD_MODE == 'modernBuild' ? 'modernBuild' : 'legacy',
+                    cacheIdentifier: utils.isDev() ? 'dev' : process.env.BUILD_MODE == BUILDMODE.modern ? BUILDMODE.modern : BUILDMODE.legacy,
                     cacheDirectory: path.resolve(__dirname, '../node_modules/.cache/vue-loader')
                 }
             },

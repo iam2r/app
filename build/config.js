@@ -3,30 +3,17 @@
  */
 
 const path = require("path");
-const fs = require('fs-extra')
-
-let appName = 'blog';
-let titleMap = {
-    'blog': '',
-}
-
-
-if (process.argv.includes("--modern") && !process.argv.includes("legacy")) {
-    appName = process.env.APP_NAME || JSON.parse(fs.readFileSync(path.resolve(__dirname, './plugin/webpack/appName.json'), 'utf-8')).appName
-} else {
-    appName = process.env.APP_NAME || (process.argv.includes("--app") && process.argv[process.argv.indexOf('--app') + 1]) || appName;
-}
-
 
 module.exports = {
-    appName: appName,
-    htmlTitle: titleMap[appName] || appName,
-    staticPath:path.resolve(__dirname,'../dist'),
+    titleMap: {
+        'blog': '',
+    },
+    staticPath: path.resolve(__dirname, '../dist'),
     dev: {
         publicPath: "/",
         assetsSubDirectory: "assets",
         proxy: {
-          
+
         }
     },
     build: {
@@ -52,6 +39,11 @@ module.exports = {
                 priority: -10,
                 enforce: true
             },
+        },
+        mode: {
+            normal: 'normal',//传统 
+            legacy: 'legacy',//现代-兼容
+            modern: 'modern'//现代-现代
         }
     },
     polyfills: [

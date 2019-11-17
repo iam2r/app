@@ -5,7 +5,7 @@ const path = require('path')
 const safariFix = `!function(){var e=document,t=e.createElement("script");if(!("noModule"in t)&&"onbeforeload"in t){var n=!1;e.addEventListener("beforeload",function(e){if(e.target===t)n=!0;else if(!e.target.hasAttribute("nomodule")||!n)return;e.preventDefault()},!0),t.type="module",t.src=".",e.head.appendChild(t),t.remove()}}();`
 
 class ModernModePlugin {
-  constructor({ targetDir, isModernBuild, unsafeInline ,publicPath}) {
+  constructor({ targetDir, isModernBuild, unsafeInline, publicPath }) {
     this.targetDir = targetDir
     this.isModernBuild = isModernBuild
     this.unsafeInline = unsafeInline
@@ -30,9 +30,9 @@ class ModernModePlugin {
         // Watch out for output files in sub directories
         const htmlPath = path.dirname(data.plugin.options.filename)
         const tempFilename = path.join(this.targetDir, htmlPath, `legacy-assets-${htmlName}.json`)
-        const appNameFilename = path.join(__dirname, `appName.json`)
+        const constFilename = path.join(__dirname, `const.json`)
         await fs.mkdirp(path.dirname(tempFilename))
-        await Promise.all([fs.writeFile(tempFilename, JSON.stringify(data.body)),fs.writeFile(appNameFilename, JSON.stringify({appName:process.env.APP_NAME}))])
+        await Promise.all([fs.writeFile(tempFilename, JSON.stringify(data.body)), fs.writeFile(constFilename, JSON.stringify({ appName: process.env.APP_NAME, isReport: process.argv.includes("--report") }))])
         cb()
       })
     })
@@ -64,7 +64,7 @@ class ModernModePlugin {
         // Watch out for output files in sub directories
         const htmlPath = path.dirname(data.plugin.options.filename)
         const tempFilename = path.join(this.targetDir, htmlPath, `legacy-assets-${htmlName}.json`)
-        const appNameFilename = path.join(__dirname, `appName.json`)
+        const constFilename = path.join(__dirname, `const.json`)
         const legacyAssets = JSON.parse(await fs.readFile(tempFilename, 'utf-8'))
           .filter(a => a.tagName === 'script' && a.attributes)
         legacyAssets.forEach(a => { a.attributes.nomodule = '' })
@@ -78,13 +78,12 @@ class ModernModePlugin {
           })
         } else {
           // inject the fix as an external script
-          const safariFixPath = legacyAssets[0].attributes.src.replace(new RegExp(`^${this.publicPath}`),'')
+          const safariFixPath = legacyAssets[0].attributes.src.replace(new RegExp(`^${this.publicPath}`), '')
             .split('/')
             .slice(0, -1)
             .concat(['safari-nomodule-fix.js'])
             .join('/')
-          console.log(safariFixPath)
-          
+
           compilation.assets[safariFixPath] = {
             source: function () {
               return new Buffer(safariFix)
@@ -97,13 +96,13 @@ class ModernModePlugin {
             tagName: 'script',
             closeTag: true,
             attributes: {
-              src: this.publicPath+''+safariFixPath
+              src: this.publicPath + '' + safariFixPath
             }
           })
         }
 
         data.body.push(...legacyAssets)
-        await Promise.all([fs.remove(tempFilename),fs.remove(appNameFilename)])
+        await Promise.all([fs.remove(tempFilename), fs.remove(constFilename)])
         cb()
       })
 

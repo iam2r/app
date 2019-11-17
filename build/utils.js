@@ -7,7 +7,7 @@ class Utils {
 
   }
 
- 
+
 
   getLocalIP() {
     const interfaces = os.networkInterfaces();
@@ -33,6 +33,14 @@ class Utils {
     return fileList;
   }
 
+  getAppName(appName) {
+    if (process.argv.includes("--modern") && !process.argv.includes("legacy")) {
+      return process.env.APP_NAME || JSON.parse(fs.readFileSync(path.resolve(__dirname, './plugin/webpack/const.json'), 'utf-8')).appName
+    } else {
+      return process.env.APP_NAME || (process.argv.includes("--app") && process.argv[process.argv.indexOf('--app') + 1]) || appName;
+    }
+  }
+
   isDev() {
     return process.env.NODE_ENV === "development";
   };
@@ -41,8 +49,22 @@ class Utils {
     return process.argv.includes("--dll");
   }
 
-  isModernBuild(){
-    return process.env.BUILD_MODE == 'modernBuild'
+  isReport() {
+
+    if (process.argv.includes("--modern") && !process.argv.includes("legacy")) {
+      return JSON.parse(fs.readFileSync(path.resolve(__dirname, './plugin/webpack/const.json'), 'utf-8')).isReport
+    } else {
+      return process.argv.includes("--report")
+    }
+
+  }
+
+  getBuildMode() {
+    return {
+      normal: !process.argv.includes("--modern"),
+      legacy: process.argv.includes("--modern") && process.argv.includes("legacy"),
+      modern: process.argv.includes("--modern") && !process.argv.includes("modern"),
+    }
   }
 
   getDllVendor() {
@@ -60,13 +82,6 @@ class Utils {
       flag && pre.push(cur)
       return pre;
     }, []);
-  }
-
-  getModernConfig() {
-    return {
-      isModern: process.argv.includes("--modern"),
-      isModernBuild: process.argv.includes("--modern") && !process.argv.includes("legacy")
-    }
   }
 
   resolve(dir) {
