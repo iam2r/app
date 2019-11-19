@@ -1,1 +1,0 @@
-npm i @vue/babel-preset-jsx vue vue-class-component vue-property-decorator vue-router vuex vuex-class  -S

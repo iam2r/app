@@ -1,1 +1,0 @@
-npm i core-js regenerator-runtime minireset.css normalize.css vconsole -S

@@ -12,9 +12,9 @@
     "server": "http-server ./dist -g -o"
   },
   "keywords": [
-    "webpack4",
-    "cli",
-    "modern"
+    "typescript",
+    "github-actions",
+    "vue-build-modern"
   ],
   "author": "zr",
   "license": "ISC",
