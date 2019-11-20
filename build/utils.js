@@ -7,6 +7,28 @@ class Utils {
 
   }
 
+  getArgvByKey(key) {
+    /*
+          can't find    =>undefined
+          --key         =>true
+          --key=value   =>value
+          --key value   =>value
+      */
+    let value = undefined;
+    for (let index = 0; index < process.argv.length; index++) {
+      const cur = process.argv[index],
+        next = process.argv[index + 1];
+      if (new RegExp(`^--${key}(=\\w+)?$`).test(cur)) {
+        if (new RegExp(`^--${key}$`).test(cur)) { //--key value
+          value = (!next || (next && new RegExp(`^--\\w+(=\\w+)?$`).test(next))) ? true : next;
+        } else { //--key=value
+          value = cur.split("=")[1]
+        }
+        break
+      }
+    }
+    return value
+  }
 
 
   getLocalIP() {
@@ -34,10 +56,10 @@ class Utils {
   }
 
   getAppName(appName) {
-    if (process.argv.includes("--modern") && !process.argv.includes("legacy")) {
+    if (this.getArgvByKey("modern") == true) {
       return process.env.APP_NAME || JSON.parse(fs.readFileSync(path.resolve(__dirname, './plugin/webpack/const.json'), 'utf-8')).appName
     } else {
-      return process.env.APP_NAME || (process.argv.includes("--app") && process.argv[process.argv.indexOf('--app') + 1]) || appName;
+      return process.env.APP_NAME || this.getArgvByKey("app") || appName;
     }
   }
 
@@ -46,24 +68,24 @@ class Utils {
   };
 
   isDll() {
-    return process.argv.includes("--dll");
+    return this.getArgvByKey("dll") == true;
   }
 
   isReport() {
 
-    if (process.argv.includes("--modern") && !process.argv.includes("legacy")) {
+    if (this.getArgvByKey("modern") == true) {
       return JSON.parse(fs.readFileSync(path.resolve(__dirname, './plugin/webpack/const.json'), 'utf-8')).isReport
     } else {
-      return process.argv.includes("--report")
+      return this.getArgvByKey("report") == true
     }
 
   }
 
   getBuildMode() {
     return {
-      normal: !process.argv.includes("--modern"),
-      legacy: process.argv.includes("--modern") && process.argv.includes("legacy"),
-      modern: process.argv.includes("--modern") && !process.argv.includes("modern"),
+      normal: !this.getArgvByKey("modern"),
+      legacy: this.getArgvByKey("modern") == "legacy",
+      modern: this.getArgvByKey("modern") == true,
     }
   }
 

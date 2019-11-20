@@ -6,9 +6,9 @@
   "scripts": {
     "dev": "webpack-dev-server --config build/webpack.dev.config.js",
     "build": "webpack --config build/webpack.prod.config.js",
-    "start": "yarn run dev -- --dll",
-    "build:modern": "yarn run build -- --modern legacy",
-    "postbuild:modern": "yarn run build -- --modern",
+    "start": "yarn run dev --dll",
+    "build:modern": "yarn run build --modern legacy",
+    "postbuild:modern": "yarn run build --modern",
     "server": "http-server ./dist -g -o"
   },
   "keywords": [
