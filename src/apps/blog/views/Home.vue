@@ -16,8 +16,8 @@
 
 <script lang="ts" >
 import { Component, Vue , Provide} from 'vue-property-decorator';
-import HelloWorld from 'appdir/components/HelloWorld.vue'; // @ is an alias to /src
-import Test from 'appdir/components/HelloWorld.vue';
+import HelloWorld from 'app.root/components/HelloWorld.vue'; // @ is an alias to /src
+import Test from 'app.root/components/HelloWorld.vue';
 @Component({
   components: {
     HelloWorld,

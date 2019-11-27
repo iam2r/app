@@ -12,7 +12,7 @@
 
 <script lang="ts">
 import { Component, Prop, Vue, Mixins, Inject ,Watch} from "vue-property-decorator";
-import Test from "appdir/components/Test.vue";
+import Test from "app.root/components/Test.vue";
 @Component
 export default class HelloWorld extends Mixins(Test) {
   @Prop() private propMsg!: string;

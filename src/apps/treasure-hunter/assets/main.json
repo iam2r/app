@@ -1,0 +1,54 @@
+{
+    "frames": {
+        "blob.png": {
+            "frame": {
+                "x": 513,
+                "y": 33,
+                "w": 32,
+                "h": 24
+            }
+        },
+        "door.png": {
+            "frame": {
+                "x": 513,
+                "y": 0,
+                "w": 32,
+                "h": 32
+            }
+        },
+        "dungeon.png": {
+            "frame": {
+                "x": 0,
+                "y": 0,
+                "w": 512,
+                "h": 512
+            }
+        },
+        "explorer.png": {
+            "frame": {
+                "x": 513,
+                "y": 58,
+                "w": 21,
+                "h": 32
+            }
+        },
+        "treasure.png": {
+            "frame": {
+                "x": 513,
+                "y": 91,
+                "w": 28,
+                "h": 24
+            }
+        }
+    },
+    "meta": {
+        "app": "spritesheet-templates",
+        "version": "10.4.2",
+        "image": "main.png",
+        "scale": 1,
+        "size": {
+            "w": 545,
+            "h": 512
+        }
+    }
+}

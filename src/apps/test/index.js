@@ -2,7 +2,7 @@ import {
     abc
 } from "./untils";
 // const $app = document.querySelector("#app");
-// import lazyTest from "appdir/dynamic/component";
+// import lazyTest from "app.root/dynamic/component";
 // require("@/webfonts/myfont.font.js");
 
 
