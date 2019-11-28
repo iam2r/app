@@ -37,7 +37,7 @@ export class Resolution {
         this.size = this.isPortrait ?
             new Size(config.size.height, config.size.width) :
             new Size(config.size.width, config.size.height);
-
+        document.querySelector('body').setAttribute('data-screen',this.state)
         emitter.emit(Events.STATE_CHANGE, this.state, oldState);
     }
 
@@ -49,8 +49,8 @@ export class Resolution {
             winSize.width / size.width;
         let renderSize = new Size(size.width * scale, size.height * scale);
         this.scale = scale;
-        this.renderSize = winSize;
-        emitter.emit(Events.RESIZE, scale, renderSize);
+        this.renderSize = renderSize;
+        emitter.emit(Events.RESIZE, scale, this.renderSize);
     }
 
     public get isPortrait() {

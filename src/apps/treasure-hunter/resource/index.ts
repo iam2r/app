@@ -1,13 +1,11 @@
 import { IResourceMap } from "./IResource";
 import { ResourceLoader, pixiLoader } from "./ResourceLoader";
-import { ResourceType } from "./ResourceType";
-
 const loader = new ResourceLoader();
-
+const Resources = pixiLoader.resources
 export {
     loader,
     IResourceMap,
-    ResourceType,
+    Resources
 }
 
 const resource: IResourceMap = {
@@ -38,4 +36,3 @@ const resource: IResourceMap = {
 }
 export default resource;
 
-export const Resources = pixiLoader.resources

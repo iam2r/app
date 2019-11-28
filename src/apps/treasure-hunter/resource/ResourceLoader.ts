@@ -1,4 +1,4 @@
-import { utils,Loader } from "pixi.js";
+import { Loader } from "pixi.js";
 import { Events } from "../const";
 import context, { emitter } from "../context";
 import { IResource } from "./IResource";
@@ -6,7 +6,7 @@ import { IResource } from "./IResource";
 
 export const pixiLoader = new Loader();
 
-export class ResourceLoader extends utils.EventEmitter {
+export class ResourceLoader {
 
     public async load() {
         await this.loadJson();

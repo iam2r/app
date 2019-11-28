@@ -11,11 +11,12 @@ export interface IOptions {
 export default class Main {
     constructor(options: IOptions) {
         context.resource = options.resource;
-        loader.load().then(() => {
+        emitter.once(Events.LOAD_COMPLETE,() => {
             this.initPixi();
             emitter.emit(Events.GAME_INIT);
             this.initData();
         })
+        loader.load()
     }
 
     public initData() {
