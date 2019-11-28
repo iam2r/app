@@ -35,7 +35,7 @@ module.exports = merge(baseConfig, {
     port: config.dev.port, // 端口
     host: '0.0.0.0',
     useLocalIp: true,
-    writeToDisk: true,
+    writeToDisk: utils.isWriteToDisk(),
     historyApiFallback: true, //html5 history API
     overlay: true,
     compress: false, // 服务器返回浏览器的时候是否启动gzip压缩

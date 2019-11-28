@@ -71,6 +71,10 @@ class Utils {
     return this.getArgvByKey("dll") == true;
   }
 
+  isWriteToDisk() {
+    return this.getArgvByKey("disk") == true;
+  }
+
   isReport() {
 
     if (this.getArgvByKey("modern") == true) {
