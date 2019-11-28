@@ -411,11 +411,12 @@ module.exports = {
             {
                 test: /\.xml$/,
                 oneOf: [{
-                    test: /\.font\.\w+$/,
+                    test: /\.sprites\.\w+$/,
                     use: [{
-                        loader: "font-xml-loader",
+                        loader: "sprites-loader",
                         options: {
-                            name: utils.assetsPath("fonts/[name].[hash:8].[ext]")
+                            suffix:".sprites.xml",
+                            name: utils.assetsPath("sprites/[name].[hash:8].[ext]")
                         }
                     }]
                 }, ]
@@ -426,8 +427,9 @@ module.exports = {
                         test: /\.sprites\.\w+$/,
                         type: "javascript/auto",
                         use: [{
-                            loader: "sprites-json-loader",
+                            loader: "sprites-loader",
                             options: {
+                                suffix:".sprites.json",
                                 name: utils.assetsPath("sprites/[name].[hash:8].[ext]")
                             }
                         }, ]
@@ -438,6 +440,7 @@ module.exports = {
                         use: [{
                             loader: "spine-json-loader",
                             options: {
+                                suffix:".spine.json",
                                 name: utils.assetsPath("spines/[name].[hash:8].[ext]")
                             }
                         }, ]

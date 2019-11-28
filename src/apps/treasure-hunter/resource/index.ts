@@ -11,15 +11,20 @@ export {
 }
 
 const resource: IResourceMap = {
+    test: {
+        normal_json: require("../assets/normal.json"),
+        xml_sprites: require("../assets/sprites/fonts/line_num.sprites.xml"),
+        json_sprites: require("../assets/sprites/main/_spritesmith/main.sprites.json"),
+
+        // normal_spines: require("../assets/spines/maingame/maingame.spine.json"),
+        nesting_spines: require("../assets/spines/line/line.spine.json"),
+    },
     html: {
 
     },
 
     base: {
-        json: require("../assets/main.json"),
         main: require("../assets/sprites/main/_spritesmith/main.sprites.json"),
-        lines: require("../assets/spines/lines/lines.spine.json"),
-        maingame: require("../assets/spines/maingame/maingame.spine.json")
     },
 
     sound: {
@@ -29,7 +34,6 @@ const resource: IResourceMap = {
     font: {
         roboto: require("../assets/fonts/roboto.woff"),
         arial: require("../assets/fonts/arial.woff"),
-        line_num: require("../assets/fonts/line_num.font.xml"),
     }
 }
 export default resource;

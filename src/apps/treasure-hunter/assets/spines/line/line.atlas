@@ -1,0 +1,29 @@
+
+line.png
+size: 1024,512
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+number
+  rotate: false
+  xy: 2, 2
+  size: 193, 126
+  orig: 193, 126
+  offset: 0, 0
+  index: -1
+winning-value_1
+  rotate: false
+  xy: 324, 169
+  size: 242, 242
+  orig: 400, 400
+  offset: 79, 79
+  index: -1
+winning-value_2
+  rotate: false
+  xy: 2, 130
+  size: 320, 281
+  orig: 400, 400
+  offset: 40, 79
+  index: -1
+
+./[lan]/text.atlas
