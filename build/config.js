@@ -10,14 +10,14 @@ module.exports = {
     },
     staticPath: path.resolve(__dirname, '../dist'),
     dev: {
-        publicPath: "/",
+        publicPath: "",
         assetsSubDirectory: "assets",
         proxy: {
 
         }
     },
     build: {
-        publicPath: `./`,
+        publicPath: "",
         assetsSubDirectory: "assets",
         cacheGroups: {
             config: {

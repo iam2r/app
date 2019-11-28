@@ -1,26 +1,7 @@
 import { ScreenState, Events } from "app.root/const";
+import Size from "app.root/main/Size";
 import { emitter, device } from "./";
 import config from "./config";
-
-export class Size {
-    public width: number;
-    public height: number;
-    constructor(width: number = 0, height: number = 0) {
-        this.width = width;
-        this.height = height;
-    }
-
-    public get center() {
-        return {
-            x: this.width / 2,
-            y: this.height / 2
-        };
-    }
-
-    public get ratio() {
-        return this.width / this.height;
-    }
-}
 
 export class Resolution {
     public size: Size; // 游戏尺寸
@@ -61,17 +42,15 @@ export class Resolution {
     }
 
     private doResize() {
-
         let winSize = new Size(innerWidth, innerHeight);
         let size = this.size;
         let scale = winSize.ratio > size.ratio ?
             winSize.height / size.height :
             winSize.width / size.width;
         let renderSize = new Size(size.width * scale, size.height * scale);
-
         this.scale = scale;
         this.renderSize = winSize;
-        emitter.emit(Events.RESIZE, scale, winSize);
+        emitter.emit(Events.RESIZE, scale, renderSize);
     }
 
     public get isPortrait() {

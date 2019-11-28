@@ -1,7 +1,7 @@
 import { EventEmitter } from "events";
 import querystring from 'querystring';
-import { Events } from "../const";
-import { emitter, resolution, device } from "../context";
+import { Events } from "app.root/const";
+import { emitter, resolution, device } from "app.root/context";
 import "./Loader.scss";
 
 export class Loader extends EventEmitter {

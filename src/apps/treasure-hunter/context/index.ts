@@ -1,21 +1,24 @@
-import { IResourceMap } from './../resource/IResource';
+import { IResourceMap } from 'app.root/resource/IResource';
 import { EventEmitter } from "events";
 import { Device } from './Device';
 import { Resolution } from "./Resolution";
-let app: any, appVue: any,resource: IResourceMap;;
+import config from "./config"
+let app: any, appVue: any, resource: IResourceMap;
 let emitter = new EventEmitter();
 let device = new Device();
 let resolution = new Resolution();
 export {
     emitter,
     device,
-    resolution
+    resolution,
+    config
 }
 export default {
-    emitter: new EventEmitter(),
-    device: new Device(),
-    resolution: new Resolution(),
     app,
     appVue,
-    resource
+    resource,
+    emitter,
+    device,
+    resolution,
+    config
 }

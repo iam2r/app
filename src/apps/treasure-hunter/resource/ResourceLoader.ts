@@ -1,45 +1,34 @@
-import { utils, Loader } from "pixi.js";
+import { utils,Loader } from "pixi.js";
 import { Events } from "../const";
 import context, { emitter } from "../context";
 import { IResource } from "./IResource";
 
+
+export const pixiLoader = new Loader();
+
 export class ResourceLoader extends utils.EventEmitter {
-    private cb: Function;
 
-    public load(cb: Function) {
-        this.cb = cb;
-        this.runLoad();
-    }
-
-    protected runLoad() {
-        this.loadJson(() => {
-            this.loadFonts(() => {
-                this.loadImages(() => {
-                    this.cb && this.cb();
-                });
-            });
-        });
-
+    public async load() {
+        await this.loadJson();
+        await this.loadFonts();
+        await this.loadImages();
         emitter.once(Events.GAME_INIT, () => this.loadSounds());
     }
 
-    protected loadImages(cb: Function) {
-        let res = context.resource.base;
-        res = {
-            ...res,
+    protected loadImages() {
+        let res = {
+            ...context.resource.base,
             ...context.resource.html
         };
 
-        this.loadResource(res, () => {
-            cb && cb();
-        });
+        this.loadResource(res);
     }
 
-    protected loadJson(cb: Function) {
-        cb && cb();
+    protected loadJson() {
+
     }
 
-    protected loadFonts(cb: Function) {
+    protected loadFonts() {
 
     }
 
@@ -62,21 +51,18 @@ export class ResourceLoader extends utils.EventEmitter {
 
 
 
-    private loadResource(res: IResource, cb: Function) {
-        const loader = new Loader();
-        let resources = loader.resources;
+    private loadResource(res: IResource) {
+        let resources = pixiLoader.resources;
         this.interator(res, (key: string, path: string) => {
-            if(!resources[key]) 
-                loader.add(key, path); 
+            if (!resources[key])
+            pixiLoader.add(key, path);
         });
-        let emitter = context.emitter;
-        let fn = () => emitter.emit(Events.LOAD_PROGRESS, loader.progress);
-        loader
+        let fn = () => emitter.emit(Events.LOAD_PROGRESS, pixiLoader.progress);
+        pixiLoader
             .on("progress", fn)
             .load(() => {
-                loader.off("progress", fn);
+                pixiLoader.off("progress", fn);
                 emitter.emit(Events.LOAD_COMPLETE);
-                cb && cb();
             });
     }
 

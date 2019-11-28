@@ -1,4 +1,4 @@
-import { ScreenState } from "../const";
+import { ScreenState } from "app.root/const";
 
 export class Device {
     public version: string;
