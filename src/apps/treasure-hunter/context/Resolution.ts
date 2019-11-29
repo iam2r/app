@@ -12,7 +12,6 @@ export class Resolution {
     constructor() {
         let size = config.size;
         this.size = new Size(size.width, size.height);
-
         window.addEventListener("resize", () => this.onResize());
         emitter.once(Events.GAME_ENTER, () => {
             this.onResize();

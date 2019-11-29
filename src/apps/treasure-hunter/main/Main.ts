@@ -13,8 +13,8 @@ export default class Main {
         context.resource = options.resource;
         emitter.once(Events.LOAD_COMPLETE,() => {
             this.initPixi();
-            emitter.emit(Events.GAME_INIT);
             this.initData();
+            emitter.emit(Events.GAME_INIT);
         })
         loader.load()
     }

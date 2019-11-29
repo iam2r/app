@@ -6094,6 +6094,11 @@ pixelsmith@^2.3.0:
     save-pixels "~2.3.0"
     vinyl-file "~1.3.0"
 
+pixi-spine@^2.1.4:
+  version "2.1.4"
+  resolved "https://registry.npm.taobao.org/pixi-spine/download/pixi-spine-2.1.4.tgz#c57d5b26804cb30fd9d54c8038e97db31ae0f658"
+  integrity sha1-xX1bJoBMsw/Z1UyAOOl9sxrg9lg=
+
 pixi.js@^5.2.0:
   version "5.2.0"
   resolved "https://registry.npm.taobao.org/pixi.js/download/pixi.js-5.2.0.tgz#097eb90825cd28e40230c779998876d575d02b69"
