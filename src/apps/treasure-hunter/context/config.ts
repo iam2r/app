@@ -11,7 +11,7 @@ interface ISize {
 
 const config: IConfig = {
     size: {
-        width: 920,
+        width: 916,
         height: 512,
     }
 };

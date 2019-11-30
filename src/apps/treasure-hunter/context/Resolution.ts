@@ -13,6 +13,7 @@ export class Resolution {
         let size = config.size;
         this.size = new Size(size.width, size.height);
         window.addEventListener("resize", () => this.onResize());
+        window.addEventListener("orientationchange", () => this.onResize());
         emitter.once(Events.GAME_ENTER, () => {
             this.onResize();
             emitter.emit(Events.STATE_CHANGE, this.state);
@@ -47,6 +48,7 @@ export class Resolution {
             winSize.height / size.height :
             winSize.width / size.width;
         let renderSize = new Size(size.width * scale, size.height * scale);
+    
         this.scale = scale;
         this.renderSize = renderSize;
         emitter.emit(Events.RESIZE, scale, this.renderSize);

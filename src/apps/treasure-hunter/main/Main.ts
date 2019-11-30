@@ -1,8 +1,13 @@
-import Scence from './Scence';
+import Vue from "vue";
 import { Application, utils } from "pixi.js";
+import App from "app.root/views/App.vue";
 import { Events } from 'app.root/const/Events';
 import { IResourceMap, loader } from 'app.root/resource';
 import context, { emitter, config } from "app.root/context";
+import Scence from './Scence';
+import router from "./router";
+import store from "./store";
+
 
 export interface IOptions {
     resource: IResourceMap,
@@ -11,16 +16,21 @@ export interface IOptions {
 export default class Main {
     constructor(options: IOptions) {
         context.resource = options.resource;
-        emitter.once(Events.LOAD_COMPLETE,() => {
-            this.initPixi();
+        emitter.once(Events.LOAD_COMPLETE, () => {
+            this.initGame();
             this.initData();
-            emitter.emit(Events.GAME_INIT);
         })
         loader.load()
     }
 
+    private initGame() {
+        this.initVue();
+        this.initPixi();
+        emitter.emit(Events.GAME_INIT);
+    }
+
     public initData() {
-        setTimeout(() => {
+        setTimeout(() => {//模拟数据请求
             //gameStart
             this.initScence();
             emitter.emit(Events.GAME_ENTER);
@@ -41,11 +51,21 @@ export default class Main {
 
     }
 
+    private initVue() {
+        let app = new Vue({
+            store,
+            router,
+            render: (h) => h(App)
+        }).$mount("#app");
+
+        context.appVue = app.$children[0];
+    }
+
     protected initScence() {
         let scence = new Scence();
         let app = context.app as Application;
         app.stage.addChild(scence);
-      
+
     }
 
 

@@ -1,6 +1,7 @@
 import { Container, Application } from "pixi.js";
 import { Events, ScreenState } from 'app.root/const';
 import context, { emitter } from 'app.root/context';
+import store from "./store";
 import Size from "./Size";
 import Background from 'app.root/components/Background';
 import Door from 'app.root/components/Door';
@@ -24,9 +25,14 @@ export default class Scence extends Container {
         let innerSize = new Size(size.width * scale, size.height * scale);
         app.stage.x = (renderSize.width - innerSize.width) * 0.5;
         app.stage.y = (renderSize.height - innerSize.height) * 0.5;
+
+        store.state.scale = scale;
+        store.state.width = size.width;
+        store.state.height = size.height;
     }
 
     protected onStateChange(state: ScreenState) {
+        store.state.state = state;
         this.background.onStateChange();
     }
 
@@ -36,8 +42,9 @@ export default class Scence extends Container {
 
     protected initComponent() {
         this.background = new Background();
+        this.addChild(this.background)
         this.door = new Door();
         this.background.addChild(this.door);
-        this.addChild(this.background)
+       
     }
 }

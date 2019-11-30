@@ -16,6 +16,9 @@ export default class FullScreen {
         window.addEventListener("resize", () => {
             this.onStateChange();
         });
+        window.addEventListener("orientationchange", () => {
+            this.onStateChange();
+        });
     }
 
     private init() {
@@ -32,21 +35,18 @@ export default class FullScreen {
     }
 
     private onStateChange() {
+        let $body = document.querySelector('body');
         let isPortrait = resolution.isPortrait;
         let clientHeight = device.mobile.ios && (device.browser.chrome || device.browser.firefox) ? screen.width - 20 : document.documentElement.clientHeight;
         let hasNavBar = isPortrait ? window.innerHeight == clientHeight : window.innerHeight < clientHeight;
-        this.element.style.visibility = (device.mobile.ios && !device.mobile.tablet) && hasNavBar && !isPortrait ? 'visible' : 'hidden';
+        this.element.style.display = (device.mobile.ios && !device.mobile.tablet) && hasNavBar  ? '' : 'none';
+        $body.style.overflow = this.element.style.display==''?'visible':'hidden';
         window.scrollTo(0, 0);
-        if (this.isPortrait == isPortrait) return;
-        device.mobile.ios && device.browser.safari && isPortrait && setTimeout(() => {
-            document.querySelector('body').scrollTop = 0;
-        }, 500);
         this.isPortrait = isPortrait;
     }
 
     private onTouchFullScreen() {
         let de = <any>document.documentElement;
-
         if (de.requestFullscreen) {
             de.requestFullscreen();
         } else if (de.mozRequestFullScreen) {

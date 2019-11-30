@@ -1,6 +1,8 @@
 import { EventEmitter } from "events";
 import querystring from 'querystring';
 import { Events } from "app.root/const";
+import FullScreen from "./FullScreen";
+import StopFingerScale from './StopFingerScale';
 import { emitter, resolution, device } from "app.root/context";
 import "./Loader.scss";
 
@@ -80,7 +82,6 @@ export class Loader extends EventEmitter {
         this.elContainer.style.transform = "translate(-50%,-50%) scale(" + resolution.scale + ")";
     }
 
-
     private complete() {
         let el = document.querySelector<HTMLElement>(".loader-page");
         let mask = el.querySelector<HTMLElement>(".mask");
@@ -91,5 +92,8 @@ export class Loader extends EventEmitter {
                 document.querySelector("body").removeChild(el);
             });
         });
+
+        if (device.mobile.device) new FullScreen();
+        if (device.mobile.ios) new StopFingerScale();
     }
 }
