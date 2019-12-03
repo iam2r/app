@@ -3,6 +3,5 @@ declare module '*.vue' {
   export default Vue;
 }
 
-declare module 'fastclick';
-declare module 'lodash';
+
 

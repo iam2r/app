@@ -1,14 +1,16 @@
 import { Container, Application } from "pixi.js";
 import { Events, ScreenState } from 'app.root/const';
 import context, { emitter } from 'app.root/context';
+import Background from 'app.root/components/Background';
+import Explorer from 'app.root/components/Explorer';
+import Door from 'app.root/components/Door';
 import store from "./store";
 import Size from "./Size";
-import Background from 'app.root/components/Background';
-import Door from 'app.root/components/Door';
 
 export default class Scence extends Container {
-    protected background: Background;
-    protected door: Door;
+    public background: Background;
+    public door: Door;
+    public explorer: Explorer;
     constructor() {
         super();
         this.init();
@@ -45,6 +47,9 @@ export default class Scence extends Container {
         this.addChild(this.background)
         this.door = new Door();
         this.background.addChild(this.door);
-       
+        this.explorer = new Explorer();
+        this.background.addChild(this.explorer);
     }
+
+
 }

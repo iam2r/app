@@ -49,27 +49,26 @@ export default class Main {
         (document.querySelector("#app") as HTMLElement).appendChild(app.view);
         context.app = app;
 
+
     }
 
     private initVue() {
-        let app = new Vue({
+        let appVue = new Vue({
             store,
             router,
             render: (h) => h(App)
         }).$mount("#app");
 
-        context.appVue = app.$children[0];
+        context.appVue = appVue;
     }
 
     protected initScence() {
         let scence = new Scence();
         let app = context.app as Application;
         app.stage.addChild(scence);
-
+        context.scence = scence;
     }
 
 
 
 }
-
-
