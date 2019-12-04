@@ -15,7 +15,6 @@ export default class Background extends Container {
 
     public onStateChange() {
         const center = resolution.size.center;
-        this.position.set(center.x, center.y);
-        this.pivot.set(this.width / 2, this.height / 2);    
+        this.position.set(center.x - this.width / 2, center.y - this.height / 2);
     }
 };

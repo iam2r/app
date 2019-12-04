@@ -9,7 +9,7 @@ export default class Door extends Container {
 
     private initDoor() {
         this.door = new Sprite(Resources['main'].textures["door.png"]);
-        this.door.position.set(32,0);
+        this.position.set(32,0);
         this.addChild(this.door);
     }
 };

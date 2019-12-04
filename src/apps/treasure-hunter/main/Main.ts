@@ -45,28 +45,25 @@ export default class Main {
         } : {
                 ...config.size,
             }
-        let app: Application = new Application(options);
-        (document.querySelector("#app") as HTMLElement).appendChild(app.view);
-        context.app = app;
-
-
+        context.app = new Application(options);
+        (document.querySelector("#app") as HTMLElement).appendChild(context.app.view);
     }
 
     private initVue() {
-        let appVue = new Vue({
+        context.appVue = new Vue({
             store,
             router,
             render: (h) => h(App)
         }).$mount("#app");
-
-        context.appVue = appVue;
     }
 
     protected initScence() {
-        let scence = new Scence();
+        context.scence = new Scence();
         let app = context.app as Application;
-        app.stage.addChild(scence);
-        context.scence = scence;
+        app.stage.addChild(context.scence);
+        context.app.ticker.add(() => {
+            emitter.emit(Events.TICKER)
+        })
     }
 
 

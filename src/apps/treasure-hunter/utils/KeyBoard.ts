@@ -22,21 +22,19 @@ export default class KeyBoard {
     }
 
     private onKeyDown(e: KeyboardEvent) {
+        if (this.isDown) return;
         if (this.keyCodes.includes(e.keyCode)) {
-            if (!this.isDown) {
-                this.press && this.press()
-            }
-            this.isDown = true;
+            this.isDown = !this.isDown;
+            this.isDown && this.press && this.press()
         }
         e.preventDefault();
     }
 
     private onKeyUp(e: KeyboardEvent) {
+        if (!this.isDown) return;
         if (this.keyCodes.includes(e.keyCode)) {
-            if (this.isDown) {
-                this.release && this.release()
-            }
-            this.isDown = false;
+            this.isDown = !this.isDown;
+            !this.isDown && this.release && this.release()
         }
         e.preventDefault();
     }
