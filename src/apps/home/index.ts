@@ -16,7 +16,7 @@ export const loadJson = (url: string) => {
     })
 }
 (async () => {
-    let config = <any>(await loadJson('../../apps.json?' + new Date().getTime()));
+    let config = <any>(await loadJson('../apps.json?' + new Date().getTime()));
     state.appList = config.apps.filter(it => it !== 'home');
    
     new Vue({
