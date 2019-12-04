@@ -1,12 +1,12 @@
 export default class KeyBoard {
-    constructor(keyCode: number, press: Function, release?: Function) {
-        this.keyCode = keyCode;
+    constructor(keyCode: number | number[], press: Function, release?: Function) {
+        this.keyCodes = typeof keyCode == 'number' ? [keyCode] : keyCode;
         this.press = press;
         this.release = release;
         this.initEvents()
     }
     public isDown: boolean = false;
-    private keyCode: number;
+    private keyCodes: number[];
     private press: Function;
     private release: Function;
 
@@ -22,7 +22,7 @@ export default class KeyBoard {
     }
 
     private onKeyDown(e: KeyboardEvent) {
-        if (e.keyCode == this.keyCode) {
+        if (this.keyCodes.includes(e.keyCode)) {
             if (!this.isDown) {
                 this.press && this.press()
             }
@@ -32,7 +32,7 @@ export default class KeyBoard {
     }
 
     private onKeyUp(e: KeyboardEvent) {
-        if (e.keyCode == this.keyCode) {
+        if (this.keyCodes.includes(e.keyCode)) {
             if (this.isDown) {
                 this.release && this.release()
             }

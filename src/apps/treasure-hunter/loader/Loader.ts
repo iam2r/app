@@ -80,6 +80,8 @@ export class Loader extends EventEmitter {
 
     private resize() {
         this.elContainer.style.transform = "translate(-50%,-50%) scale(" + resolution.scale + ")";
+        this.elContainer.style.width = `${100/resolution.scale}% `;
+        this.elContainer.style.height = `${100/resolution.scale}% `;
     }
 
     private complete() {
