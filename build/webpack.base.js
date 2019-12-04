@@ -12,6 +12,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin"); //CSS文件单�
 const HtmlWebpackPlugin = require("html-webpack-plugin"); // 生成html的插件
 const CopyWebpackPlugin = require("copy-webpack-plugin"); // 复制静态资源的插件
 const PreloadWebpackPlugin = require('@vue/preload-webpack-plugin');
+const AppsStorePlugin = require('./plugin/webpack/AppsStorePlugin');
 const {
     ProvidePlugin,
     DefinePlugin
@@ -201,20 +202,23 @@ const plugins = [
         additionalTransformers: [transformer],
         additionalFormatters: [formatter]
     }),
+    new AppsStorePlugin({
+        targetDir: config.staticPath,
+        reset: utils.isResetAppsStore()
+    }),
     ...SpritesmithPlugin
 ]
 
 
 
-const copyWebpackOptions = [
-    {
-        from: path.resolve(__dirname, `../public/root`),
-        to: config.staticPath ,
-        toType: 'dir',
-        ignore: [
-            '.DS_Store'
-        ]
-    },{
+const copyWebpackOptions = [{
+    from: path.resolve(__dirname, `../public/root`),
+    to: config.staticPath,
+    toType: 'dir',
+    ignore: [
+        '.DS_Store'
+    ]
+}, {
     from: path.resolve(__dirname, `../public`),
     to: config.staticPath + "/" + process.env.APP_NAME,
     toType: 'dir',
@@ -424,7 +428,7 @@ module.exports = {
                     use: [{
                         loader: "sprites-loader",
                         options: {
-                            suffix:".sprites.xml",
+                            suffix: ".sprites.xml",
                             name: utils.assetsPath("sprites/[name].[hash:8].[ext]")
                         }
                     }]
@@ -438,7 +442,7 @@ module.exports = {
                         use: [{
                             loader: "sprites-loader",
                             options: {
-                                suffix:".sprites.json",
+                                suffix: ".sprites.json",
                                 name: utils.assetsPath("sprites/[name].[hash:8].[ext]")
                             }
                         }, ]
@@ -449,7 +453,7 @@ module.exports = {
                         use: [{
                             loader: "spine-json-loader",
                             options: {
-                                suffix:".spine.json",
+                                suffix: ".spine.json",
                                 name: utils.assetsPath("spines/[name].[hash:8].[ext]")
                             }
                         }, ]

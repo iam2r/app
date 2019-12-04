@@ -75,6 +75,10 @@ class Utils {
     return this.getArgvByKey("disk") == true;
   }
 
+  isResetAppsStore() {
+    return this.getArgvByKey("reset-apps-store") == true;
+  }
+
   isReport() {
 
     if (this.getArgvByKey("modern") == true) {
