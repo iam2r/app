@@ -206,11 +206,20 @@ const plugins = [
 
 
 
-const copyWebpackOptions = [{
+const copyWebpackOptions = [
+    {
+        from: path.resolve(__dirname, `../public/root`),
+        to: config.staticPath ,
+        toType: 'dir',
+        ignore: [
+            '.DS_Store'
+        ]
+    },{
     from: path.resolve(__dirname, `../public`),
     to: config.staticPath + "/" + process.env.APP_NAME,
     toType: 'dir',
     ignore: [
+        'root',
         'index.html',
         '.DS_Store'
     ]
