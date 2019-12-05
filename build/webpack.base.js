@@ -372,7 +372,7 @@ module.exports = {
 
             },
             {
-                test: /\.(png|jpe?g|gif|webp)(\?.*)?$/,
+                test: /\.(png|jpe?g|gif|webp|ico)(\?.*)?$/,
                 loader: "url-loader",
                 options: {
                     name: utils.assetsPath("images/[name].[hash:8].[ext]"), // 图片输出的路径

@@ -67,6 +67,7 @@
     "yml-loader": "^2.1.0"
   },
   "dependencies": {
+    "better-scroll": "^1.15.2",
     "core-js": "^3.4.1",
     "lodash": "^4.17.15",
     "minireset.css": "0.0.6",
