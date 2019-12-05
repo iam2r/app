@@ -30,7 +30,7 @@ process.env.BUILD_MODE = (() => {
         }
     }
 })();
-process.env.APP_NAME = utils.getAppName('test');
+process.env.APP_NAME = utils.getAppName('home');
 process.env.APP_ROOT = path.resolve(__dirname, `../src/apps/${process.env.APP_NAME}`);
 let tsConfig = require("../tsconfig.json");
 tsConfig.compilerOptions.paths['app.root/*'] = [`src/apps/${process.env.APP_NAME}/*`]
