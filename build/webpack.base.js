@@ -107,14 +107,17 @@ const createCssLoader = (isModules, lang = 'scss') => [
 
 const createWebFontsLoader = () => {
     let uses = [
-        utils.isDev() ? "vue-style-loader" : {
-            loader: MiniCssExtractPlugin.loader,
-            options: {
-                publicPath: "../"
-            }
-        },
+        utils.isDev() ? "vue-style-loader" : MiniCssExtractPlugin.loader,
         'css-loader',
-        'webfonts-loader'
+        {
+            loader:'webfonts-loader',
+            options:{
+                fileName: utils.assetsPath("fonts/[name].[hash:8].[ext]"),
+                types: ['eot', 'woff', 'woff2', 'ttf', 'svg'],
+                // publicPath: '../'
+            }
+        }
+        
     ];
     return uses
 }
