@@ -1,9 +1,8 @@
 module.exports = {
-  'files': [
+  files: [
     './test-png/*.svg'
   ],
-  'fontName': 'myfonticons',
-  'classPrefix': 'myfonticon-',
-  'baseSelector': '.myfonticon',
-  'fixedWidth': true,
+  fontName: 'myfonticons',
+  classPrefix: 'myfonticon-',
+  baseSelector: '.myfonticon',
 };
