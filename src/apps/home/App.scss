@@ -1,22 +1,25 @@
 @font-face {
     font-family: "Source Sans Pro";
     src: local("Source Sans Pro"), url("./fonts/Source_Sans_Pro/SourceSansPro-Regular.ttf");
-  }
-  @font-face {
+}
+
+@font-face {
     font-family: "Source Sans Pro";
     src: local("Source Sans Pro Light"), url("./fonts/Source_Sans_Pro/SourceSansPro-Light.ttf");
     font-weight: 300;
-  }
-  @font-face {
+}
+
+@font-face {
     font-family: "Source Sans Pro";
     src: local("Source Sans Pro Semibold"), url("./fonts/Source_Sans_Pro/SourceSansPro-Semibold.ttf");
     font-weight: 600;
-  }
-  @font-face {
+}
+
+@font-face {
     font-family: "Dosis";
     src: local("Dosis Medium"), url("./fonts/Dosis/Dosis-Medium.ttf");
     font-weight: 500;
-  }
+}
 
 html {
     ::-webkit-scrollbar {
@@ -54,6 +57,8 @@ body {
         font-size: 14px;
     }
 }
+
+$mainColorActive:#e20031;
 
 #app {
     position: absolute;
@@ -122,9 +127,64 @@ body {
         }
     }
 
+    #mobile-sidebar {
+        display: none;
+        position: fixed;
+        z-index: 10;
+        background-color: #f9f9f9;
+        height: 100%;
+        top: 0;
+        left: 0;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0, 1);
+
+        @media screen and (max-width: 900px) {
+            display: block;
+            transform: translate(-100%, 0);
+        }
+
+        &.open {
+            transform: translate(0, 0);
+        }
+
+        .scroll-container {
+
+            padding: 10px 10px 10px 20px;
+            width: 250px;
+            height: 100%;
+            overflow-x: hidden;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+            -ms-overflow-style: none;
+        }
+
+        ul {
+            margin: 0;
+            margin-top: 20px;
+            line-height: 1.5em;
+            li {
+                margin-top: 0.5em;
+                margin: 0;
+                line-height: 1.5em;
+                padding-left: 1em;
+                margin-bottom: 5px;
+                a {
+                    padding-bottom: 3px;
+                    white-space: nowrap;
+                    text-decoration: none;
+                    color: #34495e;
+                    &:hover{
+                        border-bottom: 3px solid $mainColorActive;
+                    }
+                }
+            }
+        }
+
+
+    }
+
     #header {
         transform: translateZ(0px);
-        box-shadow: 0 0 1px rgba(0, 0, 0, 0.25);
         transition: background-color 0.3s ease-in-out;
         position: fixed;
         width: 100%;
@@ -142,7 +202,7 @@ body {
             background-color: rgba(255, 255, 255, 0.4);
         }
 
-        >.logo {
+        .logo {
             display: inline-block;
             font-size: 1.5em;
             line-height: 40px;
@@ -150,12 +210,77 @@ body {
             font-family: "Dosis", "Source Sans Pro", "Helvetica Neue", Arial, sans-serif;
             font-weight: 500;
 
+            span {
+                font-size: 1.2em;
+            }
+
             img {
                 display: none;
                 vertical-align: middle;
                 margin-right: 6px;
                 width: 30px;
                 height: 40px;
+            }
+        }
+
+        .nav {
+            margin: 0;
+            padding: 0;
+            position: absolute;
+            right: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            height: 40px;
+            line-height: 40px;
+
+            li {
+                display: inline-block;
+                position: relative;
+                margin: 0 0.6em;
+
+                &.nav-dropdown-container:hover {
+                    .nav-dropdown {
+                        display: block;
+                    }
+                }
+
+                a {
+                    cursor: pointer;
+                    padding-bottom: 3px;
+                    white-space: nowrap;
+                    text-decoration: none;
+                    color: #34495e;
+                }
+
+                .nav-dropdown {
+                    display: none;
+                    max-height: calc(100vh - 61px);
+                    overflow-y: auto;
+                    position: absolute;
+                    top: 100%;
+                    right: -15px;
+                    background-color: #fff;
+                    padding: 10px 0;
+                    border: 1px solid #ddd;
+                    border-bottom-color: #ccc;
+                    text-align: left;
+                    border-radius: 4px;
+                    white-space: nowrap;
+
+                    a {
+                        padding: 0 24px 0 20px;
+
+                        &:hover {
+                            color: $mainColorActive;
+                        }
+                    }
+
+                    li {
+                        line-height: 1.8em;
+                        margin: 0;
+                        display: block;
+                    }
+                }
             }
         }
     }
@@ -253,7 +378,8 @@ body {
         padding: 40px 0;
         color: #fff;
         text-align: center;
-        p{
+
+        p {
             word-spacing: 0.05em;
         }
     }

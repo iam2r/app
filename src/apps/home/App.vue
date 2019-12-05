@@ -1,15 +1,44 @@
 <template>
   <div id="app">
     <div id="mobile-bar" :class="[!topScrolled?'top':'']">
-      <i class="menu-button"></i>
+      <i class="menu-button" @[tap]="toggleSlideBar"></i>
       <i class="logo"></i>
+    </div>
+    <div id="mobile-sidebar" :class="[isSideBarOpen?'open':'']">
+      <div class="scroll-container">
+        <ul class="nav">
+        <li v-for="(nav) in navData" :key="nav.key" class="nav-dropdown-container">
+          <a :href="nav.href">{{nav.key}}</a>
+          <template v-if="nav.children&&nav.children.length">
+            <span class="arrow"></span>
+            <ul class="nav-dropdown">
+              <li v-for="(child) in nav.children" :key="child.key">
+                <a :href="child.href">{{child.key}}</a>
+              </li>
+            </ul>
+          </template>
+        </li>
+      </ul>
+      </div>
     </div>
     <div id="header">
       <div class="logo">
         <img class="header-logo" :src="require('./assets/logo.ico')" alt="home logo" />
         <span>{{mainTitle}}</span>
       </div>
-      <ul class="nav"></ul>
+      <ul class="nav">
+        <li v-for="(nav) in navData" :key="nav.key" class="nav-dropdown-container">
+          <a :href="nav.href">{{nav.key}}</a>
+          <template v-if="nav.children&&nav.children.length">
+            <span class="arrow"></span>
+            <ul class="nav-dropdown">
+              <li v-for="(child) in nav.children" :key="child.key">
+                <a :href="child.href">{{child.key}}</a>
+              </li>
+            </ul>
+          </template>
+        </li>
+      </ul>
     </div>
     <div id="main">
       <div class="hero">
