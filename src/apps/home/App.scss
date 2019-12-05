@@ -1,25 +1,6 @@
-@font-face {
-    font-family: "Source Sans Pro";
-    src: local("Source Sans Pro"), url("./fonts/Source_Sans_Pro/SourceSansPro-Regular.ttf");
-}
-
-@font-face {
-    font-family: "Source Sans Pro";
-    src: local("Source Sans Pro Light"), url("./fonts/Source_Sans_Pro/SourceSansPro-Light.ttf");
-    font-weight: 300;
-}
-
-@font-face {
-    font-family: "Source Sans Pro";
-    src: local("Source Sans Pro Semibold"), url("./fonts/Source_Sans_Pro/SourceSansPro-Semibold.ttf");
-    font-weight: 600;
-}
-
-@font-face {
-    font-family: "Dosis";
-    src: local("Dosis Medium"), url("./fonts/Dosis/Dosis-Medium.ttf");
-    font-weight: 500;
-}
+@import "./styles/fonts.scss";
+@import "./styles/animate.scss";
+$mainColorActive:#e20031;
 
 html {
     ::-webkit-scrollbar {
@@ -58,7 +39,7 @@ body {
     }
 }
 
-$mainColorActive:#e20031;
+
 
 #app {
     position: absolute;
@@ -92,10 +73,6 @@ $mainColorActive:#e20031;
         &.top {
             background-color: transparent;
             box-shadow: none;
-
-            .logo {
-                display: none;
-            }
         }
 
         @media screen and (max-width: 900px) {
@@ -108,7 +85,8 @@ $mainColorActive:#e20031;
             left: 50%;
             width: 22px;
             height: 30px;
-            transform: translate(-50%, -50%);
+            margin-left: -11px;
+            margin-top: -15px;
             background: url(./assets/logo.ico) center center no-repeat;
             background-size: 100% auto;
             cursor: pointer;
@@ -162,18 +140,21 @@ $mainColorActive:#e20031;
             margin: 0;
             margin-top: 20px;
             line-height: 1.5em;
+
             li {
                 margin-top: 0.5em;
                 margin: 0;
                 line-height: 1.5em;
                 padding-left: 1em;
                 margin-bottom: 5px;
+
                 a {
                     padding-bottom: 3px;
                     white-space: nowrap;
                     text-decoration: none;
                     color: #34495e;
-                    &:hover{
+
+                    &:hover {
                         border-bottom: 3px solid $mainColorActive;
                     }
                 }
@@ -335,7 +316,8 @@ $mainColorActive:#e20031;
                 width: 165px;
                 height: 215px;
                 margin-right: 60px;
-
+                @extend.heartBeat;
+                @extend.animated.infinite;
                 @media screen and (max-width: 900px) {
                     margin: 30px 0 15px;
                     width: 105px;

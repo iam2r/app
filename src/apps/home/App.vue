@@ -2,23 +2,29 @@
   <div id="app">
     <div id="mobile-bar" :class="[!topScrolled?'top':'']">
       <i class="menu-button" @[tap]="toggleSlideBar"></i>
-      <i class="logo"></i>
+      <transition
+        name="custom-classes-transition"
+        enter-active-class="animated jello"
+        leave-active-class="animated bounceOut"
+      >
+        <i v-show="topScrolled" class="logo"></i>
+      </transition>
     </div>
     <div id="mobile-sidebar" :class="[isSideBarOpen?'open':'']">
       <div class="scroll-container">
         <ul class="nav">
-        <li v-for="(nav) in navData" :key="nav.key" class="nav-dropdown-container">
-          <a :href="nav.href||'javascript:void(0);'">{{nav.key}}</a>
-          <template v-if="nav.children&&nav.children.length">
-            <span class="arrow"></span>
-            <ul class="nav-dropdown">
-              <li v-for="(child) in nav.children" :key="child.key">
-                <a :href="child.href||'javascript:void(0);'">{{child.key}}</a>
-              </li>
-            </ul>
-          </template>
-        </li>
-      </ul>
+          <li v-for="(nav) in navData" :key="nav.key" class="nav-dropdown-container">
+            <a :href="nav.href||'javascript:void(0);'">{{nav.key}}</a>
+            <template v-if="nav.children&&nav.children.length">
+              <span class="arrow"></span>
+              <ul class="nav-dropdown">
+                <li v-for="(child) in nav.children" :key="child.key">
+                  <a :href="child.href||'javascript:void(0);'">{{child.key}}</a>
+                </li>
+              </ul>
+            </template>
+          </li>
+        </ul>
       </div>
     </div>
     <div id="header">

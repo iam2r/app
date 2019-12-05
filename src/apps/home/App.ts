@@ -34,9 +34,9 @@ export default class App extends Vue {
 
     private bindEvents() {
         window.addEventListener('scroll', () => {
-            if (window.pageYOffset > 165 && !this.topScrolled) {
+            if (window.pageYOffset > 168 && !this.topScrolled) {
                 this.topScrolled = true
-            } else if (window.pageYOffset <= 165 && this.topScrolled) {
+            } else if (window.pageYOffset <= 168 && this.topScrolled) {
                 this.topScrolled = false
             }
         });
