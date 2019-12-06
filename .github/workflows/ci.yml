@@ -10,13 +10,18 @@ jobs:
     - name: Checkout
       uses: actions/checkout@master
 
-    - name: Build and Deploy
-      uses: JamesIves/github-pages-deploy-action@master
-      env:
-        ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-        BRANCH: gh-pages
-        FOLDER: dist
-        BUILD_SCRIPT: yarn && yarn run build:modern --reset-apps-store && yarn run build:modern --app treasure-hunter && yarn run build:modern --app img2font
+    - name: Build
+      run:   yarn && yarn run build:modern --reset-apps-store && yarn run build:modern --app treasure-hunter && yarn run build:modern --app img2font
 
-    - name: Update gh-pages
-      run: gem update github-pages
+
+    - name: Deploy
+      env:
+        ACTIONS_DEPLOY_KEY: ${{ secrets.ACCESS_TOKEN }}
+        PUBLISH_BRANCH: gh-pages
+        PUBLISH_DIR: dist
+        SCRIPT_MODE: true
+      run: |
+    wget https://raw.githubusercontent.com/peaceiris/actions-gh-pages/v2/entrypoint.sh
+    bash ./entrypoint.sh
+
+
