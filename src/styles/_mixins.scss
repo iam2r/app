@@ -1,4 +1,3 @@
-
 //定位全屏
 @mixin allcover {
     position: absolute;
@@ -122,6 +121,7 @@
 //倍图
 @mixin bg-image($url) {
     background-image: url($url + "@2x.png");
+
     /* 设备像素比为 3 */
     @media only screen and (-webkit-min-device-pixel-ratio: 3),
     only screen and (min-device-pixel-ratio: 3) {
@@ -295,6 +295,29 @@
     only screen and (min-device-pixel-ratio: 3) {
         &:after {
             transform: scaleX(0.333333);
+        }
+    }
+}
+
+
+
+@mixin sprite-size($sprite, $design-width, $design-height) {
+    $x: $design-width / nth($sprite, 5);
+    $y: $design-height / nth($sprite, 6);
+    $sprite-image: nth($sprite, 9);
+    background-image: url(#{$sprite-image});
+    background-position: nth($sprite, 3)*$x nth($sprite, 4)*$y;
+    width: $design-width;
+    height: $design-height;
+    background-size: nth($sprite, 7)*$x nth($sprite, 8)*$y;
+}
+
+
+@mixin sprites-size($sprites, $design-width, $design-height) {
+    @each $sprite in $sprites {
+        $sprite-name: nth($sprite, 10);
+        .#{$sprite-name} {
+            @include sprite-size($sprites, $design-width, $design-height);
         }
     }
 }

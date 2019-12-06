@@ -1,5 +1,6 @@
 @import "./styles/fonts.scss";
 @import "./styles/animate.scss";
+@import "./assets/images/_spritesmith/main.scss";
 $mainColorActive:#e20031;
 
 html {
@@ -34,6 +35,7 @@ body {
     -moz-osx-font-smoothing: grayscale;
     color: #34495e;
     user-select: none;
+
     @media screen and (max-width: 900px) {
         font-size: 14px;
     }
@@ -87,24 +89,21 @@ body {
             height: 30px;
             margin-left: -11px;
             margin-top: -15px;
-            background: url(./assets/logo.svg) center center no-repeat;
+            background: url(./assets/images/logo.svg) center center no-repeat;
             background-size: 100% auto;
             cursor: pointer;
         }
 
         .menu-button {
             position: absolute;
-            width: 24px;
-            height: 24px;
             left: 12px;
-            background: url(./assets/menu.png) center center no-repeat;
-            background-size: 24px;
             top: 50%;
             margin-top: -12px;
             cursor: pointer;
             @extend.tada;
             @extend.animated.infinite;
             @extend.animated.slower;
+            @include sprite-size($menu, 24px, 24px);
         }
     }
 
@@ -322,6 +321,7 @@ body {
                 @extend.pulse;
                 @extend.animated.infinite;
                 @extend.animated.slower;
+
                 @media screen and (max-width: 900px) {
                     margin: 30px 0 15px;
                     width: 105px;

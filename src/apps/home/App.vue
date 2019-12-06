@@ -28,7 +28,7 @@
     </div>
     <div id="header">
       <div class="logo">
-        <img class="header-logo" :src="require('./assets/logo.svg')" alt="home logo" />
+        <img class="header-logo" :src="require('./assets/images/logo.svg')" alt="home logo" />
         <span>{{mainTitle}}</span>
       </div>
       <ul class="nav">
@@ -48,7 +48,7 @@
     <div id="main">
       <div class="hero">
         <div class="left">
-          <img class="hero-logo" :src="require('./assets/logo.svg')" alt="home logo" />
+          <img class="hero-logo" :src="require('./assets/images/logo.svg')" alt="home logo" />
         </div>
         <div class="right">
           <h2>{{mainTitle}}</h2>

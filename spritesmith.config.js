@@ -56,6 +56,30 @@ switch (process.env.APP_NAME) {
                 }
             })
         ]
+    case 'home':
+        var assetsName = 'main';
+        var assetsPath = `${process.env.APP_ROOT}/assets/images`
+        plugins = [
+            new SpritesmithPlugin({
+                spritesmithOptions: {
+                    padding: 1,
+                },
+                src: {
+                    cwd: assetsPath,
+                    glob: '*.png'
+                },
+                target: {
+                    image: `${assetsPath}/_spritesmith/${assetsName}.png`,
+                    css: [
+                        [`${assetsPath}/_spritesmith/${assetsName}.scss`]
+                    ]
+                },
+
+                apiOptions: {
+                    cssImageRef: `~app.root/assets/images/_spritesmith/${assetsName}.png`
+                }
+            })
+        ]
     default:
         break;
 }
