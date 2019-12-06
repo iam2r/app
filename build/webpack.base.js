@@ -376,7 +376,7 @@ module.exports = {
 
         },
         {
-            test: /\.(png|jpe?g|gif|webp|ico)(\?.*)?$/,
+            test: /\.(png|jpe?g|gif|webp|ico|svg)(\?.*)?$/,
             loader: "url-loader",
             options: {
                 name: utils.assetsPath("images/[name].[hash:8].[ext]"), // 图片输出的路径
@@ -387,15 +387,7 @@ module.exports = {
             test: /\.yml$/,
             loader: 'yml-loader'
         },
-        {
-            test: /\.(svg)(\?.*)?$/,
-            use: [{
-                loader: 'file-loader',
-                options: {
-                    name: utils.assetsPath("images/[name].[hash:8].[ext]")
-                }
-            }]
-        },
+      
         {
             test: /\.(mp4|webm|ogg|mp3|wav|flac|aac)(\?.*)?$/,
             use: [{
