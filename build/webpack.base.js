@@ -266,10 +266,10 @@ module.exports = {
 
     resolve: {
         extensions: [
-            '.js',
-            '.jsx',
-            '.ts',
             '.tsx',
+            '.ts',
+            '.jsx',
+            '.js',
             '.vue',
             '.json'
         ],
