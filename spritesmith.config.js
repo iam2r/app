@@ -55,7 +55,8 @@ switch (process.env.APP_NAME) {
                     cssImageRef: `${assetsName}.png`
                 }
             })
-        ]
+        ];
+        break;
     case 'home':
         var assetsName = 'main';
         var assetsPath = `${process.env.APP_ROOT}/assets/images`
@@ -79,7 +80,8 @@ switch (process.env.APP_NAME) {
                     cssImageRef: `~app.root/assets/images/_spritesmith/${assetsName}.png`
                 }
             })
-        ]
+        ];
+        break;
     default:
         break;
 }
