@@ -16,4 +16,4 @@ jobs:
         ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
         BRANCH: gh-pages
         FOLDER: dist
-        BUILD_SCRIPT: yarn && yarn run build:modern --reset-apps-store && yarn run build:modern --app blog && yarn run build:modern --app treasure-hunter && yarn run build:modern --app img2font
+        BUILD_SCRIPT: yarn && yarn run build:modern --reset-apps-store && yarn run build:modern --app treasure-hunter && yarn run build:modern --app img2font
