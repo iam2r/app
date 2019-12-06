@@ -1,4 +1,4 @@
-import { Component, Watch, Vue } from "vue-property-decorator";
+import { Component, Vue } from "vue-property-decorator";
 import * as Hammer from 'hammerjs';
 import state from "./state";
 import ScrollView from "app.root/components/scrollview/ScrollView.vue"

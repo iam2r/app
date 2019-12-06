@@ -2,10 +2,7 @@
   <div id="app">
     <div id="mobile-bar" :class="[!topScrolled?'top':'']">
       <v-touch tag="i" class="menu-button" @tap="toggleSlideBar"></v-touch>
-      <transition
-        enter-active-class="animated jello"
-        leave-active-class="animated fast bounceOut"
-      >
+      <transition enter-active-class="animated jello" leave-active-class="animated fast bounceOut">
         <i v-show="topScrolled" class="logo"></i>
       </transition>
     </div>
@@ -24,6 +21,7 @@
             </template>
           </li>
         </ul>
+        <div class="test" style="height:100vh"></div>
       </div>
     </div>
     <div id="header">
