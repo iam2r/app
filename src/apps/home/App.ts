@@ -1,6 +1,5 @@
 import { Component, Vue } from "vue-property-decorator";
 import * as Hammer from 'hammerjs';
-import state from "./state";
 import ScrollView from "app.root/components/scrollview/ScrollView.vue"
 
 @Component({
@@ -50,7 +49,7 @@ export default class App extends Vue {
     private createNavData() {
         let demoNav = this.navData.find(it => it.key == 'Demo');
         demoNav.children = [];
-        state.appList.forEach(key => {
+        this.$state.appList.forEach(key => {
             demoNav.children.push({
                 key,
                 href: `../${key}`
