@@ -5,7 +5,6 @@ import { loadJson } from "@/common/Utils.ts";
 const VueTouch = require("vue-touch");
 
 Vue.config.productionTip = false;
-Vue.prototype.$state = state;
 Vue.use(VueTouch, { name: "v-touch" });
 
 (async () => {

@@ -11,6 +11,6 @@ declare module 'vue/types/vue' {
     }
 };
 
-export default {
+export default Vue.prototype.$state = {
 
 } as State
