@@ -42,9 +42,10 @@ export default class App extends Vue {
   position: absolute;
   left: 10px;
   bottom: 10px;
-  transition: .3s all;
-  &:active{
-    transform: scale(0.9)
+  transition: 0.3s all;
+  cursor: pointer;
+  &:active {
+    transform: scale(0.9);
   }
 }
 </style>
