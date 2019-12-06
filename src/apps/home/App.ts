@@ -21,7 +21,7 @@ export default class App extends Vue {
     }]
 
     get tap() {
-        return 'ontouchstart' in window ? 'touchend' : 'click'
+        return 'ontouchstart' in window ? 'touchstart' : 'click'
     }
 
     protected created() {

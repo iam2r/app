@@ -3,9 +3,8 @@
     <div id="mobile-bar" :class="[!topScrolled?'top':'']">
       <i class="menu-button" @[tap]="toggleSlideBar"></i>
       <transition
-        name="custom-classes-transition"
         enter-active-class="animated jello"
-        leave-active-class="animated bounceOut"
+        leave-active-class="animated fast bounceOut"
       >
         <i v-show="topScrolled" class="logo"></i>
       </transition>
@@ -29,7 +28,7 @@
     </div>
     <div id="header">
       <div class="logo">
-        <img class="header-logo" :src="require('./assets/logo.ico')" alt="home logo" />
+        <img class="header-logo" :src="require('./assets/logo.svg')" alt="home logo" />
         <span>{{mainTitle}}</span>
       </div>
       <ul class="nav">
@@ -49,7 +48,7 @@
     <div id="main">
       <div class="hero">
         <div class="left">
-          <img class="hero-logo" :src="require('./assets/logo.ico')" alt="home logo" />
+          <img class="hero-logo" :src="require('./assets/logo.svg')" alt="home logo" />
         </div>
         <div class="right">
           <h2>{{mainTitle}}</h2>
@@ -62,7 +61,7 @@
       <div class="test" style="height:100vh"></div>
     </div>
     <div id="footer">
-      <p>Copyright © 2014-2020 ZhangRui</p>
+      <p>Copyright © 2020 ZhangRui</p>
     </div>
   </div>
 </template>
