@@ -1,0 +1,274 @@
+
+maingame.08d9bf02.png
+size: 1024,1024
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+dengpao_001
+  rotate: false
+  xy: 2, 4
+  size: 262, 142
+  orig: 314, 181
+  offset: 29, 23
+  index: -1
+dengpao_002
+  rotate: false
+  xy: 266, 4
+  size: 262, 142
+  orig: 314, 181
+  offset: 29, 23
+  index: -1
+dengpao_003
+  rotate: false
+  xy: 530, 4
+  size: 262, 142
+  orig: 314, 181
+  offset: 29, 23
+  index: -1
+pingmu2
+  rotate: false
+  xy: 2, 148
+  size: 1011, 870
+  orig: 1810, 870
+  offset: 799, 0
+  index: -1
+pingmuxiaodian
+  rotate: true
+  xy: 968, 2
+  size: 69, 27
+  orig: 1810, 870
+  offset: 1362, 408
+  index: -1
+yinxianglan
+  rotate: true
+  xy: 794, 8
+  size: 138, 172
+  orig: 905, 435
+  offset: 663, 6
+  index: -1
+zhongjian
+  rotate: false
+  xy: 968, 73
+  size: 47, 73
+  orig: 55, 74
+  offset: 5, 1
+  index: -1
+
+maingame2.be06be0d.png
+size: 1024,1024
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+diban_001
+  rotate: true
+  xy: 874, 74
+  size: 245, 60
+  orig: 289, 86
+  offset: 20, 8
+  index: -1
+diban_002
+  rotate: true
+  xy: 874, 321
+  size: 252, 60
+  orig: 289, 86
+  offset: 20, 8
+  index: -1
+diban_003
+  rotate: true
+  xy: 936, 328
+  size: 245, 60
+  orig: 289, 86
+  offset: 20, 8
+  index: -1
+diban_004
+  rotate: true
+  xy: 936, 81
+  size: 245, 63
+  orig: 289, 86
+  offset: 20, 5
+  index: -1
+maingame_2
+  rotate: false
+  xy: 2, 44
+  size: 870, 966
+  orig: 870, 1810
+  offset: 0, 0
+  index: -1
+pingmu_logo
+  rotate: false
+  xy: 874, 2
+  size: 101, 70
+  orig: 1810, 870
+  offset: 1372, 439
+  index: -1
+pingmuguang
+  rotate: true
+  xy: 874, 789
+  size: 221, 103
+  orig: 1810, 870
+  offset: 1306, 382
+  index: -1
+qianmian
+  rotate: false
+  xy: 874, 575
+  size: 103, 212
+  orig: 103, 212
+  offset: 0, 0
+  index: -1
+
+maingame3.a7347c73.png
+size: 1024,1024
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+deng_2
+  rotate: false
+  xy: 2, 3
+  size: 420, 562
+  orig: 1810, 870
+  offset: 156, 308
+  index: -1
+deng_3
+  rotate: true
+  xy: 424, 130
+  size: 435, 590
+  orig: 1810, 870
+  offset: 1086, 280
+  index: -1
+maingame_1
+  rotate: false
+  xy: 2, 567
+  size: 870, 440
+  orig: 870, 1810
+  offset: 0, 1370
+  index: -1
+pingmu00
+  rotate: false
+  xy: 424, 2
+  size: 162, 126
+  orig: 1810, 870
+  offset: 1338, 381
+  index: -1
+title
+  rotate: true
+  xy: 588, 7
+  size: 121, 55
+  orig: 1810, 870
+  offset: 1354, 424
+  index: -1
+
+maingame4.4a7e184c.png
+size: 1024,1024
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+dancingmachine
+  rotate: false
+  xy: 2, 316
+  size: 802, 685
+  orig: 1810, 870
+  offset: 868, 1
+  index: -1
+deng_1
+  rotate: true
+  xy: 2, 2
+  size: 312, 702
+  orig: 1810, 870
+  offset: 0, 168
+  index: -1
+liangliang
+  rotate: true
+  xy: 706, 42
+  size: 272, 237
+  orig: 1810, 870
+  offset: 1320, 490
+  index: -1
+
+maingame5.004c6b73.png
+size: 1024,1024
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+jiqiqian
+  rotate: false
+  xy: 2, 277
+  size: 447, 710
+  orig: 1810, 870
+  offset: 0, 0
+  index: -1
+pingmu
+  rotate: true
+  xy: 451, 366
+  size: 621, 435
+  orig: 905, 435
+  offset: 284, 0
+  index: -1
+shine
+  rotate: false
+  xy: 347, 31
+  size: 243, 244
+  orig: 254, 258
+  offset: 8, 10
+  index: -1
+yinxiang_light
+  rotate: true
+  xy: 2, 2
+  size: 273, 343
+  orig: 1810, 870
+  offset: 1327, 13
+  index: -1
+
+maingame_x.61854336.png
+size: 1024,512
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+bg
+  rotate: false
+  xy: 454, 285
+  size: 468, 225
+  orig: 468, 225
+  offset: 0, 0
+  index: -1
+bg_maingame_001
+  rotate: false
+  xy: 454, 170
+  size: 233, 113
+  orig: 234, 113
+  offset: 0, 0
+  index: -1
+bg_maingame_002
+  rotate: false
+  xy: 689, 170
+  size: 233, 113
+  orig: 234, 113
+  offset: 0, 0
+  index: -1
+bg_maingame_003
+  rotate: false
+  xy: 454, 55
+  size: 233, 113
+  orig: 234, 113
+  offset: 0, 0
+  index: -1
+huibian
+  rotate: false
+  xy: 924, 285
+  size: 11, 225
+  orig: 11, 225
+  offset: 0, 0
+  index: -1
+p_beijing_bu
+  rotate: false
+  xy: 2, 2
+  size: 47, 51
+  orig: 113, 234
+  offset: 66, 134
+  index: -1
+yinying
+  rotate: false
+  xy: 2, 98
+  size: 450, 412
+  orig: 450, 936
+  offset: 0, 398
+  index: -1
