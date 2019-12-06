@@ -1,4 +1,5 @@
 import { Component, Watch, Vue } from "vue-property-decorator";
+import * as Hammer from 'hammerjs';
 import state from "./state";
 import ScrollView from "app.root/components/scrollview/ScrollView.vue"
 
@@ -20,10 +21,6 @@ export default class App extends Vue {
         }]
     }]
 
-    get tap() {
-        return 'ontouchstart' in window ? 'touchstart' : 'click'
-    }
-
     protected created() {
         this.createNavData();
     }
@@ -41,10 +38,9 @@ export default class App extends Vue {
             }
         });
 
-
         let $slideDom = document.querySelector("#mobile-sidebar");
         let $menu = document.querySelector(".menu-button");
-        document.body.addEventListener(this.tap, (e: any) => {
+        new Hammer(document.body).on('tap', (e: any) => {
             if (!this.isSideBarOpen || $menu.contains(e.target)) return;
             if ($slideDom.contains(e.target)) return;
             this.toggleSlideBar()

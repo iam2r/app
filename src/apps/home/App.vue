@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div id="mobile-bar" :class="[!topScrolled?'top':'']">
-      <i class="menu-button" @[tap]="toggleSlideBar"></i>
+      <v-touch tag="i" class="menu-button" @tap="toggleSlideBar"></v-touch>
       <transition
         enter-active-class="animated jello"
         leave-active-class="animated fast bounceOut"
