@@ -1,16 +1,14 @@
-import { Container, Sprite } from "pixi.js";
+import { Sprite } from "pixi.js";
 import { resolution } from "app.root/context";
 import { Resources } from "app.root/resource";
-export default class Background extends Container {
-    private background: Sprite;
+export default class Background extends Sprite {
     constructor() {
         super();
         this.initBackground();
     }
 
     private initBackground() {
-        this.background = new Sprite(Resources['main'].textures["dungeon.png"]);
-        this.addChild(this.background);
+        this.texture = Resources['main'].textures["dungeon.png"];
     }
 
     public onStateChange() {

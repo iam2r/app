@@ -50,6 +50,10 @@ export default class Main {
     }
 
     private initVue() {
+        const VueTouch = require("vue-touch");
+        Vue.config.productionTip = false;
+        Vue.use(VueTouch, { name: "v-touch" });
+        
         context.appVue = new Vue({
             store,
             router,

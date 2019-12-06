@@ -1,6 +1,7 @@
 import { Container, Application } from "pixi.js";
 import { Events, ScreenState } from 'app.root/const';
 import context, { emitter } from 'app.root/context';
+import { resolution } from "app.root/context";
 import Background from 'app.root/components/Background';
 import Explorer from 'app.root/components/Explorer';
 import Door from 'app.root/components/Door';
@@ -35,7 +36,8 @@ export default class Scence extends Container {
 
     protected onStateChange(state: ScreenState) {
         store.state.state = state;
-        this.background.onStateChange();
+        const center = resolution.size.center;
+        this.position.set(center.x - this.width / 2, center.y - this.height / 2);
     }
 
     protected init() {
@@ -44,11 +46,9 @@ export default class Scence extends Container {
 
     protected initComponent() {
         this.background = new Background();
-        this.addChild(this.background)
         this.door = new Door();
-        this.background.addChild(this.door);
         this.explorer = new Explorer();
-        this.background.addChild(this.explorer);
+        this.addChild(this.background, this.door, this.explorer)
     }
 
 

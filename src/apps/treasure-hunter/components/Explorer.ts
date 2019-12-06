@@ -1,4 +1,4 @@
-import { Container, Sprite } from "pixi.js";
+import { Sprite } from "pixi.js";
 import { Resources } from "app.root/resource";
 import { config, emitter } from 'app.root/context';
 import KeyBoard from 'app.root/utils/KeyBoard';
@@ -6,9 +6,8 @@ import context from 'app.root/context';
 import { Events } from 'app.root/const';
 import store from 'app.root/main/store';
 
-export default class Explorer extends Container {
+export default class Explorer extends Sprite {
     private keyBoardList: { [key: string]: KeyBoard } = {};
-    private explorer: Sprite;
     private vx: number = 0;
     private vy: number = 0;
     private speed: number = 5;
@@ -21,10 +20,9 @@ export default class Explorer extends Container {
     }
 
     private initExplorer() {
-        this.explorer = new Sprite(Resources['main'].textures["explorer.png"]);
+        this.texture = Resources['main'].textures["explorer.png"];
         this.position.set(68, config.size.height / 2 - this.height / 2);
         this.vx = this.vy = 0;
-        this.addChild(this.explorer);
     }
 
     private initKeyBoard() {
@@ -75,7 +73,6 @@ export default class Explorer extends Container {
     private play() {
         this.x += this.vx;
         this.y += this.vy;
-        store.state.bump.contain(this, context.scence.background.children[0], true);
-        console.log(this.vx, this.vy)
+        store.state.bump.contain(this, context.scence.background, true);
     }
 };

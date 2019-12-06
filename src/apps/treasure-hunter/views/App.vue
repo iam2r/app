@@ -10,6 +10,7 @@
         transform: `translate(-50%,-50%) scale(${$store.state.scale})`
         }"
     >
+      <v-touch tag="span" class="test-button" @tap="test($event)">HTML BUTTON</v-touch>
       <router-view />
     </div>
   </div>
@@ -18,7 +19,34 @@
 <script lang="ts">
 import { Vue, Component } from "vue-property-decorator";
 @Component
-export default class App extends Vue {}
+export default class App extends Vue {
+  private count: number = 0;
+  protected test(e: Event) {
+    this.count++;
+    (e.target as HTMLElement).innerHTML = "HTML BUTTON" + this.count;
+  }
+}
 </script>
+<style lang="scss">
+.test-button {
+  pointer-events: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 120px;
+  height: 60px;
+  background: red;
+  border-radius: 10px;
+  color: white;
+  font-size: 12px;
+  position: absolute;
+  left: 10px;
+  bottom: 10px;
+  transition: .3s all;
+  &:active{
+    transform: scale(0.9)
+  }
+}
+</style>
 
 
