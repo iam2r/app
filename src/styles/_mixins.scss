@@ -316,8 +316,34 @@
 @mixin sprites-size($sprites, $design-width, $design-height) {
     @each $sprite in $sprites {
         $sprite-name: nth($sprite, 10);
+
         .#{$sprite-name} {
             @include sprite-size($sprites, $design-width, $design-height);
         }
     }
+}
+
+@mixin scrollbar-beautify() {
+    ::-webkit-scrollbar {
+        width: 4px;
+        height: 4px;
+
+    }
+
+    ::-webkit-scrollbar-track {
+        box-shadow: inset 0 0 1px rgba(0, 0, 0, 0);
+        border-radius: 10px;
+        background-color: transparent;
+
+    }
+
+    ::-webkit-scrollbar-thumb {
+        border-radius: 10px;
+        box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+        background: #dad6d6;
+    }
+
+    -ms-overflow-style:none;
+    overflow:-moz-scrollbars-none;
+    scrollbar-width:none;
 }

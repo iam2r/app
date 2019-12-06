@@ -1,7 +1,7 @@
 import Vue from 'vue';
 
 interface State {
-    app: Vue;
+    app?: Vue;
     appList: string[];
 }
 
@@ -11,6 +11,8 @@ declare module 'vue/types/vue' {
     }
 };
 
-export default Vue.prototype.$state = {
+let state: State = {
+    appList: []
+}
 
-} as State
+export default Vue.prototype.$state = Vue.observable(state); 

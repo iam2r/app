@@ -1,5 +1,5 @@
 import { VNode } from 'vue';
-import { Component, Vue } from "vue-property-decorator";
+import { Component, Vue, Emit } from "vue-property-decorator";
 import * as Hammer from 'hammerjs';
 import "./App.scss";
 
@@ -52,12 +52,21 @@ export default class App extends Vue {
                 this.topScrolled = false
             }
         });
+
+
         let $slideDom = document.querySelector("#mobile-sidebar");
         let $menu = document.querySelector(".menu-button");
         new Hammer(document.body).on('tap', (e: any) => {
             if (!this.isSideBarOpen || $menu.contains(e.target)) return;
             if ($slideDom.contains(e.target)) return;
             this.toggleSlideBar()
+        });
+
+
+        this.$nextTick(() => {
+            this.$state.app.$on('resize', (size) => {
+                console.log(size)
+            })
         })
     }
 

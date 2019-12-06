@@ -4,30 +4,9 @@
 $mainColorActive:#e20031;
 
 html {
-    ::-webkit-scrollbar {
-        width: 4px;
-        height: 4px;
-
-    }
-
-    ::-webkit-scrollbar-track {
-        box-shadow: inset 0 0 1px rgba(0, 0, 0, 0);
-        border-radius: 10px;
-        background-color: transparent;
-
-    }
-
-    ::-webkit-scrollbar-thumb {
-        border-radius: 10px;
-        box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
-        background: #dad6d6;
-    }
-
-    -ms-overflow-style:none;
-    overflow:-moz-scrollbars-none;
-    scrollbar-width:none;
-
-    img{
+    height: 100%;
+    @include scrollbar-beautify();
+    img {
         -webkit-user-drag: none;
     }
 }
@@ -52,6 +31,8 @@ body {
     right: 0;
     top: 0;
     bottom: 0;
+    width: 100%;
+    height: 100%;
 
     .bscroll-vertical-scrollbar {
         background: transparent !important;
