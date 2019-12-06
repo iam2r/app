@@ -26,12 +26,6 @@ module.exports = {
                 chunks: "initial",
                 enforce: true
             },
-            vue: {
-                test: /node_modules[\\/]vue/,
-                name: "vueAll",
-                chunks: "initial",
-                enforce: true
-            },
             vendors: {
                 test: /[\\/]node_modules[\\/]/,
                 chunks: "initial",
