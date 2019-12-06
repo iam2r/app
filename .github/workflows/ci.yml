@@ -17,3 +17,7 @@ jobs:
         BRANCH: gh-pages
         FOLDER: dist
         BUILD_SCRIPT: yarn && yarn run build:modern --reset-apps-store && yarn run build:modern --app treasure-hunter && yarn run build:modern --app img2font
+
+    - name: Update gh-pages
+      uses: actions/checkout@v1
+      run: gem update github-pages
