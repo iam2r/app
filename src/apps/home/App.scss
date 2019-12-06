@@ -26,6 +26,10 @@ html {
     -ms-overflow-style:none;
     overflow:-moz-scrollbars-none;
     scrollbar-width:none;
+
+    img{
+        -webkit-user-drag: none;
+    }
 }
 
 body {
@@ -35,7 +39,6 @@ body {
     -moz-osx-font-smoothing: grayscale;
     color: #34495e;
     user-select: none;
-
     @media screen and (max-width: 900px) {
         font-size: 14px;
     }
