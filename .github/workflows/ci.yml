@@ -20,4 +20,4 @@ jobs:
 
     - name: Update gh-pages
       uses: actions/checkout@v1
-      run: gem update github-pages
+    - run: gem update github-pages
