@@ -200,7 +200,8 @@ const plugins = [
         format: `${chalk.cyan.bold(`${process.env.BUILD_MODE}: build `)}${chalk.bold('[')}:bar${chalk.bold(']')}${chalk.green.bold(":percent")}(:elapsed seconds)`
     }),
     new ProvidePlugin({
-        React: 'react'
+        React: 'react',
+        PIXI: 'pixi.js'
     }),
     new FriendlyErrorsWebpackPlugin({
         additionalTransformers: [transformer],
@@ -387,7 +388,7 @@ module.exports = {
             test: /\.yml$/,
             loader: 'yml-loader'
         },
-      
+
         {
             test: /\.(mp4|webm|ogg|mp3|wav|flac|aac)(\?.*)?$/,
             use: [{

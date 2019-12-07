@@ -27,7 +27,6 @@ export default class KeyBoard {
             this.isDown = !this.isDown;
             this.isDown && this.press && this.press()
         }
-        e.preventDefault();
     }
 
     private onKeyUp(e: KeyboardEvent) {
@@ -36,7 +35,6 @@ export default class KeyBoard {
             this.isDown = !this.isDown;
             !this.isDown && this.release && this.release()
         }
-        e.preventDefault();
     }
 
     protected handleEvent(e: KeyboardEvent) {

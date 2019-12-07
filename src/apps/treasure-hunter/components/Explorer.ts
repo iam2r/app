@@ -5,6 +5,7 @@ import KeyBoard from 'app.root/utils/KeyBoard';
 import context from 'app.root/context';
 import { Events } from 'app.root/const';
 import store from 'app.root/main/store';
+import Drag from 'app.root/utils/Drag';
 
 export default class Explorer extends Sprite {
     private keyBoardList: { [key: string]: KeyBoard } = {};
@@ -23,6 +24,7 @@ export default class Explorer extends Sprite {
         this.texture = Resources['main'].textures["explorer.png"];
         this.position.set(68, config.size.height / 2 - this.height / 2);
         this.vx = this.vy = 0;
+        new Drag(this, context.app);
     }
 
     private initKeyBoard() {

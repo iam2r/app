@@ -1,5 +1,5 @@
 import Vue from "vue";
-import { Application, utils } from "pixi.js";
+import { Application, utils }  from "pixi.js";
 import App from "app.root/views/App.vue";
 import { Events } from 'app.root/const/Events';
 import { IResourceMap, loader } from 'app.root/resource';
@@ -8,6 +8,7 @@ import Scence from './Scence';
 import router from "./router";
 import store from "./store";
 
+import "pixi-spine";
 
 export interface IOptions {
     resource: IResourceMap,
@@ -53,7 +54,7 @@ export default class Main {
         const VueTouch = require("vue-touch");
         Vue.config.productionTip = false;
         Vue.use(VueTouch, { name: "v-touch" });
-        
+
         context.appVue = new Vue({
             store,
             router,

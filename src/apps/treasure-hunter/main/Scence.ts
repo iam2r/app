@@ -5,6 +5,7 @@ import { resolution } from "app.root/context";
 import Background from 'app.root/components/Background';
 import Explorer from 'app.root/components/Explorer';
 import Door from 'app.root/components/Door';
+import SpineBoy from 'app.root/components/SpineBoy';
 import store from "./store";
 import Size from "./Size";
 
@@ -12,6 +13,7 @@ export default class Scence extends Container {
     public background: Background;
     public door: Door;
     public explorer: Explorer;
+    public spineBoy: SpineBoy;
     constructor() {
         super();
         this.init();
@@ -48,7 +50,8 @@ export default class Scence extends Container {
         this.background = new Background();
         this.door = new Door();
         this.explorer = new Explorer();
-        this.addChild(this.background, this.door, this.explorer)
+        this.spineBoy = new SpineBoy();
+        this.addChild(this.background, this.door, this.explorer, this.spineBoy)
     }
 
 
