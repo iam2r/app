@@ -159,7 +159,7 @@ export default class App extends Vue {
                         <h2>{this.mainTitle}</h2>
                         <h1>
                             欢迎
-                     <br />进入我的主页！
+                     <br />进入我的主页
                     </h1>
                     </div>
                 </div>
