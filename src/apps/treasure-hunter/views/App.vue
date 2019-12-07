@@ -33,15 +33,15 @@ export default class App extends Vue {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 120px;
-  height: 60px;
+  width: 70px;
+  height: 30px;
   background: red;
-  border-radius: 10px;
+  border-radius: 5px;
   color: white;
   font-size: 12px;
   position: absolute;
-  left: 10px;
-  bottom: 10px;
+  left: 0px;
+  bottom: 0px;
   transition: 0.3s all;
   cursor: pointer;
   &:active {

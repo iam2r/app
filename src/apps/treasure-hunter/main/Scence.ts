@@ -27,10 +27,6 @@ export default class Scence extends Container {
         app.renderer.resize(renderSize.width, renderSize.height);
         app.stage.scale.set(scale);
         let size = context.resolution.size;
-        let innerSize = new Size(size.width * scale, size.height * scale);
-        app.stage.x = (renderSize.width - innerSize.width) * 0.5;
-        app.stage.y = (renderSize.height - innerSize.height) * 0.5;
-
         store.state.scale = scale;
         store.state.width = size.width;
         store.state.height = size.height;
@@ -38,8 +34,7 @@ export default class Scence extends Container {
 
     protected onStateChange(state: ScreenState) {
         store.state.state = state;
-        const center = resolution.size.center;
-        this.position.set(center.x - this.width / 2, center.y - this.height / 2);
+        this.background.onStateChange();
     }
 
     protected init() {

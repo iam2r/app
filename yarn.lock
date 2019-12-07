@@ -6165,10 +6165,17 @@ pixelsmith@^2.3.0:
     save-pixels "~2.3.0"
     vinyl-file "~1.3.0"
 
-pixi-spine@^2.1.4:
-  version "2.1.6"
-  resolved "https://registry.npm.taobao.org/pixi-spine/download/pixi-spine-2.1.6.tgz#9aba92098e2e86b9bef6580e4169dce1c7b58014"
-  integrity sha1-mrqSCY4uhrm+9lgOQWnc4ce1gBQ=
+pixi-heaven@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.npm.taobao.org/pixi-heaven/download/pixi-heaven-0.2.0.tgz#cf85a6ed679c014ee3169360ec0ee41e97f50ee6"
+  integrity sha1-z4Wm7WecAU7jFpNg7A7kHpf1DuY=
+  dependencies:
+    tmp "^0.1.0"
+
+pixi-spine@2.0.5:
+  version "2.0.5"
+  resolved "http://r.cnpmjs.org/pixi-spine/download/pixi-spine-2.0.5.tgz#48b2127a7b766047cf317fbf25015db944db5856"
+  integrity sha1-SLISent2YEfPMX+/JQFduUTbWFY=
 
 pixi.js@^5.2.0:
   version "5.2.0"
@@ -8091,6 +8098,13 @@ timsort@^0.3.0:
   version "0.3.0"
   resolved "https://registry.npm.taobao.org/timsort/download/timsort-0.3.0.tgz#405411a8e7e6339fe64db9a234de11dc31e02bd4"
   integrity sha1-QFQRqOfmM5/mTbmiNN4R3DHgK9Q=
+
+tmp@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.npm.taobao.org/tmp/download/tmp-0.1.0.tgz#ee434a4e22543082e294ba6201dcc6eafefa2877"
+  integrity sha1-7kNKTiJUMILilLpiAdzG6v76KHc=
+  dependencies:
+    rimraf "^2.6.3"
 
 to-arraybuffer@^1.0.0:
   version "1.0.1"

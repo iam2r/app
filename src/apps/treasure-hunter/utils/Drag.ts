@@ -1,14 +1,14 @@
 import { Sprite, utils, Point, Application } from 'pixi.js';
 
 export default class Drag extends utils.EventEmitter {
-    constructor(sprite: Sprite, app?: Application) {
+    constructor(sprite: Sprite | PIXI.spine.Spine, app?: Application) {
         super();
         this.sprite = sprite;
         this.app = app;
         this.initEvents();
     }
     private app: Application;
-    private sprite: Sprite;
+    private sprite: Sprite | PIXI.spine.Spine;
     private dragging: boolean = false;
     private data: any = null;
     private diff: Point = new Point();

@@ -17,7 +17,7 @@ export default class Explorer extends Sprite {
         super();
         this.initExplorer();
         this.initKeyBoard();
-        emitter.on(Events.TICKER, () => { this.play() })
+        emitter.on(Events.TICKER, () => { this.ticker() })
     }
 
     private initExplorer() {
@@ -72,9 +72,9 @@ export default class Explorer extends Sprite {
 
     }
 
-    private play() {
+    private ticker() {
         this.x += this.vx;
         this.y += this.vy;
-        store.state.bump.contain(this, context.scence.background, true);
+        store.state.bump.contain(this, store.state.contain, true);
     }
 };

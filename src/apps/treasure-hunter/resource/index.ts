@@ -24,6 +24,7 @@ const resource: IResourceMap = {
     base: {
         main: require("app.root/assets/sprites/main/_spritesmith/main.sprites.json"),
         spineboy:require("app.root/assets/spines/boy/spineboy-pro.spine.json"),
+        normal_spines: require("app.root/assets/spines/maingame/maingame.spine.json"),
     },
 
     sound: {
