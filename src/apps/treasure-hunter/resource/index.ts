@@ -10,12 +10,12 @@ export {
 
 const resource: IResourceMap = {
     test: {
-        normal_json: require("app.root/assets/normal.json"),
-        xml_sprites: require("app.root/assets/sprites/fonts/line_num.sprites.xml"),
-        json_sprites: require("app.root/assets/sprites/main/_spritesmith/main.sprites.json"),
+        // normal_json: require("app.root/assets/normal.json"),
+        // xml_sprites: require("app.root/assets/sprites/fonts/line_num.sprites.xml"),
+        // json_sprites: require("app.root/assets/sprites/main/_spritesmith/main.sprites.json"),
 
-        normal_spines: require("app.root/assets/spines/maingame/maingame.spine.json"),
-        nesting_spines: require("app.root/assets/spines/line/line.spine.json"),
+        // normal_spines: require("app.root/assets/spines/maingame/maingame.spine.json"),
+        // nesting_spines: require("app.root/assets/spines/line/line.spine.json"),
     },
     html: {
 
@@ -24,7 +24,6 @@ const resource: IResourceMap = {
     base: {
         main: require("app.root/assets/sprites/main/_spritesmith/main.sprites.json"),
         spineboy:require("app.root/assets/spines/boy/spineboy-pro.spine.json"),
-        normal_spines: require("app.root/assets/spines/maingame/maingame.spine.json"),
     },
 
     sound: {
