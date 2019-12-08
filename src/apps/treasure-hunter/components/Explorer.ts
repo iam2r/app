@@ -13,10 +13,10 @@ export default class Explorer extends Sprite {
     private vy: number = 0;
     private speed: number = 5;
     private speedEffect: number = 2;
+
     constructor() {
         super();
         this.initExplorer();
-        this.initKeyBoard();
         emitter.on(Events.TICKER, () => { this.ticker() })
     }
 
@@ -25,9 +25,28 @@ export default class Explorer extends Sprite {
         this.position.set(68, config.size.height / 2 - this.height / 2);
         this.vx = this.vy = 0;
         new Drag(this, context.app);
+        this.on('pointerdown', () => {
+            this.active = true;
+        })
     }
 
-    private initKeyBoard() {
+    public get active(): boolean {
+        return JSON.stringify(this.keyBoardList) != '{}'
+    }
+
+    public set active(val: boolean) {
+        if (this.active == val) return;
+        this.initKeyBoard(!val);
+        this.scale.set(val ? 1.5 : 1);
+    }
+
+    private initKeyBoard(remove?: boolean) {
+        if (remove) {
+            for (const key in this.keyBoardList) {
+                this.keyBoardList[key] && this.keyBoardList[key].destroy();
+            }
+            return this.keyBoardList == {};
+        }
 
         let doSpeedEffect = () => {
             if (this.keyBoardList.shift.isDown) {
@@ -69,6 +88,8 @@ export default class Explorer extends Sprite {
             this.vx /= this.speedEffect;
             this.vy /= this.speedEffect;
         });
+
+
 
     }
 

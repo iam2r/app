@@ -23,7 +23,7 @@ export default class Scence extends Container {
     }
 
     protected onResize(scale: number, renderSize: Size) {
-        const app = context.app as Application;
+        const app = context.app;
         app.renderer.resize(renderSize.width, renderSize.height);
         app.stage.scale.set(scale);
         let size = context.resolution.size;

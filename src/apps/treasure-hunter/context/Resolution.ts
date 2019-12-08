@@ -48,7 +48,6 @@ export class Resolution {
             winSize.height / size.height :
             winSize.width / size.width;
         let renderSize = new Size(size.width * scale, size.height * scale);
-    
         this.scale = scale;
         this.renderSize = renderSize;
         emitter.emit(Events.RESIZE, scale, this.renderSize);
