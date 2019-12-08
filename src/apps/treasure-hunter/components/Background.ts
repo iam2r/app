@@ -1,14 +1,10 @@
-import { Sprite } from "pixi.js";
-import { resolution } from "app.root/context";
-import { Resources } from "app.root/resource";
+import { Sprite, Texture } from "pixi.js";
+import { resolution,emitter } from "app.root/context";
+import { Events } from 'app.root/const';
 export default class Background extends Sprite {
-    constructor() {
-        super();
-        this.initBackground();
-    }
-
-    private initBackground() {
-        this.texture = Resources['main'].textures["dungeon.png"];
+    constructor(texture?: Texture) {
+        super(texture);
+        emitter.on(Events.STATE_CHANGE, () => { this.parent && this.onStateChange() });
     }
 
     public onStateChange() {

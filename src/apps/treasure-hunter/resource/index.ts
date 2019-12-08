@@ -1,7 +1,7 @@
 import { IResourceMap } from "./IResource";
 import { ResourceLoader, pixiLoader } from "./ResourceLoader";
 const loader = new ResourceLoader();
-const Resources = pixiLoader.resources
+const Resources = pixiLoader.resources;
 export {
     loader,
     IResourceMap,
@@ -23,7 +23,10 @@ const resource: IResourceMap = {
 
     base: {
         main: require("app.root/assets/sprites/main/_spritesmith/main.sprites.json"),
-        spineboy:require("app.root/assets/spines/boy/spineboy-pro.spine.json"),
+        scrollerBg: require("app.root/assets/sprites/bg/_spritesmith/bg.sprites.json"),
+        fighter: require("app.root/assets/sprites/fighter/fighter.sprites.json"),
+
+        spineboy: require("app.root/assets/spines/boy/spineboy-pro.spine.json"),
     },
 
     sound: {

@@ -1,4 +1,4 @@
-import { Sprite } from "pixi.js";
+import { Sprite, Texture } from "pixi.js";
 import { Resources } from "app.root/resource";
 import { config, emitter } from 'app.root/context';
 import KeyBoard from 'app.root/utils/KeyBoard';
@@ -14,10 +14,10 @@ export default class Explorer extends Sprite {
     private speed: number = 5;
     private speedEffect: number = 2;
 
-    constructor() {
-        super();
+    constructor(texture?: Texture) {
+        super(texture);
         this.initExplorer();
-        emitter.on(Events.TICKER, () => { this.ticker() })
+        emitter.on(Events.TICKER, () => { this.parent && this.ticker() })
     }
 
     private initExplorer() {

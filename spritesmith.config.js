@@ -30,16 +30,16 @@ switch (process.env.APP_NAME) {
         ];
         break;
     case 'treasure-hunter':
-        var assetsName = 'main';
-        var assetsPath = `${process.env.APP_ROOT}/assets/sprites/${assetsName}`
-        plugins = [
-            new SpritesmithPlugin({
+        let assetsList = ['main', 'bg'];
+        assetsList.forEach(assetsName => {
+            var assetsPath = `${process.env.APP_ROOT}/assets/sprites/${assetsName}`;
+            plugins.push(new SpritesmithPlugin({
                 spritesmithOptions: {
                     padding: 1,
                 },
                 src: {
                     cwd: assetsPath,
-                    glob: '*.png'
+                    glob: ['*.png', '*.jpg']
                 },
                 target: {
                     image: `${assetsPath}/_spritesmith/${assetsName}.png`,
@@ -53,8 +53,9 @@ switch (process.env.APP_NAME) {
                 apiOptions: {
                     cssImageRef: `${assetsName}.png`
                 }
-            })
-        ];
+            }))
+        })
+
         break;
     default:
         break;

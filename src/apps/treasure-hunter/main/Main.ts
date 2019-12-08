@@ -19,6 +19,7 @@ export default class Main {
         emitter.once(Events.LOAD_COMPLETE, () => {
             this.initGame();
             this.initData();
+
         })
         loader.load()
     }
@@ -63,8 +64,6 @@ export default class Main {
 
     protected initScence() {
         context.scence = new Scence();
-        let app = context.app as Application;
-        app.stage.addChild(context.scence);
         context.app.ticker.add(() => {
             emitter.emit(Events.TICKER)
         })

@@ -1,13 +1,11 @@
-import {  Sprite } from "pixi.js";
-import { Resources } from "app.root/resource";
+import { Sprite, Texture } from "pixi.js";
 export default class Door extends Sprite {
-    constructor() {
-        super();
+    constructor(texture?: Texture) {
+        super(texture);
         this.initDoor();
     }
 
     private initDoor() {
-        this.texture = Resources['main'].textures["door.png"]
-        this.position.set(32,0);
+        this.position.set(32, 0);
     }
 };
