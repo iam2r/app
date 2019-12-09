@@ -32,7 +32,7 @@ class ModernModePlugin {
         const tempFilename = path.join(this.targetDir, htmlPath, `legacy-assets-${htmlName}.json`)
         const constFilename = path.join(__dirname, `const.json`)
         await fs.mkdirp(path.dirname(tempFilename))
-        await Promise.all([fs.writeFile(tempFilename, JSON.stringify(data.body)), fs.writeFile(constFilename, JSON.stringify({ appName: process.env.APP_NAME, isReport: process.argv.includes("--report") }))])
+        await Promise.all([fs.writeFile(tempFilename, JSON.stringify(data.body)), fs.writeFile(constFilename, JSON.stringify({ appName: process.env.APP_NAME, isReport: process.argv.includes("--report"), isTiny: process.argv.includes("--tiny") }))])
         cb()
       })
     })

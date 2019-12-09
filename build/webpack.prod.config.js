@@ -3,6 +3,7 @@ process.env.NODE_ENV = 'production';
 const path = require("path");
 const utils = require("./utils");
 const config = require("./config");
+const TinypngPlugin = require('tinypng-webpack-plugin');
 const CleanWebpackPlugin = require("clean-webpack-plugin"); // 清空打包目录的插件
 const seen = new Set();
 const nameLength = 4;
@@ -22,7 +23,6 @@ const cacheGroups = require("./config").build.cacheGroups;
 const ModernModePlugin = require('./plugin/webpack/ModernModePlugin');
 const BUILDMODE = config.build.mode;
 const plugins = [
-
     new NamedChunksPlugin(chunk => {
         if (chunk.name) {
             return chunk.name
@@ -66,6 +66,8 @@ if (utils.isReport() && process.env.BUILD_MODE !== BUILDMODE.legacy) {
     plugins.push(new BundleAnalyzerPlugin())
 }
 
+
+
 if (process.env.BUILD_MODE !== BUILDMODE.normal) {
     plugins.push(new ModernModePlugin({
         targetDir: config.staticPath,
@@ -74,6 +76,15 @@ if (process.env.BUILD_MODE !== BUILDMODE.normal) {
         publicPath: utils.isDev() ? config.dev.publicPath : config.build.publicPath
     }))
 }
+
+if (utils.isTiny()) {
+    plugins.push(new TinypngPlugin({
+        key: "yrfcJ9QzyL7zDMZH7NblrLCgHWqvSlQb",//can be Array, eg:['your key 1','your key 2'....]
+        ext: ['png', 'jpeg', 'jpg'],//img ext name
+    }))
+}
+
+
 
 module.exports = merge(baseConfig, {
     devtool: "false",

@@ -71,6 +71,14 @@ class Utils {
     return this.getArgvByKey("dll") == true;
   }
 
+  isTiny() {
+    if (this.getArgvByKey("modern") == true) {
+      return JSON.parse(fs.readFileSync(path.resolve(__dirname, './plugin/webpack/const.json'), 'utf-8')).isTiny
+    } else {
+      return this.getArgvByKey("tiny") == true;
+    }
+  }
+
   isWriteToDisk() {
     return this.getArgvByKey("disk") == true;
   }

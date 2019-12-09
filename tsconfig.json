@@ -19,7 +19,7 @@
         "src/*"
       ],
       "app.root/*": [
-        "src/apps/treasure-hunter/*"
+        "src/apps/home/*"
       ]
     },
     "lib": [
