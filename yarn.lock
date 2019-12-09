@@ -1696,6 +1696,11 @@ base@^0.11.1:
     mixin-deep "^1.2.0"
     pascalcase "^0.1.1"
 
+basic-auth@^1.0.3:
+  version "1.1.0"
+  resolved "http://r.cnpmjs.org/basic-auth/download/basic-auth-1.1.0.tgz#45221ee429f7ee1e5035be3f51533f1cdfd29884"
+  integrity sha1-RSIe5Cn37h5QNb4/UVM/HN/SmIQ=
+
 batch@0.6.1:
   version "0.6.1"
   resolved "https://registry.npm.taobao.org/batch/download/batch-0.6.1.tgz#dc34314f4e679318093fc760272525f94bf25c16"
@@ -2311,10 +2316,10 @@ color@^3.0.0:
     color-convert "^1.9.1"
     color-string "^1.5.2"
 
-colors@1.0.3:
-  version "1.0.3"
-  resolved "https://registry.npm.taobao.org/colors/download/colors-1.0.3.tgz#0433f44d809680fdeb60ed260f1b0c262e82a40b"
-  integrity sha1-BDP0TYCWgP3rYO0mDxsMJi6CpAs=
+colors@^1.3.3:
+  version "1.4.0"
+  resolved "http://r.cnpmjs.org/colors/download/colors-1.4.0.tgz#c50491479d4c1bdaed2c9ced32cf7c7dc2360f78"
+  integrity sha1-xQSRR51MG9rtLJztMs98fcI2D3g=
 
 combined-stream@^1.0.6, combined-stream@~1.0.6:
   version "1.0.8"
@@ -2514,9 +2519,9 @@ core-util-is@1.0.2, core-util-is@~1.0.0:
   resolved "https://registry.npm.taobao.org/core-util-is/download/core-util-is-1.0.2.tgz#b5fd54220aa2bc5ab57aab7140c940754503c1a7"
   integrity sha1-tf1UIgqivFq1eqtxQMlAdUUDwac=
 
-corser@~2.0.0:
+corser@^2.0.1:
   version "2.0.1"
-  resolved "https://registry.npm.taobao.org/corser/download/corser-2.0.1.tgz#8eda252ecaab5840dcd975ceb90d9370c819ff87"
+  resolved "http://r.cnpmjs.org/corser/download/corser-2.0.1.tgz#8eda252ecaab5840dcd975ceb90d9370c819ff87"
   integrity sha1-jtolLsqrWEDc2XXOuQ2TcMgZ/4c=
 
 cosmiconfig@^5.0.0:
@@ -3087,9 +3092,9 @@ ecc-jsbn@~0.1.1:
     jsbn "~0.1.0"
     safer-buffer "^2.1.0"
 
-ecstatic@^3.0.0:
+ecstatic@^3.3.2:
   version "3.3.2"
-  resolved "https://registry.npm.taobao.org/ecstatic/download/ecstatic-3.3.2.tgz#6d1dd49814d00594682c652adb66076a69d46c48"
+  resolved "http://r.cnpmjs.org/ecstatic/download/ecstatic-3.3.2.tgz#6d1dd49814d00594682c652adb66076a69d46c48"
   integrity sha1-bR3UmBTQBZRoLGUq22YHamnUbEg=
   dependencies:
     he "^1.1.1"
@@ -4189,7 +4194,7 @@ http-proxy-middleware@0.19.1:
     lodash "^4.17.11"
     micromatch "^3.1.10"
 
-http-proxy@^1.17.0, http-proxy@^1.8.1:
+http-proxy@^1.17.0:
   version "1.18.0"
   resolved "https://registry.npm.taobao.org/http-proxy/download/http-proxy-1.18.0.tgz#dbe55f63e75a347db7f3d99974f2692a314a6a3a"
   integrity sha1-2+VfY+daNH2389mZdPJpKjFKajo=
@@ -4198,19 +4203,21 @@ http-proxy@^1.17.0, http-proxy@^1.8.1:
     follow-redirects "^1.0.0"
     requires-port "^1.0.0"
 
-http-server@^0.11.1:
-  version "0.11.1"
-  resolved "https://registry.npm.taobao.org/http-server/download/http-server-0.11.1.tgz#2302a56a6ffef7f9abea0147d838a5e9b6b6a79b"
-  integrity sha1-IwKlam/+9/mr6gFH2Dil6ba2p5s=
+http-server@^0.12.0:
+  version "0.12.0"
+  resolved "http://r.cnpmjs.org/http-server/download/http-server-0.12.0.tgz#316b450603c0454d4a462d97a3132808a9858563"
+  integrity sha1-MWtFBgPARU1KRi2XoxMoCKmFhWM=
   dependencies:
-    colors "1.0.3"
-    corser "~2.0.0"
-    ecstatic "^3.0.0"
-    http-proxy "^1.8.1"
-    opener "~1.4.0"
-    optimist "0.6.x"
-    portfinder "^1.0.13"
-    union "~0.4.3"
+    basic-auth "^1.0.3"
+    colors "^1.3.3"
+    corser "^2.0.1"
+    ecstatic "^3.3.2"
+    http-proxy "^1.17.0"
+    opener "^1.5.1"
+    optimist "~0.6.1"
+    portfinder "^1.0.20"
+    secure-compare "3.0.1"
+    union "~0.5.0"
 
 http-signature@~1.2.0:
   version "1.2.0"
@@ -5815,11 +5822,6 @@ opener@^1.5.1:
   resolved "https://registry.npm.taobao.org/opener/download/opener-1.5.1.tgz#6d2f0e77f1a0af0032aca716c2c1fbb8e7e8abed"
   integrity sha1-bS8Od/GgrwAyrKcWwsH7uOfoq+0=
 
-opener@~1.4.0:
-  version "1.4.3"
-  resolved "https://registry.npm.taobao.org/opener/download/opener-1.4.3.tgz#5c6da2c5d7e5831e8ffa3964950f8d6674ac90b8"
-  integrity sha1-XG2ixdflgx6P+jlklQ+NZnSskLg=
-
 opn@^5.5.0:
   version "5.5.0"
   resolved "https://registry.npm.taobao.org/opn/download/opn-5.5.0.tgz#fc7164fab56d235904c51c3b27da6758ca3b9bfc"
@@ -5839,7 +5841,7 @@ opter@^1.1.0:
     z-schema "^3.0.1"
     z-schema-errors "0.0.1"
 
-optimist@0.6.x, optimist@^0.6.1:
+optimist@^0.6.1, optimist@~0.6.1:
   version "0.6.1"
   resolved "https://registry.npm.taobao.org/optimist/download/optimist-0.6.1.tgz#da3ea74686fa21a19a111c326e90eb15a0196686"
   integrity sha1-2j6nRob6IaGaERwybpDrFaAZZoY=
@@ -6241,7 +6243,7 @@ pngjs@^3.3.3:
   resolved "https://registry.npm.taobao.org/pngjs/download/pngjs-3.4.0.tgz#99ca7d725965fb655814eaf65f38f12bbdbf555f"
   integrity sha1-mcp9clll+2VYFOr2XzjxK72/VV8=
 
-portfinder@^1.0.13, portfinder@^1.0.25:
+portfinder@^1.0.20, portfinder@^1.0.25:
   version "1.0.25"
   resolved "https://registry.npm.taobao.org/portfinder/download/portfinder-1.0.25.tgz#254fd337ffba869f4b9d37edc298059cb4d35eca"
   integrity sha1-JU/TN/+6hp9LnTftwpgFnLTTXso=
@@ -6784,10 +6786,10 @@ qs@6.7.0:
   resolved "https://registry.npm.taobao.org/qs/download/qs-6.7.0.tgz?cache=0&sync_timestamp=1573195631718&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fqs%2Fdownload%2Fqs-6.7.0.tgz#41dc1a015e3d581f1621776be31afb2876a9b1bc"
   integrity sha1-QdwaAV49WB8WIXdr4xr7KHapsbw=
 
-qs@~2.3.3:
-  version "2.3.3"
-  resolved "https://registry.npm.taobao.org/qs/download/qs-2.3.3.tgz?cache=0&sync_timestamp=1573195631718&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fqs%2Fdownload%2Fqs-2.3.3.tgz#e9e85adbe75da0bbe4c8e0476a086290f863b404"
-  integrity sha1-6eha2+ddoLvkyOBHaghikPhjtAQ=
+qs@^6.4.0:
+  version "6.9.1"
+  resolved "http://r.cnpmjs.org/qs/download/qs-6.9.1.tgz#20082c65cb78223635ab1a9eaca8875a29bf8ec9"
+  integrity sha1-IAgsZct4IjY1qxqerKiHWim/jsk=
 
 qs@~6.5.2:
   version "6.5.2"
@@ -7329,6 +7331,11 @@ scss-tokenizer@^0.2.3:
   dependencies:
     js-base64 "^2.1.8"
     source-map "^0.4.2"
+
+secure-compare@3.0.1:
+  version "3.0.1"
+  resolved "http://r.cnpmjs.org/secure-compare/download/secure-compare-3.0.1.tgz#f1a0329b308b221fae37b9974f3d578d0ca999e3"
+  integrity sha1-8aAymzCLIh+uN7mXTz1XjQypmeM=
 
 select-hose@^2.0.0:
   version "2.0.0"
@@ -8321,12 +8328,12 @@ union-value@^1.0.0:
     is-extendable "^0.1.1"
     set-value "^2.0.1"
 
-union@~0.4.3:
-  version "0.4.6"
-  resolved "https://registry.npm.taobao.org/union/download/union-0.4.6.tgz#198fbdaeba254e788b0efcb630bc11f24a2959e0"
-  integrity sha1-GY+9rrolTniLDvy2MLwR8kopWeA=
+union@~0.5.0:
+  version "0.5.0"
+  resolved "http://r.cnpmjs.org/union/download/union-0.5.0.tgz#b2c11be84f60538537b846edb9ba266ba0090075"
+  integrity sha1-ssEb6E9gU4U3uEbtuboma6AJAHU=
   dependencies:
-    qs "~2.3.3"
+    qs "^6.4.0"
 
 uniq@^1.0.0, uniq@^1.0.1:
   version "1.0.1"
