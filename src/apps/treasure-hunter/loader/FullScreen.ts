@@ -25,7 +25,6 @@ export default class FullScreen {
     }
 
     private onStateChange() {
-        console.log(device.browser,window.external)
         let isPortrait = resolution.isPortrait;
         if (device.mobile.ios && !device.mobile.tablet && device.browser.safari) {
             let clientHeight = document.documentElement.clientHeight;
