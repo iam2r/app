@@ -3,10 +3,10 @@ import "./FullScreen.scss";
 
 export default class FullScreen {
     private element: HTMLElement;
-    private isPortrait: boolean;
-    private initiated: boolean = false;
+    private preventTouchEvent: boolean = true;
     constructor() {
         this.init();
+        this.onStateChange();
         this.initEvents();
     }
 
@@ -20,17 +20,22 @@ export default class FullScreen {
                 </div>
             </div>`
             ;
+        this.element.style.visibility = 'hidden';
         document.body.appendChild(element);
     }
 
     private onStateChange() {
+        console.log(device.browser,window.external)
         let isPortrait = resolution.isPortrait;
-        let clientHeight = device.mobile.ios && (device.browser.chrome || device.browser.firefox) ? screen.width - 20 : document.documentElement.clientHeight;
-        let hasNavBar = isPortrait ? window.innerHeight == clientHeight : window.innerHeight < clientHeight;
-        let showFullScreen = (device.mobile.ios && !device.mobile.tablet) && hasNavBar && !isPortrait;
-        this.element.style.display = showFullScreen ? '' : 'none';
-        this.initiated = showFullScreen;
-        this.isPortrait = isPortrait;
+        if (device.mobile.ios && !device.mobile.tablet && device.browser.safari) {
+            let clientHeight = document.documentElement.clientHeight;
+            let hasNavBar = isPortrait ? window.innerHeight == clientHeight : window.innerHeight < clientHeight;
+            let showFullScreen = (device.mobile.ios && !device.mobile.tablet) && hasNavBar;
+            this.element.style.visibility = showFullScreen ? 'visible' : 'hidden';
+            document.body.style.overflow = showFullScreen ? 'auto' : 'hidden';
+            this.preventTouchEvent = !showFullScreen;
+            window.scrollTo(0, 0);
+        }
     }
 
     private onTouchFullScreen() {
@@ -44,8 +49,8 @@ export default class FullScreen {
         }
     }
 
-    private onStart(e: TouchEvent) {
-        if (!this.initiated || e.touches.length > 1) {
+    private onPreventTouch(e: TouchEvent) {
+        if (this.preventTouchEvent || e.touches.length > 1) {
             e.preventDefault();
         }
     }
@@ -57,31 +62,29 @@ export default class FullScreen {
             el.addEventListener(type, fn, options);
         };
 
-        if (device.mobile.andriod) {
-            eventType(window, "touchend", this);
-            eventType(window, 'touchcancel', this);
-        }
+        eventType(window, 'touchstart', this, { passive: false });
+        eventType(window, "touchend", this);
+        eventType(window, 'touchcancel', this);
 
-        if (device.mobile.ios) {
-            let target = document.querySelector('body');
-            eventType(target, 'touchstart', this, { passive: false });
-        }
 
-        this.onStateChange();
         eventType(window, "resize", this);
         eventType(window, "orientationchange", this);
-
     }
 
-    protected handleEvent(e: Event) {
+    protected handleEvent(e: Event | TouchEvent) {
         switch (e.type) {
             case 'touchstart':
-                this.onStart(e as TouchEvent);
+                this.onPreventTouch(e as TouchEvent);
                 break;
             case 'touchend':
             case 'touchcancel':
                 if (device.mobile.andriod) {
                     this.onTouchFullScreen()
+                }
+                if (device.mobile.ios && this.preventTouchEvent) {
+                    setTimeout(() => {
+                        window.scrollTo(0, 0);
+                    })
                 }
                 break;
             case 'resize':

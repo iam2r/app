@@ -71,8 +71,8 @@ export class Device {
     private initBrowserData() {
         let ua = navigator.userAgent;
         let brower = {
-            chrome: ua.indexOf("Chrome") > -1 && ua.indexOf("Safari") > -1,
-            safari: ua.indexOf("Safari") > -1 && ua.indexOf("Chrome") == -1,
+            chrome: ua.indexOf("Chrome") > -1  && ua.indexOf("Safari") > -1,
+            safari: ua.indexOf("Safari") > -1 && ua.indexOf("Chrome") == -1 && typeof window.external == 'undefined',
             firefox: ua.indexOf("Firefox") > -1,
             ie: !!window.ActiveXObject || "ActiveXObject" in window,
             edge: ua.indexOf("Edge") > -1,
@@ -95,7 +95,7 @@ export class Device {
      * 操作系统信息，后端收集
      */
     public get osName() {
-        let osName = "Unknow", version = "", uaResult:any[]|null = [];
+        let osName = "Unknow", version = "", uaResult: any[] | null = [];
         let userAgent = navigator.userAgent, appVersion = navigator.appVersion, platform = navigator.platform;
         if (this.mobile.andriod) {
             uaResult = /android (\d+(?:\.\d+)+)/i.exec(userAgent) || /android (\d+(?:\.\d+)+)/i.exec(platform);

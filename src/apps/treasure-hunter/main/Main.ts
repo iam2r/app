@@ -9,6 +9,7 @@ import context, { emitter, config } from "app.root/context";
 import Scence from './Scence';
 import router from "./router";
 import store from "./store";
+
 export interface IOptions {
     resource: IResourceMap,
 }
