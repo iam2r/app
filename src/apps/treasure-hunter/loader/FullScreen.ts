@@ -54,6 +54,16 @@ export default class FullScreen {
         }
     }
 
+    private doClick(e: any) {
+        let target = e.target,
+            ev;
+        if (!(/(SELECT|INPUT|TEXTAREA)/i).test(target.tagName)) {
+            ev = document.createEvent('MouseEvents');
+            ev.initMouseEvent('click', true, true, e.view, 1, target.screenX, target.screenY, target.clientX, target.clientY, e.ctrlKey, e.altKey, e.shiftKey, e.metaKey, 0, null);
+            target.dispatchEvent(ev);
+        }
+    }
+
     private initEvents(remove?: boolean) {
         let eventType = remove ? (el: any, type: string, fn: any, options?: any) => {
             el.removeEventListener(type, fn, options);
@@ -80,10 +90,13 @@ export default class FullScreen {
                 if (device.mobile.andriod) {
                     this.onTouchFullScreen()
                 }
-                if (device.mobile.ios && this.preventTouchEvent) {
-                    setTimeout(() => {
-                        window.scrollTo(0, 0);
-                    })
+                if (device.mobile.ios) {
+                    this.doClick(e);
+                    if (this.preventTouchEvent) {
+                        setTimeout(() => {
+                            window.scrollTo(0, 0);
+                        })
+                    }
                 }
                 break;
             case 'resize':

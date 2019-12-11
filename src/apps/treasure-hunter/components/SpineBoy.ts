@@ -106,6 +106,8 @@ export default class SpineBoy extends PIXI.spine.Spine {
 
     private doAnimation(animation: spineBoyAnimation, nextAnimation?: spineBoyAnimation[]) {
         const loopAnimations = ['hoverboard', 'idle', 'run', 'shoot', 'walk'];
+        let oldAnimation = this.state.tracks[0]?this.state.tracks[0].animation.name:'';
+        if(animation==oldAnimation) return
         this.state.setAnimation(0, animation, loopAnimations.includes(animation));
         nextAnimation && nextAnimation.forEach((animation: spineBoyAnimation) => {
             this.state.addAnimation(0, animation, loopAnimations.includes(animation), 0);
