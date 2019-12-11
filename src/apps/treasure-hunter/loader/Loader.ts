@@ -31,7 +31,7 @@ export class Loader extends EventEmitter {
                 <div class="mask"></div>
             </div>
         `;
-
+        if (device.mobile.device) new FullScreen();
         this.elContainer = document.querySelector(".loader-page .container");
         this.elProgress = document.querySelector(".loader-page .bar");
         this.elText = document.querySelector(".loader-page .message");
@@ -63,7 +63,6 @@ export class Loader extends EventEmitter {
                     .off(Events.LOAD_PROGRESS, onProgress)
                     .off(Events.LOAD_TEXT, onText)
                     .off(Events.LOAD_ERROR, onError)
-
                 this.complete();
             });
         window.addEventListener("contextmenu", (e) => e.preventDefault());
@@ -93,7 +92,5 @@ export class Loader extends EventEmitter {
                 document.querySelector("body").removeChild(el);
             });
         });
-
-        if (device.mobile.device) new FullScreen();
     }
 }
