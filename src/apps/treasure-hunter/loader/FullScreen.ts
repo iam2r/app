@@ -26,12 +26,11 @@ export default class FullScreen {
 
     private onStateChange() {
         let isPortrait = resolution.isPortrait;
-        if (device.mobile.ios && !device.mobile.tablet && device.browser.safari) {
+        if (device.mobile.ios && !device.mobile.tablet) {
             let clientHeight = document.documentElement.clientHeight;
             let hasNavBar = isPortrait ? window.innerHeight == clientHeight : window.innerHeight < clientHeight;
-            let showFullScreen = (device.mobile.ios && !device.mobile.tablet) && hasNavBar;
+            let showFullScreen = hasNavBar;
             this.element.style.visibility = showFullScreen ? 'visible' : 'hidden';
-            document.body.style.overflow = showFullScreen ? 'auto' : 'hidden';
             this.preventTouchEvent = !showFullScreen;
             window.scrollTo(0, 0);
         }
@@ -92,11 +91,7 @@ export default class FullScreen {
                 }
                 if (device.mobile.ios) {
                     this.doClick(e);
-                    if (this.preventTouchEvent) {
-                        setTimeout(() => {
-                            window.scrollTo(0, 0);
-                        })
-                    }
+
                 }
                 break;
             case 'resize':
