@@ -86,12 +86,9 @@ export default class FullScreen {
                 break;
             case 'touchend':
             case 'touchcancel':
+                this.doClick(e);
                 if (device.mobile.andriod) {
                     this.onTouchFullScreen()
-                }
-                if (device.mobile.ios) {
-                    this.doClick(e);
-
                 }
                 break;
             case 'resize':

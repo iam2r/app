@@ -10,7 +10,11 @@
         transform: `translate(-50%,-50%) scale(${$store.state.scale})`
         }"
     >
-      <v-touch tag="span" class="test-button" @tap="test($event)">HTML BUTTON</v-touch>
+      <div class="html-button">
+        <v-touch tag="span" class="test-button" @tap="test($event)">Tap</v-touch>
+        <span class="test-button" @click="click($event)">Click</span>
+      </div>
+
       <router-view />
     </div>
   </div>
@@ -21,31 +25,41 @@ import { Vue, Component } from "vue-property-decorator";
 @Component
 export default class App extends Vue {
   private count: number = 0;
+  private clickCount: number = 0;
   protected test(e: Event) {
     this.count++;
-    (e.target as HTMLElement).innerHTML = "HTML BUTTON" + this.count;
+    (e.target as HTMLElement).innerHTML = "Tap" + this.count;
+  }
+
+  protected click(e: Event) {
+    this.clickCount++;
+    (e.target as HTMLElement).innerHTML = "Click" + this.clickCount;
   }
 }
 </script>
 <style lang="scss">
-.test-button {
-  pointer-events: auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 70px;
-  height: 30px;
-  background: red;
-  border-radius: 5px;
-  color: white;
-  font-size: 12px;
+.html-button {
   position: absolute;
   left: 0px;
   bottom: 0px;
-  transition: 0.3s all;
-  cursor: pointer;
-  &:active {
-    transform: scale(0.9);
+  display: flex;
+  align-items: center;
+  .test-button {
+    pointer-events: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    height: 40px;
+    background: red;
+    border-radius: 5px;
+    color: white;
+    font-size: 12px;
+    transition: 0.3s all;
+    cursor: pointer;
+    &:active {
+      transform: scale(0.8);
+    }
   }
 }
 </style>
