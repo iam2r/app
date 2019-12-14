@@ -3,6 +3,7 @@ import Vue from 'vue';
 interface State {
     app?: Vue;
     appList: string[];
+    resources:any[]
 }
 
 declare module 'vue/types/vue' {
@@ -12,7 +13,8 @@ declare module 'vue/types/vue' {
 };
 
 let state: State = {
-    appList: []
+    appList: [],
+    resources:[],
 }
 
 export default Vue.prototype.$state = Vue.observable(state); 

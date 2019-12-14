@@ -1,7 +1,10 @@
 import { VNode } from 'vue';
 import { Component, Vue } from "vue-property-decorator";
 import * as Hammer from 'hammerjs';
+import Loading from "app.root/components/loading/Loadind";
 import resource from "app.root/resources";
+import { loadJson } from "@/common/Utils.ts";
+import state from "./state";
 import "./App.scss";
 
 interface Nav {
@@ -12,37 +15,52 @@ interface Nav {
 
 @Component
 export default class App extends Vue {
+    private isLoaing: boolean = true;
     protected isSideBarOpen: boolean = false;
     protected topScrolled: boolean = false;
     protected mainTitle: string = 'iam2r';
-    protected navData: Nav[] = [{
-        key: 'Demo',
-        href: '',
-        children: [{
-            key: '',
-            href: ''
-        }]
-    }]
 
-    protected created() {
-        this.createNavData();
+    protected async created() {
+        let config = (await loadJson('../apps.json?' + +new Date())) as any;
+        state.appList = config.apps.filter(it => it !== 'home');
+        state.resources = config.resources;
+
+        setTimeout(() => { //模拟资源预加载
+            this.isLoaing = false;
+            this.$nextTick(() => {
+                this.bindEvents();
+            })
+        },200)
     }
 
-    protected mounted() {
-        this.bindEvents();
+    private get navData(): Nav[] {
+        return [
+            {
+                key: 'Demo',
+                href: '',
+                children: this.$state.appList.map((key: string) => ({
+                    key,
+                    href: `../${key}`
+                }))
+            }
+        ]
     }
 
     protected render(): VNode {
-        return (
-            <div id="app">
-                {this.createViewMobileBar()}
-                {this.createViewMobileSideBar()}
-                {this.createViewHeader()}
-                {this.createViewMain()}
-                {this.createViewFooter()}
-            </div >
-
-        )
+        return this.isLoaing ?
+            (<transition leave-active-class="animated zoomOut">
+                <Loading />
+            </transition>)
+            :
+            (
+                <div id="app">
+                    {this.createViewMobileBar()}
+                    {this.createViewMobileSideBar()}
+                    {this.createViewHeader()}
+                    {this.createViewMain()}
+                    {this.createViewFooter()}
+                </div >
+            )
     }
 
     private bindEvents() {
@@ -54,32 +72,17 @@ export default class App extends Vue {
             }
         });
 
-
-        let $slideDom = document.querySelector("#mobile-sidebar");
-        let $menu = document.querySelector(".menu-button");
         new Hammer(document.body).on('tap', (e: any) => {
+            let $slideDom = document.querySelector("#mobile-sidebar");
+            let $menu = document.querySelector(".menu-button");
             if (!this.isSideBarOpen || $menu.contains(e.target)) return;
             if ($slideDom.contains(e.target)) return;
             this.toggleSlideBar()
         });
 
-
-        this.$nextTick(() => {
-            this.$state.app.$on('resize', (size) => {
-                console.log(size)
-            })
+        this.$state.app.$on('resize', (size) => {
+            console.log(size)
         })
-    }
-
-    private createNavData() {
-        let demoNav = this.navData.find(it => it.key == 'Demo');
-        demoNav.children = [];
-        this.$state.appList.forEach(key => {
-            demoNav.children.push({
-                key,
-                href: `../${key}`
-            })
-        });
     }
 
     private toggleSlideBar() {

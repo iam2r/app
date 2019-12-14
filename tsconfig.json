@@ -19,7 +19,7 @@
         "src/*"
       ],
       "app.root/*": [
-        "src/apps/img2font/*"
+        "src/apps/home/*"
       ]
     },
     "lib": [

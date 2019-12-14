@@ -26,24 +26,6 @@ body {
 
 
 #app {
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    width: 100%;
-    height: 100%;
-
-    .bscroll-vertical-scrollbar {
-        background: transparent !important;
-        width: 4px !important;
-
-        .bscroll-indicator {
-            background: rgb(180, 146, 24) important;
-            border: none !important;
-        }
-    }
-
     #mobile-bar {
         position: fixed;
         top: 0;

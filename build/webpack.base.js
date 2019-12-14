@@ -387,7 +387,6 @@ module.exports = {
                 {
                     loader: "url-loader",
                     options: {
-                        esModule:false,
                         limit: config.inlineLimit,
                         name: utils.assetsPath("images/[name].[hash:8].[ext]"),
                         outputPath: (url, resourcePath, context) => {

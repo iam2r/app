@@ -24,7 +24,7 @@ class AppsStorePlugin {
 
                 let content = {
                     apps: [process.env.APP_NAME],
-                    resourses:{
+                    resources:{
                         [process.env.APP_NAME]:[]
                     }
                 }
@@ -38,7 +38,7 @@ class AppsStorePlugin {
                 }
 
                 !content.apps.includes(process.env.APP_NAME) && content.apps.push(process.env.APP_NAME);
-                content.resourses[process.env.APP_NAME] = resourceCache;
+                content.resources[process.env.APP_NAME] = resourceCache;
                 await fs.writeFile(tempFilename, JSON.stringify(content));
                 cb()
             })
