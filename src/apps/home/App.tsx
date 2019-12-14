@@ -1,6 +1,7 @@
 import { VNode } from 'vue';
-import { Component, Vue, Emit } from "vue-property-decorator";
+import { Component, Vue } from "vue-property-decorator";
 import * as Hammer from 'hammerjs';
+import resource from "app.root/resources";
 import "./App.scss";
 
 interface Nav {
@@ -153,7 +154,7 @@ export default class App extends Vue {
             <div id="main">
                 <div class="hero">
                     <div class="left">
-                        <img class="hero-logo" src={require('./assets/images/logo.svg')} alt="home logo" />
+                        <img class="hero-logo" src={resource.logo} alt="home logo" />
                     </div>
                     <div class="right">
                         <h2>{this.mainTitle}</h2>
@@ -172,7 +173,7 @@ export default class App extends Vue {
         return (
             <div id="header">
                 <div class="logo">
-                    <img class="header-logo" src={require('./assets/images/logo.svg')} alt="home logo" />
+                    <img class="header-logo" src={resource.logo} alt="home logo" />
                     <span>{this.mainTitle}</span>
                 </div>
                 {this.createViewNav(this.navData)}

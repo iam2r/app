@@ -13,6 +13,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin"); // 生成html的插件
 const CopyWebpackPlugin = require("copy-webpack-plugin"); // 复制静态资源的插件
 const PreloadWebpackPlugin = require('@vue/preload-webpack-plugin');
 const AppsStorePlugin = require('./plugin/webpack/AppsStorePlugin');
+const resourceCache = require('./resourceCache');
 const {
     ProvidePlugin,
     DefinePlugin
@@ -38,6 +39,10 @@ fs.writeFileSync(path.resolve(__dirname, `../tsconfig.json`), JSON.stringify(tsC
 const {
     plugins: SpritesmithPlugin
 } = require("../spritesmith.config");
+
+const doResourceCache = (obj) => {
+    resourceCache.push(obj);
+}
 
 const createEntryAndHtml = pageList => pageList.reduce((pre, page) => {
     let html = new HtmlWebpackPlugin({
@@ -97,10 +102,10 @@ const createCssLoader = (isModules, lang = 'scss') => [
     } : {
             loader: "sass-loader",
             options: {
-                data: `
-      @import "@/styles/_config.scss";
-      @import "@/styles/_mixins.scss";
-      `
+                prependData: `
+                    @import "@/styles/_config.scss";
+                    @import "@/styles/_mixins.scss";
+                    `
             }
         }
 ]
@@ -378,46 +383,77 @@ module.exports = {
         },
         {
             test: /\.(png|jpe?g|gif|webp|ico|svg)(\?.*)?$/,
-            loader: "url-loader",
-            options: {
-                name: utils.assetsPath("images/[name].[hash:8].[ext]"), // 图片输出的路径
-                limit: config.inlineLimit,
-            }
+            use: [
+                {
+                    loader: "url-loader",
+                    options: {
+                        esModule:false,
+                        limit: config.inlineLimit,
+                        name: utils.assetsPath("images/[name].[hash:8].[ext]"),
+                        outputPath: (url, resourcePath, context) => {
+                            doResourceCache({
+                                type: 'image',
+                                resourcePath: path.relative(context, resourcePath).replace(/\\/g, '/'),
+                                url
+                            })
+                            return url;
+                        },
+
+                    }
+                }
+            ]
         },
+
+        {
+            test: /\.(mp4|webm|ogg|mp3|wav|flac|aac)(\?.*)?$/,
+            use: [
+                {
+                    loader: 'url-loader',
+                    options: {
+                        limit: config.inlineLimit,
+                        name: utils.assetsPath("media/[name].[hash:8].[ext]"),
+                        outputPath: (url, resourcePath, context) => {
+                            doResourceCache({
+                                type: 'media',
+                                resourcePath: path.relative(context, resourcePath).replace(/\\/g, '/'),
+                                url
+                            })
+                            return url;
+                        },
+                    }
+                }
+            ]
+
+        },
+
+        {
+            test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/i,
+            use: [
+                {
+                    loader: "url-loader",
+                    options: {
+                        limit: config.inlineLimit,
+                        name: utils.assetsPath("fonts/[name].[hash:8].[ext]"),
+                        outputPath: (url, resourcePath, context) => {
+                            doResourceCache({
+                                type: 'font',
+                                resourcePath: path.relative(context, resourcePath).replace(/\\/g, '/'),
+                                url
+                            })
+                            return url;
+                        },
+
+                    }
+                }
+            ]
+
+        },
+
         {
             test: /\.yml$/,
             loader: 'yml-loader'
         },
 
-        {
-            test: /\.(mp4|webm|ogg|mp3|wav|flac|aac)(\?.*)?$/,
-            use: [{
-                loader: 'url-loader',
-                options: {
-                    limit: config.inlineLimit,
-                    fallback: {
-                        loader: 'file-loader',
-                        options: {
-                            name: utils.assetsPath("media/[name].[hash:8].[ext]")
-                        }
-                    }
-                }
-            }]
-        },
-        {
-            test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/i,
-            loader: "url-loader",
-            options: {
-                limit: config.inlineLimit,
-                fallback: {
-                    loader: 'file-loader',
-                    options: {
-                        name: utils.assetsPath("fonts/[name].[hash:8].[ext]")
-                    }
-                }
-
-            }
-        },
         {
             test: /\.xml$/,
             oneOf: [{

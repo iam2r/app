@@ -4,7 +4,7 @@ const path = require("path");
 const utils = require("./utils");
 const config = require("./config");
 const TinypngPlugin = require('tinypng-webpack-plugin');
-const CleanWebpackPlugin = require("clean-webpack-plugin"); // 清空打包目录的插件
+const {CleanWebpackPlugin}  = require("clean-webpack-plugin"); // 清空打包目录的插件
 const seen = new Set();
 const nameLength = 4;
 const {
