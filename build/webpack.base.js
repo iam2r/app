@@ -84,8 +84,9 @@ const createCssLoader = (isModules, lang = 'scss') => [
         loader: "css-loader",
         options: isModules === true ? {
             importLoaders: 2,
-            modules: true,
-            localIdentName: '[name]-[local]-[hash:base64:5]'
+            modules: {
+                localIdentName: '[name]-[local]-[hash:base64:5]'
+            },
         } : {
                 importLoaders: 2,
             }
