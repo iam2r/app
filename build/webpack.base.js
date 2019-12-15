@@ -179,6 +179,11 @@ const {
     entry,
     html
 } = createEntryAndHtml(utils.getFileNameList("./public", "html"));
+const context = path.resolve(__dirname, "../");
+process.env.ENTRY_FILES = JSON.stringify(Object.values(entry || []).reduce((allEntries, curr) => {
+    return allEntries.concat(curr)
+}, []).map(file => path.resolve(context, file)));
+
 
 const plugins = [
     ...html,
@@ -253,7 +258,7 @@ plugins.push(new CopyWebpackPlugin(copyWebpackOptions.filter(({
 
 module.exports = {
     mode: process.env.NODE_ENV,
-    context: path.resolve(__dirname, "../"), //绝对路径，用于从配置中解析入口起点(entry point)和加载器(loader)，以后若设置相对路径 相对当前目录的上一级
+    context, //绝对路径，用于从配置中解析入口起点(entry point)和加载器(loader)，以后若设置相对路径 相对当前目录的上一级
     entry,
     node: {
         setImmediate: false,
