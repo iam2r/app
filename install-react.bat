@@ -1,0 +1,1 @@
+yarn add  react react-dom react-redux react-router-dom redux  redux-promise

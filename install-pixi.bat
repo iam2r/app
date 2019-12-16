@@ -1,0 +1,1 @@
+yarn add pixi.js pixi-spine@2.0.5
