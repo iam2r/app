@@ -74,12 +74,12 @@ const createEntryAndHtml = pageList => pageList.reduce((pre, page) => {
 
 const createCssLoader = (isModules, lang = 'scss') => [
     utils.isDev() ?
-        "vue-style-loader" : {
-            loader: MiniCssExtractPlugin.loader,
-            options: {
-                publicPath: "../"
-            }
-        },
+    "vue-style-loader" : {
+        loader: MiniCssExtractPlugin.loader,
+        options: {
+            publicPath: "../"
+        }
+    },
     {
         loader: "css-loader",
         options: isModules === true ? {
@@ -88,8 +88,8 @@ const createCssLoader = (isModules, lang = 'scss') => [
                 localIdentName: '[name]-[local]-[hash:base64:5]'
             },
         } : {
-                importLoaders: 2,
-            }
+            importLoaders: 2,
+        }
     },
     "postcss-loader",
     lang == 'less' ? {
@@ -101,14 +101,14 @@ const createCssLoader = (isModules, lang = 'scss') => [
             }
         }
     } : {
-            loader: "sass-loader",
-            options: {
-                prependData: `
+        loader: "sass-loader",
+        options: {
+            prependData: `
                     @import "@/styles/_config.scss";
                     @import "@/styles/_mixins.scss";
                     `
-            }
         }
+    }
 ]
 
 const createWebFontsLoader = () => {
@@ -145,10 +145,10 @@ const transformer = error => {
 
         console.log('message:' + message)
         for (const {
-            re,
-            msg,
-            type
-        } of rules) {
+                re,
+                msg,
+                type
+            } of rules) {
             const match = message.match(re)
             if (match) {
                 return Object.assign({}, error, {
@@ -299,98 +299,98 @@ module.exports = {
         noParse: /^(vue|vue-router|vuex|vuex-router-sync|react|react-dom)$/,
         // 多个loader是有顺序要求的，从右往左写，因为转换的时候是从右往左转换的
         rules: [{
-            test: /\.(j|t)sx?$/,
-            exclude: [
-                filepath => {
-                    if (process.env.BUILD_MODE == BUILDMODE.modern) { //modern模式时全部走loader
-                        return false
-                    }
-                    return /node_modules/.test(filepath)
-                }
-            ],
-
-            oneOf: [{
-                test: /\.font\.\w+$/,
-                use: createWebFontsLoader()
-            },
-            {
-                use: [{
-                    loader: 'cache-loader',
-                    options: {
-                        cacheIdentifier: utils.isDev() ? 'dev' : process.env.BUILD_MODE == BUILDMODE.modern ? BUILDMODE.modern : BUILDMODE.legacy,
-                        cacheDirectory: path.resolve(__dirname, '../node_modules/.cache/babel-loader')
-                    }
-                },
-                    "thread-loader",
-                    "babel-loader",
-                {
-                    loader: 'ts-loader',
-                    options: {
-                        transpileOnly: true,
-                        happyPackMode: true
-                    }
-                }
-                ]
-            }
-            ],
-
-        },
-
-        {
-            test: /\.vue$/,
-            use: [{
-                loader: 'cache-loader',
-                options: {
-                    cacheIdentifier: utils.isDev() ? 'dev' : process.env.BUILD_MODE == BUILDMODE.modern ? BUILDMODE.modern : BUILDMODE.legacy,
-                    cacheDirectory: path.resolve(__dirname, '../node_modules/.cache/vue-loader')
-                }
-            },
-            {
-                loader: 'vue-loader',
-                options: {
-                    compilerOptions: {
-                        preserveWhitespace: false
+                test: /\.(j|t)sx?$/,
+                oneOf: [{
+                        test: /\.font\.\w+$/,
+                        use: createWebFontsLoader()
                     },
-                }
-            }
-            ],
-        },
-        {
-            test: /\.s?css$/,
-            oneOf: [
-                // 这里匹配 `<style module>`
-                {
-                    resourceQuery: /module/,
-                    use: createCssLoader(true)
-                }, {
-                    test: /\.module\.\w+$/,
-                    use: createCssLoader(true)
-                },
-                {
-                    use: createCssLoader()
-                }
-            ],
+                    {
+                        use: [{
+                                loader: 'cache-loader',
+                                options: {
+                                    cacheIdentifier: utils.isDev() ? 'dev' : process.env.BUILD_MODE == BUILDMODE.modern ? BUILDMODE.modern : BUILDMODE.legacy,
+                                    cacheDirectory: path.resolve(__dirname, '../node_modules/.cache/babel-loader')
+                                }
+                            },
+                            "thread-loader",
+                            "babel-loader",
+                            {
+                                loader: 'ts-loader',
+                                options: {
+                                    transpileOnly: true,
+                                    happyPackMode: true
+                                }
+                            }
+                        ],
+                        exclude: [
+                            filepath => {
+                                if (
+                                    filepath.includes(path.join('@babel', 'runtime'))
+                                ) {
+                                    return false
+                                }
+                                return /node_modules/.test(filepath)
+                            }
+                        ],
+                    }
+                ],
 
-        },
-        {
-            test: /\.less$/,
-            oneOf: [{
-                resourceQuery: /module/,
-                use: createCssLoader(true, 'less')
-            }, {
-                test: /\.module\.\w+$/,
-                use: createCssLoader(true, 'less')
+            },
+
+            {
+                test: /\.vue$/,
+                use: [{
+                        loader: 'cache-loader',
+                        options: {
+                            cacheIdentifier: utils.isDev() ? 'dev' : process.env.BUILD_MODE == BUILDMODE.modern ? BUILDMODE.modern : BUILDMODE.legacy,
+                            cacheDirectory: path.resolve(__dirname, '../node_modules/.cache/vue-loader')
+                        }
+                    },
+                    {
+                        loader: 'vue-loader',
+                        options: {
+                            compilerOptions: {
+                                preserveWhitespace: false
+                            },
+                        }
+                    }
+                ],
             },
             {
-                use: createCssLoader(false, 'less')
-            }
-            ]
+                test: /\.s?css$/,
+                oneOf: [
+                    // 这里匹配 `<style module>`
+                    {
+                        resourceQuery: /module/,
+                        use: createCssLoader(true)
+                    }, {
+                        test: /\.module\.\w+$/,
+                        use: createCssLoader(true)
+                    },
+                    {
+                        use: createCssLoader()
+                    }
+                ],
 
-        },
-        {
-            test: /\.(png|jpe?g|gif|webp|ico|svg)(\?.*)?$/,
-            use: [
-                {
+            },
+            {
+                test: /\.less$/,
+                oneOf: [{
+                        resourceQuery: /module/,
+                        use: createCssLoader(true, 'less')
+                    }, {
+                        test: /\.module\.\w+$/,
+                        use: createCssLoader(true, 'less')
+                    },
+                    {
+                        use: createCssLoader(false, 'less')
+                    }
+                ]
+
+            },
+            {
+                test: /\.(png|jpe?g|gif|webp|ico|svg)(\?.*)?$/,
+                use: [{
                     loader: "url-loader",
                     options: {
                         limit: config.inlineLimit,
@@ -405,14 +405,12 @@ module.exports = {
                         },
 
                     }
-                }
-            ]
-        },
+                }]
+            },
 
-        {
-            test: /\.(mp4|webm|ogg|mp3|wav|flac|aac)(\?.*)?$/,
-            use: [
-                {
+            {
+                test: /\.(mp4|webm|ogg|mp3|wav|flac|aac)(\?.*)?$/,
+                use: [{
                     loader: 'url-loader',
                     options: {
                         limit: config.inlineLimit,
@@ -426,15 +424,13 @@ module.exports = {
                             return url;
                         },
                     }
-                }
-            ]
+                }]
 
-        },
+            },
 
-        {
-            test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/i,
-            use: [
-                {
+            {
+                test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/i,
+                use: [{
                     loader: "url-loader",
                     options: {
                         limit: config.inlineLimit,
@@ -449,55 +445,54 @@ module.exports = {
                         },
 
                     }
-                }
-            ]
-
-        },
-
-        {
-            test: /\.yml$/,
-            loader: 'yml-loader'
-        },
-
-        {
-            test: /\.xml$/,
-            oneOf: [{
-                test: /\.sprites\.\w+$/,
-                use: [{
-                    loader: "sprites-loader",
-                    options: {
-                        suffix: ".sprites.xml",
-                        name: utils.assetsPath("sprites/[name].[hash:8].[ext]")
-                    }
                 }]
-            },]
-        },
-        {
-            test: /\.json$/,
-            oneOf: [{
-                test: /\.sprites\.\w+$/,
-                type: "javascript/auto",
-                use: [{
-                    loader: "sprites-loader",
-                    options: {
-                        suffix: ".sprites.json",
-                        name: utils.assetsPath("sprites/[name].[hash:8].[ext]")
-                    }
-                },]
+
+            },
+
+            {
+                test: /\.yml$/,
+                loader: 'yml-loader'
+            },
+
+            {
+                test: /\.xml$/,
+                oneOf: [{
+                    test: /\.sprites\.\w+$/,
+                    use: [{
+                        loader: "sprites-loader",
+                        options: {
+                            suffix: ".sprites.xml",
+                            name: utils.assetsPath("sprites/[name].[hash:8].[ext]")
+                        }
+                    }]
+                }, ]
             },
             {
-                test: /\.spine\.\w+$/,
-                type: "javascript/auto",
-                use: [{
-                    loader: "spine-json-loader",
-                    options: {
-                        suffix: ".spine.json",
-                        name: utils.assetsPath("spines/[name].[hash:8].[ext]")
+                test: /\.json$/,
+                oneOf: [{
+                        test: /\.sprites\.\w+$/,
+                        type: "javascript/auto",
+                        use: [{
+                            loader: "sprites-loader",
+                            options: {
+                                suffix: ".sprites.json",
+                                name: utils.assetsPath("sprites/[name].[hash:8].[ext]")
+                            }
+                        }, ]
+                    },
+                    {
+                        test: /\.spine\.\w+$/,
+                        type: "javascript/auto",
+                        use: [{
+                            loader: "spine-json-loader",
+                            options: {
+                                suffix: ".spine.json",
+                                name: utils.assetsPath("spines/[name].[hash:8].[ext]")
+                            }
+                        }, ]
                     }
-                },]
-            }
-            ]
-        },
+                ]
+            },
 
         ]
     },
