@@ -85,6 +85,10 @@ module.exports = {
             libDir: '',
         }, 'lodash']
     ],
+    appsTypes:{
+        react: ['test-react'],
+        vue: ['blog', 'home']
+    },
     inlineLimit: 4096,
     dllVendorBlackList: [/^@/, /\.css$/, /antd|vant|element-ui|mint-ui|core-js|regenerator-runtime/]
 };
