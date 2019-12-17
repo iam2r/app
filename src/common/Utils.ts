@@ -58,8 +58,8 @@ export const loadFont = (families: string[], module = "custom") => {
       [module]: {
         families
       },
-      active: resolve,
-      inactive: reject
+      active: ()=>{resolve('active')},
+      inactive: ()=>{resolve('inactive')}
     });
   });
 };
