@@ -69,7 +69,7 @@ body {
             @extend.tada;
             @extend.animated.infinite;
             @extend.animated.slower;
-            @include sprite-size($menu, 24px, 24px);
+            @include sprite-size($sprite-menu, 24px, 24px);
         }
     }
 

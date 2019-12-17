@@ -1,4 +1,5 @@
 const SpritesmithPlugin = require('webpack-spritesmith');
+const path = require('path');
 let plugins = [
 
 ]
@@ -6,7 +7,7 @@ let plugins = [
 switch (process.env.APP_NAME) {
     case 'home':
         var assetsName = 'main';
-        var assetsPath = `${process.env.APP_ROOT}/assets/images`
+        var assetsPath = `${process.env.APP_ROOT}/assets/images`;
         plugins = [
             new SpritesmithPlugin({
                 spritesmithOptions: {
@@ -24,7 +25,10 @@ switch (process.env.APP_NAME) {
                 },
 
                 apiOptions: {
-                    cssImageRef: `~app.root/assets/images/_spritesmith/${assetsName}.png`
+                    cssImageRef: `~app.root/assets/images/_spritesmith/${assetsName}.png`,
+                    generateSpriteName: fileName => {
+                        return 'sprite_'+path.parse(path.relative(assetsPath, fileName)).name
+                    }
                 }
             })
         ];
