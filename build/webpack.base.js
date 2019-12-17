@@ -435,15 +435,6 @@ module.exports = {
                     options: {
                         limit: config.inlineLimit,
                         name: utils.assetsPath("fonts/[name].[hash:8].[ext]"),
-                        outputPath: (url, resourcePath, context) => {
-                            doResourceCache({
-                                type: 'font',
-                                resourcePath: path.relative(context, resourcePath).replace(/\\/g, '/'),
-                                url
-                            })
-                            return url;
-                        },
-
                     }
                 }]
 

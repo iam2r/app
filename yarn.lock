@@ -9975,6 +9975,11 @@ wbuf@^1.1.0, wbuf@^1.7.3:
   dependencies:
     minimalistic-assert "^1.0.0"
 
+webfontloader@^1.6.28:
+  version "1.6.28"
+  resolved "http://r.cnpmjs.org/webfontloader/download/webfontloader-1.6.28.tgz#db786129253cb6e8eae54c2fb05f870af6675bae"
+  integrity sha1-23hhKSU8tujq5UwvsF+HCvZnW64=
+
 webfonts-loader@^5.1.1:
   version "5.1.1"
   resolved "https://registry.npm.taobao.org/webfonts-loader/download/webfonts-loader-5.1.1.tgz#14edbe5b69bb73c661832450996c336ac29c516c"
