@@ -1,3 +1,4 @@
+import FontFaceObserver from "fontfaceobserver";
 export const loadJson = (url: string) => {
   return new Promise((resolve, reject) => {
     let xhr = (<any>window).XMLHttpRequest
@@ -51,15 +52,20 @@ export const loadImage = (url: string) => {
   });
 };
 
-export const loadFont = (families: string[], module = "custom") => {
-  const WebFont = require("webfontloader");
-  return new Promise((resolve, reject) => {
-    WebFont.load({
-      [module]: {
-        families
-      },
-      active: ()=>{resolve('active')},
-      inactive: ()=>{resolve('inactive')}
-    });
+export const loadFont = (families: string[]) => {
+  let observers = [];
+  families.forEach((str: string) => {
+    let strModel = str.split(":");
+    let family = strModel[0];
+    let variations = strModel[1] ? strModel[1].split(",") : ['n4']
+    variations.forEach((variation: string) => {
+      let match = variation.match(/^([nio])([1-9])$/i);
+      if(match){
+        let style = match[1]=='n'?'normal':match[1]=='i'?'italic':'oblique';
+        let weight = parseInt(match[2], 10)+'00';
+        observers.push(new FontFaceObserver(family,{style,weight}).load())
+      }
+    })
   });
-};
+  return Promise.all(observers)
+}

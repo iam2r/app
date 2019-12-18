@@ -44,6 +44,7 @@ export default class Loading extends Vue {
         },
     ]
     protected render(): VNode {
+
         return (
             <div id="loading-box">
                 <div class="sk-cube-grid">
@@ -54,7 +55,6 @@ export default class Loading extends Vue {
                         }} ></div>)
                     }
                 </div>
-                <span class="loading-tip">Loaing...</span>
             </div >
         )
     }

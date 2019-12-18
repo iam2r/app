@@ -4,10 +4,10 @@ import "normalize.css"
 import "@/styles/common.scss"
 // import { isMobile } from "./common/utils";
 // // 如果是非线上环境，加载 VConsole（移动端适用）
-if (process.env.NODE_ENV !== 'production' ) {
-    const VConsole = require('vconsole');
-    new VConsole();
-}
+// if (process.env.NODE_ENV !== 'production' ) {
+//     const VConsole = require('vconsole');
+//     new VConsole();
+// }
 // const FastClick = require('fastclick')
 // let str = navigator.userAgent.toLowerCase();
 // let ver = str.match(/cpu iphone os (.*?) like mac os/);

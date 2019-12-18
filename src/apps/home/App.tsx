@@ -3,9 +3,8 @@ import { Component, Vue } from "vue-property-decorator";
 import * as Hammer from "hammerjs";
 import Loading from "app.root/components/loading/Loadind";
 import resource from "app.root/resources";
-import { loadJson } from "@/common/Utils.ts";
+import { loadJson, loadFont } from "@/common/Utils";
 import state from "./state";
-import { loadFont } from "@/common/Utils";
 import "./App.scss";
 
 interface Nav {
@@ -25,41 +24,15 @@ export default class App extends Vue {
     let config = (await loadJson("../apps.json?" + +new Date())) as any;
     state.appList = config.apps.filter(it => it !== "home");
     state.resources = config.resources.home;
-    await loadFont(this.initFontStyle());
+    await loadFont(["Source Sans Pro:n3,n4,n6", "Dosis:n5"]).catch((error) => { console.log('font preload error');this.initMain() });
+    this.initMain();
+  }
+
+  private initMain() {
     this.isLoaing = false;
     this.$nextTick(() => {
       this.bindEvents();
     });
-  }
-
-  private initFontStyle() {
-    let styleLink = document.head.appendChild(document.createElement("style"));
-    styleLink.innerHTML = `
-    @font-face {
-        font-family: "Source Sans Pro";
-        src: local("Source Sans Pro"), url("${resource.fonts["SourceSansPro-Regular"]}");
-    }
-    
-    @font-face {
-        font-family: "Source Sans Pro";
-        src: local("Source Sans Pro Light"), url("${resource.fonts["SourceSansPro-Light"]}");
-        font-weight: 300;
-    }
-    
-    @font-face {
-        font-family: "Source Sans Pro";
-        src: local("Source Sans Pro Semibold"), url("${resource.fonts["SourceSansPro-Semibold"]}");
-        font-weight: 600;
-    }
-    
-    @font-face {
-        font-family: "Dosis";
-        src: local("Dosis Medium"), url("${resource.fonts["Dosis-Medium"]}");
-        font-weight: 500;
-    }
-    
-    `;
-    return ["Source Sans Pro:n3,n4,n6", "Dosis:n5"];
   }
 
   private get navData(): Nav[] {
@@ -81,14 +54,14 @@ export default class App extends Vue {
         <Loading />
       </transition>
     ) : (
-      <div id="app">
-        {this.createViewMobileBar()}
-        {this.createViewMobileSideBar()}
-        {this.createViewHeader()}
-        {this.createViewMain()}
-        {this.createViewFooter()}
-      </div>
-    );
+        <div id="app">
+          {this.createViewMobileBar()}
+          {this.createViewMobileSideBar()}
+          {this.createViewHeader()}
+          {this.createViewMain()}
+          {this.createViewFooter()}
+        </div>
+      );
   }
 
   private bindEvents() {
