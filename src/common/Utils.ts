@@ -1,9 +1,7 @@
 import FontFaceObserver from "fontfaceobserver";
 export const loadJson = (url: string) => {
   return new Promise((resolve, reject) => {
-    let xhr = (<any>window).XMLHttpRequest
-      ? new (<any>window).XMLHttpRequest()
-      : new ActiveXObject("Micosoft.XMLHttp");
+    let xhr = new XMLHttpRequest();
     xhr.open("GET", url);
     xhr.send();
 
