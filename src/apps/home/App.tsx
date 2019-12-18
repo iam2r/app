@@ -28,13 +28,6 @@ export default class App extends Vue {
     this.initMain();
   }
 
-  private initMain() {
-    this.isLoaing = false;
-    this.$nextTick(() => {
-      this.bindEvents();
-    });
-  }
-
   private get navData(): Nav[] {
     return [
       {
@@ -62,6 +55,13 @@ export default class App extends Vue {
           {this.createViewFooter()}
         </div>
       );
+  }
+
+  private initMain() {
+    this.isLoaing = false;
+    this.$nextTick(() => {
+      this.bindEvents();
+    });
   }
 
   private bindEvents() {
