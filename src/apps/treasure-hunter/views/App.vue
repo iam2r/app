@@ -17,7 +17,7 @@
         <span class="test-button" @click="click($event)">Click</span>
       </div>
 
-      <router-view />
+      <router-view >
     </div>
   </div>
 </template>
