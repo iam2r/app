@@ -18,7 +18,7 @@ export default class App extends Vue {
   private isLoaing = true;
   protected isSideBarOpen = false;
   protected topScrolled = false;
-  protected mainTitle = "iam2r";
+  protected mainTitle: String = "iam2r";
 
   protected async created() {
     const config = (await loadJson("../apps.json?" + +new Date())) as any;
