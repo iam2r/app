@@ -19,7 +19,7 @@
         "src/*"
       ],
       "app.root/*": [
-        "src/apps/test-react/*"
+        "src/apps/home/*"
       ]
     },
     "lib": [
