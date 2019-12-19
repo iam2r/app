@@ -1,7 +1,4 @@
 import { Events } from "./Events";
 import { ScreenState } from "./ScreenState";
 
-export {
-    ScreenState,
-    Events
-}
+export { ScreenState, Events };

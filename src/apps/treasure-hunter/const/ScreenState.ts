@@ -1,6 +1,5 @@
-
-export enum ScreenState{
-    WEB = "web",
-    LANDSCAPE = "landscape",
-    PORTRAIT = "portrait"
+export enum ScreenState {
+  WEB = "web",
+  LANDSCAPE = "landscape",
+  PORTRAIT = "portrait"
 }

@@ -1,7 +1,7 @@
 // styles
-import "minireset.css"
-import "normalize.css"
-import "@/styles/common.scss"
+import "minireset.css";
+import "normalize.css";
+import "@/styles/common.scss";
 // import { isMobile } from "./common/utils";
 // // 如果是非线上环境，加载 VConsole（移动端适用）
 // if (process.env.NODE_ENV !== 'production' ) {
@@ -23,11 +23,11 @@ import "@/styles/common.scss"
 //               return false;
 //             }
 //           }
-        
+
 //           FastClick.prototype.focus =  (targetElement:any)=> {
 //             targetElement.focus();
 //           };
-        
+
 //         (FastClick as any).attach(document.body);
 //       },
 //       false,
@@ -35,9 +35,4 @@ import "@/styles/common.scss"
 //   }
 // }
 
-require(`@/apps/${process.env.APP_NAME}`)
-
-
-
-
-
+require(`@/apps/${process.env.APP_NAME}`);

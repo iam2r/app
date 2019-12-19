@@ -1,5 +1,5 @@
 export enum ScrollEvent {
-    Normal,
-    Refresh,
-    Infinite
-};
+  Normal,
+  Refresh,
+  Infinite
+}

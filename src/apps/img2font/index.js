@@ -1,13 +1,9 @@
-import {
-    abc
-} from "./untils";
+import { abc } from "./untils";
 const $app = document.querySelector("#app");
 // import lazyTest from "app.root/dynamic/component";
 require("@/webfonts/myfont.font.js");
 
-
-
-let $div = document.createElement('div');
+const $div = document.createElement("div");
 $div.innerHTML = `
 <h2>图片转字体图标测试</h2>
 <i class="myfonticon myfonticon-arrow_adian"></i>
@@ -27,16 +23,7 @@ $div.innerHTML = `
 <i class="myfonticon myfonticon-sound_off_up"></i>
 <i class="myfonticon myfonticon-sound_on_up"></i>
 
-`
+`;
 
 // $app.appendChild(lazyTest());
 $app.appendChild($div);
-
-
-
-
-
-
-
-
-

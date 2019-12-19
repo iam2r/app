@@ -1,3 +1,3 @@
-export interface State{
-    name:string;
+export interface State {
+  name: string;
 }
