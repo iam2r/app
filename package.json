@@ -30,6 +30,8 @@
     "@babel/preset-react": "^7.7.4",
     "@intervolga/optimize-cssnano-plugin": "^1.0.6",
     "@types/webpack-env": "^1.14.0",
+    "@typescript-eslint/eslint-plugin": "^2.12.0",
+    "@typescript-eslint/parser": "^2.12.0",
     "@vue/babel-preset-jsx": "^1.1.2",
     "@vue/preload-webpack-plugin": "^1.1.1",
     "autodll-webpack-plugin": "^0.4.2",
@@ -42,6 +44,7 @@
     "copy-webpack-plugin": "^5.1.1",
     "css-loader": "^3.3.2",
     "eslint": "^6.7.2",
+    "eslint-config-prettier": "^6.7.0",
     "eslint-plugin-prettier": "^3.1.2",
     "eslint-plugin-vue": "^6.0.1",
     "file-loader": "^5.0.2",
@@ -74,7 +77,8 @@
     "webpack-dev-server": "3.9.0",
     "webpack-merge": "^4.2.2",
     "webpack-spritesmith": "^1.0.2",
-    "yml-loader": "^2.1.0"
+    "yml-loader": "^2.1.0",
+    "yorkie": "^2.0.0"
   },
   "dependencies": {
     "antd": "^3.26.3",
