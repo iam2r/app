@@ -9,7 +9,8 @@
     "start": "yarn run dev --dll",
     "build:modern": "yarn run build --modern legacy",
     "postbuild:modern": "yarn run build --modern",
-    "server": "http-server ./dist -g -o"
+    "server": "http-server ./dist -g -o",
+    "lint": "eslint --fix src/**/*.{js,jsx,vue,ts,tsx,scss,css,less}"
   },
   "keywords": [
     "typescript",
@@ -114,7 +115,7 @@
     "pre-commit": "lint-staged"
   },
   "lint-staged": {
-    "*.{js,jsx,vue,ts,tsx}": [
+    "*.{js,jsx,vue,ts,tsx,scss,css,less}": [
       "eslint --fix",
       "git add"
     ]
