@@ -2,14 +2,11 @@
   <div class="home">
     <!-- <img alt="Vue logo" src="../assets/logo.png"> -->
     响应式测试：dataFoo
-    <input
-type="text" v-model="dataFoo" />
+    <input type="text" v-model="dataFoo" />
     响应式测试：dataObj.name
-    <input
-type="text" v-model="dataObj.name" />
+    <input type="text" v-model="dataObj.name" />
     响应式测试：dataObj.obj.a
-    <input
-type="text" v-model="dataObj.obj.a" />
+    <input type="text" v-model="dataObj.obj.a" />
 
     <HelloWorld
       prop-msg="Welcome to Your Vue.js + TypeScript App"
