@@ -1,1 +1,1 @@
-yarn add eslint eslint-plugin-prettier eslint-plugin-vue lint-staged prettier -D
+yarn add eslint eslint-plugin-prettier eslint-plugin-vue lint-staged prettier yorkie-D
