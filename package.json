@@ -114,11 +114,11 @@
     "pre-commit": "lint-staged"
   },
   "lint-staged": {
-    "src/**/*.{vue,js,jsx,ts,tsx}": [
+    "src/**/*.{js,jsx,ts,tsx}": [
       "eslint --fix",
       "git add"
     ],
-    "*.{json,css,less,scss,js}": [
+    "*.{vue,json,css,less,scss,js}": [
       "prettier --write",
       "git add"
     ]
