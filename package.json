@@ -9,7 +9,8 @@
     "start": "yarn run dev --dll",
     "build:modern": "yarn run build --modern legacy",
     "postbuild:modern": "yarn run build --modern",
-    "server": "http-server ./dist -g -o"
+    "server": "http-server ./dist -g -o",
+    "format": "eslint --fix src/**/*.{vue,js,jsx,ts,tsx} & prettier --write *.{json,css,less,scss}"
   },
   "keywords": [
     "typescript",
@@ -33,7 +34,6 @@
     "@typescript-eslint/eslint-plugin": "^2.12.0",
     "@typescript-eslint/parser": "^2.12.0",
     "@vue/babel-preset-jsx": "^1.1.2",
-    "@vue/cli-service": "^4.1.1",
     "@vue/eslint-config-prettier": "^6.0.0",
     "@vue/eslint-config-typescript": "^5.0.1",
     "@vue/preload-webpack-plugin": "^1.1.1",
@@ -117,10 +117,10 @@
   },
   "lint-staged": {
     "src/**/*.{vue,js,jsx,ts,tsx}": [
-      "vue-cli-service lint",
+      "eslint --fix",
       "git add"
     ],
-    "*.{json,css,less,scss,js}": [
+    "*.{json,css,less,scss}": [
       "prettier --write",
       "git add"
     ]

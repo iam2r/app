@@ -15,10 +15,10 @@ interface Nav {
 
 @Component
 export default class App extends Vue {
-  private isLoaing: Boolean = true;
-  protected isSideBarOpen: Boolean = false;
-  protected topScrolled: Boolean = false;
-  protected mainTitle: String = "iam2r";
+  private isLoaing = true;
+  protected isSideBarOpen = false;
+  protected topScrolled = false;
+  protected mainTitle = "iam2r";
 
   protected async created() {
     const config = (await loadJson("../apps.json?" + +new Date())) as any;

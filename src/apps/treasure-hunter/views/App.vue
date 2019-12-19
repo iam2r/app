@@ -19,7 +19,7 @@
 
       <router-view />
     </div>
-  <div>
+  </div>
 </template>
 
 <script lang="ts">
