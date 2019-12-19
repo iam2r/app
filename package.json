@@ -114,7 +114,7 @@
     "pre-commit": "lint-staged"
   },
   "lint-staged": {
-    "src/**/*.{js,jsx,ts,tsx}": [
+    "src/**/*.{vue,js,jsx,ts,tsx}": [
       "eslint --fix",
       "git add"
     ],
