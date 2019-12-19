@@ -15,9 +15,9 @@ interface Nav {
 
 @Component
 export default class App extends Vue {
-  private isLoaing = true;
-  protected isSideBarOpen = false;
-  protected topScrolled = false;
+  private isLoaing: Boolean = true;
+  protected isSideBarOpen: Boolean = false;
+  protected topScrolled: Boolean = false;
   protected mainTitle: String = "iam2r";
 
   protected async created() {
