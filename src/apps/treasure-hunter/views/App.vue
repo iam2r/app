@@ -11,12 +11,10 @@
       }"
     >
       <div class="html-button">
-        <v-touch tag="span"
-class="test-button" @tap="test($event)">
+        <v-touch tag="span" class="test-button" @tap="test($event)">
           Tap
         </v-touch>
-        <span class="test-button"
-@click="click($event)">Click</span>
+        <span class="test-button" @click="click($event)">Click</span>
       </div>
 
       <router-view />
