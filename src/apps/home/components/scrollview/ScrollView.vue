@@ -13,7 +13,7 @@
       ref="scroller"
       :style="{
         ...scrollerStyle,
-        'pointer-events':this.pointerEvent
+        'pointer-events': this.pointerEvent
       }"
       class="scroll-scroller"
       :class="scrollerClass"
@@ -37,4 +37,3 @@ export default ScrollView;
   }
 }
 </style>
-

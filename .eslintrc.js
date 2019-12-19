@@ -5,8 +5,8 @@ module.exports = {
   },
   extends: [
     "plugin:@typescript-eslint/recommended",
-    'plugin:vue/strongly-recommended',
     "prettier/@typescript-eslint",
+    "plugin:vue/recommended",
     "plugin:prettier/recommended"
   ],
   rules: {

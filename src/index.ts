@@ -35,4 +35,4 @@ import "@/styles/common.scss";
 //   }
 // }
 
-require(`@/apps/${process.env.APP_NAME}`);
+require(` @/apps/${process.env.APP_NAME}`);

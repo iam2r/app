@@ -1,23 +1,28 @@
-
 <template>
   <div>
     HelloWorld:start
-    <br>
-      provideFoo={{provideFoo}}
-      provideObj={{provideObj}}
-    <br>
-     HelloWorld:end
+    <br />
+    provideFoo={{ provideFoo }} provideObj={{ provideObj }}
+    <br />
+    HelloWorld:end
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue, Mixins, Inject ,Watch} from "vue-property-decorator";
+import {
+  Component,
+  Prop,
+  Vue,
+  Mixins,
+  Inject,
+  Watch
+} from "vue-property-decorator";
 import Test from "app.root/components/Test.vue";
 @Component
 export default class HelloWorld extends Mixins(Test) {
   @Prop() private propMsg!: string;
   @Inject() provideFoo!: string;
-  @Inject({default: { name: "zr", age: 22 } })
+  @Inject({ default: { name: "zr", age: 22 } })
   provideObj!: any;
 
   mounted() {
