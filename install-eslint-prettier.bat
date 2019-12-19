@@ -1,1 +1,1 @@
-yarn add eslint prettier eslint-config-prettier eslint-plugin-prettier eslint-plugin-vue @typescript-eslint/eslint-plugin @typescript-eslint/parser  lint-staged  -D
+yarn add eslint prettier eslint-plugin-prettier eslint-plugin-vue  @vue/eslint-config-prettier @vue/eslint-config-typescript lint-staged  yorkie -D
