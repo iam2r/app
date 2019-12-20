@@ -8,10 +8,12 @@
         width: `${$store.state.width}px`,
         height: `${$store.state.height}px`,
         transform: `translate(-50%,-50%) scale(${$store.state.scale})`
-        }"
+      }"
     >
       <div class="html-button">
-        <v-touch tag="span" class="test-button" @tap="test($event)">Tap</v-touch>
+        <v-touch tag="span" class="test-button" @tap="test($event)">
+          Tap
+        </v-touch>
         <span class="test-button" @click="click($event)">Click</span>
       </div>
 
@@ -24,8 +26,8 @@
 import { Vue, Component } from "vue-property-decorator";
 @Component
 export default class App extends Vue {
-  private count: number = 0;
-  private clickCount: number = 0;
+  private count = 0;
+  private clickCount = 0;
   protected test(e: Event) {
     this.count++;
     (e.target as HTMLElement).innerHTML = "Tap" + this.count;
@@ -63,5 +65,3 @@ export default class App extends Vue {
   }
 }
 </style>
-
-

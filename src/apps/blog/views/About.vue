@@ -1,31 +1,29 @@
 <template>
-    <div class="about" :class="$style.about">
-        <h1>This is an about page</h1>
-    </div>
+  <div class="about" :class="$style.about">
+    <h1>This is an about page</h1>
+  </div>
 </template>
 <script lang="ts">
-import { Component, Vue, Provide } from 'vue-property-decorator';
+import { Component, Vue, Provide } from "vue-property-decorator";
 @Component
 export default class About extends Vue {
-    mounted() {
-     
-        console.log((<any>this).$style)
-    }
-
+  mounted() {
+    console.log((this as any).$style);
+  }
 }
 </script>
 
 <style lang="scss" scoped>
 .about {
-    background: $mC;
-    background: black;
-    @include border();
+  background: $mC;
+  background: black;
+  @include border();
 }
 </style>
 
 <style lang="scss" module>
 .about {
-    background: red;
-    color: yellow;
+  background: red;
+  color: yellow;
 }
 </style>

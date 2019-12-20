@@ -11,7 +11,7 @@ import { VNode } from "vue";
   directives: {
     mymodel: {
       bind: (el: any, binding: any) => {
-        var valState = binding.value.value;
+        const valState = binding.value.value;
         el.value = valState;
         el.oninput = (e: any) => {
           binding.value.value = e.target.value;
@@ -23,7 +23,7 @@ import { VNode } from "vue";
     msg: {
       deep: true,
       handler: function(val: any) {
-        let refs: any = this.$refs;
+        const refs: any = this.$refs;
         refs["input"].value = val.value;
       }
     }

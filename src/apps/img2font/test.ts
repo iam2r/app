@@ -1,4 +1,3 @@
-let abc = new Map()
+const abc = new Map();
 
-
-alert('ddddddddd')
+alert("ddddddddd");

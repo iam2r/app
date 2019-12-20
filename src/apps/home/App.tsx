@@ -15,16 +15,19 @@ interface Nav {
 
 @Component
 export default class App extends Vue {
-  private isLoaing: boolean = true;
-  protected isSideBarOpen: boolean = false;
-  protected topScrolled: boolean = false;
-  protected mainTitle: string = "iam2r";
+  private isLoaing = true;
+  protected isSideBarOpen = false;
+  protected topScrolled = false;
+  protected mainTitle = "iam2r";
 
   protected async created() {
-    let config = (await loadJson("../apps.json?" + +new Date())) as any;
+    const config = (await loadJson("../apps.json?" + +new Date())) as any;
     state.appList = config.apps.filter(it => it !== "home");
     state.resources = config.resources.home;
-    await loadFont(["Source Sans Pro:n3,n4,n6", "Dosis:n5"]).catch((error) => { console.log('font preload error');this.initMain() });
+    await loadFont(["Source Sans Pro:n3,n4,n6", "Dosis:n5"]).catch(error => {
+      console.log("font preload error");
+      this.initMain();
+    });
     this.initMain();
   }
 
@@ -47,14 +50,14 @@ export default class App extends Vue {
         <Loading />
       </transition>
     ) : (
-        <div id="app">
-          {this.createViewMobileBar()}
-          {this.createViewMobileSideBar()}
-          {this.createViewHeader()}
-          {this.createViewMain()}
-          {this.createViewFooter()}
-        </div>
-      );
+      <div id="app">
+        {this.createViewMobileBar()}
+        {this.createViewMobileSideBar()}
+        {this.createViewHeader()}
+        {this.createViewMain()}
+        {this.createViewFooter()}
+      </div>
+    );
   }
 
   private initMain() {
@@ -74,8 +77,8 @@ export default class App extends Vue {
     });
 
     new Hammer(document.body).on("tap", (e: any) => {
-      let $slideDom = document.querySelector("#mobile-sidebar");
-      let $menu = document.querySelector(".menu-button");
+      const $slideDom = document.querySelector("#mobile-sidebar");
+      const $menu = document.querySelector(".menu-button");
       if (!this.isSideBarOpen || $menu.contains(e.target)) return;
       if ($slideDom.contains(e.target)) return;
       this.toggleSlideBar();

@@ -1,24 +1,18 @@
 module.exports = {
-    root: true,
-    env: {
-        node: true
-    },
-    extends: [
-        "prettier",
-        "prettier/@typescript-eslint",
-        "prettier/babel",
-        "prettier/flowtype",
-        "prettier/react",
-        "prettier/standard",
-        "prettier/unicorn",
-        "prettier/vue",
-        "plugin:prettier/recommended"
-    ],
-    rules: {
-        "no-console": process.env.NODE_ENV === "production" ? "error" : "off",
-        "no-debugger": process.env.NODE_ENV === "production" ? "error" : "off"
-    },
-    parserOptions: {
-        parser: "@typescript-eslint/parser"
-    }
+  root: true,
+  env: {
+    node: true
+  },
+  extends: [
+    "plugin:vue/strongly-recommended",
+    "@vue/prettier",
+    "@vue/typescript"
+  ],
+  rules: {
+    "no-console": process.env.NODE_ENV === "production" ? "error" : "off",
+    "no-debugger": process.env.NODE_ENV === "production" ? "error" : "off"
+  },
+  parserOptions: {
+    parser: "@typescript-eslint/parser"
+  }
 };

@@ -1,15 +1,14 @@
-const {
-    polyfills,
-    demandList,
-    appsTypes
-} = require("./build/config");
+const { polyfills, demandList, appsTypes } = require("./build/config");
 
 module.exports = {
-    presets: [
-        [require('./build/plugin/babel/preset-app'), {
-            polyfills,
-            appsTypes,
-            demandList,
-        }]
+  presets: [
+    [
+      require("./build/plugin/babel/preset-app"),
+      {
+        polyfills,
+        appsTypes,
+        demandList
+      }
     ]
+  ]
 };

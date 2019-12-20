@@ -2,56 +2,59 @@
  * 存储localStorage
  */
 export const setStore = (name, content) => {
-    if (!name) return;
-    if (typeof content !== 'string') {
-        content = JSON.stringify(content);
-    }
-    window.localStorage.setItem(name, content);
+  if (!name) return;
+  if (typeof content !== "string") {
+    content = JSON.stringify(content);
+  }
+  window.localStorage.setItem(name, content);
 };
 
 /**
  * 获取localStorage
  */
 export const getStore = name => {
-    if (!name) return;
-    return window.localStorage.getItem(name);
+  if (!name) return;
+  return window.localStorage.getItem(name);
 };
 
 /**
  * 删除localStorage
  */
 export const removeStore = name => {
-    if (!name) return;
-    window.localStorage.removeItem(name);
+  if (!name) return;
+  window.localStorage.removeItem(name);
 };
 
 /**
  * 写cookies
  */
 export const setCookie = (name, value, time) => {
-    let strsec = getsec(time);
-    let exp = new Date();
-    exp.setTime(exp.getTime() + strsec * 1);
-    document.cookie = name + "=" + escape(value) + ";expires=" + exp.toGMTString();
+  const strsec = getsec(time);
+  const exp = new Date();
+  exp.setTime(exp.getTime() + strsec * 1);
+  document.cookie =
+    name + "=" + escape(value) + ";expires=" + exp.toGMTString();
 };
 
 /**
  * 读取cookies
  */
-export const getCookie = (name) => {
-    let arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
-    if (arr = document.cookie.match(reg)) return (arr[2]);
-    else return null;
+export const getCookie = name => {
+  let arr,
+    reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
+  if ((arr = document.cookie.match(reg))) return arr[2];
+  else return null;
 };
 
 /**
  * 删除cookies
  */
-export const delCookie = (name) => {
-    let exp = new Date();
-    exp.setTime(exp.getTime() - 1);
-    let cval = getCookie(name);
-    if (cval != null) document.cookie = name + "=" + cval + ";expires=" + exp.toGMTString();
+export const delCookie = name => {
+  const exp = new Date();
+  exp.setTime(exp.getTime() - 1);
+  const cval = getCookie(name);
+  if (cval != null)
+    document.cookie = name + "=" + cval + ";expires=" + exp.toGMTString();
 };
 
 /**
@@ -59,16 +62,16 @@ export const delCookie = (name) => {
  * @param len
  * @returns {string}
  */
-export const randomString = (len) => {
-    len = len || 8;
-    let $chars = 'ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz2345678';
-    /****默认去掉了容易混淆的字符oOLl,9gq,Vv,Uu,I1****/
-    let maxPos = $chars.length;
-    let pwd = '';
-    for (let i = 0; i < len; i++) {
-        pwd += $chars.charAt(Math.floor(Math.random() * maxPos));
-    }
-    return pwd;
+export const randomString = len => {
+  len = len || 8;
+  const $chars = "ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz2345678";
+  /****默认去掉了容易混淆的字符oOLl,9gq,Vv,Uu,I1****/
+  const maxPos = $chars.length;
+  let pwd = "";
+  for (let i = 0; i < len; i++) {
+    pwd += $chars.charAt(Math.floor(Math.random() * maxPos));
+  }
+  return pwd;
 };
 
 /**
@@ -84,48 +87,111 @@ export const randomString = (len) => {
  * randomWord(false,32);     例如：fjpnWj29Bb8boiXbLeDF0nxkR4aYcLRl
  */
 export const randomWord = (randomFlag, min, max) => {
-    let str = "",
-        range = min,
-        arr = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+  let str = "",
+    range = min,
+    arr = [
+      "0",
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9",
+      "a",
+      "b",
+      "c",
+      "d",
+      "e",
+      "f",
+      "g",
+      "h",
+      "i",
+      "j",
+      "k",
+      "l",
+      "m",
+      "n",
+      "o",
+      "p",
+      "q",
+      "r",
+      "s",
+      "t",
+      "u",
+      "v",
+      "w",
+      "x",
+      "y",
+      "z",
+      "A",
+      "B",
+      "C",
+      "D",
+      "E",
+      "F",
+      "G",
+      "H",
+      "I",
+      "J",
+      "K",
+      "L",
+      "M",
+      "N",
+      "O",
+      "P",
+      "Q",
+      "R",
+      "S",
+      "T",
+      "U",
+      "V",
+      "W",
+      "X",
+      "Y",
+      "Z"
+    ];
 
-    // 随机产生
-    if (randomFlag) {
-        range = Math.round(Math.random() * (max - min)) + min;
-    }
-    for (let i = 0; i < range; i++) {
-        let pos = Math.round(Math.random() * (arr.length - 1));
-        str += arr[pos];
-    }
-    return str;
+  // 随机产生
+  if (randomFlag) {
+    range = Math.round(Math.random() * (max - min)) + min;
+  }
+  for (let i = 0; i < range; i++) {
+    const pos = Math.round(Math.random() * (arr.length - 1));
+    str += arr[pos];
+  }
+  return str;
 };
 
 /**
  * 获取url后参数
  */
 export const getRequest = () => {
-    let url = location.search; //获取url中"?"符后的字串
-    let theRequest = new Object();
-    if (url.indexOf("?") != -1) {
-        let str = url.substr(1);
-        let strs = str.split("&");
-        for (let i = 0; i < strs.length; i++) {
-            theRequest[strs[i].split("=")[0]] = (strs[i].split("=")[1]);
-        }
+  const url = location.search; //获取url中"?"符后的字串
+  const theRequest = new Object();
+  if (url.indexOf("?") != -1) {
+    const str = url.substr(1);
+    const strs = str.split("&");
+    for (let i = 0; i < strs.length; i++) {
+      theRequest[strs[i].split("=")[0]] = strs[i].split("=")[1];
     }
-    return theRequest;
+  }
+  return theRequest;
 };
 
 /**
  * 生成随机颜色值
  */
 export const getRandomColor = () => {
-    const rgb = [];
-    for (let i = 0; i < 3; ++i) {
-        let color = Math.floor(Math.random() * 256).toString(16);
-        color = color.length === 1 ? '0' + color : color;
-        rgb.push(color)
-    }
-    return '#' + rgb.join('')
+  const rgb = [];
+  for (let i = 0; i < 3; ++i) {
+    let color = Math.floor(Math.random() * 256).toString(16);
+    color = color.length === 1 ? "0" + color : color;
+    rgb.push(color);
+  }
+  return "#" + rgb.join("");
 };
 
 /**
@@ -133,10 +199,10 @@ export const getRandomColor = () => {
  * @param el 号码输入input
  * @returns {boolean}
  */
-export const checkCardNo = (el) => {
-    let txtval = el.value;
-    let reg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
-    return reg.test(txtval);
+export const checkCardNo = el => {
+  const txtval = el.value;
+  const reg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
+  return reg.test(txtval);
 };
 
 /**
@@ -144,15 +210,15 @@ export const checkCardNo = (el) => {
  * @param {String}
  * @returns {Boolean}
  */
-export const checkLength = (v) => {
-    let realLength = 0;
-    let len = v.length;
-    for (let i = 0; i < len; i++) {
-        let charCode = v.charCodeAt(i);
-        if (charCode >= 0 && charCode <= 128) realLength += 1;
-        else realLength += 2;
-    }
-    return realLength;
+export const checkLength = v => {
+  let realLength = 0;
+  const len = v.length;
+  for (let i = 0; i < len; i++) {
+    const charCode = v.charCodeAt(i);
+    if (charCode >= 0 && charCode <= 128) realLength += 1;
+    else realLength += 2;
+  }
+  return realLength;
 };
 
 /**
@@ -160,15 +226,13 @@ export const checkLength = (v) => {
  * @returns {Boolean}
  */
 export const isWeiXin = () => {
-    let ua = window.navigator.userAgent.toLowerCase();
-    if (ua.match(/MicroMessenger/i) == 'micromessenger') {
-        return true;
-    } else {
-        return false;
-    }
+  const ua = window.navigator.userAgent.toLowerCase();
+  if (ua.match(/MicroMessenger/i) == "micromessenger") {
+    return true;
+  } else {
+    return false;
+  }
 };
-
-
 
 /**
  * 浏览器判断
@@ -179,33 +243,34 @@ export const isWeiXin = () => {
  *   }
  */
 export const parseUA = () => {
-    let u = navigator.userAgent;
-    let u2 = navigator.userAgent.toLowerCase();
-    return { //移动终端浏览器版本信息
-        trident: u.indexOf('Trident') > -1,
-        //IE内核
-        presto: u.indexOf('Presto') > -1,
-        //opera内核
-        webKit: u.indexOf('AppleWebKit') > -1,
-        //苹果、谷歌内核
-        gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1,
-        //火狐内核
-        mobile: !!u.match(/AppleWebKit.*Mobile.*/),
-        //是否为移动终端
-        ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/),
-        //ios终端
-        android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1,
-        //android终端或uc浏览器
-        iPhone: u.indexOf('iPhone') > -1,
-        //是否为iPhone或者QQHD浏览器
-        iPad: u.indexOf('iPad') > -1,
-        //是否iPad
-        webApp: u.indexOf('Safari') == -1,
-        //是否web应该程序，没有头部与底部
-        iosv: u.substr(u.indexOf('iPhone OS') + 9, 3),
-        weixin: u2.match(/MicroMessenger/i) == "micromessenger",
-        ali: u.indexOf('AliApp') > -1,
-    };
+  const u = navigator.userAgent;
+  const u2 = navigator.userAgent.toLowerCase();
+  return {
+    //移动终端浏览器版本信息
+    trident: u.indexOf("Trident") > -1,
+    //IE内核
+    presto: u.indexOf("Presto") > -1,
+    //opera内核
+    webKit: u.indexOf("AppleWebKit") > -1,
+    //苹果、谷歌内核
+    gecko: u.indexOf("Gecko") > -1 && u.indexOf("KHTML") == -1,
+    //火狐内核
+    mobile: !!u.match(/AppleWebKit.*Mobile.*/),
+    //是否为移动终端
+    ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/),
+    //ios终端
+    android: u.indexOf("Android") > -1 || u.indexOf("Linux") > -1,
+    //android终端或uc浏览器
+    iPhone: u.indexOf("iPhone") > -1,
+    //是否为iPhone或者QQHD浏览器
+    iPad: u.indexOf("iPad") > -1,
+    //是否iPad
+    webApp: u.indexOf("Safari") == -1,
+    //是否web应该程序，没有头部与底部
+    iosv: u.substr(u.indexOf("iPhone OS") + 9, 3),
+    weixin: u2.match(/MicroMessenger/i) == "micromessenger",
+    ali: u.indexOf("AliApp") > -1
+  };
 };
 
 /**
@@ -213,13 +278,15 @@ export const parseUA = () => {
  * @returns {string}
  */
 export const generateUUID = () => {
-    let d = new Date().getTime();
-    let uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
-        let r = (d + Math.random() * 16) % 16 | 0;
-        d = Math.floor(d / 16);
-        return (c === 'x' ? r : (r & 0x7 | 0x8)).toString(16);
-    });
-    return uuid;
+  let d = new Date().getTime();
+  const uuid = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function(
+    c
+  ) {
+    const r = (d + Math.random() * 16) % 16 | 0;
+    d = Math.floor(d / 16);
+    return (c === "x" ? r : (r & 0x7) | 0x8).toString(16);
+  });
+  return uuid;
 };
 
 /**
@@ -227,8 +294,7 @@ export const generateUUID = () => {
  * @param str
  * @returns {string | * | void}
  */
-export const trim = str => str.replace(/(^\s*)|(\s*$)/g, "")
-
+export const trim = str => str.replace(/(^\s*)|(\s*$)/g, "");
 
 /**
  * 找出对象数组中某属性的最大值
@@ -236,34 +302,35 @@ export const trim = str => str.replace(/(^\s*)|(\s*$)/g, "")
  * @param item
  * @returns val
  */
-export const maxValueInObjArrForKey = (array, key) => Math.max(...array.map( item => item[key]));
+export const maxValueInObjArrForKey = (array, key) =>
+  Math.max(...array.map(item => item[key]));
 
 /**
  * 判断当前网络环境
  */
 export const isWifi = () => {
-    try {
-        let wifi = true;
-        let ua = window.navigator.userAgent;
-        let con = window.navigator.connection;
-        // 如果是微信
-        if (/MicroMessenger/.test(ua)) {
-            if (ua.indexOf('WIFI') >= 0) {
-                return true
-            } else {
-                wifi = false
-            }
-            // 如果支持navigator.connection
-        } else if (con) {
-            let network = con.type;
-            if (network !== 'wifi' && network !== '2' && network !== 'unknown') {
-                wifi = false
-            }
-        }
-        return wifi
-    } catch (e) {
-        return false
+  try {
+    let wifi = true;
+    const ua = window.navigator.userAgent;
+    const con = window.navigator.connection;
+    // 如果是微信
+    if (/MicroMessenger/.test(ua)) {
+      if (ua.indexOf("WIFI") >= 0) {
+        return true;
+      } else {
+        wifi = false;
+      }
+      // 如果支持navigator.connection
+    } else if (con) {
+      const network = con.type;
+      if (network !== "wifi" && network !== "2" && network !== "unknown") {
+        wifi = false;
+      }
     }
+    return wifi;
+  } catch (e) {
+    return false;
+  }
 };
 
 /**
@@ -271,20 +338,22 @@ export const isWifi = () => {
  * @param str
  * @returns {string}
  */
-export const fistLetterUpper = (str) => {
-    return str.charAt(0).toUpperCase() + str.slice(1);
+export const fistLetterUpper = str => {
+  return str.charAt(0).toUpperCase() + str.slice(1);
 };
 
 /**
  * 过滤非法字符串
  */
-export const illegalFilter = (str) => {
-    let regEn = /[`~!@#$%^&*()_+<>?:"{},.\/;'[\]]/im;
-    let regCn = /[·！#￥（——）：；“”‘、，|《。》？、【】[\]]/im;
+export const illegalFilter = str => {
+  const regEn = /[`~!@#$%^&*()_+<>?:"{},.\/;'[\]]/im;
+  const regCn = /[·！#￥（——）：；“”‘、，|《。》？、【】[\]]/im;
 
-    if (regEn.test(str) || regCn.test(str)) return false;
-    return true;
+  if (regEn.test(str) || regCn.test(str)) return false;
+  return true;
 };
 
-
-export const isMobile = () => (navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)) 
+export const isMobile = () =>
+  navigator.userAgent.match(
+    /(phone|pad|pod|iPhone|iPod|ios|iPad|android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i
+  );

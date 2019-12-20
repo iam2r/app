@@ -1,7 +1,7 @@
 import FontFaceObserver from "fontfaceobserver";
 export const loadJson = (url: string) => {
   return new Promise((resolve, reject) => {
-    let xhr = new XMLHttpRequest();
+    const xhr = new XMLHttpRequest();
     xhr.open("GET", url);
     xhr.send();
 
@@ -15,7 +15,7 @@ export const loadJson = (url: string) => {
 
 export const loadSound = (url: string) => {
   return new Promise((resolve, reject) => {
-    let media = new Audio();
+    const media = new Audio();
     media.oncanplay = () => {
       resolve(media);
     };
@@ -36,7 +36,7 @@ export const loadSound = (url: string) => {
 
 export const loadImage = (url: string) => {
   return new Promise((resolve, reject) => {
-    let img = new Image();
+    const img = new Image();
     img.onload = () => {
       console.timeEnd(url);
       resolve(img);
@@ -51,19 +51,20 @@ export const loadImage = (url: string) => {
 };
 
 export const loadFont = (families: string[]) => {
-  let observers = [];
+  const observers = [];
   families.forEach((str: string) => {
-    let strModel = str.split(":");
-    let family = strModel[0];
-    let variations = strModel[1] ? strModel[1].split(",") : ['n4']
+    const strModel = str.split(":");
+    const family = strModel[0];
+    const variations = strModel[1] ? strModel[1].split(",") : ["n4"];
     variations.forEach((variation: string) => {
-      let match = variation.match(/^([nio])([1-9])$/i);
-      if(match){
-        let style = match[1]=='n'?'normal':match[1]=='i'?'italic':'oblique';
-        let weight = parseInt(match[2], 10)+'00';
-        observers.push(new FontFaceObserver(family,{style,weight}).load())
+      const match = variation.match(/^([nio])([1-9])$/i);
+      if (match) {
+        const style =
+          match[1] == "n" ? "normal" : match[1] == "i" ? "italic" : "oblique";
+        const weight = parseInt(match[2], 10) + "00";
+        observers.push(new FontFaceObserver(family, { style, weight }).load());
       }
-    })
+    });
   });
-  return Promise.all(observers)
-}
+  return Promise.all(observers);
+};

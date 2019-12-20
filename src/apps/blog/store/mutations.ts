@@ -1,7 +1,7 @@
-import {State} from "./interface";
+import { State } from "./interface";
 
 export default {
-    updateName(state:State,preload:any){
-        state.name = preload;
-    }
-}
+  updateName(state: State, preload: any) {
+    state.name = preload;
+  }
+};

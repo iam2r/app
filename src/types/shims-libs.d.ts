@@ -1,2 +1,2 @@
-declare module 'lodash';
-declare module 'bump';
+declare module "lodash";
+declare module "bump";

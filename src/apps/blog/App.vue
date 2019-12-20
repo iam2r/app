@@ -12,9 +12,17 @@
       <li>
         <router-link to="/hello/you">/hello/you</router-link>
       </li>
+
+      <li></li>
     </ul>
 
-    <div ref="wheel" id="wheel" :status="wheelStatus" :result="wheelResult" :style="wheelStyle">
+    <div
+      ref="wheel"
+      id="wheel"
+      :status="wheelStatus"
+      :result="wheelResult"
+      :style="wheelStyle"
+    >
       <span>1</span>
       <span>2</span>
       <span>3</span>
@@ -39,7 +47,7 @@ export default class App extends Vue {
   }
 
   private get wheel() {
-    return <any>this.$refs["wheel"];
+    return this.$refs["wheel"] as any;
   }
 
   private spinStoped() {
@@ -52,7 +60,7 @@ export default class App extends Vue {
   }
 
   private calcAngleFromMatrix() {
-    let transform = <string>getComputedStyle(this.wheel)["transform"];
+    let transform = getComputedStyle(this.wheel)["transform"];
     let sinAngle = Number(transform.split(",")[0].replace("matrix(", ""));
     return (Math.asin(sinAngle) * 180) / Math.PI;
   }
@@ -73,7 +81,6 @@ export default class App extends Vue {
   }
 }
 </script>
-
 
 <style lang="scss">
 #app {
@@ -134,7 +141,7 @@ export default class App extends Vue {
   background: red;
   border-radius: 50%;
   position: relative;
- 
+
   &[status="loading"],
   &[status="error"] {
     animation: loading 1s infinite linear;
