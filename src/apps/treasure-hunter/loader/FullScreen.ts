@@ -32,6 +32,9 @@ export default class FullScreen {
         : window.innerHeight < clientHeight;
       const showFullScreen = hasNavBar;
       this.element.style.visibility = showFullScreen ? "visible" : "hidden";
+      (document.querySelector(
+        "#app"
+      ) as HTMLElement).style.pointerEvents = showFullScreen ? "none" : "";
       this.preventTouchEvent = !showFullScreen;
       window.scrollTo(0, 0);
     }
