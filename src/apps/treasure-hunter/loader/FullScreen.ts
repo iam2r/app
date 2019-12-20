@@ -16,7 +16,7 @@ export default class FullScreen {
     element.className = "fullscreen";
     element.innerHTML = `
             <div class="container">
-      <div class="icon-box" style="transform:scale(${scale}) translate(-50%,-50%)">
+                <div class="icon-box" style="transform:scale(${scale}) translate(-50%,-50%)">
                 </div>
             </div>`;
     this.element.style.visibility = "hidden";
