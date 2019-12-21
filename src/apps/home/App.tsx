@@ -73,7 +73,7 @@ export default class App extends Vue {
     this.isSideBarOpen = !this.isSideBarOpen;
   }
 
-  private formateHref(href: string) {
+  private formatHref(href: string) {
     return href ? href : "javascript:void(0);";
   }
 
@@ -82,14 +82,14 @@ export default class App extends Vue {
       <ul class="nav">
         {navData.map((nav: Nav) => (
           <li key={nav.key} class="nav-dropdown-container">
-            <a href={this.formateHref(nav.href)}>{nav.key}</a>
+            <a href={this.formatHref(nav.href)}>{nav.key}</a>
             {nav.children &&
               !!nav.children.length && [
                 <span class="arrow"></span>,
                 <ul class="nav-dropdown">
                   {nav.children.map((child: Nav) => (
                     <li key={child.key}>
-                      <a href={this.formateHref(child.href)}>{child.key}</a>
+                      <a href={this.formatHref(child.href)}>{child.key}</a>
                     </li>
                   ))}
                 </ul>
