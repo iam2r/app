@@ -91,7 +91,6 @@ module.exports = (context, options = {}) => {
     targets = rawTargets
   }
 
-  console.log(targets)
 
   // included-by-default polyfills. These are common polyfills that 3rd party
   // dependencies may rely on (e.g. Vuex relies on Promise), but since with
