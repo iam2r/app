@@ -1,8 +1,10 @@
-import Vue from "vue";
-import App from "./App";
-import state from "./state";
-import VuePlugin from "./VuePlugin";
-Vue.use(VuePlugin);
-state.app = new Vue({
-  render: h => h(App)
-}).$mount("#app");
+(async () => {
+  const { default: Preloading } = await import(
+    /* webpackChunkName: "loader" */ "app.root/preloading/Preloading"
+  );
+  new Preloading()
+    .once("loaded", () => {
+      import(/* webpackChunkName: "main" */ "app.root/main");
+    })
+    .init();
+})();

@@ -1,0 +1,38 @@
+@import "~app.root/styles/fonts.scss";
+@keyframes sk-cube-grid-scale-delay {
+  0%,
+  70%,
+  100% {
+    transform: scale3D(1, 1, 1);
+  }
+
+  35% {
+    transform: scale3D(0, 0, 1);
+  }
+}
+#loading-box {
+  transition: opacity 0.3s;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 10;
+  .sk-cube-grid {
+    width: 99px;
+    height: 99px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    .sk-cube {
+      width: 33px;
+      height: 33px;
+      float: left;
+      animation: sk-cube-grid-scale-delay 1.2s infinite ease-in-out;
+      backface-visibility: hidden;
+    }
+  }
+}

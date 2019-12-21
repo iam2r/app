@@ -1,10 +1,7 @@
 import { VNode } from "vue";
 import { Component, Vue } from "vue-property-decorator";
 import * as Hammer from "hammerjs";
-import Loading from "app.root/components/loading/Loadind";
 import resource from "app.root/resources";
-import { loadJson, loadFont } from "@/common/Utils";
-import state from "./state";
 import "./App.scss";
 
 interface Nav {
@@ -15,20 +12,24 @@ interface Nav {
 
 @Component
 export default class App extends Vue {
-  private isLoaing = true;
   protected isSideBarOpen = false;
   protected topScrolled = false;
   protected mainTitle = "iam2r";
 
-  protected async created() {
-    const config = (await loadJson("../apps.json?" + +new Date())) as any;
-    state.appList = config.apps.filter(it => it !== "home");
-    state.resources = config.resources.home;
-    await loadFont(["Source Sans Pro:n3,n4,n6", "Dosis:n5"]).catch(error => {
-      console.log("font preload error");
-      this.initMain();
-    });
-    this.initMain();
+  protected mounted() {
+    this.bindEvents();
+  }
+
+  protected render(): VNode {
+    return (
+      <div id="app">
+        {this.createViewMobileBar()}
+        {this.createViewMobileSideBar()}
+        {this.createViewHeader()}
+        {this.createViewMain()}
+        {this.createViewFooter()}
+      </div>
+    );
   }
 
   private get navData(): Nav[] {
@@ -42,29 +43,6 @@ export default class App extends Vue {
         }))
       }
     ];
-  }
-
-  protected render(): VNode {
-    return this.isLoaing ? (
-      <transition leave-active-class="animated zoomOut">
-        <Loading />
-      </transition>
-    ) : (
-      <div id="app">
-        {this.createViewMobileBar()}
-        {this.createViewMobileSideBar()}
-        {this.createViewHeader()}
-        {this.createViewMain()}
-        {this.createViewFooter()}
-      </div>
-    );
-  }
-
-  private initMain() {
-    this.isLoaing = false;
-    this.$nextTick(() => {
-      this.bindEvents();
-    });
   }
 
   private bindEvents() {
@@ -84,8 +62,10 @@ export default class App extends Vue {
       this.toggleSlideBar();
     });
 
-    this.$state.app.$on("resize", size => {
-      console.log(size);
+    this.$nextTick(() => {
+      this.$state.app.$on("resize", size => {
+        console.log(size);
+      });
     });
   }
 

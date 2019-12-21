@@ -12,9 +12,9 @@ declare module "vue/types/vue" {
   }
 }
 
-const state: State = {
+export const state: State = {
   appList: [],
   resources: []
 };
 
-export default Vue.prototype.$state = Vue.observable(state);
+export default state;
