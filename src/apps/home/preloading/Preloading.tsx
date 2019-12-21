@@ -44,16 +44,16 @@ export default class Preloading extends EventEmitter {
   ];
 
   public async init() {
+    this.once("destory", () => this.destory());
     this.render();
     const appData = (await loadJson("../apps.json?" + +new Date())) as any;
     state.appList = appData.apps.filter(it => it !== "home");
     state.resources = appData.resources.home;
     await loadFont(["Source Sans Pro:n3,n4,n6", "Dosis:n5"]).catch(error => {
       console.log("font preload error");
-      this.leave();
+      this.emit("loaded");
     });
-
-    this.leave();
+    this.emit("loaded");
   }
 
   protected render() {
@@ -77,16 +77,13 @@ export default class Preloading extends EventEmitter {
     document.querySelector("body").appendChild(this.$el);
   }
 
-  public leave() {
+  public destory() {
     const end = () => {
-      if (this.$el) {
-        this.$el.removeEventListener("transitionend", end);
-        this.$el.parentNode.removeChild(this.$el);
-        this.$el = null;
-      }
+      this.$el.removeEventListener("transitionend", end);
+      this.$el.parentNode.removeChild(this.$el);
+      this.$el = null;
     };
     this.$el.addEventListener("transitionend", end, { once: true });
     this.$el.style.opacity = "0";
-    this.emit("loaded");
   }
 }

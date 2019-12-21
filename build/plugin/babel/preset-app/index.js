@@ -36,7 +36,7 @@ module.exports = (context, options = {}) => {
   const presets = []
   const plugins = []
   const defaultEntryFiles = JSON.parse(process.env.ENTRY_FILES || '[]');
-  const defaultIgnoreBrowserslistConfig = isModern = !!process.env.BUILD_MODE == 'modern';
+  const defaultIgnoreBrowserslistConfig = isModern = process.env.BUILD_MODE == 'modern';
   const demandList = options.demandList || [];
   const appsTypes = options.appsTypes || {};
   // Though in the vue-cli repo, we only use the two envrionment variables
@@ -81,7 +81,7 @@ module.exports = (context, options = {}) => {
   } = options
 
   // resolve targets
-  let targets
+  let targets;
   if (isModern) {
     // targeting browsers that support <script type="module">
     targets = {
@@ -90,6 +90,8 @@ module.exports = (context, options = {}) => {
   } else {
     targets = rawTargets
   }
+
+  console.log(targets)
 
   // included-by-default polyfills. These are common polyfills that 3rd party
   // dependencies may rely on (e.g. Vuex relies on Promise), but since with
