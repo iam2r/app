@@ -80,7 +80,7 @@ export default class Preloading extends EventEmitter {
   public leave(appData: any) {
     this.emit("loaded", appData);
     this.$el.addEventListener("transitionend", () => {
-      document.querySelector("body").removeChild(this.$el);
+      this.$el.parentNode.removeChild(this.$el);
       this.$el = null;
     });
 
