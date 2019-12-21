@@ -1,6 +1,6 @@
 (async () => {
   const { default: Preloading } = await import(
-    /* webpackChunkName: "loader" */ "app.root/preloading/Preloading"
+    /* webpackChunkName: "preloading" */ "app.root/preloading/Preloading"
   );
   new Preloading()
     .once("loaded", () => {
