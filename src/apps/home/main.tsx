@@ -17,6 +17,7 @@ const loading = async () => {
     console.log("font preload error");
     emitter.emit("loaded");
   });
+
   emitter.emit("loaded");
 };
 

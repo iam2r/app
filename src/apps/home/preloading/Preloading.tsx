@@ -1,6 +1,7 @@
 import "./Preloading.scss";
 import { emitter } from "app.root/context";
-import { h, createElement } from "@/common/Utils";
+import JSXUtils from "@/common/JSXUtils";
+
 export default class Preloading {
   constructor() {
     this.init();
@@ -49,7 +50,9 @@ export default class Preloading {
     emitter.once("loaded", () => this.destory());
     document
       .querySelector("body")
-      .appendChild((this.$el = createElement(this.render(h))));
+      .appendChild(
+        (this.$el = JSXUtils.createElement(this.render(JSXUtils.h)))
+      );
   }
 
   protected render(h: Function) {

@@ -74,10 +74,15 @@ export const $typeof = (target: any) =>
     .slice(8, -1)
     .toLowerCase();
 
-export const h = (type: string, props: { [key: string]: any }, ...children) => {
+export const h = (
+  type: string,
+  props: { [key: string]: any },
+  children: any
+) => {
+  props.children = children ? [].concat.apply([], children) : [];
   return {
     type,
-    props: { ...props, children: children.flat(2) || [] } || {}
+    props
   };
 };
 
@@ -93,7 +98,7 @@ export const createElement = (vdom: any) => {
   const element = document.createElement(type);
   setProps(element, props);
   children = children || [];
-  children = $typeof(children) == "array" ? children : [children];
+  children = children instanceof Array ? children : [children];
   children.map(createElement).forEach(element.appendChild.bind(element));
   return element;
 };
@@ -108,7 +113,7 @@ export const setProps = (
     if (typeof value === "object") {
       switch (key) {
         case "style":
-          let cssText = ``;
+          let cssText = "";
           for (let prop in value) {
             const style = value[prop];
             cssText += `${prop}:${style};`;
