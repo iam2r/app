@@ -1,6 +1,6 @@
 import "./Preloading.scss";
 import { EventEmitter } from "events";
-import { loadJson, loadFont } from "@/common/Utils";
+import { loadJson, loadFont, h, createElement } from "@/common/Utils";
 import state from "app.root/state";
 export default class Preloading extends EventEmitter {
   private $el: HTMLElement;
@@ -45,36 +45,35 @@ export default class Preloading extends EventEmitter {
 
   public async init() {
     this.once("destory", () => this.destory());
-    this.render();
+    document
+      .querySelector("body")
+      .appendChild((this.$el = createElement(this.render(h))));
     const appData = (await loadJson("../apps.json?" + +new Date())) as any;
     state.appList = appData.apps.filter(it => it !== "home");
     state.resources = appData.resources.home;
-    await loadFont(["Source Sans Pro:n3,n4,n6", "Dosis:n5"]).catch(error => {
+    await loadFont(["Source Sans Pro", "Dosis"]).catch(error => {
       console.log("font preload error");
       this.emit("loaded");
     });
     this.emit("loaded");
   }
 
-  protected render() {
-    let child = ``;
-    this.cubes.map(
-      (item: any) =>
-        (child += `<div
-          class="sk-cube"
-          style="background-color:${item.color};animation-delay:${item.delay}s"
-        ></div>
-        `)
+  protected render(h: Function) {
+    return (
+      <div id="loading-box">
+        <div class="sk-cube-grid">
+          {this.cubes.map((item: any) => (
+            <div
+              class="sk-cube"
+              style={{
+                "background-color": item.color,
+                "animation-delay": item.delay + "s"
+              }}
+            ></div>
+          ))}
+        </div>
+      </div>
     );
-
-    let el = (this.$el = document.createElement("div"));
-    el.setAttribute("id", "loading-box");
-    el.innerHTML = `
-     <div class="sk-cube-grid">
-       ${child}
-     </div>
-   `;
-    document.querySelector("body").appendChild(this.$el);
   }
 
   public destory() {

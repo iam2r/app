@@ -68,3 +68,60 @@ export const loadFont = (families: string[]) => {
   });
   return Promise.all(observers);
 };
+
+export const $typeof = (target: any) =>
+  Object.prototype.toString
+    .call(target)
+    .slice(8, -1)
+    .toLowerCase();
+
+export const h = (type: string, props: { [key: string]: any }, ...children) => {
+  return {
+    type,
+    props: { ...props, children: children.flat(2) || [] } || {}
+  };
+};
+
+export const createElement = (vdom: any) => {
+  if (typeof vdom === "string") {
+    return document.createTextNode(vdom);
+  }
+  let {
+    type,
+    props,
+    props: { children }
+  } = vdom;
+  const element = document.createElement(type);
+  setProps(element, props);
+  children = children || [];
+  children = $typeof(children) == "array" ? children : [children];
+  children.map(createElement).forEach(element.appendChild.bind(element));
+  return element;
+};
+
+export const setProps = (
+  element: HTMLElement,
+  props: { [key: string]: any }
+) => {
+  for (let key in props) {
+    if (key == "children") continue;
+    const value = props[key];
+    if (typeof value === "object") {
+      switch (key) {
+        case "style":
+          let cssText = ``;
+          for (let prop in value) {
+            const style = value[prop];
+            cssText += `${prop}:${style};`;
+          }
+          element.setAttribute(key, cssText);
+          break;
+        default:
+          setProps(element, value);
+          break;
+      }
+    } else {
+      element.setAttribute(key, value);
+    }
+  }
+};
