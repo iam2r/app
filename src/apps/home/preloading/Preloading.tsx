@@ -1,8 +1,10 @@
 import "./Preloading.scss";
-import { EventEmitter } from "events";
-import { loadJson, loadFont, h, createElement } from "@/common/Utils";
-import state from "app.root/state";
-export default class Preloading extends EventEmitter {
+import { emitter } from "app.root/context";
+import { h, createElement } from "@/common/Utils";
+export default class Preloading {
+  constructor() {
+    this.init();
+  }
   private $el: HTMLElement;
   private cubes: any[] = [
     {
@@ -43,19 +45,11 @@ export default class Preloading extends EventEmitter {
     }
   ];
 
-  public async init() {
-    this.once("destory", () => this.destory());
+  public init() {
+    emitter.once("loaded", () => this.destory());
     document
       .querySelector("body")
       .appendChild((this.$el = createElement(this.render(h))));
-    const appData = (await loadJson("../apps.json?" + +new Date())) as any;
-    state.appList = appData.apps.filter(it => it !== "home");
-    state.resources = appData.resources.home;
-    await loadFont(["Source Sans Pro", "Dosis"]).catch(error => {
-      console.log("font preload error");
-      this.emit("loaded");
-    });
-    this.emit("loaded");
   }
 
   protected render(h: Function) {

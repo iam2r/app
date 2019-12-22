@@ -17,4 +17,4 @@ export const state: State = {
   resources: []
 };
 
-export default state;
+export default Vue.prototype.$state = Vue.observable(state);

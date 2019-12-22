@@ -1,4 +1,3 @@
-import FontFaceObserver from "fontfaceobserver";
 export const loadJson = (url: string) => {
   return new Promise((resolve, reject) => {
     const xhr = new XMLHttpRequest();
@@ -50,7 +49,7 @@ export const loadImage = (url: string) => {
   });
 };
 
-export const loadFont = (families: string[]) => {
+export const loadFont = (tools: any, families: string[]) => {
   const observers = [];
   families.forEach((str: string) => {
     const strModel = str.split(":");
@@ -62,7 +61,7 @@ export const loadFont = (families: string[]) => {
         const style =
           match[1] == "n" ? "normal" : match[1] == "i" ? "italic" : "oblique";
         const weight = parseInt(match[2], 10) + "00";
-        observers.push(new FontFaceObserver(family, { style, weight }).load());
+        observers.push(new tools(family, { style, weight }).load());
       }
     });
   });
