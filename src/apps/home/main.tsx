@@ -14,7 +14,7 @@ const loading = async () => {
     "Source Sans Pro",
     "Dosis"
   ]).catch(error => {
-    console.log("font preload error");
+    console.info(error);
     emitter.emit("loaded");
   });
 
