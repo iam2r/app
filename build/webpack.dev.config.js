@@ -1,14 +1,25 @@
-
-process.env.NODE_ENV='development';
+process.env.NODE_ENV = 'development';
+const fs = require('fs-extra');
+const path = require("path");
 const baseConfig = require("./webpack.base");
 const merge = require("webpack-merge");
 const config = require("./config");
 const utils = require("./utils");
 const AutoDllPlugin = require('autodll-webpack-plugin');
+const prettier = require('prettier');
 const {
   HotModuleReplacementPlugin,
   NoEmitOnErrorsPlugin,
 } = require("webpack");
+
+let tsConfig = require("../tsconfig.json");
+tsConfig.compilerOptions.paths['app.root/*'] = [`src/apps/${process.env.APP_NAME}/*`];
+fs.writeFileSync(path.resolve(__dirname, `../tsconfig.json`), prettier.format(JSON.stringify(tsConfig), {
+  semi: false,
+  parser: "json"
+}));
+
+
 const plugins = [
   new HotModuleReplacementPlugin(),
   new NoEmitOnErrorsPlugin(),
