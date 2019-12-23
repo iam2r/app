@@ -33,6 +33,13 @@ module.exports = {
                 priority: -10,
                 enforce: true
             },
+            vendors_async: {
+                test: /[\\/]node_modules[\\/]/,
+                chunks: "async",
+                name: "vendors-async",
+                priority: -10,
+                enforce: true
+            },
         },
         mode: {
             normal: 'normal',//传统 

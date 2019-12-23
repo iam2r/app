@@ -1,7 +1,3 @@
-(async () => {
-  const { default: Preloading } = await import(
-    /* webpackChunkName: "preloading" */ "app.root/preloading/Preloading"
-  );
-  new Preloading();
-  await import(/* webpackChunkName: "main" */ "app.root/main");
-})();
+import Preloading from "app.root/preloading/Preloading";
+new Preloading();
+import(/* webpackChunkName: "main-async" */ "app.root/main");
