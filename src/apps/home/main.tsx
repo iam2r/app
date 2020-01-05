@@ -10,15 +10,13 @@ const loading = async () => {
   const appData = (await loadJson("../apps.json?" + +new Date())) as any;
   state.appList = appData.apps.filter(it => it !== "home");
   state.resources = appData.resources.home;
-  await loadFont(require("fontfaceobserver"), [
-    "Source Sans Pro",
-    "Dosis"
-  ]).catch(error => {
-    console.info("font preload timeout!");
-    emitter.emit("loaded");
-  });
-
-  emitter.emit("loaded");
+  await loadFont(require("fontfaceobserver"), ["Source Sans Pro", "Dosis"])
+    .catch(error => {
+      console.info("font preload timeout!");
+    })
+    .finally(() => {
+      emitter.emit("loaded");
+    });
 };
 
 emitter.once("loaded", () => {
