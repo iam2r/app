@@ -12,7 +12,7 @@
     "sourceMap": true,
     "baseUrl": ".",
     "types": ["webpack-env"],
-    "paths": { "@/*": ["src/*"], "app.root/*": ["src/apps/test-react/*"] },
+    "paths": { "@/*": ["src/*"], "app.root/*": ["src/apps/home/*"] },
     "lib": ["esnext", "dom", "dom.iterable", "scripthost"]
   },
   "exclude": ["node_modules"]
