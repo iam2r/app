@@ -1,5 +1,6 @@
 import { VNode } from "vue";
 import { Component, Vue } from "vue-property-decorator";
+import * as tsx from "vue-tsx-support";
 import * as Hammer from "hammerjs";
 import resource from "app.root/resources";
 import "./App.scss";
@@ -11,7 +12,7 @@ interface Nav {
 }
 
 @Component
-export default class App extends Vue {
+export default class App extends tsx.Component<any> {
   protected isSideBarOpen = false;
   protected topScrolled = false;
   protected mainTitle = "iam2r";
