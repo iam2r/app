@@ -1,1 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([["HooksTest"],{"0cba":function(n,e,t){"use strict";t.r(e),function(n){var t=function(){return n.createElement("div",null,n.createElement("span",null,22))};t(),e.default=t}.call(this,t("ab5b"))}}]);
