@@ -1,13 +1,18 @@
 export default class JSXUtils {
-  static h(type: string, props: { [key: string]: any }, children) {
+  static h(type: string, props: { [key: string]: any } | string, children) {
+    if (Array.isArray(props) || typeof props === "string") {
+      children = props;
+      props = {};
+    }
     props.children = children ? [].concat.apply([], children) : [];
+
     return {
       type,
       props
     };
   }
 
-  static createElement(vdom: any) {
+  static createElement(vdom: any): HTMLElement | Text {
     if (typeof vdom === "string") {
       return document.createTextNode(vdom);
     }
@@ -17,6 +22,7 @@ export default class JSXUtils {
       props,
       props: { children }
     } = vdom;
+
     const element = document.createElement(type);
     JSXUtils.setProps(element, props);
     children = children || [];
