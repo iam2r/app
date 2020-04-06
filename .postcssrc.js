@@ -1,5 +1,5 @@
 let plugins = {
-  autoprefixer: {}
+  autoprefixer: {},
 };
 switch (process.env.APP_NAME) {
   case "blog":
@@ -7,7 +7,16 @@ switch (process.env.APP_NAME) {
       ...plugins,
       autoprefixer: {},
       "postcss-px-to-viewport": {
-        viewportWidth: 375
+        viewportWidth: 375,
+      },
+    };
+    break;
+  case "birthday":
+    plugins = {
+      ...plugins,
+      autoprefixer: {},
+      "postcss-px2rem-exclude": {
+        remUnit: 100,
       }
     };
     break;
@@ -16,5 +25,5 @@ switch (process.env.APP_NAME) {
 }
 
 module.exports = {
-  plugins
+  plugins,
 };

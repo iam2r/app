@@ -4,6 +4,7 @@ let plugins = [];
 
 switch (process.env.APP_NAME) {
   case "home":
+  case "birthday":
     var assetsName = "main";
     var assetsPath = `${process.env.APP_ROOT}/assets/images`;
     plugins = [

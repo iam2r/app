@@ -1,0 +1,444 @@
+@import "./styles/animate.scss";
+@import "./assets/images/_spritesmith/main.scss";
+$mainColorActive: #e20031;
+
+html {
+  height: 100%;
+  @include scrollbar-beautify();
+
+  img {
+    -webkit-user-drag: none;
+  }
+}
+
+body {
+  font-family: "Source Sans Pro", "Helvetica Neue", Arial, sans-serif;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: #34495e;
+  user-select: none;
+  overflow: hidden;
+}
+
+#app {
+  .scene {
+    box-sizing: content-box;
+    width: 1000%;
+    left: 50%;
+    position: absolute;
+    // transform: translate(-50%, 0) scale(1);
+    top: 50%;
+    transition: all ease 2s;
+    transform-style: preserve-3d;
+    &.active {
+      // transform: translate(-50%, -50%) rotate(-180deg) scale(0.09);
+      .snail-box {
+        animation: rotateSnail 86400s linear infinite;
+      }
+    }
+
+    .snail-box {
+      width: 400px;
+      transform-origin: 50% calc(100% + 500vw);
+      position: absolute;
+      top: 5px;
+      left: 50%;
+      z-index: 2;
+      transform: translate(-50%, -100%);
+      transition: all ease 2s;
+      .speed {
+        position: absolute;
+        width: 250px;
+        height: 200px;
+        left: 50%;
+        bottom: 0;
+        z-index: 2;
+        span {
+          background: linear-gradient(90deg, #e3e1ea00 30%, #3c384d 90%);
+          border-radius: 50px;
+          display: block;
+          position: absolute;
+          height: 10px;
+          animation: speed ease;
+          animation-iteration-count: infinite;
+
+          &:nth-child(1) {
+            width: 100%;
+            left: 0%;
+            top: 0%;
+            animation-delay: 250ms;
+            animation-duration: 600ms;
+          }
+
+          &:nth-child(2) {
+            width: 50%;
+            left: 50%;
+            top: 38%;
+            animation-delay: 50ms;
+            animation-duration: 500ms;
+          }
+
+          &:nth-child(3) {
+            width: 30%;
+            left: 0;
+            top: 60%;
+            animation-duration: 250ms;
+          }
+
+          &:nth-child(4) {
+            width: 60%;
+            left: 5%;
+            top: 20%;
+            animation-delay: 250ms;
+            animation-duration: 900ms;
+          }
+        }
+      }
+
+      .snail-wrapper {
+        width: 100%;
+
+        .snail {
+          width: 100%;
+          padding-bottom: 100%;
+          position: relative;
+
+          > * {
+            position: absolute;
+          }
+        }
+
+        .eyes {
+          left: 10%;
+          bottom: 10%;
+          width: 10%;
+          height: 10%;
+          border-radius: 50px;
+          background: #3c384d;
+        }
+
+        .bottomchest {
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          height: 15%;
+          transform-origin: 100% 100%;
+          border: 10px solid #3c384d;
+          border-radius: 125px 125px 25px 25px;
+          z-index: 5;
+          animation: bottomchest ease 600ms;
+          animation-iteration-count: infinite;
+          animation-direction: alternate;
+          background: #524d6a;
+          box-shadow: inset 0px 10px 0 0px rgba(60, 56, 77, 0.35);
+        }
+
+        .shell {
+          bottom: 10px;
+          left: 30%;
+          width: 60%;
+          height: 60%;
+          border-radius: 50%;
+          animation: shell ease 600ms;
+          animation-iteration-count: infinite;
+          animation-direction: alternate;
+          transform-origin: 50% 100%;
+
+          &.behind {
+            z-index: 1;
+            background: #524d6a;
+            box-shadow: inset 25px 0px 0 rgba(60, 56, 77, 0.35),
+              0 0 0px 10px #3c384d;
+          }
+
+          &.front {
+            border-top: 10px solid transparent;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-bottom: 10px solid transparent;
+            z-index: 6;
+
+            &:before {
+              width: 70%;
+              height: 70%;
+              position: absolute;
+              border-radius: 50%;
+              right: 10px;
+              bottom: 10px;
+              content: "";
+              display: block;
+              background: #524d6a;
+            }
+
+            .innershell {
+              width: 70%;
+              height: 70%;
+              position: absolute;
+              border-radius: 50%;
+              right: -4px;
+              bottom: 0;
+
+              &:after {
+                position: absolute;
+                content: "";
+                border-radius: 50%;
+                z-index: 3;
+                bottom: 0px;
+                right: 0;
+                display: block;
+                width: 100%;
+                height: 100%;
+                border-left: 15px solid transparent;
+                border-bottom: 15px solid transparent;
+                border-right: 15px solid transparent;
+                border-top: 15px solid #524d6a;
+                top: -20px;
+                left: -30px;
+              }
+
+              &:before {
+                z-index: 2;
+                position: absolute;
+                content: "";
+                width: 100%;
+                height: 100%;
+                border-radius: 50%;
+                display: block;
+                top: -20px;
+                left: -24px;
+                border-left: 10px solid #3c384d;
+                border-bottom: 10px solid #3c384d;
+                border-right: 10px solid #3c384d;
+                border-top: 10px solid transparent;
+                transform: rotate(70deg);
+              }
+            }
+          }
+        }
+
+        .eyes {
+          bottom: 9%;
+          width: 10px;
+          height: 20%;
+          border-radius: 50px;
+          background: #3c384d;
+          transform-origin: 100% 100%;
+          animation: eyes ease-in-out 600ms, eyes-translate ease 600ms;
+          animation-iteration-count: infinite;
+          animation-direction: alternate;
+
+          &.right {
+            z-index: 6;
+            left: 5%;
+            transform: rotate(65deg);
+          }
+
+          &.left {
+            z-index: 1;
+            left: 5%;
+            animation-delay: 200ms;
+            transform: rotate(40deg);
+          }
+
+          &:after {
+            width: 200%;
+            padding-bottom: 200%;
+            border-radius: 50%;
+            display: block;
+            background: #3c384d;
+            content: "";
+            top: 0;
+            position: absolute;
+            z-index: 3;
+            right: 0;
+            transform: translate(0, 0);
+          }
+
+          &:before {
+            content: "";
+            width: 300%;
+            padding-bottom: 300%;
+            border-radius: 50%;
+            position: absolute;
+            top: 0;
+            left: 50%;
+            display: block;
+            background: white;
+            transform: translate(-50%, -50%);
+            border: 10px solid #3c384d;
+          }
+        }
+
+        .face {
+          position: absolute;
+          // z-index: 6;
+          left: 50%;
+          bottom: 53%;
+          width: 10px;
+          height: 20%;
+          border-radius: 50px;
+          background: #3c384d;
+          transform-origin: 100% 100%;
+          animation: eyes ease-in-out 600ms, face-translate ease 600ms;
+          animation-iteration-count: infinite;
+          animation-direction: alternate;
+          $faceWidth: 1000%;
+          &::before {
+            content: "";
+            width: $faceWidth;
+            padding-bottom: $faceWidth * 1.5356;
+            position: absolute;
+            top: -30%;
+            left: 50%;
+            display: block;
+            transform: translate(-50%, -50%) translateX(10px);
+            background: url(./assets/images/face.png) no-repeat;
+            background-size: 100% 100%;
+          }
+        }
+      }
+    }
+
+    .ground {
+      animation: earth 5s ease-in-out infinite;
+      transform: rotate(0deg);
+
+      .earth {
+        width: 100%;
+        height: 1000vw;
+        border-radius: 50%;
+        position: relative;
+        z-index: 3;
+        background-color: #69d1db;
+        overflow: hidden;
+        box-shadow: 0 0 200px #2b5970;
+        transform-style: preserve-3d;
+        .earthShadow {
+          position: absolute;
+          top: 0;
+          height: 300px;
+          width: 300px;
+          border-radius: 50%;
+          background: radial-gradient(
+            ellipse at center,
+            rgba(0, 0, 0, 0) 70%,
+            rgba(0, 0, 0, 0.85) 100%
+          );
+        }
+
+        .mapWrapper {
+          $height: 90%;
+          position: absolute;
+          top: 5%;
+          left: -70%;
+          height: $height;
+          width: $height * 2.16;
+          animation: rotateEarth 10s ease-in-out infinite;
+
+          img {
+            height: 100%;
+          }
+        }
+      }
+    }
+  }
+}
+
+@keyframes bottomchest {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.02, 0.98);
+  }
+}
+@keyframes shell {
+  from {
+    transform: scale(1.1, 0.9);
+  }
+  to {
+    transform: scale(1.15, 0.85);
+  }
+}
+@keyframes eyes {
+  from {
+    transform: rotate(40deg);
+  }
+  to {
+    transform: rotate(10deg);
+  }
+}
+@keyframes eyes-translate {
+  from {
+    left: 10%;
+  }
+  to {
+    left: 4%;
+  }
+}
+
+@keyframes face-translate {
+  from {
+    left: 50%;
+  }
+  to {
+    left: 46%;
+  }
+}
+
+@keyframes speed {
+  0% {
+    transform: translateX(0%);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(200%);
+    opacity: 0;
+  }
+}
+
+@keyframes earth {
+  0%,
+  100% {
+    transform: translate3d(0, 10px, 0);
+  }
+
+  50% {
+    transform: translate3d(0, -10px, 0);
+  }
+}
+
+@keyframes rotateEarth {
+  0%,
+  100% {
+    transform: translate3d(-450px, 0, 0);
+  }
+
+  50% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes eyeBlink {
+  0%,
+  30%,
+  40%,
+  100% {
+    transform: scale(1);
+  }
+
+  33%,
+  37% {
+    transform: scale(1, 0);
+  }
+}
+
+@keyframes rotateSnail {
+  0% {
+    transform: translate(-50%, -100%) rotate(0deg);
+  }
+  100% {
+    transform: translate(-50%, -100%) rotate(-360deg);
+  }
+}

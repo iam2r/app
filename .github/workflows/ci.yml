@@ -11,7 +11,7 @@ jobs:
       uses: actions/checkout@master
 
     - name: Build
-      run: yarn && yarn run build:modern --tiny && yarn run build:modern --app treasure-hunter --tiny && yarn run build:modern --app img2font --tiny
+      run: yarn && yarn run build:modern --tiny && yarn run build:modern --app treasure-hunter --tiny && yarn run build:modern --app img2font --tiny && yarn run build:modern --app birthday --tiny
     
     - name: Deploy
       uses: peaceiris/actions-gh-pages@v2
