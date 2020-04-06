@@ -37,7 +37,6 @@ export const loadImage = (url: string) => {
   return new Promise((resolve, reject) => {
     const img = new Image();
     img.onload = () => {
-      console.timeEnd(url);
       resolve(img);
     };
 
@@ -69,10 +68,7 @@ export const loadFont = (tools: any, families: string[]) => {
 };
 
 export const $typeof = (target: any) =>
-  Object.prototype.toString
-    .call(target)
-    .slice(8, -1)
-    .toLowerCase();
+  Object.prototype.toString.call(target).slice(8, -1).toLowerCase();
 
 export const h = (
   type: string,
@@ -82,7 +78,7 @@ export const h = (
   props.children = children ? [].concat.apply([], children) : [];
   return {
     type,
-    props
+    props,
   };
 };
 
@@ -93,7 +89,7 @@ export const createElement = (vdom: any) => {
   let {
     type,
     props,
-    props: { children }
+    props: { children },
   } = vdom;
   const element = document.createElement(type);
   setProps(element, props);
