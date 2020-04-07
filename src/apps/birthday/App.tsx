@@ -17,19 +17,12 @@ export default class App extends tsx.Component<any> {
 
   private get sceneStyle() {
     return {
-      transform: `translate(-50%, ${this.sceneTranslateY}%) rotate(${this.sceneRotate}deg) scale(${this.sceneScale})`,
+      transform: `translate3d(-50%, ${this.sceneTranslateY}%,0) rotateZ(${this.sceneRotate}deg) scale3d(${this.sceneScale},${this.sceneScale},1)`,
     };
   }
 
-  protected created() {
-    this.initCountDown();
-  }
-
-  protected mounted() {
-    // this.bindEvents();
-  }
-
-  private formateMilliSecond(ms: number) {
+  private get formateMilliSecond() {
+    const ms = this.countDown;
     const ss = 1000;
     const mi = ss * 60;
     const hh = mi * 60;
@@ -50,9 +43,21 @@ export default class App extends tsx.Component<any> {
     strMilliSecond =
       milliSecond < 100 ? "0" + strMilliSecond : "" + strMilliSecond;
 
-    return `${strDay + "天"}${strHour + "时"}${strMinute + "分"}${
-      strSecond + "秒"
-    }`;
+    return {
+      day: strDay,
+      hour: strHour,
+      minute: strMinute,
+      second: strSecond,
+      milliSecond: strMilliSecond,
+    };
+  }
+
+  protected created() {
+    this.initCountDown();
+  }
+
+  protected mounted() {
+    // this.bindEvents();
   }
 
   private initCountDown() {
@@ -60,6 +65,9 @@ export default class App extends tsx.Component<any> {
     clearInterval(this.countDownTimer);
     this.countDownTimer = setInterval(() => {
       this.countDown = this.birthDate - +new Date();
+      if (this.countDown <= 0) {
+        clearInterval(this.countDownTimer);
+      }
     }, 1000);
   }
 
@@ -78,12 +86,34 @@ export default class App extends tsx.Component<any> {
     this.sceneTranslateY = this.active ? -50 : 0;
   }
 
+  private countdownDom(): VNode {
+    if (this.countDown <= 0) return;
+    return (
+      <div class="clock clock-countdown">
+        <div class="elem-center">
+          <div class="digit">
+            {" "}
+            <span class="days">{this.formateMilliSecond.day}</span>{" "}
+            <span class="txt">天</span>{" "}
+          </div>
+        </div>
+        <div class="elem-bottom">
+          <div class="deco"></div>
+          <span class="hours">{this.formateMilliSecond.hour}</span>
+          <span class="thin"> 小时</span>{" "}
+          <span class="minutes">{this.formateMilliSecond.minute}</span>
+          <span class="thin"> 分钟</span>{" "}
+          <span class="seconds">{this.formateMilliSecond.second}</span>
+          <span class="thin"> 秒</span>{" "}
+        </div>
+      </div>
+    );
+  }
+
   protected render(): VNode {
     return (
       <div id="app">
-        <div class="time-box">
-          <span>{this.formateMilliSecond(this.countDown)}</span>
-        </div>
+        {this.countdownDom()}
         <div
           class={["scene", this.active ? "active" : ""]}
           style={this.sceneStyle}

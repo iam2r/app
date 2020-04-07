@@ -1,6 +1,6 @@
 @import "./styles/animate.scss";
 @import "./assets/images/_spritesmith/main.scss";
-$mainColorActive: #e20031;
+$earthColor: #188994;
 
 html {
   height: 100%;
@@ -12,6 +12,7 @@ html {
 }
 
 body {
+  // background: rgb(87, 86, 86);
   font-family: "Source Sans Pro", "Helvetica Neue", Arial, sans-serif;
   font-size: 16px;
   -webkit-font-smoothing: antialiased;
@@ -22,6 +23,146 @@ body {
 }
 
 #app {
+  .clock {
+    $mainColor: rgb(105, 95, 95);
+    width: 500px;
+    color: $mainColor;
+    margin: 0 auto;
+
+    .text {
+      position: relative;
+      width: 100%;
+      font-family: "Opensans";
+      font-weight: normal;
+      letter-spacing: 0;
+      margin-top: 0.5em;
+      display: block;
+      text-transform: uppercase;
+      color: #fff;
+      text-align: center;
+    }
+
+    .block:last-child .digit:after {
+      display: none;
+    }
+
+    .elem-center {
+      display: inline-block;
+      position: relative;
+      text-align: center;
+      width: 100%;
+      top: 0;
+      bottom: 0;
+
+      .digit {
+        position: relative;
+        font-size: 240px;
+        letter-spacing: -0.02em;
+        line-height: 1;
+        // font-family: 'Opensans';
+        font-weight: 500;
+        // color: #fff;
+        display: block;
+        width: auto;
+      }
+
+      .txt {
+        position: absolute;
+        right: auto;
+        letter-spacing: 0em;
+        top: 1.4em;
+        text-transform: uppercase;
+        // font-family: 'Opensans';
+        font-weight: bold;
+        font-size: 24px;
+        width: auto;
+      }
+
+      .text.top {
+        bottom: 124%;
+
+        img {
+          height: 65px;
+          margin-bottom: 20px;
+        }
+      }
+    }
+
+    .elem-bottom {
+      position: relative;
+      width: 100%;
+
+      /*	text-transform: uppercase;*/
+      // font-family: 'Opensans';
+      font-weight: bold;
+      font-size: 24px;
+      // color: #fff;
+      text-align: center;
+
+      .thin {
+        font-weight: 100;
+      }
+
+      &:after {
+        position: absolute;
+        content: "";
+        border-bottom: 1px solid $mainColor;
+        height: 1px;
+        bottom: 17px;
+      }
+
+      &:before {
+        position: absolute;
+        content: "";
+        border-bottom: 1px solid $mainColor;
+        height: 1px;
+        bottom: 17px;
+        right: 0;
+        left: 75%;
+      }
+
+      &:after {
+        left: 0;
+        right: 75%;
+      }
+
+      .deco {
+        &:after {
+          position: absolute;
+          content: "";
+
+          /*	background: #fff;*/
+          border: 1px solid $mainColor;
+          width: 20px;
+          height: 120px;
+          bottom: 17px;
+        }
+
+        &:before {
+          position: absolute;
+          content: "";
+
+          /*	background: #fff;*/
+          border: 1px solid $mainColor;
+          width: 20px;
+          height: 120px;
+          bottom: 17px;
+          left: 0;
+          right: auto;
+          border-right: none;
+          border-bottom: none;
+        }
+
+        &:after {
+          right: 0;
+          left: auto;
+          border-left: none;
+          border-bottom: none;
+        }
+      }
+    }
+  }
+
   .scene {
     box-sizing: content-box;
     width: 1000%;
@@ -310,7 +451,7 @@ body {
         border-radius: 50%;
         position: relative;
         z-index: 3;
-        background-color: #69d1db;
+        background-color: $earthColor;
         overflow: hidden;
         box-shadow: 0 0 200px #2b5970;
         transform-style: preserve-3d;
