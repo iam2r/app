@@ -10,7 +10,7 @@ export default class App extends tsx.Component<any> {
   private active: boolean = false;
   private sceneRotate: number = 0;
   private sceneScale: number = 1;
-  private sceneTranslateY: number = 0;
+  private sceneTranslateY: number = 5;
   private birthDate: number = +new Date(`2020/9/19`);
   private countDown: number = 0;
   private countDownTimer: any;
@@ -54,6 +54,10 @@ export default class App extends tsx.Component<any> {
 
   protected created() {
     this.initCountDown();
+    setTimeout(() => {
+      if (this.active) return;
+      this.doActive();
+    }, 2000);
   }
 
   protected mounted() {
@@ -83,7 +87,7 @@ export default class App extends tsx.Component<any> {
     this.active = !this.active;
     this.sceneRotate = this.active ? (-360 * diff) / (3600 * 1000 * 24) : 0;
     this.sceneScale = this.active ? 0.09 : 1;
-    this.sceneTranslateY = this.active ? -50 : 0;
+    this.sceneTranslateY = this.active ? -47.8 : 5;
   }
 
   private countdownDom(): VNode {
