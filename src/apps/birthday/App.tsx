@@ -1,11 +1,8 @@
 import { VNode } from "vue";
 import { Component } from "vue-property-decorator";
 import * as tsx from "vue-tsx-support";
-import { TweenLite, Linear } from "gsap";
-import * as Hammer from "hammerjs";
-import resource from "app.root/resources";
-// TweenLite.lagSmoothing(0, null);
-
+import { TweenLite, Linear, gsap } from "gsap";
+gsap.ticker.lagSmoothing(0, null);
 import "./App.scss";
 
 @Component
