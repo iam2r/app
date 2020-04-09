@@ -182,9 +182,7 @@ export default class App extends tsx.Component<any> {
           {this.snailDom()}
           <div class="ground">
             <div class="earth">
-              <div class="mapWrapper">
-                <img src={resource.wordMap} />
-              </div>
+              <div class="mapWrapper"></div>
               <div class="earthShadow"></div>
             </div>
           </div>

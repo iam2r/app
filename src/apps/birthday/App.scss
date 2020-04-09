@@ -414,7 +414,6 @@ body {
 
         .face {
           position: absolute;
-          // z-index: 6;
           left: 50%;
           bottom: 53%;
           width: 10px;
@@ -425,18 +424,15 @@ body {
           animation: eyes ease-in-out 600ms, face-translate ease 600ms;
           animation-iteration-count: infinite;
           animation-direction: alternate;
-          $faceWidth: 1000%;
+          $faceWidth: 100px;
           &::before {
             content: "";
-            width: $faceWidth;
-            padding-bottom: $faceWidth * 1.5356;
+            @include sprite-size($sprite-face, $faceWidth, $faceWidth * 1.5356);
             position: absolute;
             top: -30%;
             left: 50%;
             display: block;
             transform: translate(-50%, -50%) translateX(10px);
-            background: url(./assets/images/face.png) no-repeat;
-            background-size: 100% 100%;
           }
         }
       }
@@ -471,17 +467,14 @@ body {
         }
 
         .mapWrapper {
-          $height: 90%;
+          $height: 7500px * 0.9;
           position: absolute;
           top: 5%;
           left: -70%;
           height: $height;
           width: $height * 2.16;
           animation: rotateEarth 10s ease-in-out infinite;
-
-          img {
-            height: 100%;
-          }
+          @include sprite-size($sprite-wordmap, $height * 2.16, $height);
         }
       }
     }
