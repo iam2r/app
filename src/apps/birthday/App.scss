@@ -26,6 +26,7 @@ body {
   .clock {
     $mainColor: rgb(105, 95, 95);
     width: 500px;
+    height: 280px;
     color: $mainColor;
     margin: 0 auto;
 
@@ -164,37 +165,37 @@ body {
   }
 
   .scene {
+    // transform-origin: 50% 0;
     box-sizing: content-box;
     width: 1000%;
     left: 50%;
     position: absolute;
-    // transform: translate(-50%, 0) scale(1);
-    top: 50%;
+    top: 0;
     transition: all ease 2s;
     transform-style: preserve-3d;
+    transform: translate(-50%, 700px);
     &.active {
       // transform: translate(-50%, -50%) rotate(-180deg) scale(0.09);
-      .snail-box {
-        animation: rotateSnail 86400s linear infinite;
-      }
+      // top:-3000px
     }
 
     .snail-box {
       width: 400px;
-      transform-origin: 50% calc(100% + 500vw);
+      padding-bottom: 50%;
+      transform-origin: 50% 100%;
       position: absolute;
-      top: 5px;
+      top: -395px;
       left: 50%;
       z-index: 2;
-      transform: translate(-50%, -100%);
-      transition: all ease 2s;
+      transform: translate(-50%, 0);
       .speed {
         position: absolute;
         width: 250px;
         height: 200px;
         left: 50%;
-        bottom: 0;
+        top: 0;
         z-index: 2;
+        transform: translateY(100%);
         span {
           background: linear-gradient(90deg, #e3e1ea00 30%, #3c384d 90%);
           border-radius: 50px;
@@ -447,7 +448,8 @@ body {
 
       .earth {
         width: 100%;
-        height: 1000vw;
+        box-sizing: content-box;
+        padding-bottom: 100%;
         border-radius: 50%;
         position: relative;
         z-index: 3;
@@ -572,14 +574,5 @@ body {
   33%,
   37% {
     transform: scale(1, 0);
-  }
-}
-
-@keyframes rotateSnail {
-  0% {
-    transform: translate(-50%, -100%) rotate(0deg);
-  }
-  100% {
-    transform: translate(-50%, -100%) rotate(-360deg);
   }
 }

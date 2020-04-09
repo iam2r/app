@@ -1,8 +1,11 @@
 import { VNode } from "vue";
 import { Component } from "vue-property-decorator";
 import * as tsx from "vue-tsx-support";
+import { TweenLite, Linear } from "gsap";
 import * as Hammer from "hammerjs";
 import resource from "app.root/resources";
+// TweenLite.lagSmoothing(0, null);
+
 import "./App.scss";
 
 @Component
@@ -10,14 +13,15 @@ export default class App extends tsx.Component<any> {
   private active: boolean = false;
   private sceneRotate: number = 0;
   private sceneScale: number = 1;
-  private sceneTranslateY: number = 5;
+  private sceneTranslateY: number = 7;
   private birthDate: number = +new Date(`2020/9/19`);
   private countDown: number = 0;
   private countDownTimer: any;
+  private snailRotateTween: TweenLite;
 
   private get sceneStyle() {
     return {
-      transform: `translate3d(-50%, ${this.sceneTranslateY}%,0) rotateZ(${this.sceneRotate}deg) scale3d(${this.sceneScale},${this.sceneScale},1)`,
+      transform: `translate3d(-50%, ${this.sceneTranslateY}rem,0) rotateZ(${this.sceneRotate}deg) scale3d(${this.sceneScale},${this.sceneScale},1)`,
     };
   }
 
@@ -83,11 +87,30 @@ export default class App extends tsx.Component<any> {
         `${nowDate.getFullYear()}/${
           nowDate.getMonth() + 1
         }/${nowDate.getDate()}`
-      );
+      ) +
+      2000;
     this.active = !this.active;
     this.sceneRotate = this.active ? (-360 * diff) / (3600 * 1000 * 24) : 0;
     this.sceneScale = this.active ? 0.09 : 1;
-    this.sceneTranslateY = this.active ? -47.8 : 5;
+    this.sceneTranslateY = this.active ? -30.2 : 7;
+    if (this.active) {
+      if (this.snailRotateTween)
+        return this.snailRotateTween.repeat(-1).restart();
+      this.snailRotateTween = TweenLite.fromTo(
+        ".snail-box",
+        86400,
+        {
+          rotate: 0,
+        },
+        {
+          ease: Linear.easeNone,
+          rotate: -360,
+          repeat: -1,
+        }
+      );
+    } else {
+      this.snailRotateTween && this.snailRotateTween.reverse(2);
+    }
   }
 
   private countdownDom(): VNode {
@@ -114,43 +137,49 @@ export default class App extends tsx.Component<any> {
     );
   }
 
+  private snailDom(): VNode {
+    return (
+      <div class="snail-box">
+        <div class="snail-wrapper">
+          <div class="snail">
+            <div class="face"></div>
+            <div class="eyes left"></div>
+            <div class="eyes right"></div>
+            <div class="shell front">
+              <div class="innershell"></div>
+            </div>
+            <div class="shell behind"></div>
+            <div class="bottomchest"></div>
+          </div>
+        </div>
+        <div class="speed">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    );
+  }
+
   protected render(): VNode {
     return (
       <div id="app">
         {this.countdownDom()}
-        <div
+        <v-touch
           class={["scene", this.active ? "active" : ""]}
           style={this.sceneStyle}
-          onClick={() => {
+          onTap={() => {
             this.doActive();
           }}
         >
-          <div class="snail-box">
-            <div class="snail-wrapper">
-              <div class="snail">
-                <div class="face"></div>
-                <div class="eyes left"></div>
-                <div class="eyes right"></div>
-                <div class="shell front">
-                  <div class="innershell"></div>
-                </div>
-                <div class="shell behind"></div>
-                <div class="bottomchest"></div>
-              </div>
-            </div>
-            <div class="speed">
-              <span></span>
-              <span></span>
-              <span></span>
-              <span></span>
-            </div>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-          </div>
+          {this.snailDom()}
           <div class="ground">
             <div class="earth">
               <div class="mapWrapper">
@@ -159,7 +188,7 @@ export default class App extends tsx.Component<any> {
               <div class="earthShadow"></div>
             </div>
           </div>
-        </div>
+        </v-touch>
       </div>
     );
   }

@@ -1,3 +1,20 @@
+$maxWidth: 450px; /* no*/
+html,
+body {
+  height: 100%;
+}
+
 html {
   font-size: calc(100vw / 7.5);
+
+  @media (min-width: $maxWidth) {
+    /* no*/
+    font-size: calc(#{$maxWidth} / 7.5) /* no*/;
+  }
+  #app {
+    max-width: $maxWidth; /* no*/
+    position: relative;
+    height: 100%;
+    margin: 0 auto;
+  }
 }
