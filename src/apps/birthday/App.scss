@@ -439,7 +439,7 @@ body {
     }
 
     .ground {
-      animation: earth 5s ease-in-out infinite;
+      animation: earth-translate 5s ease-in-out infinite;
       transform: rotate(0deg);
 
       .earth {
@@ -473,7 +473,7 @@ body {
           left: -70%;
           height: $height;
           width: $height * 2.16;
-          animation: rotateEarth 10s ease-in-out infinite;
+          animation: map-translate 10s ease-in-out infinite;
           @include sprite-size($sprite-wordmap, $height * 2.16, $height);
         }
       }
@@ -534,7 +534,7 @@ body {
   }
 }
 
-@keyframes earth {
+@keyframes earth-translate {
   0%,
   100% {
     transform: translate3d(0, 10px, 0);
@@ -545,7 +545,7 @@ body {
   }
 }
 
-@keyframes rotateEarth {
+@keyframes map-translate {
   0%,
   100% {
     transform: translate3d(-450px, 0, 0);
