@@ -1,4 +1,4 @@
-import "./styles/layout.scss";
+import "./styles/_layout.scss";
 import Preloading from "app.root/preloading/Preloading";
 new Preloading();
 import(/* webpackChunkName: "main-async" */ "app.root/main");
