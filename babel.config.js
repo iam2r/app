@@ -7,7 +7,8 @@ module.exports = {
       {
         polyfills,
         appsTypes,
-        demandList
+        demandList,
+        modules:"commonjs"
       }
     ]
   ]
