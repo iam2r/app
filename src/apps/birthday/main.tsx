@@ -14,14 +14,7 @@ const loading = async () => {
   });
 
   state.resources[0] = await Promise.all(imageLoadArr);
-  await loadFont(require("fontfaceobserver"), ["Source Sans Pro"])
-    .catch((error) => {
-      console.info("font preload timeout!");
-    })
-    .finally(() => {
-      // emitter.emit("loaded");
-    });
-
+  await loadFont(require("fontfaceobserver"), ["Dosis"]);
   emitter.emit("loaded");
 };
 
