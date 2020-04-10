@@ -19,8 +19,10 @@ const loading = async () => {
       console.info("font preload timeout!");
     })
     .finally(() => {
-      emitter.emit("loaded");
+      // emitter.emit("loaded");
     });
+
+  emitter.emit("loaded");
 };
 
 emitter.once("loaded", () => {
