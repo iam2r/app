@@ -7,11 +7,13 @@ import "./App.scss";
 
 @Component
 export default class App extends tsx.Component<any> {
+  private birthDate: number = +new Date(`2020/9/19`);
+  private revolution: number = 3600 * 24 * 1000; //一圈的毫秒数
   private active: boolean = false;
   private sceneRotate: number = 0;
   private sceneScale: number = 1;
   private sceneTranslateY: number = 7;
-  private birthDate: number = +new Date(`2020/9/19`);
+  private isSceneAnimating: boolean = false;
   private countDown: number = 0;
   private countDownTimer: any;
   private snailRotateTween: TweenLite;
@@ -77,6 +79,11 @@ export default class App extends tsx.Component<any> {
   }
 
   private doActive() {
+    if (this.isSceneAnimating) return;
+    this.isSceneAnimating = true;
+    setTimeout(() => {
+      this.isSceneAnimating = false;
+    }, 2000);
     const nowDate = new Date();
     const diff =
       +nowDate -
@@ -84,18 +91,24 @@ export default class App extends tsx.Component<any> {
         `${nowDate.getFullYear()}/${
           nowDate.getMonth() + 1
         }/${nowDate.getDate()}`
-      ) +
-      2000;
+      ); //已经过去的毫秒数
+
     this.active = !this.active;
-    this.sceneRotate = this.active ? (-360 * diff) / (3600 * 1000 * 24) : 0;
+    this.sceneRotate = this.active
+      ? ((diff % this.revolution) / this.revolution) * -360
+      : 0;
     this.sceneScale = this.active ? 0.09 : 1;
     this.sceneTranslateY = this.active ? -30.2 : 7;
+
     if (this.active) {
       if (this.snailRotateTween)
-        return this.snailRotateTween.repeat(-1).restart();
+        return this.snailRotateTween
+          .time(this.revolution / 1000)
+          .repeat(-1)
+          .restart();
       this.snailRotateTween = TweenLite.fromTo(
         ".snail-box",
-        86400,
+        this.revolution / 1000,
         {
           rotate: 0,
         },
@@ -106,7 +119,7 @@ export default class App extends tsx.Component<any> {
         }
       );
     } else {
-      this.snailRotateTween && this.snailRotateTween.reverse(2);
+      this.snailRotateTween && this.snailRotateTween.time(2).reverse();
     }
   }
 
@@ -168,22 +181,24 @@ export default class App extends tsx.Component<any> {
   protected render(): VNode {
     return (
       <div id="app">
-        {this.countdownDom()}
-        <v-touch
-          class={["scene", this.active ? "active" : ""]}
-          style={this.sceneStyle}
-          onTap={() => {
-            this.doActive();
-          }}
-        >
-          {this.snailDom()}
-          <div class="ground">
-            <div class="earth">
-              <div class="mapWrapper"></div>
-              <div class="earthShadow"></div>
+        <div class="page-start">
+          {this.countdownDom()}
+          <v-touch
+            class={["scene", this.active ? "active" : ""]}
+            style={this.sceneStyle}
+            onTap={() => {
+              this.doActive();
+            }}
+          >
+            {this.snailDom()}
+            <div class="ground">
+              <div class="earth">
+                <div class="map-wrapper"></div>
+                <div class="earth-shadow"></div>
+              </div>
             </div>
-          </div>
-        </v-touch>
+          </v-touch>
+        </div>
       </div>
     );
   }

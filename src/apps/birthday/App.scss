@@ -23,457 +23,467 @@ body {
 }
 
 #app {
-  .clock {
-    $mainColor: rgb(105, 95, 95);
-    width: 500px;
-    height: 280px;
-    color: $mainColor;
-    margin: 0 auto;
+  .page-start {
+    //  overflow: hidden;
+    position: relative;
+    //  background: black;
+    height: 100%;
+    .clock {
+      $mainColor: rgb(202, 152, 152);
+      width: 500px;
+      height: 280px;
+      color: $mainColor;
+      margin: 0 auto;
 
-    .text {
-      position: relative;
-      width: 100%;
-      font-family: "Opensans";
-      font-weight: normal;
-      letter-spacing: 0;
-      margin-top: 0.5em;
-      display: block;
-      text-transform: uppercase;
-      color: #fff;
-      text-align: center;
-    }
-
-    .block:last-child .digit:after {
-      display: none;
-    }
-
-    .elem-center {
-      display: inline-block;
-      position: relative;
-      text-align: center;
-      width: 100%;
-      top: 0;
-      bottom: 0;
-
-      .digit {
+      .text {
         position: relative;
-        font-size: 240px;
-        letter-spacing: -0.02em;
-        line-height: 1;
-        // font-family: 'Opensans';
-        font-weight: 500;
-        // color: #fff;
+        width: 100%;
+        font-family: "Opensans";
+        font-weight: normal;
+        letter-spacing: 0;
+        margin-top: 0.5em;
         display: block;
-        width: auto;
+        text-transform: uppercase;
+        color: #fff;
+        text-align: center;
       }
 
-      .txt {
-        position: absolute;
-        right: auto;
-        letter-spacing: 0em;
-        top: 1.4em;
-        text-transform: uppercase;
+      .block:last-child .digit:after {
+        display: none;
+      }
+
+      .elem-center {
+        display: inline-block;
+        position: relative;
+        text-align: center;
+        width: 100%;
+        top: 0;
+        bottom: 0;
+
+        .digit {
+          position: relative;
+          font-size: 240px;
+          letter-spacing: -0.02em;
+          line-height: 1;
+          // font-family: 'Opensans';
+          font-weight: 500;
+          // color: #fff;
+          display: block;
+          width: auto;
+        }
+
+        .txt {
+          position: absolute;
+          right: auto;
+          letter-spacing: 0em;
+          top: 1.4em;
+          text-transform: uppercase;
+          // font-family: 'Opensans';
+          font-weight: bold;
+          font-size: 24px;
+          width: auto;
+        }
+
+        .text.top {
+          bottom: 124%;
+
+          img {
+            height: 65px;
+            margin-bottom: 20px;
+          }
+        }
+      }
+
+      .elem-bottom {
+        position: relative;
+        width: 100%;
+
+        /*	text-transform: uppercase;*/
         // font-family: 'Opensans';
         font-weight: bold;
         font-size: 24px;
-        width: auto;
-      }
+        // color: #fff;
+        text-align: center;
 
-      .text.top {
-        bottom: 124%;
-
-        img {
-          height: 65px;
-          margin-bottom: 20px;
+        .thin {
+          font-weight: 100;
         }
-      }
-    }
 
-    .elem-bottom {
-      position: relative;
-      width: 100%;
-
-      /*	text-transform: uppercase;*/
-      // font-family: 'Opensans';
-      font-weight: bold;
-      font-size: 24px;
-      // color: #fff;
-      text-align: center;
-
-      .thin {
-        font-weight: 100;
-      }
-
-      &:after {
-        position: absolute;
-        content: "";
-        border-bottom: 1px solid $mainColor;
-        height: 1px;
-        bottom: 17px;
-      }
-
-      &:before {
-        position: absolute;
-        content: "";
-        border-bottom: 1px solid $mainColor;
-        height: 1px;
-        bottom: 17px;
-        right: 0;
-        left: 75%;
-      }
-
-      &:after {
-        left: 0;
-        right: 75%;
-      }
-
-      .deco {
         &:after {
           position: absolute;
           content: "";
-
-          /*	background: #fff;*/
-          border: 1px solid $mainColor;
-          width: 20px;
-          height: 120px;
+          border-bottom: 1px solid $mainColor;
+          height: 1px;
           bottom: 17px;
         }
 
         &:before {
           position: absolute;
           content: "";
-
-          /*	background: #fff;*/
-          border: 1px solid $mainColor;
-          width: 20px;
-          height: 120px;
+          border-bottom: 1px solid $mainColor;
+          height: 1px;
           bottom: 17px;
-          left: 0;
-          right: auto;
-          border-right: none;
-          border-bottom: none;
+          right: 0;
+          left: 75%;
         }
 
         &:after {
-          right: 0;
-          left: auto;
-          border-left: none;
-          border-bottom: none;
-        }
-      }
-    }
-  }
-
-  .scene {
-    $sceneWidth: $widthAll * 10;
-    box-sizing: content-box;
-    width: $sceneWidth;
-    left: 50%;
-    position: absolute;
-    top: 0;
-    transition: all ease 2s;
-    transform-style: preserve-3d;
-    transform: translate(-50%, 700px);
-    &.active {
-      // transform: translate(-50%, -50%) rotate(-180deg) scale(0.09);
-      // top:-3000px
-    }
-
-    .snail-box {
-      width: 400px;
-      transform-origin: 50% calc(#{$sceneWidth * 0.5} + 100%);
-      position: absolute;
-      top: -395px;
-      left: 50%;
-      z-index: 2;
-      transform: translate(-50%, 0);
-      .speed {
-        position: absolute;
-        width: 250px;
-        height: 200px;
-        left: 50%;
-        top: 0;
-        z-index: 2;
-        transform: translateY(100%);
-        span {
-          background: linear-gradient(90deg, #e3e1ea00 30%, #3c384d 90%);
-          border-radius: 50px;
-          display: block;
-          position: absolute;
-          height: 10px;
-          animation: speed ease;
-          animation-iteration-count: infinite;
-
-          &:nth-child(1) {
-            width: 100%;
-            left: 0%;
-            top: 0%;
-            animation-delay: 250ms;
-            animation-duration: 600ms;
-          }
-
-          &:nth-child(2) {
-            width: 50%;
-            left: 50%;
-            top: 38%;
-            animation-delay: 50ms;
-            animation-duration: 500ms;
-          }
-
-          &:nth-child(3) {
-            width: 30%;
-            left: 0;
-            top: 60%;
-            animation-duration: 250ms;
-          }
-
-          &:nth-child(4) {
-            width: 60%;
-            left: 5%;
-            top: 20%;
-            animation-delay: 250ms;
-            animation-duration: 900ms;
-          }
-        }
-      }
-
-      .snail-wrapper {
-        width: 100%;
-
-        .snail {
-          width: 100%;
-          padding-bottom: 100%;
-          position: relative;
-
-          > * {
-            position: absolute;
-          }
-        }
-
-        .eyes {
-          left: 10%;
-          bottom: 10%;
-          width: 10%;
-          height: 10%;
-          border-radius: 50px;
-          background: #3c384d;
-        }
-
-        .bottomchest {
-          bottom: 0;
           left: 0;
-          width: 100%;
-          height: 15%;
-          transform-origin: 100% 100%;
-          border: 10px solid #3c384d;
-          border-radius: 125px 125px 25px 25px;
-          z-index: 5;
-          animation: bottomchest ease 600ms;
-          animation-iteration-count: infinite;
-          animation-direction: alternate;
-          background: #524d6a;
-          box-shadow: inset 0px 10px 0 0px rgba(60, 56, 77, 0.35);
+          right: 75%;
         }
 
-        .shell {
-          bottom: 10px;
-          left: 30%;
-          width: 60%;
-          height: 60%;
-          border-radius: 50%;
-          animation: shell ease 600ms;
-          animation-iteration-count: infinite;
-          animation-direction: alternate;
-          transform-origin: 50% 100%;
-
-          &.behind {
-            z-index: 1;
-            background: #524d6a;
-            box-shadow: inset 25px 0px 0 rgba(60, 56, 77, 0.35),
-              0 0 0px 10px #3c384d;
-          }
-
-          &.front {
-            border-top: 10px solid transparent;
-            border-left: 10px solid transparent;
-            border-right: 10px solid transparent;
-            border-bottom: 10px solid transparent;
-            z-index: 6;
-
-            &:before {
-              width: 70%;
-              height: 70%;
-              position: absolute;
-              border-radius: 50%;
-              right: 10px;
-              bottom: 10px;
-              content: "";
-              display: block;
-              background: #524d6a;
-            }
-
-            .innershell {
-              width: 70%;
-              height: 70%;
-              position: absolute;
-              border-radius: 50%;
-              right: -4px;
-              bottom: 0;
-
-              &:after {
-                position: absolute;
-                content: "";
-                border-radius: 50%;
-                z-index: 3;
-                bottom: 0px;
-                right: 0;
-                display: block;
-                width: 100%;
-                height: 100%;
-                border-left: 15px solid transparent;
-                border-bottom: 15px solid transparent;
-                border-right: 15px solid transparent;
-                border-top: 15px solid #524d6a;
-                top: -20px;
-                left: -30px;
-              }
-
-              &:before {
-                z-index: 2;
-                position: absolute;
-                content: "";
-                width: 100%;
-                height: 100%;
-                border-radius: 50%;
-                display: block;
-                top: -20px;
-                left: -24px;
-                border-left: 10px solid #3c384d;
-                border-bottom: 10px solid #3c384d;
-                border-right: 10px solid #3c384d;
-                border-top: 10px solid transparent;
-                transform: rotate(70deg);
-              }
-            }
-          }
-        }
-
-        .eyes {
-          bottom: 9%;
-          width: 10px;
-          height: 20%;
-          border-radius: 50px;
-          background: #3c384d;
-          transform-origin: 100% 100%;
-          animation: eyes ease-in-out 600ms, eyes-translate ease 600ms;
-          animation-iteration-count: infinite;
-          animation-direction: alternate;
-
-          &.right {
-            z-index: 6;
-            left: 5%;
-            transform: rotate(65deg);
-          }
-
-          &.left {
-            z-index: 1;
-            left: 5%;
-            animation-delay: 200ms;
-            transform: rotate(40deg);
-          }
-
+        .deco {
           &:after {
-            width: 200%;
-            padding-bottom: 200%;
-            border-radius: 50%;
-            display: block;
-            background: #3c384d;
-            content: "";
-            top: 0;
             position: absolute;
-            z-index: 3;
-            right: 0;
-            transform: translate(0, 0);
+            content: "";
+
+            /*	background: #fff;*/
+            border: 1px solid $mainColor;
+            width: 20px;
+            height: 120px;
+            bottom: 17px;
           }
 
           &:before {
-            content: "";
-            width: 300%;
-            padding-bottom: 300%;
-            border-radius: 50%;
             position: absolute;
-            top: 0;
-            left: 50%;
-            display: block;
-            background: white;
-            transform: translate(-50%, -50%);
-            border: 10px solid #3c384d;
-          }
-        }
+            content: "";
 
-        .face {
-          position: absolute;
-          left: 50%;
-          bottom: 53%;
-          width: 10px;
-          height: 20%;
-          border-radius: 50px;
-          background: #3c384d;
-          transform-origin: 100% 100%;
-          animation: eyes ease-in-out 600ms, face-translate ease 600ms;
-          animation-iteration-count: infinite;
-          animation-direction: alternate;
-          $faceWidth: 100px;
-          &::before {
-            content: "";
-            @include sprite-size($sprite-face, $faceWidth, $faceWidth * 1.5356);
-            position: absolute;
-            top: -30%;
-            left: 50%;
-            display: block;
-            transform: translate(-50%, -50%) translateX(10px);
+            /*	background: #fff;*/
+            border: 1px solid $mainColor;
+            width: 20px;
+            height: 120px;
+            bottom: 17px;
+            left: 0;
+            right: auto;
+            border-right: none;
+            border-bottom: none;
+          }
+
+          &:after {
+            right: 0;
+            left: auto;
+            border-left: none;
+            border-bottom: none;
           }
         }
       }
     }
 
-    .ground {
-      animation: earth-translate 5s ease-in-out infinite;
-      transform: rotate(0deg);
+    .scene {
+      $sceneWidth: $widthAll * 10;
+      box-sizing: content-box;
+      width: $sceneWidth;
+      left: 50%;
+      position: absolute;
+      top: 0;
+      transition: transform ease 2s;
+      transform-style: preserve-3d;
+      transform: translate(-50%, 700px);
+      &.active {
+        // transform: translate(-50%, -50%) rotate(-180deg) scale(0.09);
+        // top:-3000px
+      }
 
-      .earth {
-        width: 100%;
-        box-sizing: content-box;
-        padding-bottom: 100%;
-        border-radius: 50%;
-        position: relative;
-        z-index: 3;
-        background-color: $earthColor;
-        overflow: hidden;
-        box-shadow: 0 0 200px #2b5970;
-        transform-style: preserve-3d;
-        .earthShadow {
+      .snail-box {
+        width: 400px;
+        transform-origin: 50% calc(#{$sceneWidth * 0.5} + 100%);
+        position: absolute;
+        top: -395px;
+        left: 50%;
+        z-index: 2;
+        transform: translate(-50%, 0);
+        .speed {
           position: absolute;
+          width: 250px;
+          height: 200px;
+          left: 50%;
           top: 0;
-          height: 300px;
-          width: 300px;
-          border-radius: 50%;
-          background: radial-gradient(
-            ellipse at center,
-            rgba(0, 0, 0, 0) 70%,
-            rgba(0, 0, 0, 0.85) 100%
-          );
+          z-index: 2;
+          transform: translateY(100%);
+          span {
+            background: linear-gradient(90deg, #e3e1ea00 30%, #3c384d 90%);
+            border-radius: 50px;
+            display: block;
+            position: absolute;
+            height: 10px;
+            animation: speed ease;
+            animation-iteration-count: infinite;
+
+            &:nth-child(1) {
+              width: 100%;
+              left: 0%;
+              top: 0%;
+              animation-delay: 250ms;
+              animation-duration: 600ms;
+            }
+
+            &:nth-child(2) {
+              width: 50%;
+              left: 50%;
+              top: 38%;
+              animation-delay: 50ms;
+              animation-duration: 500ms;
+            }
+
+            &:nth-child(3) {
+              width: 30%;
+              left: 0;
+              top: 60%;
+              animation-duration: 250ms;
+            }
+
+            &:nth-child(4) {
+              width: 60%;
+              left: 5%;
+              top: 20%;
+              animation-delay: 250ms;
+              animation-duration: 900ms;
+            }
+          }
         }
 
-        .mapWrapper {
-          $height: $sceneWidth * 0.9;
-          position: absolute;
-          top: 5%;
-          left: -70%;
-          height: $height;
-          width: $height * 2.16;
-          animation: map-translate 10s ease-in-out infinite;
-          @include sprite-size($sprite-wordmap, $height * 2.16, $height);
+        .snail-wrapper {
+          width: 100%;
+
+          .snail {
+            width: 100%;
+            padding-bottom: 100%;
+            position: relative;
+
+            > * {
+              position: absolute;
+            }
+          }
+
+          .eyes {
+            left: 10%;
+            bottom: 10%;
+            width: 10%;
+            height: 10%;
+            border-radius: 50px;
+            background: #3c384d;
+          }
+
+          .bottomchest {
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 15%;
+            transform-origin: 100% 100%;
+            border: 10px solid #3c384d;
+            border-radius: 125px 125px 25px 25px;
+            z-index: 5;
+            animation: bottomchest ease 600ms;
+            animation-iteration-count: infinite;
+            animation-direction: alternate;
+            background: #524d6a;
+            box-shadow: inset 0px 10px 0 0px rgba(60, 56, 77, 0.35);
+          }
+
+          .shell {
+            bottom: 10px;
+            left: 30%;
+            width: 60%;
+            height: 60%;
+            border-radius: 50%;
+            animation: shell ease 600ms;
+            animation-iteration-count: infinite;
+            animation-direction: alternate;
+            transform-origin: 50% 100%;
+
+            &.behind {
+              z-index: 1;
+              background: #524d6a;
+              box-shadow: inset 25px 0px 0 rgba(60, 56, 77, 0.35),
+                0 0 0px 10px #3c384d;
+            }
+
+            &.front {
+              border-top: 10px solid transparent;
+              border-left: 10px solid transparent;
+              border-right: 10px solid transparent;
+              border-bottom: 10px solid transparent;
+              z-index: 6;
+
+              &:before {
+                width: 70%;
+                height: 70%;
+                position: absolute;
+                border-radius: 50%;
+                right: 10px;
+                bottom: 10px;
+                content: "";
+                display: block;
+                background: #524d6a;
+              }
+
+              .innershell {
+                width: 70%;
+                height: 70%;
+                position: absolute;
+                border-radius: 50%;
+                right: -4px;
+                bottom: 0;
+
+                &:after {
+                  position: absolute;
+                  content: "";
+                  border-radius: 50%;
+                  z-index: 3;
+                  bottom: 0px;
+                  right: 0;
+                  display: block;
+                  width: 100%;
+                  height: 100%;
+                  border-left: 15px solid transparent;
+                  border-bottom: 15px solid transparent;
+                  border-right: 15px solid transparent;
+                  border-top: 15px solid #524d6a;
+                  top: -20px;
+                  left: -30px;
+                }
+
+                &:before {
+                  z-index: 2;
+                  position: absolute;
+                  content: "";
+                  width: 100%;
+                  height: 100%;
+                  border-radius: 50%;
+                  display: block;
+                  top: -20px;
+                  left: -24px;
+                  border-left: 10px solid #3c384d;
+                  border-bottom: 10px solid #3c384d;
+                  border-right: 10px solid #3c384d;
+                  border-top: 10px solid transparent;
+                  transform: rotate(70deg);
+                }
+              }
+            }
+          }
+
+          .eyes {
+            bottom: 9%;
+            width: 10px;
+            height: 20%;
+            border-radius: 50px;
+            background: #3c384d;
+            transform-origin: 100% 100%;
+            animation: eyes ease-in-out 600ms, eyes-translate ease 600ms;
+            animation-iteration-count: infinite;
+            animation-direction: alternate;
+
+            &.right {
+              z-index: 6;
+              left: 5%;
+              transform: rotate(65deg);
+            }
+
+            &.left {
+              z-index: 1;
+              left: 5%;
+              animation-delay: 200ms;
+              transform: rotate(40deg);
+            }
+
+            &:after {
+              width: 200%;
+              padding-bottom: 200%;
+              border-radius: 50%;
+              display: block;
+              background: #3c384d;
+              content: "";
+              top: 0;
+              position: absolute;
+              z-index: 3;
+              right: 0;
+              transform: translate(0, 0);
+            }
+
+            &:before {
+              content: "";
+              width: 300%;
+              padding-bottom: 300%;
+              border-radius: 50%;
+              position: absolute;
+              top: 0;
+              left: 50%;
+              display: block;
+              background: white;
+              transform: translate(-50%, -50%);
+              border: 10px solid #3c384d;
+            }
+          }
+
+          .face {
+            position: absolute;
+            left: 50%;
+            bottom: 53%;
+            width: 10px;
+            height: 20%;
+            border-radius: 50px;
+            background: #3c384d;
+            transform-origin: 100% 100%;
+            animation: eyes ease-in-out 600ms, face-translate ease 600ms;
+            animation-iteration-count: infinite;
+            animation-direction: alternate;
+            $faceWidth: 100px;
+            &::before {
+              content: "";
+              @include sprite-size(
+                $sprite-face,
+                $faceWidth,
+                $faceWidth * 1.5356
+              );
+              position: absolute;
+              top: -30%;
+              left: 50%;
+              display: block;
+              transform: translate(-50%, -50%) translateX(10px);
+            }
+          }
+        }
+      }
+
+      .ground {
+        animation: earth-translate 5s ease-in-out infinite;
+        transform: rotate(0deg);
+
+        .earth {
+          width: 100%;
+          box-sizing: content-box;
+          padding-bottom: 100%;
+          border-radius: 50%;
+          position: relative;
+          z-index: 3;
+          background-color: $earthColor;
+          overflow: hidden;
+          box-shadow: 0 0 200px #2b5970;
+          transform-style: preserve-3d;
+          .earth-shadow {
+            position: absolute;
+            top: 0;
+            height: 300px;
+            width: 300px;
+            border-radius: 50%;
+            background: radial-gradient(
+              ellipse at center,
+              rgba(0, 0, 0, 0) 70%,
+              rgba(0, 0, 0, 0.85) 100%
+            );
+          }
+
+          .map-wrapper {
+            $height: $sceneWidth * 0.9;
+            position: absolute;
+            top: 5%;
+            left: -70%;
+            height: $height;
+            width: $height * 2.16;
+            animation: map-translate 10s ease-in-out infinite;
+            @include sprite-size($sprite-wordmap, $height * 2.16, $height);
+          }
         }
       }
     }
