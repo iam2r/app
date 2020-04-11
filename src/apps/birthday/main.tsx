@@ -3,7 +3,7 @@ import App from "./App";
 import state from "./state";
 import VuePlugin from "./VuePlugin";
 import resource from "app.root/resources";
-import { loadJson, loadFont, loadImage } from "@/common/Utils";
+import { loadFont, loadImage } from "@/common/Utils";
 import { emitter } from "app.root/context";
 Vue.use(VuePlugin);
 

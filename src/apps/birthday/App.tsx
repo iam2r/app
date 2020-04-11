@@ -2,10 +2,18 @@ import { VNode } from "vue";
 import { Component } from "vue-property-decorator";
 import * as tsx from "vue-tsx-support";
 import { TweenLite, Linear, gsap } from "gsap";
+import { Swiper, SwiperSlide } from "vue-awesome-swiper";
+import "swiper/css/swiper.css";
+
 gsap.ticker.lagSmoothing(0, null);
 import "./App.scss";
 
-@Component
+@Component({
+  components: {
+    Swiper,
+    SwiperSlide,
+  },
+})
 export default class App extends tsx.Component<any> {
   private birthDate: number = +new Date(`2020/9/19`);
   private revolution: number = 3600 * 24 * 1000; //一圈的毫秒数
@@ -17,11 +25,20 @@ export default class App extends tsx.Component<any> {
   private countDown: number = 0;
   private countDownTimer: any;
   private snailRotateTween: TweenLite;
-
+  private test: boolean = false;
+  private isMounted: boolean = false;
+  private swiperOptions: any = {
+    direction: "vertical",
+  };
   private get sceneStyle() {
     return {
       transform: `translate3d(-50%, ${this.sceneTranslateY}rem,0) rotateZ(${this.sceneRotate}deg) scale3d(${this.sceneScale},${this.sceneScale},1)`,
     };
+  }
+
+  private get isBirthDay(): boolean {
+    // return this.test;
+    return this.countDown <= 0;
   }
 
   private get formateMilliSecond() {
@@ -55,16 +72,16 @@ export default class App extends tsx.Component<any> {
     };
   }
 
-  protected created() {
+  protected created() {}
+
+  protected mounted() {
+    this.isMounted = true;
     this.initCountDown();
+
     setTimeout(() => {
       if (this.active) return;
       this.doActive();
     }, 2000);
-  }
-
-  protected mounted() {
-    // this.bindEvents();
   }
 
   private initCountDown() {
@@ -123,27 +140,60 @@ export default class App extends tsx.Component<any> {
     }
   }
 
-  private countdownDom(): VNode {
-    if (this.countDown <= 0) return;
+  private startsDom(): VNode {
     return (
-      <div class="clock clock-countdown">
-        <div class="elem-center">
-          <div class="digit">
-            {" "}
-            <span class="days">{this.formateMilliSecond.day}</span>{" "}
-            <span class="txt">天</span>{" "}
-          </div>
-        </div>
-        <div class="elem-bottom">
-          <div class="deco"></div>
-          <span class="hours">{this.formateMilliSecond.hour}</span>
-          <span class="thin"> 小时</span>{" "}
-          <span class="minutes">{this.formateMilliSecond.minute}</span>
-          <span class="thin"> 分钟</span>{" "}
-          <span class="seconds">{this.formateMilliSecond.second}</span>
-          <span class="thin"> 秒</span>{" "}
-        </div>
+      <div class="stars">
+        <div class="star"></div>
+        <div class="star pink"></div>
+        <div class="star blue"></div>
+        <div class="star yellow"></div>
       </div>
+    );
+  }
+
+  private countdownDom(): VNode {
+    return (
+      <transition
+        enter-active-class="animated jello"
+        leave-active-class="animated fast bounceOut"
+      >
+        {this.isMounted && !this.isBirthDay ? (
+          <div class="clock clock-countdown">
+            <div class="elem-center">
+              <div class="digit">
+                {" "}
+                <span class="days">{this.formateMilliSecond.day}</span>{" "}
+                <span class="txt">天</span>{" "}
+              </div>
+            </div>
+            <div class="elem-bottom">
+              <div class="deco"></div>
+              <span class="hours">{this.formateMilliSecond.hour}</span>
+              <span class="thin"> 小时</span>{" "}
+              <span class="minutes">{this.formateMilliSecond.minute}</span>
+              <span class="thin"> 分钟</span>{" "}
+              <span class="seconds">{this.formateMilliSecond.second}</span>
+              <span class="thin"> 秒</span>{" "}
+            </div>
+          </div>
+        ) : null}
+      </transition>
+    );
+  }
+
+  private startTextDom(): VNode {
+    return (
+      <transition
+        enter-active-class="animated jello"
+        leave-active-class="animated fast bounceOut"
+      >
+        {this.isMounted && this.isBirthDay ? (
+          <div class="start-text">
+            <h1 class="title slide-bar">愿你贪吃不胖，愿你傻人傻福。</h1>
+            <p class="subtitle slide-bar">生日快乐！</p>
+          </div>
+        ) : null}
+      </transition>
     );
   }
 
@@ -181,24 +231,38 @@ export default class App extends tsx.Component<any> {
   protected render(): VNode {
     return (
       <div id="app">
-        <div class="page-start">
-          {this.countdownDom()}
-          <v-touch
-            class={["scene", this.active ? "active" : ""]}
-            style={this.sceneStyle}
-            onTap={() => {
-              this.doActive();
-            }}
-          >
-            {this.snailDom()}
-            <div class="ground">
-              <div class="earth">
-                <div class="map-wrapper"></div>
-                <div class="earth-shadow"></div>
-              </div>
+        <swiper ref="mySwiper" options={this.swiperOptions}>
+          <swiper-slide>
+            <div class="page-start">
+              {this.startsDom()}
+              {this.countdownDom()}
+              {this.startTextDom()}
+              <v-touch
+                class={["scene", this.active ? "active" : ""]}
+                style={this.sceneStyle}
+                onTap={() => {
+                  this.doActive();
+                }}
+              >
+                {this.snailDom()}
+                <div class="ground">
+                  <div class="earth">
+                    <div class="map-wrapper"></div>
+                    <div class="earth-shadow"></div>
+                  </div>
+                </div>
+              </v-touch>
             </div>
-          </v-touch>
-        </div>
+          </swiper-slide>
+          {this.isBirthDay
+            ? [
+                <swiper-slide>page2</swiper-slide>,
+                <swiper-slide>page3</swiper-slide>,
+                <swiper-slide>page4</swiper-slide>,
+                <swiper-slide>page5</swiper-slide>,
+              ]
+            : null}
+        </swiper>
       </div>
     );
   }
