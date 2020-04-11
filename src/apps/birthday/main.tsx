@@ -14,7 +14,7 @@ const loading = async () => {
   });
 
   state.resources[0] = await Promise.all(imageLoadArr);
-  await loadFont(require("fontfaceobserver"), ["Dosis"]);
+  await loadFont(require("fontfaceobserver"), ["Lato"]);
   emitter.emit("loaded");
 };
 
