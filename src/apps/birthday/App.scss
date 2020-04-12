@@ -687,7 +687,7 @@ body {
             left: -70%;
             height: $height;
             width: $height * 2.16;
-            animation: map-translate 10s ease-in-out infinite;
+            // animation: map-translate 10s ease-in-out infinite;
             @include sprite-size($sprite-wordmap, $height * 2.16, $height);
           }
         }
