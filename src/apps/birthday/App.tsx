@@ -26,10 +26,18 @@ export default class App extends tsx.Component<any> {
   private countDownTimer: any;
   private snailRotateTween: TweenLite;
   private test: boolean = false;
-  private isMounted: boolean = false;
+  private slideIndex: number = -1;
   private swiperOptions: any = {
     direction: "vertical",
+    on: {
+      slideChangeTransitionEnd: this.onSlideChangeTransitionEnd,
+    },
   };
+
+  private get mySwiper() {
+    return (this.$refs.mySwiper as any).swiperInstance;
+  }
+
   private get sceneStyle() {
     return {
       transform: `translate3d(-50%, ${this.sceneTranslateY}rem,0) rotateZ(${this.sceneRotate}deg) scale3d(${this.sceneScale},${this.sceneScale},1)`,
@@ -37,7 +45,7 @@ export default class App extends tsx.Component<any> {
   }
 
   private get isBirthDay(): boolean {
-    // return this.test;
+    return this.test;
     return this.countDown <= 0;
   }
 
@@ -75,13 +83,18 @@ export default class App extends tsx.Component<any> {
   protected created() {}
 
   protected mounted() {
-    this.isMounted = true;
+    this.slideIndex = 0;
     this.initCountDown();
 
     setTimeout(() => {
       if (this.active) return;
       this.doActive();
     }, 2000);
+  }
+
+  private onSlideChangeTransitionEnd() {
+    console.log(this.mySwiper);
+    this.slideIndex = this.mySwiper.activeIndex;
   }
 
   private initCountDown() {
@@ -157,7 +170,7 @@ export default class App extends tsx.Component<any> {
         enter-active-class="animated jello"
         leave-active-class="animated fast bounceOut"
       >
-        {this.isMounted && !this.isBirthDay ? (
+        {this.slideIndex == 0 && !this.isBirthDay ? (
           <div class="clock clock-countdown">
             <div class="elem-center">
               <div class="digit">
@@ -187,7 +200,7 @@ export default class App extends tsx.Component<any> {
         enter-active-class="animated jello"
         leave-active-class="animated fast bounceOut"
       >
-        {this.isMounted && this.isBirthDay ? (
+        {this.slideIndex == 0 && this.isBirthDay ? (
           <div class="start-text">
             <h1 class="title slide-bar">愿你贪吃不胖，愿你傻人傻福。</h1>
             <p class="subtitle slide-bar">生日快乐！</p>
@@ -234,6 +247,14 @@ export default class App extends tsx.Component<any> {
         <swiper ref="mySwiper" options={this.swiperOptions}>
           <swiper-slide>
             <div class="page-start">
+              <v-touch
+                onTap={() => {
+                  this.test = !this.test;
+                }}
+                class="test-box"
+              >
+                Test
+              </v-touch>
               {this.startsDom()}
               {this.countdownDom()}
               {this.startTextDom()}
@@ -263,6 +284,13 @@ export default class App extends tsx.Component<any> {
               ]
             : null}
         </swiper>
+
+        <span
+          v-show={
+            this.isBirthDay && (!this.mySwiper.isEnd || this.slideIndex == 0)
+          }
+          class="swiper-tip"
+        ></span>
       </div>
     );
   }
