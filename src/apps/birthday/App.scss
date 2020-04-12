@@ -12,7 +12,6 @@ html {
 }
 
 body {
-  background: black;
   font-family: "Lato", Arial, sans-serif;
   font-size: 16px;
   -webkit-font-smoothing: antialiased;
@@ -23,6 +22,7 @@ body {
 }
 
 #app {
+  background: black;
   .swiper-tip {
     display: inline-block;
     @include sprite-size($sprite-swipe-tip, 48px, 42px);
@@ -56,10 +56,9 @@ body {
     }
   }
 
-  .page-start {
+  .page-one {
     overflow: hidden;
     position: relative;
-    background: black;
     height: 100%;
     .test-box {
       font-size: 20px;
@@ -67,6 +66,7 @@ body {
       position: absolute;
       right: 0;
       top: 0;
+      padding: 10px;
     }
     .stars {
       .star {
@@ -766,6 +766,32 @@ body {
         50% {
           transform: translate3d(0, 0, 0);
         }
+      }
+    }
+  }
+
+  .page-two {
+    .land-in {
+      display: flex;
+      flex-wrap: wrap;
+      line-height: 1.8;
+      color: white;
+      font-size: 24px;
+      opacity: 0;
+      span {
+        animation: land-in 0.8s ease-out both;
+      }
+    }
+
+    @keyframes land-in {
+      from {
+        opacity: 0;
+        transform: translateY(-20%);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
       }
     }
   }

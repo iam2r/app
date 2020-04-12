@@ -1,5 +1,5 @@
 import { VNode } from "vue";
-import { Component } from "vue-property-decorator";
+import { Component, Watch } from "vue-property-decorator";
 import * as tsx from "vue-tsx-support";
 import { TweenLite, Linear, gsap } from "gsap";
 import { Swiper, SwiperSlide } from "vue-awesome-swiper";
@@ -80,6 +80,11 @@ export default class App extends tsx.Component<any> {
     };
   }
 
+  @Watch("slideIndex")
+  protected onSlideIndexChange(value: number) {
+    this.doLandInAnimation(value == 1);
+  }
+
   protected created() {}
 
   protected mounted() {
@@ -90,6 +95,27 @@ export default class App extends tsx.Component<any> {
       if (this.active) return;
       this.doActive();
     }, 2000);
+  }
+
+  private doLandInAnimation(show: boolean) {
+    let landInTexts = document.querySelectorAll(".land-in");
+    if (show) {
+      landInTexts.forEach((landInText: HTMLElement) => {
+        landInText.style.opacity = "1";
+        let letters = landInText.textContent.split("");
+        landInText.textContent = "";
+        letters.forEach((letter, i) => {
+          let span = document.createElement("span");
+          span.textContent = letter;
+          span.style.animationDelay = `${i * 0.05}s`;
+          landInText.append(span);
+        });
+      });
+    } else {
+      landInTexts.forEach((landInText: HTMLElement) => {
+        landInText.style.opacity = "";
+      });
+    }
   }
 
   private onSlideChangeTransitionEnd() {
@@ -246,14 +272,14 @@ export default class App extends tsx.Component<any> {
       <div id="app">
         <swiper ref="mySwiper" options={this.swiperOptions}>
           <swiper-slide>
-            <div class="page-start">
+            <div class="page-one">
               <v-touch
                 onTap={() => {
                   this.test = !this.test;
                 }}
                 class="test-box"
               >
-                Test
+                Click To Test
               </v-touch>
               {this.startsDom()}
               {this.countdownDom()}
@@ -277,10 +303,21 @@ export default class App extends tsx.Component<any> {
           </swiper-slide>
           {this.isBirthDay
             ? [
-                <swiper-slide>page2</swiper-slide>,
+                <swiper-slide>
+                  <div class="page-two">
+                    <p class="land-in">
+                      你 好！这里是给你的一封信，请查收！
+                      还有一种经常用到的玩法：用JS将句子或单词分割成字母，并给每个字母加上不同延时的动画，同样也很华丽
+                      你 好！这里是给你的一封信，请查收！
+                      还有一种经常用到的玩法：用JS将句子或单词分割成字母，并给每个字母加上不同延时的动画，同样也很华丽
+                      你 好！这里是给你的一封信，请查收！
+                      还有一种经常用到的玩法：用JS将句子或单词分割成字母，并给每个字母加上不同延时的动画，同样也很华丽
+                      你 好！这里是给你的一封信，请查收！
+                      还有一种经常用到的玩法：用JS将句子或单词分割成字母，并给每个字母加上不同延时的动画，同样也很华丽
+                    </p>
+                  </div>
+                </swiper-slide>,
                 <swiper-slide>page3</swiper-slide>,
-                <swiper-slide>page4</swiper-slide>,
-                <swiper-slide>page5</swiper-slide>,
               ]
             : null}
         </swiper>
