@@ -15,6 +15,7 @@ import "./App.scss";
   },
 })
 export default class App extends tsx.Component<any> {
+  private splitSymbol: string = `<br>`;
   private birthDate: number = +new Date(`2020/9/19`);
   private revolution: number = 3600 * 24 * 1000; //一圈的毫秒数
   private active: boolean = false;
@@ -102,13 +103,22 @@ export default class App extends tsx.Component<any> {
     if (show) {
       landInTexts.forEach((landInText: HTMLElement) => {
         landInText.style.opacity = "1";
-        let letters = landInText.textContent.split("");
-        landInText.textContent = "";
-        letters.forEach((letter, i) => {
-          let span = document.createElement("span");
-          span.textContent = letter;
-          span.style.animationDelay = `${i * 0.05}s`;
-          landInText.append(span);
+        let ps = landInText
+          .getAttribute("data-text")
+          .trim()
+          .split(this.splitSymbol);
+        landInText.innerHTML = "";
+        let count = 0;
+        ps.forEach((p) => {
+          let letters = p.split("");
+          letters.forEach((letter) => {
+            let span = document.createElement("span");
+            span.textContent = letter;
+            span.style.animationDelay = `${count * 0.05}s`;
+            landInText.append(span);
+            count++;
+          });
+          landInText.append(document.createElement("br"));
         });
       });
     } else {
@@ -119,7 +129,6 @@ export default class App extends tsx.Component<any> {
   }
 
   private onSlideChangeTransitionEnd() {
-    console.log(this.mySwiper);
     this.slideIndex = this.mySwiper.activeIndex;
   }
 
@@ -267,59 +276,63 @@ export default class App extends tsx.Component<any> {
     );
   }
 
+  private page1Dom(): VNode {
+    return (
+      <swiper-slide>
+        <div class="page-one">
+          <v-touch
+            onTap={() => {
+              this.test = !this.test;
+            }}
+            class="test-box"
+          >
+            Click To Test
+          </v-touch>
+          {this.startsDom()}
+          {this.countdownDom()}
+          {this.startTextDom()}
+          <v-touch
+            class={["scene", this.active ? "active" : ""]}
+            style={this.sceneStyle}
+            onTap={() => {
+              this.doActive();
+            }}
+          >
+            {this.snailDom()}
+            <div class="ground">
+              <div class="earth">
+                <div class="map-wrapper"></div>
+                <div class="earth-shadow"></div>
+              </div>
+            </div>
+          </v-touch>
+        </div>
+      </swiper-slide>
+    );
+  }
+
+  private page2Dom(): VNode {
+    const text = `Hi,李紫寒。${this.splitSymbol}今天是你的生日哦。送你一份电子礼物~${this.splitSymbol}`;
+
+    return (
+      <swiper-slide>
+        <div class="page-two">
+          <p class="land-in" data-text={text}></p>
+        </div>
+      </swiper-slide>
+    );
+  }
+
+  private page3Dom(): VNode {
+    return <swiper-slide>page3</swiper-slide>;
+  }
+
   protected render(): VNode {
     return (
       <div id="app">
         <swiper ref="mySwiper" options={this.swiperOptions}>
-          <swiper-slide>
-            <div class="page-one">
-              <v-touch
-                onTap={() => {
-                  this.test = !this.test;
-                }}
-                class="test-box"
-              >
-                Click To Test
-              </v-touch>
-              {this.startsDom()}
-              {this.countdownDom()}
-              {this.startTextDom()}
-              <v-touch
-                class={["scene", this.active ? "active" : ""]}
-                style={this.sceneStyle}
-                onTap={() => {
-                  this.doActive();
-                }}
-              >
-                {this.snailDom()}
-                <div class="ground">
-                  <div class="earth">
-                    <div class="map-wrapper"></div>
-                    <div class="earth-shadow"></div>
-                  </div>
-                </div>
-              </v-touch>
-            </div>
-          </swiper-slide>
-          {this.isBirthDay
-            ? [
-                <swiper-slide>
-                  <div class="page-two">
-                    <p class="land-in">
-                      你 好！这里是给你的一封信，请查收！
-                      还有一种经常用到的玩法：用JS将句子或单词分割成字母，并给每个字母加上不同延时的动画，同样也很华丽
-                      你 好！这里是给你的一封信，请查收！
-                      还有一种经常用到的玩法：用JS将句子或单词分割成字母，并给每个字母加上不同延时的动画，同样也很华丽
-                      你 好！这里是给你的一封信，请查收！
-                      还有一种经常用到的玩法：用JS将句子或单词分割成字母，并给每个字母加上不同延时的动画，同样也很华丽
-                      你 好！这里是给你的一封信，请查收！
-                      还有一种经常用到的玩法：用JS将句子或单词分割成字母，并给每个字母加上不同延时的动画，同样也很华丽
-                    </p>
-                  </div>
-                </swiper-slide>,
-                <swiper-slide>page3</swiper-slide>,
-              ]
-            : null}
+          {this.page1Dom()}
+          {this.isBirthDay ? [this.page2Dom(), this.page3Dom()] : null}
         </swiper>
 
         <span
