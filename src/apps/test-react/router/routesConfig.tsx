@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 const asyncComponent = (importComponent: Function) => {
-  return (): any => {
+  return (props: any): any => {
     const [component, setComponent] = useState(null);
     useEffect(() => {
       importComponent().then(({ default: component }) => {
@@ -8,7 +8,7 @@ const asyncComponent = (importComponent: Function) => {
       });
     }, []);
     const C = component;
-    return C ? <C /> : null;
+    return C ? <C {...props} /> : null;
   };
 };
 
@@ -18,20 +18,20 @@ export default [
     exact: true,
     component: asyncComponent(() =>
       import(/* webpackChunkName: "Home" */ "../pages/Home")
-    )
+    ),
   },
   {
     path: "/about",
     exact: true,
     component: asyncComponent(() =>
       import(/* webpackChunkName: "About" */ "../pages/About")
-    )
+    ),
   },
   {
     path: "/hookstest",
     exact: true,
     component: asyncComponent(() =>
       import(/* webpackChunkName: "HooksTest" */ "../pages/HooksTest")
-    )
-  }
+    ),
+  },
 ];
