@@ -49,6 +49,7 @@ export default class App extends tsx.Component<any> {
   private bindEvents() {
     window.addEventListener("scroll", () => {
       if (window.pageYOffset > 168 && !this.topScrolled) {
+        console.log("dddd");
         this.topScrolled = true;
       } else if (window.pageYOffset <= 168 && this.topScrolled) {
         this.topScrolled = false;
