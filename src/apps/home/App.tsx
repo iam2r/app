@@ -1,7 +1,7 @@
 import { VNode } from "vue";
 import { Component, Vue } from "vue-property-decorator";
 import * as tsx from "vue-tsx-support";
-import * as Hammer from "hammerjs";
+import Hammer from "hammerjs";
 import resource from "app.root/resources";
 import "./App.scss";
 
@@ -40,9 +40,9 @@ export default class App extends tsx.Component<any> {
         href: "",
         children: this.$state.appList.map((key: string) => ({
           key,
-          href: `../${key}`
-        }))
-      }
+          href: `../${key}`,
+        })),
+      },
     ];
   }
 
@@ -64,7 +64,7 @@ export default class App extends tsx.Component<any> {
     });
 
     this.$nextTick(() => {
-      this.$state.app.$on("resize", size => {
+      this.$state.app.$on("resize", (size) => {
         console.log(size);
       });
     });
@@ -93,7 +93,7 @@ export default class App extends tsx.Component<any> {
                       <a href={this.formatHref(child.href)}>{child.key}</a>
                     </li>
                   ))}
-                </ul>
+                </ul>,
               ]}
           </li>
         ))}

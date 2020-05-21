@@ -125,3 +125,24 @@ export const setProps = (
     }
   }
 };
+
+export const updateObject = (
+  obj: { [key: string]: any },
+  ...objArr: { [key: string]: any }[]
+) => {
+  if (!objArr) return;
+
+  objArr.forEach((ob) => {
+    for (let k in ob) {
+      if (obj[k] instanceof Array) {
+        obj[k] = ob[k];
+      } else if (typeof obj[k] === "object") {
+        this.updateObject(obj[k], ob[k]);
+      } else {
+        obj[k] = ob[k];
+      }
+
+      ob[k] = null;
+    }
+  });
+};

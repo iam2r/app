@@ -4715,7 +4715,7 @@ gzip-size@^5.0.0:
 
 hammerjs@^2.0.8:
   version "2.0.8"
-  resolved "https://registry.npm.taobao.org/hammerjs/download/hammerjs-2.0.8.tgz#04ef77862cff2bb79d30f7692095930222bf60f1"
+  resolved "http://r.cnpmjs.org/hammerjs/download/hammerjs-2.0.8.tgz#04ef77862cff2bb79d30f7692095930222bf60f1"
   integrity sha1-BO93hiz/K7edMPdpIJWTAiK/YPE=
 
 handle-thing@^2.0.0:
@@ -10116,7 +10116,7 @@ vue-touch@^2.0.0-beta.4:
 
 vue-tsx-support@^2.3.3:
   version "2.3.3"
-  resolved "https://registry.npm.taobao.org/vue-tsx-support/download/vue-tsx-support-2.3.3.tgz#234603ce7d15d6a93aff7049622b3857250bcf47"
+  resolved "http://r.cnpmjs.org/vue-tsx-support/download/vue-tsx-support-2.3.3.tgz#234603ce7d15d6a93aff7049622b3857250bcf47"
   integrity sha1-I0YDzn0V1qk6/3BJYis4VyULz0c=
 
 vue@^2.6.10:
