@@ -20,13 +20,7 @@ export default [
       import(/* webpackChunkName: "Home" */ "../pages/Home")
     ),
   },
-  {
-    path: "/about",
-    exact: true,
-    component: asyncComponent(() =>
-      import(/* webpackChunkName: "About" */ "../pages/About")
-    ),
-  },
+
   {
     path: "/hookstest",
     exact: true,

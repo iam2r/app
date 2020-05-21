@@ -70,45 +70,55 @@ const createEntryAndHtml = pageList => pageList.reduce((pre, page) => {
 
 
 
-const createCssLoader = (isModules, lang = 'scss') => [
-    utils.isDev() ?
-    "vue-style-loader" : {
-        loader: MiniCssExtractPlugin.loader,
-        options: {
-            publicPath: "../"
-        }
-    },
-    {
-        loader: "css-loader",
-        options: isModules === true ? {
-            importLoaders: 2,
-            modules: {
-                localIdentName: '[name]-[local]-[hash:base64:5]'
-            },
-        } : {
-            importLoaders: 2,
-        }
-    },
-    "postcss-loader",
-    lang == 'less' ? {
-        loader: "less-loader",
-        options: {
-            modifyVars: {
-                "hack": `true; 
-             `
+const createCssLoader = (isModules, lang = 'scss') => {
+    const loaders = [
+        {
+            loader: "css-loader",
+            options: isModules === true ? {
+                importLoaders: 2,
+                modules: {
+                    localIdentName: '[name]-[local]-[hash:base64:5]'
+                },
+            } : {
+                    importLoaders: 2,
+                }
+        },
+        "postcss-loader",
+        lang == 'less' ? {
+            loader: "less-loader",
+            options: {
+                modifyVars: {
+                    "hack": `true; 
+                 `
+                }
             }
-        }
-    } : {
-        loader: "sass-loader",
-        options: {
-            prependData: `
-                    @import "@/styles/_config.scss";
-                    @import "@/styles/_mixins.scss";
-                    `
-        }
-    }
-]
+        } : {
+                loader: "sass-loader",
+                options: {
+                    prependData: `
+                        @import "@/styles/_config.scss";
+                        @import "@/styles/_mixins.scss";
+                        `
+                }
+            }
 
+
+
+    ]
+
+    isModules && loaders.unshift("css-modules-typescript-loader");
+    loaders.unshift(utils.isDev() ?
+        "vue-style-loader" : {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+                publicPath: "../"
+            }
+        });
+
+    return loaders
+
+
+}
 const createWebFontsLoader = () => {
     let uses = [
         utils.isDev() ? "vue-style-loader" : MiniCssExtractPlugin.loader,
@@ -143,10 +153,10 @@ const transformer = error => {
 
         console.log('message:' + message)
         for (const {
-                re,
-                msg,
-                type
-            } of rules) {
+            re,
+            msg,
+            type
+        } of rules) {
             const match = message.match(re)
             if (match) {
                 return Object.assign({}, error, {
@@ -297,191 +307,191 @@ module.exports = {
         noParse: /^(vue|vue-router|vuex|vuex-router-sync|react|react-dom)$/,
         // 多个loader是有顺序要求的，从右往左写，因为转换的时候是从右往左转换的
         rules: [{
-                test: /\.(j|t)sx?$/,
-                oneOf: [{
-                        test: /\.font\.\w+$/,
-                        use: createWebFontsLoader()
-                    },
-                    {
-                        use: [{
-                                loader: 'cache-loader',
-                                options: {
-                                    cacheIdentifier: utils.isDev() ? 'dev' : process.env.BUILD_MODE == BUILDMODE.modern ? BUILDMODE.modern : BUILDMODE.legacy,
-                                    cacheDirectory: path.resolve(__dirname, '../node_modules/.cache/babel-loader')
-                                }
-                            },
-                            "thread-loader",
-                            "babel-loader",
-                            {
-                                loader: 'ts-loader',
-                                options: {
-                                    transpileOnly: true,
-                                    happyPackMode: true
-                                }
-                            }
-                        ],
-                        exclude: [
-                            filepath => {
-                                if (
-                                    filepath.includes(path.join('@babel', 'runtime'))
-                                ) {
-                                    return false
-                                }
-                                return /node_modules/.test(filepath)
-                            }
-                        ],
+            test: /\.(j|t)sx?$/,
+            oneOf: [{
+                test: /\.font\.\w+$/,
+                use: createWebFontsLoader()
+            },
+            {
+                use: [{
+                    loader: 'cache-loader',
+                    options: {
+                        cacheIdentifier: utils.isDev() ? 'dev' : process.env.BUILD_MODE == BUILDMODE.modern ? BUILDMODE.modern : BUILDMODE.legacy,
+                        cacheDirectory: path.resolve(__dirname, '../node_modules/.cache/babel-loader')
+                    }
+                },
+                    "thread-loader",
+                    "babel-loader",
+                {
+                    loader: 'ts-loader',
+                    options: {
+                        transpileOnly: true,
+                        happyPackMode: true
+                    }
+                }
+                ],
+                exclude: [
+                    filepath => {
+                        if (
+                            filepath.includes(path.join('@babel', 'runtime'))
+                        ) {
+                            return false
+                        }
+                        return /node_modules/.test(filepath)
                     }
                 ],
+            }
+            ],
 
+        },
+
+        {
+            test: /\.vue$/,
+            use: [{
+                loader: 'cache-loader',
+                options: {
+                    cacheIdentifier: utils.isDev() ? 'dev' : process.env.BUILD_MODE == BUILDMODE.modern ? BUILDMODE.modern : BUILDMODE.legacy,
+                    cacheDirectory: path.resolve(__dirname, '../node_modules/.cache/vue-loader')
+                }
             },
-
             {
-                test: /\.vue$/,
+                loader: 'vue-loader',
+                options: {
+                    compilerOptions: {
+                        preserveWhitespace: false
+                    },
+                }
+            }
+            ],
+        },
+        {
+            test: /\.s?css$/,
+            oneOf: [
+                // 这里匹配 `<style module>`
+                {
+                    resourceQuery: /module/,
+                    use: createCssLoader(true)
+                }, {
+                    test: /\.module\.\w+$/,
+                    use: createCssLoader(true)
+                },
+                {
+                    use: createCssLoader()
+                }
+            ],
+
+        },
+        {
+            test: /\.less$/,
+            oneOf: [{
+                resourceQuery: /module/,
+                use: createCssLoader(true, 'less')
+            }, {
+                test: /\.module\.\w+$/,
+                use: createCssLoader(true, 'less')
+            },
+            {
+                use: createCssLoader(false, 'less')
+            }
+            ]
+
+        },
+        {
+            test: /\.(png|jpe?g|gif|webp|ico|svg)(\?.*)?$/,
+            use: [{
+                loader: "url-loader",
+                options: {
+                    limit: config.inlineLimit,
+                    name: utils.assetsPath("images/[name].[hash:8].[ext]"),
+                    outputPath: (url, resourcePath, context) => {
+                        doResourceCache({
+                            type: 'image',
+                            resourcePath: path.relative(context, resourcePath).replace(/\\/g, '/'),
+                            url
+                        })
+                        return url;
+                    },
+
+                }
+            }]
+        },
+
+        {
+            test: /\.(mp4|webm|ogg|mp3|wav|flac|aac)(\?.*)?$/,
+            use: [{
+                loader: 'url-loader',
+                options: {
+                    limit: config.inlineLimit,
+                    name: utils.assetsPath("media/[name].[hash:8].[ext]"),
+                    outputPath: (url, resourcePath, context) => {
+                        doResourceCache({
+                            type: 'media',
+                            resourcePath: path.relative(context, resourcePath).replace(/\\/g, '/'),
+                            url
+                        })
+                        return url;
+                    },
+                }
+            }]
+
+        },
+
+        {
+            test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/i,
+            use: [{
+                loader: "url-loader",
+                options: {
+                    limit: config.inlineLimit,
+                    name: utils.assetsPath("fonts/[name].[hash:8].[ext]"),
+                }
+            }]
+
+        },
+
+        {
+            test: /\.yml$/,
+            loader: 'yml-loader'
+        },
+
+        {
+            test: /\.xml$/,
+            oneOf: [{
+                test: /\.sprites\.\w+$/,
                 use: [{
-                        loader: 'cache-loader',
-                        options: {
-                            cacheIdentifier: utils.isDev() ? 'dev' : process.env.BUILD_MODE == BUILDMODE.modern ? BUILDMODE.modern : BUILDMODE.legacy,
-                            cacheDirectory: path.resolve(__dirname, '../node_modules/.cache/vue-loader')
-                        }
-                    },
-                    {
-                        loader: 'vue-loader',
-                        options: {
-                            compilerOptions: {
-                                preserveWhitespace: false
-                            },
-                        }
-                    }
-                ],
-            },
-            {
-                test: /\.s?css$/,
-                oneOf: [
-                    // 这里匹配 `<style module>`
-                    {
-                        resourceQuery: /module/,
-                        use: createCssLoader(true)
-                    }, {
-                        test: /\.module\.\w+$/,
-                        use: createCssLoader(true)
-                    },
-                    {
-                        use: createCssLoader()
-                    }
-                ],
-
-            },
-            {
-                test: /\.less$/,
-                oneOf: [{
-                        resourceQuery: /module/,
-                        use: createCssLoader(true, 'less')
-                    }, {
-                        test: /\.module\.\w+$/,
-                        use: createCssLoader(true, 'less')
-                    },
-                    {
-                        use: createCssLoader(false, 'less')
-                    }
-                ]
-
-            },
-            {
-                test: /\.(png|jpe?g|gif|webp|ico|svg)(\?.*)?$/,
-                use: [{
-                    loader: "url-loader",
+                    loader: "sprites-loader",
                     options: {
-                        limit: config.inlineLimit,
-                        name: utils.assetsPath("images/[name].[hash:8].[ext]"),
-                        outputPath: (url, resourcePath, context) => {
-                            doResourceCache({
-                                type: 'image',
-                                resourcePath: path.relative(context, resourcePath).replace(/\\/g, '/'),
-                                url
-                            })
-                            return url;
-                        },
-
+                        suffix: ".sprites.xml",
+                        name: utils.assetsPath("sprites/[name].[hash:8].[ext]")
                     }
                 }]
-            },
-
-            {
-                test: /\.(mp4|webm|ogg|mp3|wav|flac|aac)(\?.*)?$/,
+            },]
+        },
+        {
+            test: /\.json$/,
+            oneOf: [{
+                test: /\.sprites\.\w+$/,
+                type: "javascript/auto",
                 use: [{
-                    loader: 'url-loader',
+                    loader: "sprites-loader",
                     options: {
-                        limit: config.inlineLimit,
-                        name: utils.assetsPath("media/[name].[hash:8].[ext]"),
-                        outputPath: (url, resourcePath, context) => {
-                            doResourceCache({
-                                type: 'media',
-                                resourcePath: path.relative(context, resourcePath).replace(/\\/g, '/'),
-                                url
-                            })
-                            return url;
-                        },
+                        suffix: ".sprites.json",
+                        name: utils.assetsPath("sprites/[name].[hash:8].[ext]")
                     }
-                }]
-
+                },]
             },
-
             {
-                test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/i,
+                test: /\.spine\.\w+$/,
+                type: "javascript/auto",
                 use: [{
-                    loader: "url-loader",
+                    loader: "spine-json-loader",
                     options: {
-                        limit: config.inlineLimit,
-                        name: utils.assetsPath("fonts/[name].[hash:8].[ext]"),
+                        suffix: ".spine.json",
+                        name: utils.assetsPath("spines/[name].[hash:8].[ext]")
                     }
-                }]
-
-            },
-
-            {
-                test: /\.yml$/,
-                loader: 'yml-loader'
-            },
-
-            {
-                test: /\.xml$/,
-                oneOf: [{
-                    test: /\.sprites\.\w+$/,
-                    use: [{
-                        loader: "sprites-loader",
-                        options: {
-                            suffix: ".sprites.xml",
-                            name: utils.assetsPath("sprites/[name].[hash:8].[ext]")
-                        }
-                    }]
-                }, ]
-            },
-            {
-                test: /\.json$/,
-                oneOf: [{
-                        test: /\.sprites\.\w+$/,
-                        type: "javascript/auto",
-                        use: [{
-                            loader: "sprites-loader",
-                            options: {
-                                suffix: ".sprites.json",
-                                name: utils.assetsPath("sprites/[name].[hash:8].[ext]")
-                            }
-                        }, ]
-                    },
-                    {
-                        test: /\.spine\.\w+$/,
-                        type: "javascript/auto",
-                        use: [{
-                            loader: "spine-json-loader",
-                            options: {
-                                suffix: ".spine.json",
-                                name: utils.assetsPath("spines/[name].[hash:8].[ext]")
-                            }
-                        }, ]
-                    }
-                ]
-            },
+                },]
+            }
+            ]
+        },
 
         ]
     },

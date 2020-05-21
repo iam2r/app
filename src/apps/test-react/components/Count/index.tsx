@@ -1,38 +1,31 @@
 import styles from "./styles.module.scss";
 import { connect } from "react-redux";
-import { Button } from "antd";
 import actions from "../../store/actions";
-
-const CountApp = props => {
+const CountApp = (props) => {
   const { login, addThenMinus } = actions;
-  console.log(props);
   return (
     <div className={styles.normal}>
       <div className={styles.record}>Record: {props.record}</div>
       <div className={styles.current}>{props.current}</div>
       <p>{props.message}</p>
       <div className={styles.button}>
-        <Button
-          type="primary"
+        <button
           onClick={() => {
             login({ username: "zrnokia5230", password: "zaq147895" });
           }}
         >
           login
-        </Button>
-        <Button
-          type="primary"
+        </button>
+        <button
           onClick={() => {
             addThenMinus();
           }}
         >
           + then -
-        </Button>
+        </button>
       </div>
     </div>
   );
 };
 
-CountApp.propTypes = {};
-
-export default connect(state => state)(CountApp);
+export default connect((state) => state)(CountApp);
