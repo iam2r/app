@@ -1,10 +1,11 @@
 const SpritesmithPlugin = require("webpack-spritesmith");
 const path = require("path");
+const { apps } = require("./build/const");
 let plugins = [];
 
 switch (process.env.APP_NAME) {
-  case "home":
-  case "birthday":
+  case apps.home:
+  case apps.birthday:
     var assetsName = "main";
     var assetsPath = `${process.env.APP_ROOT}/assets/images`;
     plugins = [
@@ -32,7 +33,7 @@ switch (process.env.APP_NAME) {
       })
     ];
     break;
-  case "treasure-hunter":
+  case apps.treasure_hunter:
     const assetsList = ["main", "bg"];
     assetsList.forEach(assetsName => {
       const assetsPath = `${process.env.APP_ROOT}/assets/sprites/${assetsName}`;

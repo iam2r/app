@@ -3,10 +3,11 @@
  */
 
 const path = require("path");
+const { apps } = require("./const");
 
 module.exports = {
     titleMap: {
-        'blog': '',
+        [apps.blog]: '',
     },
     staticPath: path.resolve(__dirname, '../dist'),
     dev: {
@@ -47,18 +48,6 @@ module.exports = {
             modern: 'modern'//现代-现代
         }
     },
-    polyfills: [
-        // promise polyfill alone doesn't work in IE,
-        // needs this as well. see: #1642
-        'es.array.iterator',
-        // this is required for webpack code splitting, vuex etc.
-        'es.promise',
-        // this is needed for object rest spread support in templates
-        // as vue-template-es2015-compiler 1.8+ compiles it to Object.assign() calls.
-        'es.object.assign',
-        // #2012 es6.promise replaces native Promise in FF and causes missing finally
-        'es.promise.finally'
-    ],
     demandList: [
         ["component", {
             libraryName: "antd",
@@ -93,8 +82,8 @@ module.exports = {
         }, 'lodash']
     ],
     appsTypes:{
-        react: ['test-react'],
-        vue: ['blog', 'home' ,'birthday']
+        react: [apps.test_react],
+        vue: [apps.blog, apps.home ,apps.birthday]
     },
     inlineLimit: 4096,
     dllVendorBlackList: [/^@/, /\.css$/, /antd|vant|element-ui|mint-ui|core-js|regenerator-runtime/]

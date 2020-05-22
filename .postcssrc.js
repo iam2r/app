@@ -1,8 +1,9 @@
+const { apps } = require("./build/const");
 let plugins = {
   autoprefixer: {},
 };
 switch (process.env.APP_NAME) {
-  case "blog":
+  case apps.blog:
     plugins = {
       ...plugins,
       autoprefixer: {},
@@ -11,7 +12,7 @@ switch (process.env.APP_NAME) {
       },
     };
     break;
-  case "birthday":
+  case apps.birthday:
     plugins = {
       ...plugins,
       autoprefixer: {},
