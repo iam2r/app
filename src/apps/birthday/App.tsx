@@ -115,10 +115,10 @@ export default class App extends tsx.Component<any> {
             let span = document.createElement("span");
             span.textContent = letter;
             span.style.animationDelay = `${count * 0.05}s`;
-            landInText.append(span);
+            landInText.appendChild(span);
             count++;
           });
-          landInText.append(document.createElement("br"));
+          landInText.appendChild(document.createElement("br"));
         });
       });
     } else {

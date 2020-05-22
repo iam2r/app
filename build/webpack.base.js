@@ -337,6 +337,10 @@ module.exports = {
                         ) {
                             return false
                         }
+
+                        if (config.transpileDepRegex && config.transpileDepRegex.test(filepath)) {
+                            return false
+                        }
                         return /node_modules/.test(filepath)
                     }
                 ],

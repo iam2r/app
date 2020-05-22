@@ -81,10 +81,11 @@ module.exports = {
             libDir: '',
         }, 'lodash']
     ],
-    appsTypes:{
+    appsTypes: {
         react: [apps.test_react],
-        vue: [apps.blog, apps.home ,apps.birthday]
+        vue: [apps.blog, apps.home, apps.birthday]
     },
     inlineLimit: 4096,
-    dllVendorBlackList: [/^@/, /\.css$/, /antd|vant|element-ui|mint-ui|core-js|regenerator-runtime/]
+    dllVendorBlackList: [/^@/, /\.css$/, /antd|vant|element-ui|mint-ui|core-js|regenerator-runtime/],
+    transpileDepRegex: /swiper|dom7/ //node_modules中参与转码的项目
 };
