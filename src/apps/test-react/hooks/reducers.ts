@@ -4,13 +4,13 @@ export default {
     return {
       ...state,
       record: newCurrent > state.record ? newCurrent : state.record,
-      current: newCurrent
+      current: newCurrent,
     };
   },
   minus(state, { data }) {
     return {
       ...state,
-      current: state.current - 1
+      current: state.current - 1,
     };
   },
   loginStatus(state, { data }) {
@@ -18,7 +18,7 @@ export default {
       ...state,
       isLogined: !state.isLogined,
       current: Object.keys(data).length,
-      message: data.message
+      message: data.message,
     };
-  }
+  },
 };
