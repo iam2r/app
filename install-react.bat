@@ -1,1 +1,1 @@
-yarn add  react react-dom react-redux react-router-dom redux  redux-promise
+yarn add  react react-dom react-router-dom
