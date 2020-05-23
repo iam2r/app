@@ -634,7 +634,7 @@ body {
             animation: eyes ease-in-out 600ms, face-translate ease 600ms;
             animation-iteration-count: infinite;
             animation-direction: alternate;
-            $faceWidth: 100px;
+            $faceWidth: 150px;
             &::before {
               content: "";
               @include sprite-size($sprite-face, $faceWidth, $faceWidth);
@@ -643,6 +643,7 @@ body {
               left: 50%;
               display: block;
               transform: translate(-50%, -50%) translateX(10px);
+              border-radius: 50%;
             }
           }
         }
