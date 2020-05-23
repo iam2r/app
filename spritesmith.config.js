@@ -15,7 +15,7 @@ switch (process.env.APP_NAME) {
         },
         src: {
           cwd: assetsPath,
-          glob: "*.png"
+          glob: ["*.png", "*.jpg"]
         },
         target: {
           image: `${assetsPath}/_spritesmith/${assetsName}.png`,
