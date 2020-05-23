@@ -4,9 +4,8 @@ import * as tsx from "vue-tsx-support";
 import { TweenLite, Linear, gsap } from "gsap";
 import { Swiper, SwiperSlide } from "vue-awesome-swiper";
 import "swiper/css/swiper.css";
-
-gsap.ticker.lagSmoothing(0, null);
 import "./App.scss";
+gsap.ticker.lagSmoothing(0, null);
 
 @Component({
   components: {
@@ -312,7 +311,7 @@ export default class App extends tsx.Component<any> {
   }
 
   private page2Dom(): VNode {
-    const text = `Hi,李紫寒。${this.splitSymbol}今天是你的生日哦。送你一份电子礼物~${this.splitSymbol}`;
+    const text = `Hi,XXX。${this.splitSymbol}今天是你的生日哦。送你一份电子礼物~${this.splitSymbol}`;
 
     return (
       <swiper-slide>
