@@ -637,11 +637,7 @@ body {
             $faceWidth: 100px;
             &::before {
               content: "";
-              @include sprite-size(
-                $sprite-face,
-                $faceWidth,
-                $faceWidth * 1.5356
-              );
+              @include sprite-size($sprite-face, $faceWidth, $faceWidth);
               position: absolute;
               top: -30%;
               left: 50%;
@@ -771,14 +767,16 @@ body {
   }
 
   .page-two {
-    .land-in {
+    .land-in-animation {
+      display: inline-block;
+      animation: land-in 0.8s ease-out both;
+    }
+
+    .land-in-p {
       line-height: 1.8;
       color: white;
       font-size: 24px;
-      opacity: 0;
-      span {
-        animation: land-in 0.8s ease-out both;
-      }
+      // opacity: 0;
     }
 
     @keyframes land-in {

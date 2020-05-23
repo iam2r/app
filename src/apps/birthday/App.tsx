@@ -3,7 +3,7 @@ import { Component, Watch } from "vue-property-decorator";
 import * as tsx from "vue-tsx-support";
 import { TweenLite, Linear, gsap } from "gsap";
 import { Swiper, SwiperSlide } from "vue-awesome-swiper";
-import "swiper/css/swiper.css";
+import LandInAnimation from "./modules/LandInAnimation";
 import "./App.scss";
 gsap.ticker.lagSmoothing(0, null);
 
@@ -14,7 +14,6 @@ gsap.ticker.lagSmoothing(0, null);
   },
 })
 export default class App extends tsx.Component<any> {
-  private splitSymbol: string = `<br>`;
   private birthDate: number = +new Date(`2020/9/19`);
   private revolution: number = 3600 * 24 * 1000; //一圈的毫秒数
   private active: boolean = false;
@@ -27,6 +26,7 @@ export default class App extends tsx.Component<any> {
   private snailRotateTween: TweenLite;
   private test: boolean = false;
   private slideIndex: number = -1;
+  private lanInItem: LandInAnimation;
   private swiperOptions: any = {
     direction: "vertical",
     on: {
@@ -82,7 +82,12 @@ export default class App extends tsx.Component<any> {
 
   @Watch("slideIndex")
   protected onSlideIndexChange(value: number) {
-    this.doLandInAnimation(value == 1);
+    if (value == 1) {
+      this.lanInItem = this.initLanInItem();
+      this.lanInItem.start();
+    } else {
+      this.lanInItem && this.lanInItem.hide();
+    }
   }
 
   protected created() {}
@@ -90,41 +95,20 @@ export default class App extends tsx.Component<any> {
   protected mounted() {
     this.slideIndex = 0;
     this.initCountDown();
-
     setTimeout(() => {
       if (this.active) return;
       this.doActive();
     }, 2000);
   }
 
-  private doLandInAnimation(show: boolean) {
-    let landInTexts = document.querySelectorAll(".land-in");
-    if (show) {
-      landInTexts.forEach((landInText: HTMLElement) => {
-        landInText.style.opacity = "1";
-        let ps = landInText
-          .getAttribute("data-text")
-          .trim()
-          .split(this.splitSymbol);
-        landInText.innerHTML = "";
-        let count = 0;
-        ps.forEach((p) => {
-          let letters = p.split("");
-          letters.forEach((letter) => {
-            let span = document.createElement("span");
-            span.textContent = letter;
-            span.style.animationDelay = `${count * 0.05}s`;
-            landInText.appendChild(span);
-            count++;
-          });
-          landInText.appendChild(document.createElement("br"));
-        });
-      });
-    } else {
-      landInTexts.forEach((landInText: HTMLElement) => {
-        landInText.style.opacity = "";
-      });
-    }
+  private initLanInItem() {
+    this.lanInItem && this.lanInItem.destory();
+    return new LandInAnimation(
+      this.$el.querySelector(".land-in-p") as HTMLElement,
+      {
+        content: `Hi,XXX。<br>今天是你的生日哦。送你一份电子礼物~<br>Hi,XXX。<br>今天是你的生日哦。送你一份电子礼物~<br>Hi,XXX。<br>今天是你的生日哦。送你一份电子礼物~<br>Hi,XXX。<br>今天是你的生日哦。送你一份电子礼物~<br>Hi,XXX。<br>今天是你的生日哦。送你一份电子礼物~<br>Hi,XXX。<br>今天是你的生日哦。送你一份电子礼物~<br>Hi,XXX。<br>今天是你的生日哦。送你一份电子礼物~<br>Hi,XXX。<br>今天是你的生日哦。送你一份电子礼物~<br>Hi,XXX。<br>今天是你的生日哦。送你一份电子礼物~<br>Hi,XXX。<br>今天是你的生日哦。送你一份电子礼物~<br>Hi,XXX。<br>今天是你的生日哦。送你一份电子礼物~<br>`,
+      }
+    );
   }
 
   private onSlideChangeTransitionEnd() {
@@ -311,12 +295,15 @@ export default class App extends tsx.Component<any> {
   }
 
   private page2Dom(): VNode {
-    const text = `Hi,XXX。${this.splitSymbol}今天是你的生日哦。送你一份电子礼物~${this.splitSymbol}`;
-
     return (
       <swiper-slide>
         <div class="page-two">
-          <p class="land-in" data-text={text}></p>
+          <p
+            class="land-in-p"
+            onClick={() => {
+              this.lanInItem && this.lanInItem.skip();
+            }}
+          ></p>
         </div>
       </swiper-slide>
     );
