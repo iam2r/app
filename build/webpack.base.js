@@ -1,6 +1,7 @@
 "use strict";
 const utils = require("./utils");
 const config = require("./config");
+const { apps } = require("./const");
 const fs = require('fs-extra')
 const path = require("path");
 const chalk = require("chalk");
@@ -18,6 +19,7 @@ const {
     ProvidePlugin,
     DefinePlugin
 } = require("webpack");
+console.log(Object.values(apps))
 
 const BUILDMODE = config.build.mode;
 
@@ -31,7 +33,7 @@ process.env.BUILD_MODE = (() => {
         }
     }
 })();
-process.env.APP_NAME = utils.getAppName('home');
+process.env.APP_NAME = utils.getAppName(Object.values(apps)[0]);
 process.env.APP_ROOT = path.resolve(__dirname, `../src/apps/${process.env.APP_NAME}`);
 
 const {
