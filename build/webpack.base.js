@@ -19,7 +19,6 @@ const {
     ProvidePlugin,
     DefinePlugin
 } = require("webpack");
-console.log(Object.values(apps))
 
 const BUILDMODE = config.build.mode;
 
