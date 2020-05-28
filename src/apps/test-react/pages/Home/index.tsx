@@ -1,11 +1,11 @@
 import styles from "./styles.module.scss";
 import Count from "app.root/components/Count";
-import { Store } from "app.root/hooks";
+import { useStore } from "app.root/hooks";
 import { useState } from "react";
 import NoSleep from "app.root/nosleep";
 const noSleep = new NoSleep();
 const Home = (props: any) => {
-  const { state } = Store();
+  const { state } = useStore();
   const [sleep, setSleep] = useState(true);
 
   const enable = () => {
@@ -24,6 +24,7 @@ const Home = (props: any) => {
       <div>
         <button onClick={enable}>开启</button>
         <button onClick={disable}>关闭</button>
+        {JSON.stringify(state)}
         <div>{!sleep ? "已开启常亮模式" : "会休眠"}</div>
       </div>
     </div>

@@ -1,10 +1,12 @@
 import styles from "./styles.module.scss";
-import actions from "app.root/hooks/actions";
-import { Store } from "app.root/hooks";
-
+import { useStore } from "app.root/hooks";
 const CountApp = (props) => {
-  const { login, addThenMinus } = actions;
-  const { state, dispatch } = Store();
+  const {
+    state,
+    dispatch,
+    actions: { login, addThenMinus },
+  } = useStore();
+
   return (
     <div className={styles.normal}>
       <div className={styles.record}>Record: {state.record}</div>

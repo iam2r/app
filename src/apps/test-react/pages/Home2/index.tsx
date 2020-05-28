@@ -1,8 +1,8 @@
 import styles from "./styles.module.scss";
 import Count from "app.root/components/Count";
-import { Store } from "app.root/hooks";
+import { useStore } from "app.root/hooks";
 const Home = (props: any) => {
-  const { state } = Store();
+  const { state } = useStore();
 
   return (
     <div className={styles.welcome}>

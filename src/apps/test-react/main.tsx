@@ -1,11 +1,11 @@
 import { HashRouter, Route, Switch, Redirect } from "react-router-dom";
 import routes from "app.root/router";
-import { useAppReducer, Provider } from "app.root/hooks";
+import { useCreateStore, Provider } from "app.root/hooks";
 
 const App = () => {
-  const [state, dispatch] = useAppReducer();
+  const store = useCreateStore();
   return (
-    <Provider value={{ state, dispatch }}>
+    <Provider value={store}>
       <HashRouter basename="/">
         <Switch>
           {routes.map(({ path, exact, component }, key) => (
