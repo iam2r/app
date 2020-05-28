@@ -1,12 +1,20 @@
 import styles from "./styles.module.scss";
 import Count from "app.root/components/Count";
 import { useStore } from "app.root/hooks";
-import { useState } from "react";
+import { useState, useMemo, useRef, useEffect } from "react";
 import NoSleep from "app.root/nosleep";
 const noSleep = new NoSleep();
 const Home = (props: any) => {
   const { state } = useStore();
   const [sleep, setSleep] = useState(true);
+  const memoizedValue = useMemo(() => state.current + 1, [state.current]);
+  const el = useRef(null);
+
+  useEffect(() => {
+    console.log(el.current);
+
+    return;
+  });
 
   const enable = () => {
     setSleep(false);
@@ -19,12 +27,13 @@ const Home = (props: any) => {
   };
 
   return (
-    <div className={styles.welcome}>
+    <div className={styles.welcome} ref={el}>
       <Count> </Count>
       <div>
         <button onClick={enable}>开启</button>
         <button onClick={disable}>关闭</button>
         {JSON.stringify(state)}
+        {memoizedValue}
         <div>{!sleep ? "已开启常亮模式" : "会休眠"}</div>
       </div>
     </div>
