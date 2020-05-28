@@ -1,31 +1,20 @@
-import { Component } from "react";
+import { useState, useEffect } from "react";
 const lazyLoad = ({
   component,
   loading,
 }: {
   component: Function;
   loading?: any;
-}) =>
-  class extends (Component as any) {
-    private state: {
-      c: any;
-    };
-    constructor() {
-      super();
-      this.state = {
-        c: null,
-      };
-    }
-    async componentDidMount() {
-      loading && this.setState({ c: loading });
-      const { default: c } = await component();
-      this.setState({ c });
-    }
-    render() {
-      const C = this.state.c;
-      return C ? <C {...this.props} /> : null;
-    }
-  };
+}) => (props: any) => {
+  const [state, setState] = useState({ component: null });
+  useEffect(() => {
+    (async () => {
+      loading && setState({ component: loading });
+      setState({ component: (await component()).default });
+    })();
+  }, [setState]);
+  return state.component ? <state.component {...props} /> : null;
+};
 
 export default [
   {
