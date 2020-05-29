@@ -86,7 +86,7 @@ class ModernModePlugin {
 
           compilation.assets[safariFixPath] = {
             source: function () {
-              return new Buffer(safariFix)
+              return Buffer.from(safariFix)
             },
             size: function () {
               return Buffer.byteLength(safariFix)
