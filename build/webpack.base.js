@@ -14,7 +14,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin"); // 生成html的插件
 const CopyWebpackPlugin = require("copy-webpack-plugin"); // 复制静态资源的插件
 const PreloadWebpackPlugin = require('@vue/preload-webpack-plugin');
 const AppsStorePlugin = require('./plugin/webpack/AppsStorePlugin');
-const resourceCache = require('./resourceCache');
+const resourceCache = [];
 const {
     ProvidePlugin,
     DefinePlugin
@@ -229,7 +229,8 @@ const plugins = [
     }),
     new AppsStorePlugin({
         targetDir: config.staticPath,
-        reset: utils.isResetAppsStore()
+        reset: utils.isResetAppsStore(),
+        resourceCache
     }),
     ...SpritesmithPlugin
 ]

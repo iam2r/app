@@ -1,6 +1,5 @@
 "use strict";
 process.env.NODE_ENV = 'production';
-const path = require("path");
 const utils = require("./utils");
 const config = require("./config");
 const TinypngPlugin = require('tinypng-webpack-plugin');

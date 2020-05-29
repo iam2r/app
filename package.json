@@ -4,8 +4,8 @@
   "description": "iam2r.github.io",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack-dev-server --config build/webpack.dev.config.js",
-    "build": "webpack --config build/webpack.prod.config.js",
+    "dev": "webpack-dev-server --config build/webpack.dev.js",
+    "build": "webpack --config build/webpack.prod.js",
     "start": "yarn run dev --dll",
     "build:modern": "yarn run build --modern legacy",
     "postbuild:modern": "yarn run build --modern",
