@@ -192,19 +192,18 @@ export default class App extends tsx.Component<any> {
           <div class="clock clock-countdown">
             <div class="elem-center">
               <div class="digit">
-                {" "}
-                <span class="days">{this.formateMilliSecond.day}</span>{" "}
-                <span class="txt">天</span>{" "}
+                <span class="days">{this.formateMilliSecond.day}</span>
+                <span class="txt">天</span>
               </div>
             </div>
             <div class="elem-bottom">
               <div class="deco"></div>
               <span class="hours">{this.formateMilliSecond.hour}</span>
-              <span class="thin"> 小时</span>{" "}
+              <span class="thin"> 小时</span>
               <span class="minutes">{this.formateMilliSecond.minute}</span>
-              <span class="thin"> 分钟</span>{" "}
+              <span class="thin"> 分钟</span>
               <span class="seconds">{this.formateMilliSecond.second}</span>
-              <span class="thin"> 秒</span>{" "}
+              <span class="thin"> 秒</span>
             </div>
           </div>
         ) : null}
