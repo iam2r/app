@@ -16,7 +16,7 @@ export class ResourceLoader {
   protected loadImages() {
     const res = {
       ...context.resource.base,
-      ...context.resource.html
+      ...context.resource.html,
     };
 
     this.loadResource(res);

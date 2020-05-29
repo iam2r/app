@@ -12,7 +12,7 @@ export const setStore = (name, content) => {
 /**
  * 获取localStorage
  */
-export const getStore = name => {
+export const getStore = (name) => {
   if (!name) return;
   return window.localStorage.getItem(name);
 };
@@ -20,7 +20,7 @@ export const getStore = name => {
 /**
  * 删除localStorage
  */
-export const removeStore = name => {
+export const removeStore = (name) => {
   if (!name) return;
   window.localStorage.removeItem(name);
 };
@@ -39,7 +39,7 @@ export const setCookie = (name, value, time) => {
 /**
  * 读取cookies
  */
-export const getCookie = name => {
+export const getCookie = (name) => {
   let arr,
     reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
   if ((arr = document.cookie.match(reg))) return arr[2];
@@ -49,7 +49,7 @@ export const getCookie = name => {
 /**
  * 删除cookies
  */
-export const delCookie = name => {
+export const delCookie = (name) => {
   const exp = new Date();
   exp.setTime(exp.getTime() - 1);
   const cval = getCookie(name);
@@ -62,7 +62,7 @@ export const delCookie = name => {
  * @param len
  * @returns {string}
  */
-export const randomString = len => {
+export const randomString = (len) => {
   len = len || 8;
   const $chars = "ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz2345678";
   /****默认去掉了容易混淆的字符oOLl,9gq,Vv,Uu,I1****/
@@ -151,7 +151,7 @@ export const randomWord = (randomFlag, min, max) => {
       "W",
       "X",
       "Y",
-      "Z"
+      "Z",
     ];
 
   // 随机产生
@@ -199,7 +199,7 @@ export const getRandomColor = () => {
  * @param el 号码输入input
  * @returns {boolean}
  */
-export const checkCardNo = el => {
+export const checkCardNo = (el) => {
   const txtval = el.value;
   const reg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
   return reg.test(txtval);
@@ -210,7 +210,7 @@ export const checkCardNo = el => {
  * @param {String}
  * @returns {Boolean}
  */
-export const checkLength = v => {
+export const checkLength = (v) => {
   let realLength = 0;
   const len = v.length;
   for (let i = 0; i < len; i++) {
@@ -269,7 +269,7 @@ export const parseUA = () => {
     //是否web应该程序，没有头部与底部
     iosv: u.substr(u.indexOf("iPhone OS") + 9, 3),
     weixin: u2.match(/MicroMessenger/i) == "micromessenger",
-    ali: u.indexOf("AliApp") > -1
+    ali: u.indexOf("AliApp") > -1,
   };
 };
 
@@ -279,13 +279,14 @@ export const parseUA = () => {
  */
 export const generateUUID = () => {
   let d = new Date().getTime();
-  const uuid = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function(
-    c
-  ) {
-    const r = (d + Math.random() * 16) % 16 | 0;
-    d = Math.floor(d / 16);
-    return (c === "x" ? r : (r & 0x7) | 0x8).toString(16);
-  });
+  const uuid = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(
+    /[xy]/g,
+    function (c) {
+      const r = (d + Math.random() * 16) % 16 | 0;
+      d = Math.floor(d / 16);
+      return (c === "x" ? r : (r & 0x7) | 0x8).toString(16);
+    }
+  );
   return uuid;
 };
 
@@ -294,7 +295,7 @@ export const generateUUID = () => {
  * @param str
  * @returns {string | * | void}
  */
-export const trim = str => str.replace(/(^\s*)|(\s*$)/g, "");
+export const trim = (str) => str.replace(/(^\s*)|(\s*$)/g, "");
 
 /**
  * 找出对象数组中某属性的最大值
@@ -303,7 +304,7 @@ export const trim = str => str.replace(/(^\s*)|(\s*$)/g, "");
  * @returns val
  */
 export const maxValueInObjArrForKey = (array, key) =>
-  Math.max(...array.map(item => item[key]));
+  Math.max(...array.map((item) => item[key]));
 
 /**
  * 判断当前网络环境
@@ -338,14 +339,14 @@ export const isWifi = () => {
  * @param str
  * @returns {string}
  */
-export const fistLetterUpper = str => {
+export const fistLetterUpper = (str) => {
   return str.charAt(0).toUpperCase() + str.slice(1);
 };
 
 /**
  * 过滤非法字符串
  */
-export const illegalFilter = str => {
+export const illegalFilter = (str) => {
   const regEn = /[`~!@#$%^&*()_+<>?:"{},.\/;'[\]]/im;
   const regCn = /[·！#￥（——）：；“”‘、，|《。》？、【】[\]]/im;
 

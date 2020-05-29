@@ -8,7 +8,7 @@ export default class JSXUtils {
 
     return {
       type,
-      props
+      props,
     };
   }
 
@@ -20,7 +20,7 @@ export default class JSXUtils {
     let {
       type,
       props,
-      props: { children }
+      props: { children },
     } = vdom;
 
     const element = document.createElement(type);

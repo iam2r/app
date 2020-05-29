@@ -1,6 +1,6 @@
 export const generateUUID = () => {
   let d = new Date().getTime();
-  const uuid = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, c => {
+  const uuid = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, (c) => {
     const r = (d + Math.random() * 16) % 16 | 0;
     d = Math.floor(d / 16);
     return (c === "x" ? r : (r & 0x7) | 0x8).toString(16);
@@ -23,7 +23,7 @@ class Dep {
     this.subs.push(sub);
   }
   notify() {
-    this.subs.forEach(sub => sub.update());
+    this.subs.forEach((sub) => sub.update());
   }
 }
 
@@ -59,7 +59,7 @@ class Observer {
   }
   // 遍历属性值并监听
   walk(obj: any) {
-    Object.keys(obj).forEach(key => this.defineReactive(obj, key, obj[key]));
+    Object.keys(obj).forEach((key) => this.defineReactive(obj, key, obj[key]));
   }
 
   defineReactive(obj: object, key: string | number, val: any) {
@@ -84,14 +84,14 @@ class Observer {
         }
         return val;
       },
-      set: newVal => {
+      set: (newVal) => {
         if (val === newVal) return;
         val = newVal;
         // 对新值进行监听
         this.deepObserver(newVal);
         // 通知所有订阅者，数值被改变了
         dep.notify();
-      }
+      },
     });
   }
 
@@ -109,8 +109,8 @@ const data = {
   b: "b",
   c: {
     d: "d",
-    e: "e"
-  }
+    e: "e",
+  },
 };
 
 new Observer(data);
@@ -176,5 +176,5 @@ const newObj = new Proxy([0, 1, 2, 3], {
     if (key === "text") {
     }
     return Reflect.set(target, key, value, receiver);
-  }
+  },
 });

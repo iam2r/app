@@ -1,5 +1,5 @@
 function getBrowerInfo() {
-  const browser = (function(window) {
+  const browser = (function (window) {
     const document = window.document;
     const navigator = window.navigator;
     const agent = navigator.userAgent.toLowerCase();
@@ -20,16 +20,16 @@ function getBrowerInfo() {
       // 是否为标准模式
       isStrict: document.compatMode === "CSS1Compat",
       // 是否支持subtitle
-      supportSubTitle: function() {
+      supportSubTitle: function () {
         return "track" in document.createElement("track");
       },
       // 是否支持scoped
-      supportScope: function() {
+      supportScope: function () {
         return "scoped" in document.createElement("style");
       },
 
       // 获取IE的版本号
-      ieVersion: function() {
+      ieVersion: function () {
         const rMsie = /(msie\s|trident.*rv:)([\w.]+)/;
         const match = rMsie.exec(agent);
         try {
@@ -39,7 +39,7 @@ function getBrowerInfo() {
         }
       },
       // Opera版本号
-      operaVersion: function() {
+      operaVersion: function () {
         try {
           if (window.opera) {
             return agent.match(/opera.([\d.]+)/)[1];
@@ -49,7 +49,7 @@ function getBrowerInfo() {
         } catch (e) {
           return 0;
         }
-      }
+      },
     };
 
     try {
@@ -82,7 +82,7 @@ function getBrowerInfo() {
           : "0";
 
       // 浏览器外壳
-      system.shell = function() {
+      system.shell = function () {
         if (agent.indexOf("edge") > 0) {
           system.version = agent.match(/edge\/([\d.]+)/)[1] || system.version;
           return "Edge";

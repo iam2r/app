@@ -20,5 +20,5 @@ export default {
   emitter,
   device,
   resolution,
-  config
+  config,
 };

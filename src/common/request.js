@@ -33,25 +33,25 @@ export default class Request {
   get(url, param = {}, headers = {}) {
     return this.AJAX.get(url, {
       params: param,
-      headers
+      headers,
     });
   }
   post(url, param = null, headers = {}) {
     return this.AJAX.post(url, param, {
-      headers
+      headers,
     });
   }
   put(url, param = null, headers = {}) {
     return this.AJAX.put(url, param, {
-      headers
+      headers,
     });
   }
   file(url, param = null, headers = {}) {
     return this.AJAX.post(url, param, {
       headers: {
         "Content-Type": "multipart/form-data",
-        ...headers
-      }
+        ...headers,
+      },
     });
   }
   delete(url, param = null, headers = {}) {
@@ -59,8 +59,8 @@ export default class Request {
       param,
       headers: {
         "Content-Type": "multipart/form-data",
-        ...headers
-      }
+        ...headers,
+      },
     });
   }
 }

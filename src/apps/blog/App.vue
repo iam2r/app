@@ -53,7 +53,7 @@ export default class App extends Vue {
   private spinStoped() {
     console.log("animationEnd");
     this.wheelStyle = {
-      transform: `rotate(${this.wheelResult * 72}deg)`
+      transform: `rotate(${this.wheelResult * 72}deg)`,
     };
     this.wheel.removeEventListener("animationEnd", this.spinStoped);
     this.wheelStatus = "stop";
@@ -74,7 +74,7 @@ export default class App extends Vue {
       this.wheelResult = [0, 1, 2, 3, 4][result];
       this.wheelStatus = "loaded";
       this.wheelStyle = {
-        transform: `rotate(${this.calcAngleFromMatrix()}deg)`
+        transform: `rotate(${this.calcAngleFromMatrix()}deg)`,
       };
       this.wheel.addEventListener("animationend", this.spinStoped);
     }, 2000);

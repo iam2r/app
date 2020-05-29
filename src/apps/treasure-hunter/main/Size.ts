@@ -9,7 +9,7 @@ export default class Size {
   public get center() {
     return {
       x: this.width / 2,
-      y: this.height / 2
+      y: this.height / 2,
     };
   }
 

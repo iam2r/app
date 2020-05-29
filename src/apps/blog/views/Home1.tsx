@@ -5,7 +5,7 @@ import { VNode } from "vue";
 @Component({
   components: {
     HelloWorld,
-    Test
+    Test,
   },
 
   directives: {
@@ -16,24 +16,24 @@ import { VNode } from "vue";
         el.oninput = (e: any) => {
           binding.value.value = e.target.value;
         };
-      }
-    }
+      },
+    },
   },
   watch: {
     msg: {
       deep: true,
-      handler: function(val: any) {
+      handler: function (val: any) {
         const refs: any = this.$refs;
         refs["input"].value = val.value;
-      }
-    }
-  }
+      },
+    },
+  },
 })
 export default class Home extends Vue {
   private dataObj: any = { name: "xxx", age: 12, obj: { a: "a", b: "b" } };
   private dataFoo: any = "foo";
   private msg: any = {
-    value: "lllll"
+    value: "lllll",
   };
 
   @Provide() provideFoo: string = this.dataFoo;

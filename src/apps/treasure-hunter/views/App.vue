@@ -7,7 +7,7 @@
         //height: `${100/$store.state.scale}%`,
         width: `${$store.state.width}px`,
         height: `${$store.state.height}px`,
-        transform: `translate(-50%,-50%) scale(${$store.state.scale})`
+        transform: `translate(-50%,-50%) scale(${$store.state.scale})`,
       }"
     >
       <div class="html-button">

@@ -5,7 +5,7 @@
     class="scroll-container"
     :style="{
       ...wrapperStyle,
-      'touch-action': 'none'
+      'touch-action': 'none',
     }"
   >
     <component
@@ -13,7 +13,7 @@
       ref="scroller"
       :style="{
         ...scrollerStyle,
-        'pointer-events': this.pointerEvent
+        'pointer-events': this.pointerEvent,
       }"
       class="scroll-scroller"
       :class="scrollerClass"

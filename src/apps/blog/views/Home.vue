@@ -26,8 +26,8 @@ import Test from "app.root/components/HelloWorld.vue";
 @Component({
   components: {
     HelloWorld,
-    Test
-  }
+    Test,
+  },
 })
 export default class Home extends Vue {
   private dataObj: any = { name: "xxx", age: 12, obj: { a: "a", b: "b" } };

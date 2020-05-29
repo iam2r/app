@@ -24,7 +24,7 @@ export default class Bump {
             return sprite.getGlobalPosition().x;
           },
           enumerable: true,
-          configurable: true
+          configurable: true,
         });
       }
 
@@ -35,7 +35,7 @@ export default class Bump {
             return sprite.getGlobalPosition().y;
           },
           enumerable: true,
-          configurable: true
+          configurable: true,
         });
       }
 
@@ -46,7 +46,7 @@ export default class Bump {
             return sprite.x + sprite.width / 2;
           },
           enumerable: true,
-          configurable: true
+          configurable: true,
         });
       }
 
@@ -57,7 +57,7 @@ export default class Bump {
             return sprite.y + sprite.height / 2;
           },
           enumerable: true,
-          configurable: true
+          configurable: true,
         });
       }
 
@@ -68,7 +68,7 @@ export default class Bump {
             return sprite.width / 2;
           },
           enumerable: true,
-          configurable: true
+          configurable: true,
         });
       }
 
@@ -79,7 +79,7 @@ export default class Bump {
             return sprite.height / 2;
           },
           enumerable: true,
-          configurable: true
+          configurable: true,
         });
       }
 
@@ -94,7 +94,7 @@ export default class Bump {
             }
           },
           enumerable: true,
-          configurable: true
+          configurable: true,
         });
       }
 
@@ -109,7 +109,7 @@ export default class Bump {
             }
           },
           enumerable: true,
-          configurable: true
+          configurable: true,
         });
       }
 
@@ -119,7 +119,7 @@ export default class Bump {
             return sprite.width / 2;
           },
           enumerable: true,
-          configurable: true
+          configurable: true,
         });
       }
 

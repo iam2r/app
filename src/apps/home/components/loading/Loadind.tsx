@@ -7,40 +7,40 @@ export default class Loading extends Vue {
   private cubes: any[] = [
     {
       delay: 0,
-      color: "#85a2b6"
+      color: "#85a2b6",
     },
     {
       delay: 0.1,
-      color: "#bbcedd"
+      color: "#bbcedd",
     },
     {
       delay: 0.2,
-      color: "#dce4eb"
+      color: "#dce4eb",
     },
     {
       delay: 0.1,
-      color: "#bbcedd"
+      color: "#bbcedd",
     },
     {
       delay: 0.2,
-      color: "#dce4eb"
+      color: "#dce4eb",
     },
     {
       delay: 0.3,
-      color: "#d69293"
+      color: "#d69293",
     },
     {
       delay: 0.2,
-      color: "#dce4eb"
+      color: "#dce4eb",
     },
     {
       delay: 0.3,
-      color: "#d69293"
+      color: "#d69293",
     },
     {
       delay: 0.4,
-      color: "#be5960"
-    }
+      color: "#be5960",
+    },
   ];
   protected render(): VNode {
     return (
@@ -51,7 +51,7 @@ export default class Loading extends Vue {
               class="sk-cube"
               style={{
                 "background-color": item.color,
-                "animation-delay": item.delay + "s"
+                "animation-delay": item.delay + "s",
               }}
             ></div>
           ))}

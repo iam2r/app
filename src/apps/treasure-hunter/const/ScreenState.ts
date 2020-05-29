@@ -1,5 +1,5 @@
 export enum ScreenState {
   WEB = "web",
   LANDSCAPE = "landscape",
-  PORTRAIT = "portrait"
+  PORTRAIT = "portrait",
 }

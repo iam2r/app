@@ -20,6 +20,6 @@ const debounceShotCat = debounce(shotCat, 500, false);
 function shotCat(content) {
   console.log(content);
 }
-input.addEventListener("keyup", function(e) {
+input.addEventListener("keyup", function (e) {
   debounceShotCat(e.target.value);
 });

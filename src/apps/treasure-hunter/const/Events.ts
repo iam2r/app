@@ -13,5 +13,5 @@ export enum Events {
   STATE_CHANGE = "game-state",
   RESIZE = "game-resize",
 
-  TICKER = "ticker"
+  TICKER = "ticker",
 }

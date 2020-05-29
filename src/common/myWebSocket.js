@@ -17,7 +17,7 @@ const ErrorCode = {
   ACCT_ROLE_ERR: 10106,
   ACCT_ROLE_INVALID: 10107,
   ACCT_LOCKED: 10110,
-  BALANCE_NOT_ENOUGH: 11101
+  BALANCE_NOT_ENOUGH: 11101,
 };
 class Service {
   constructor(url) {
@@ -36,12 +36,12 @@ class Service {
     this.AES = {
       key: "",
       iv: "",
-      key_original: ""
+      key_original: "",
     };
     this.OTP = {
       open: false,
       totp: "",
-      timeCode: ""
+      timeCode: "",
     };
     // this.connect();
   }
@@ -76,7 +76,7 @@ class Service {
         resolve,
         reject,
         plainText,
-        callback
+        callback,
       };
     });
   }
@@ -85,7 +85,7 @@ class Service {
     const key = command;
     this.pushPool[key] = {
       command,
-      callback
+      callback,
     };
   }
   _createWebSocket(resolve, reject) {
@@ -96,7 +96,7 @@ class Service {
         this.reConnectTimes
     );
     this.socket = new WebSocket(this.url);
-    this.socket.onopen = async e => {
+    this.socket.onopen = async (e) => {
       this._printLog(
         "websocket: " +
           this.url +
@@ -113,7 +113,7 @@ class Service {
         this._socketSend(this._encryption(plainText), plainText);
       });
     };
-    this.socket.onclose = e => {
+    this.socket.onclose = (e) => {
       if (this.isManualClose) {
         this._printLog("websocket: " + this.url + "socket closed by user!");
       } else {
@@ -132,10 +132,10 @@ class Service {
       }
       this.isManualClose = false;
     };
-    this.socket.onerror = e => {
+    this.socket.onerror = (e) => {
       const error = {
         code: ErrorCode.SOCKET_ERR,
-        msg: "websocket: " + this.url + "socket error!"
+        msg: "websocket: " + this.url + "socket error!",
       };
       if (this.reConnectTimes == this.reConnectCounterMax) {
         this.onErrorHandle && this.onErrorHandle(error);
@@ -148,7 +148,7 @@ class Service {
         );
       }
     };
-    this.socket.onmessage = e => {
+    this.socket.onmessage = (e) => {
       let plainText, cipherText;
       cipherText = e.data;
       plainText =
@@ -190,7 +190,7 @@ class Service {
       this.OTP.open = false;
       this.AES = {
         key: enc.Hex.parse(key),
-        iv: enc.Hex.parse(iv)
+        iv: enc.Hex.parse(iv),
       };
     } else {
       this.OTP.open = true;
@@ -198,7 +198,7 @@ class Service {
       this.AES = {
         key_original: key,
         key: enc.Hex.parse(key),
-        iv: enc.Hex.parse(iv)
+        iv: enc.Hex.parse(iv),
       };
     }
   }
@@ -211,7 +211,7 @@ class Service {
   _encryption(plainText) {
     this._updateAESKey();
     const data = AES.encrypt(plainText, this.AES.key, {
-      iv: this.AES.iv
+      iv: this.AES.iv,
     }).ciphertext;
     const cipherText = enc.Base64.stringify(data);
     return cipherText;
@@ -221,7 +221,7 @@ class Service {
     this._updateAESKey();
     try {
       const bytes = AES.decrypt(cipherText, this.AES.key, {
-        iv: this.AES.iv
+        iv: this.AES.iv,
       });
       return bytes.toString(enc.Utf8);
     } catch (error) {
@@ -240,7 +240,7 @@ class Service {
         const i = data.indexOf("{");
         return {
           command: parseInt(data.substr(0, i)),
-          data: JSON.parse(data.substr(i))
+          data: JSON.parse(data.substr(i)),
         };
       } else {
         const array = data.split(".");
@@ -255,8 +255,8 @@ class Service {
             salt,
             key,
             iv,
-            code: 0
-          }
+            code: 0,
+          },
         };
       }
     } catch (error) {

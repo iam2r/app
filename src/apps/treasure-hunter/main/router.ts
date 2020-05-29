@@ -6,7 +6,7 @@ export default new Router({
   routes: [
     {
       path: "/",
-      name: "home"
-    }
-  ]
+      name: "home",
+    },
+  ],
 });

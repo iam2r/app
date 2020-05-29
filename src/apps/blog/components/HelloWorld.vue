@@ -15,7 +15,7 @@ import {
   Vue,
   Mixins,
   Inject,
-  Watch
+  Watch,
 } from "vue-property-decorator";
 import Test from "app.root/components/Test.vue";
 @Component

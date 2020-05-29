@@ -56,7 +56,7 @@ export const Storage = {
     try {
       window.localStorage.removeItem(name);
     } catch (e) {}
-  }
+  },
 };
 
 export const getStyle = (element, att) => {
@@ -67,7 +67,7 @@ export const getStyle = (element, att) => {
   }
 };
 
-export const deepClone = obj => {
+export const deepClone = (obj) => {
   let _tmp, result;
   _tmp = JSON.stringify(obj);
   result = JSON.parse(_tmp);
@@ -85,14 +85,11 @@ export const lookScroll = {
       document.body.style.top = "";
       window.scrollTo(0, this.top);
     }
-  }
+  },
 };
 
-export const type = obj => {
-  return Object.prototype.toString
-    .call(obj)
-    .slice(8, -1)
-    .toLowerCase();
+export const type = (obj) => {
+  return Object.prototype.toString.call(obj).slice(8, -1).toLowerCase();
 };
 
 //setTime为创建时间毫秒，days为天
@@ -144,7 +141,7 @@ export const isHit = (r1, r2) => {
   return hit;
 };
 
-export const keyboard = keyCode => {
+export const keyboard = (keyCode) => {
   return new Key(keyCode);
 };
 export const contain = (sprite, container) => {

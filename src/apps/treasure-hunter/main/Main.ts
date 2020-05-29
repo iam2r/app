@@ -44,10 +44,10 @@ export default class Main {
       ? {
           ...config.size,
           resolution: window.devicePixelRatio || 1,
-          autoResize: true
+          autoResize: true,
         }
       : {
-          ...config.size
+          ...config.size,
         };
     context.app = new Application(options);
     (document.querySelector("#app") as HTMLElement).appendChild(
@@ -63,7 +63,7 @@ export default class Main {
     context.appVue = new Vue({
       store,
       router,
-      render: h => h(App)
+      render: (h) => h(App),
     }).$mount("#app");
   }
 

@@ -11,8 +11,8 @@ interface ISize {
 const config: IConfig = {
   size: {
     width: 800,
-    height: 600
-  }
+    height: 600,
+  },
 };
 
 export { IConfig };

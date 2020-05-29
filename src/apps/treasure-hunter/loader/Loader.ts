@@ -69,7 +69,7 @@ export class Loader extends EventEmitter {
           .off(Events.LOAD_ERROR, onError);
         this.complete();
       });
-    window.addEventListener("contextmenu", e => e.preventDefault());
+    window.addEventListener("contextmenu", (e) => e.preventDefault());
   }
 
   private set progress(value: number) {

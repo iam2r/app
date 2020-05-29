@@ -13,7 +13,7 @@ enum spineBoyAnimation {
   SHOOT = "shoot",
   WALK = "walk",
   RUN = "run",
-  IDLE = "idle"
+  IDLE = "idle",
 }
 
 export default class SpineBoy extends PIXI.spine.Spine {

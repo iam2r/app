@@ -19,16 +19,16 @@ const resource: IResourceMap = {
     scrollerBg: require("app.root/assets/sprites/bg/_spritesmith/bg.sprites.json"),
     fighter: require("app.root/assets/sprites/fighter/fighter.sprites.json"),
 
-    spineboy: require("app.root/assets/spines/boy/spineboy-pro.spine.json")
+    spineboy: require("app.root/assets/spines/boy/spineboy-pro.spine.json"),
   },
 
   sound: {
-    button: require("app.root/assets/sounds/button.mp3")
+    button: require("app.root/assets/sounds/button.mp3"),
   },
 
   font: {
     roboto: require("app.root/assets/fonts/roboto.woff"),
-    arial: require("app.root/assets/fonts/arial.woff")
-  }
+    arial: require("app.root/assets/fonts/arial.woff"),
+  },
 };
 export default resource;

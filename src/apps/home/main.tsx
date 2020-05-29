@@ -8,10 +8,10 @@ Vue.use(VuePlugin);
 
 const loading = async () => {
   const appData = (await loadJson("../apps.json?" + +new Date())) as any;
-  state.appList = appData.apps.filter(it => it !== "home");
+  state.appList = appData.apps.filter((it) => it !== "home");
   state.resources = appData.resources.home;
   await loadFont(require("fontfaceobserver"), ["Source Sans Pro", "Dosis"])
-    .catch(error => {
+    .catch((error) => {
       console.info("font preload timeout!");
     })
     .finally(() => {
@@ -21,7 +21,7 @@ const loading = async () => {
 
 emitter.once("loaded", () => {
   state.app = new Vue({
-    render: h => h(App)
+    render: (h) => h(App),
   }).$mount("#app");
 });
 

@@ -33,7 +33,7 @@ export default class ScrollView extends Vue {
       "scrollStart",
       "scrollEnd",
       "scroll",
-      "flick"
+      "flick",
     ];
 
     let key, value;
@@ -49,7 +49,7 @@ export default class ScrollView extends Vue {
     }
 
     this.scroll = new BScroll(<Element>this.$refs.scrollView, this.options);
-    events.forEach(event => {
+    events.forEach((event) => {
       this.scroll.on(<any>event, () => this.$emit(event, this.scroll));
     });
     this.registPullEvents();
@@ -79,7 +79,7 @@ export default class ScrollView extends Vue {
       if (this.scroll.y == point.y && this.scroll.x == point.x) return;
       point = {
         x: this.scroll.x,
-        y: this.scroll.y
+        y: this.scroll.y,
       };
       this.pointerEvent = "none";
       if (this.ScrollEvent == ScrollEvent.Normal) {

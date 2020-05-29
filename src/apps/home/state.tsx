@@ -14,7 +14,7 @@ declare module "vue/types/vue" {
 
 export const state: State = {
   appList: [],
-  resources: []
+  resources: [],
 };
 
 export default Vue.prototype.$state = Vue.observable(state);

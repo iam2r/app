@@ -14,7 +14,7 @@ export default class EventEmitter {
     }
     const fns = this.events[name];
     //不能直接遍历fns ,期间如果有off行为 会出问题
-    fns.map(fn => fn).forEach(fn => fn.apply(this, args));
+    fns.map((fn) => fn).forEach((fn) => fn.apply(this, args));
     return this;
   }
 

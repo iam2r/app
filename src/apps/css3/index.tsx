@@ -1,7 +1,7 @@
 import JSXUtils from "@/common/JSXUtils";
 import "./index.scss";
 
-const Link = h => (
+const Link = (h) => (
   <link
     href="https://cdn.bootcss.com/font-awesome/5.11.2/css/all.css"
     rel="stylesheet"
@@ -12,7 +12,7 @@ document
   .querySelector("head")
   .appendChild(JSXUtils.createElement((Link as any)(JSXUtils.h)));
 
-const App = h => {
+const App = (h) => {
   return (
     <nav class="navtab">
       <ul>
@@ -45,7 +45,7 @@ const navtab = document.querySelector("nav.navtab");
 const navtabItems = document.querySelectorAll("li.navtab-item");
 navtabItems.forEach((navtabItem, activeIndex) =>
   navtabItem.addEventListener("click", () => {
-    navtabItems.forEach(navtabItem => navtabItem.classList.remove("active"));
+    navtabItems.forEach((navtabItem) => navtabItem.classList.remove("active"));
     navtabItem.classList.add("active");
     (navtab as HTMLElement).style.setProperty(
       "--active-index",

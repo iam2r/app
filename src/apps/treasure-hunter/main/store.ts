@@ -23,9 +23,9 @@ const storeOptions: StoreOptions<{
       x: 30,
       y: 30,
       width: config.size.width - 30,
-      height: config.size.height - 30
-    }
-  }
+      height: config.size.height - 30,
+    },
+  },
 };
 
 export default new Store(storeOptions);

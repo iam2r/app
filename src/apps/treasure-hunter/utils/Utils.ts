@@ -22,7 +22,7 @@ export default class Utils {
   ) {
     if (!objArr) return;
 
-    objArr.forEach(ob => {
+    objArr.forEach((ob) => {
       for (const k in ob) {
         if (obj[k] instanceof Array) {
           obj[k] = ob[k];

@@ -34,7 +34,7 @@ import { State, Getter, Action, Mutation, namespace } from "vuex-class";
 import { Button } from "vant";
 Vue.use(Button);
 @Component({
-  components: {}
+  components: {},
 })
 export default class Test extends Vue {
   @Prop() private propMessage!: string;
@@ -61,8 +61,8 @@ export default class Test extends Vue {
     const loginRes = await this.login({
       ...{
         userName: "zrnokia5231",
-        password: "12345678"
-      }
+        password: "12345678",
+      },
     });
 
     this.updateName(loginRes + "");

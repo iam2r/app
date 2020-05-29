@@ -7,7 +7,7 @@ export class Device {
   public phone = {
     iphonex: false,
     iphonexr: false,
-    iphonexsmax: false
+    iphonexsmax: false,
   };
   public browser = {
     chrome: false,
@@ -17,14 +17,14 @@ export class Device {
     edge: false,
     opera: false,
     qq: false,
-    360: false
+    360: false,
   };
 
   public mobile = {
     device: false,
     ios: false,
     andriod: false,
-    tablet: false
+    tablet: false,
   };
 
   constructor() {
@@ -49,7 +49,7 @@ export class Device {
       ios: ios,
       andriod: andriod,
       tablet: tablet,
-      device: device
+      device: device,
     };
   }
 
@@ -101,7 +101,7 @@ export class Device {
           }
         }
         return false;
-      })("type", "application/vnd.chromium.remoting-viewer")
+      })("type", "application/vnd.chromium.remoting-viewer"),
     };
     return brower;
   }

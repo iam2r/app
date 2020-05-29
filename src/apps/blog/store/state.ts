@@ -1,5 +1,5 @@
 import { State } from "./interface";
 const state: State = {
-  name: "zrzrzr"
+  name: "zrzrzr",
 };
 export default state;
