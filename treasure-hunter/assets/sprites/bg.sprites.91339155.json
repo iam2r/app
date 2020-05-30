@@ -1,0 +1,30 @@
+{
+    "frames": {
+        "ground.png": {
+            "frame": {
+                "x": 0,
+                "y": 641,
+                "w": 1286,
+                "h": 179
+            }
+        },
+        "bgtile.jpg": {
+            "frame": {
+                "x": 0,
+                "y": 0,
+                "w": 1286,
+                "h": 640
+            }
+        }
+    },
+    "meta": {
+        "app": "spritesheet-templates",
+        "version": "10.5.0",
+        "image": "bg.755fa98b.png",
+        "scale": 1,
+        "size": {
+            "w": 1286,
+            "h": 820
+        }
+    }
+}
