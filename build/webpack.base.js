@@ -240,31 +240,30 @@ const plugins = [
 const copyWebpackOptions = [{
     from: path.resolve(__dirname, `../public/root`),
     to: config.staticPath,
-    toType: 'dir',
-    ignore: [
-        '.DS_Store'
-    ]
+    toType: 'dir'
 }, {
     from: path.resolve(__dirname, `../public`),
     to: config.staticPath + "/" + process.env.APP_NAME,
     toType: 'dir',
-    ignore: [
-        'root',
-        'index.html',
-        '.DS_Store'
-    ]
+    globOptions: {
+        ignore: [
+            'root',
+            'index.html'
+        ]
+    }
+
 }, {
     from: path.resolve(__dirname, `../src/apps/${process.env.APP_NAME}/_public`),
     to: config.staticPath + "/" + process.env.APP_NAME,
     toType: 'dir',
-    ignore: [
-        '.DS_Store'
-    ]
+    force: true
 }]
 
-plugins.push(new CopyWebpackPlugin(copyWebpackOptions.filter(({
-    from
-}) => fs.existsSync(from))))
+plugins.push(new CopyWebpackPlugin({
+    patterns: copyWebpackOptions.filter(({
+        from
+    }) => fs.existsSync(from))
+}))
 
 module.exports = {
     mode: process.env.NODE_ENV,
