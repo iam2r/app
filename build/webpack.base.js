@@ -37,7 +37,7 @@ process.env.APP_ROOT = path.resolve(__dirname, `../src/apps/${process.env.APP_NA
 
 const {
     plugins: SpritesmithPlugin
-} = require("../spritesmith.config");
+} = require("./spritesmith.config");
 
 const doResourceCache = (obj) => {
     resourceCache.push(obj);

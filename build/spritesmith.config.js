@@ -1,6 +1,6 @@
 const SpritesmithPlugin = require("webpack-spritesmith");
 const path = require("path");
-const { apps } = require("./build/const");
+const { apps } = require("./const");
 let plugins = [];
 
 switch (process.env.APP_NAME) {
