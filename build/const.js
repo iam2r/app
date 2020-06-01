@@ -6,6 +6,7 @@ module.exports = {
         img2font: 'img2font',
         test_react: 'test-react',
         treasure_hunter: 'treasure-hunter',
-        birthday: 'birthday'
+        birthday: 'birthday',
+        test:'test'
     },
 }
