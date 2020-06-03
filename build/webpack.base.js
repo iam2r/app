@@ -247,7 +247,7 @@ const copyWebpackOptions = [{
     toType: 'dir',
     globOptions: {
         ignore: [
-            'root',
+            '**/root/**',
             'index.html'
         ]
     }
