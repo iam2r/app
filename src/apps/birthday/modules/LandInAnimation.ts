@@ -23,7 +23,7 @@ export default class LandInAnimation {
       .forEach((p) => {
         const letters = p.split("");
         letters.forEach((letter) => {
-          let span = document.createElement("span");
+          const span = document.createElement("span");
           span.textContent = letter;
           span.classList.add("land-in-animation");
           span.style.animationDelay = `${count * 0.05}s`;
@@ -37,7 +37,6 @@ export default class LandInAnimation {
   public start() {
     this.hide();
     this.items.forEach((item: HTMLElement) => {
-      console.log(item);
       item.nodeName != "BR" && item.classList.add("land-in-animation");
       this.$el.appendChild(item);
     });

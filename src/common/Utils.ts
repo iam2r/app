@@ -33,18 +33,30 @@ export const loadSound = (url: string) => {
   });
 };
 
-export const loadImage = (url: string) => {
+export const loadImage = (url: string, isBlob: boolean = false) => {
   return new Promise((resolve, reject) => {
-    const img = new Image();
-    img.onload = () => {
-      resolve(img);
-    };
+    if (isBlob) {
+      const xhr = new XMLHttpRequest();
+      xhr.open("GET", url, true);
+      xhr.responseType = "blob";
+      xhr.onreadystatechange = () => {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+          resolve(URL.createObjectURL(xhr.response));
+        }
+      };
+      xhr.send();
+    } else {
+      const img = new Image();
+      img.onload = () => {
+        resolve(img);
+      };
 
-    img.onerror = () => {
-      reject("load error:" + url);
-    };
+      img.onerror = () => {
+        reject("load error:" + url);
+      };
 
-    img.src = url;
+      img.src = url;
+    }
   });
 };
 
@@ -75,7 +87,7 @@ export const h = (
   props: { [key: string]: any },
   children: any
 ) => {
-  props.children = children ? [].concat.apply([], children) : [];
+  props.children = children ? [...children] : [];
   return {
     type,
     props,
@@ -86,11 +98,11 @@ export const createElement = (vdom: any) => {
   if (typeof vdom === "string") {
     return document.createTextNode(vdom);
   }
+  const { type, props } = vdom;
   let {
-    type,
-    props,
     props: { children },
   } = vdom;
+
   const element = document.createElement(type);
   setProps(element, props);
   children = children || [];
@@ -103,14 +115,14 @@ export const setProps = (
   element: HTMLElement,
   props: { [key: string]: any }
 ) => {
-  for (let key in props) {
+  for (const key in props) {
     if (key == "children") continue;
     const value = props[key];
     if (typeof value === "object") {
       switch (key) {
         case "style":
           let cssText = "";
-          for (let prop in value) {
+          for (const prop in value) {
             const style = value[prop];
             cssText += `${prop}:${style};`;
           }
@@ -133,7 +145,7 @@ export const updateObject = (
   if (!objArr) return;
 
   objArr.forEach((ob) => {
-    for (let k in ob) {
+    for (const k in ob) {
       if (obj[k] instanceof Array) {
         obj[k] = ob[k];
       } else if (typeof obj[k] === "object") {

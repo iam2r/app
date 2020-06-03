@@ -2,19 +2,42 @@ import Vue from "vue";
 import App from "./App";
 import state from "./state";
 import VuePlugin from "./VuePlugin";
-import resource from "app.root/resources";
-import { loadFont, loadImage } from "@/common/Utils";
+import { loadFont, loadImage, loadJson } from "@/common/Utils";
 import { emitter } from "app.root/context";
 Vue.use(VuePlugin);
 
-const loading = async () => {
-  const imageLoadArr = [];
-  Object.entries(resource).map(([key, value]) => {
-    imageLoadArr.push(loadImage(value));
-  });
+const loadImages = async (imagesList: any) => {
+  for (let index = 0; index < imagesList.length; index++) {
+    const element = imagesList[index];
+    element.blob = await loadImage(element.url, true);
+  }
+  return imagesList;
+};
 
-  state.resources[0] = await Promise.all(imageLoadArr);
-  await loadFont(require("fontfaceobserver"), ["Lato"]);
+const updateStyleSheets = (list: any) => {
+  list.forEach(({ url, blob }) => {
+    (document.styleSheets as any).forEach((styleSheet: CSSStyleSheet) => {
+      Array.from(styleSheet.rules)
+        .filter((cssRule) => cssRule.cssText.includes(url))
+        .forEach(
+          (cssRule: CSSStyleRule) =>
+            (cssRule.style.backgroundImage = cssRule.style.backgroundImage.replace(
+              url,
+              blob
+            ))
+        );
+    });
+  });
+};
+
+const loading = async () => {
+  const appData = (await loadJson("../apps.json?" + +new Date())) as any;
+  const [resources] = await Promise.all([
+    loadImages(appData.resources.birthday.filter((it) => (it.type = "images"))),
+    loadFont(require("fontfaceobserver"), ["Lato"]),
+  ]);
+  state.resources = resources;
+  updateStyleSheets(state.resources);
   emitter.emit("loaded");
 };
 
