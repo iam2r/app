@@ -16,7 +16,7 @@ const loadImages = async (imagesList: any) => {
 
 const updateStyleSheets = (list: any) => {
   list.forEach(({ url, blob }) => {
-    (document.styleSheets as any).forEach((styleSheet: CSSStyleSheet) => {
+    Array.from(document.styleSheets).forEach((styleSheet: CSSStyleSheet) => {
       Array.from(styleSheet.rules)
         .filter((cssRule) => cssRule.cssText.includes(url))
         .forEach(
