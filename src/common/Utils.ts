@@ -1,3 +1,14 @@
+export const updateUrl2Blob = (url: string, blob: string) => {
+  Array.from(document.styleSheets).forEach((styleSheet: CSSStyleSheet) => {
+    Array.from(styleSheet.rules)
+      .filter((cssRule) => cssRule.cssText.includes(url))
+      .forEach(
+        (cssRule: CSSStyleRule) =>
+          (cssRule.style.backgroundImage = `url(${blob})`)
+      );
+  });
+};
+
 export const loadJson = (url: string) => {
   return new Promise((resolve, reject) => {
     const xhr = new XMLHttpRequest();

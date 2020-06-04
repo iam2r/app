@@ -2,7 +2,7 @@ import Vue from "vue";
 import App from "./App";
 import state from "./state";
 import VuePlugin from "./VuePlugin";
-import { loadFont, loadImage, loadJson } from "@/common/Utils";
+import { loadFont, loadImage, loadJson, updateUrl2Blob } from "@/common/Utils";
 import { emitter } from "app.root/context";
 Vue.use(VuePlugin);
 
@@ -14,31 +14,20 @@ const loadImages = async (imagesList: any) => {
   return imagesList;
 };
 
-const updateStyleSheets = (list: any) => {
-  list.forEach(({ url, blob }) => {
-    Array.from(document.styleSheets).forEach((styleSheet: CSSStyleSheet) => {
-      Array.from(styleSheet.rules)
-        .filter((cssRule) => cssRule.cssText.includes(url))
-        .forEach(
-          (cssRule: CSSStyleRule) =>
-            (cssRule.style.backgroundImage = `url(${blob})`)
-        );
-    });
-  });
-};
-
 const loading = async () => {
   const appData = (await loadJson("../apps.json?" + +new Date())) as any;
-  const [resources] = await Promise.all([
+  const [imgResources] = await Promise.all([
     loadImages(appData.resources.birthday.filter((it) => (it.type = "images"))),
     loadFont(require("fontfaceobserver"), ["Lato"]),
   ]);
-  emitter.emit("loaded", resources);
+  emitter.emit("loaded", imgResources);
 };
 
-emitter.once("loaded", (resources) => {
-  state.resources = resources;
-  updateStyleSheets(state.resources);
+emitter.once("loaded", (imgResources) => {
+  imgResources.forEach(({ url, blob }) => {
+    updateUrl2Blob(url, blob);
+  });
+
   state.app = new Vue({
     render: (h) => h(App),
   }).$mount("#app");

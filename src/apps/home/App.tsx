@@ -2,7 +2,6 @@ import { VNode } from "vue";
 import { Component, Vue } from "vue-property-decorator";
 import * as tsx from "vue-tsx-support";
 import Hammer from "hammerjs";
-import resource from "app.root/resources";
 import "./App.scss";
 
 interface Nav {
@@ -143,7 +142,7 @@ export default class App extends tsx.Component<any> {
       <div id="main">
         <div class="hero">
           <div class="left">
-            <img class="hero-logo" src={resource.logo} alt="home logo" />
+            <i class="hero-logo"></i>
           </div>
           <div class="right">
             <h2>{this.mainTitle}</h2>
@@ -163,7 +162,6 @@ export default class App extends tsx.Component<any> {
     return (
       <div id="header">
         <div class="logo">
-          <img class="header-logo" src={resource.logo} alt="home logo" />
           <span>{this.mainTitle}</span>
         </div>
         {this.createViewNav(this.navData)}

@@ -51,7 +51,9 @@ export default class Preloading {
     document
       .querySelector("body")
       .appendChild(
-        (this.$el = JSXUtils.createElement(this.render(JSXUtils.h)))
+        (this.$el = JSXUtils.createElement(
+          this.render(JSXUtils.h)
+        ) as HTMLElement)
       );
   }
 
