@@ -24,6 +24,9 @@ switch (process.env.APP_NAME) {
 
         apiOptions: {
           cssImageRef: `~app.root/assets/images/_spritesmith/${assetsName}.png`,
+          spritesheet_info: {
+            name: assetsName + "-spritesheet"
+          },
           generateSpriteName: fileName => {
             return (
               "sprite_" + path.parse(path.relative(assetsPath, fileName)).name

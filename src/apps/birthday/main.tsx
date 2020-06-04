@@ -21,10 +21,7 @@ const updateStyleSheets = (list: any) => {
         .filter((cssRule) => cssRule.cssText.includes(url))
         .forEach(
           (cssRule: CSSStyleRule) =>
-            (cssRule.style.backgroundImage = cssRule.style.backgroundImage.replace(
-              url,
-              blob
-            ))
+            (cssRule.style.backgroundImage = `url(${blob})`)
         );
     });
   });
