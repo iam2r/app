@@ -33,12 +33,12 @@ const loading = async () => {
     loadImages(appData.resources.birthday.filter((it) => (it.type = "images"))),
     loadFont(require("fontfaceobserver"), ["Lato"]),
   ]);
-  state.resources = resources;
-  updateStyleSheets(state.resources);
-  emitter.emit("loaded");
+  emitter.emit("loaded", resources);
 };
 
-emitter.once("loaded", () => {
+emitter.once("loaded", (resources) => {
+  state.resources = resources;
+  updateStyleSheets(state.resources);
   state.app = new Vue({
     render: (h) => h(App),
   }).$mount("#app");
