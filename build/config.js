@@ -87,5 +87,5 @@ module.exports = {
     },
     inlineLimit: 4096,
     dllVendorBlackList: [/^@/, /\.css$/, /antd|vant|element-ui|mint-ui|core-js|regenerator-runtime/],
-    transpileDepRegex: /swiper|dom7/ //node_modules中参与转码的项目
+    transpileDepRegex: /swiper|dom7|ssr-window/ //node_modules中参与转码的项目
 };
