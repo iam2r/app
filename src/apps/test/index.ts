@@ -1,3 +1,4 @@
+import { loadScripts } from "@/common/Utils";
 export class PreLoader {
   private elPreLoad: HTMLElement;
 
@@ -24,6 +25,11 @@ export class PreLoader {
 }
 
 const loader = new PreLoader();
+
+loadScripts([
+  { id: "moment", url: "./libs/moment.min.js" },
+  { id: "jquery", url: "./libs/jquery.min.js" },
+]);
 
 setTimeout(() => {
   loader.destory();

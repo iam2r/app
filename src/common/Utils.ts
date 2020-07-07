@@ -9,6 +9,35 @@ export const updateUrl2Blob = (url: string, blob: string) => {
   });
 };
 
+export const loadScripts = async (
+  scripts: { id: string; url: string } | { id: string; url: string }[],
+  parallel = false
+) => {
+  scripts = Array.isArray(scripts) ? scripts : [scripts];
+
+  const loadScript = (script: { id: string; url: string }) =>
+    new Promise((resolve, reject) => {
+      const $script = document.createElement("script");
+      const $fjs = document.querySelector("script");
+      $script.id = script.id;
+      $script.src = script.url;
+      $fjs.parentNode.insertBefore($script, $fjs);
+      $script.onload = () => {
+        resolve($script);
+      };
+    });
+
+  if (parallel) {
+    return Promise.all(scripts.map((script) => loadScript(script)));
+  } else {
+    const result = [];
+    for (let index = 0; index < scripts.length; index++) {
+      result[index] = await loadScript(scripts[index]);
+    }
+    return result;
+  }
+};
+
 export const loadJson = (url: string) => {
   return new Promise((resolve, reject) => {
     const xhr = new XMLHttpRequest();
@@ -119,7 +148,7 @@ export const createElement = (vdom: any) => {
   children = children || [];
   children = children instanceof Array ? children : [children];
   children.map(createElement).forEach(element.appendChild.bind(element));
-  return element;
+  return;
 };
 
 export const setProps = (
