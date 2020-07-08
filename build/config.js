@@ -83,7 +83,7 @@ module.exports = {
     ],
     appsTypes: {
         react: [apps.test_react],
-        vue: [apps.blog, apps.home, apps.birthday]
+        vue: [apps.blog, apps.home, apps.birthday,apps.test]
     },
     inlineLimit: 4096,
     dllVendorBlackList: [/^@/, /\.css$/, /antd|vant|element-ui|mint-ui|core-js|regenerator-runtime/],
