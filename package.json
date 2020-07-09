@@ -10,7 +10,7 @@
     "build:modern": "yarn run build --modern legacy",
     "postbuild:modern": "yarn run build --modern",
     "server": "http-server ./dist -g -o",
-    "format": "eslint --fix src/**/*.{vue,js,jsx,ts,tsx} && prettier --write src/**/*.{vue,js,jsx,ts,tsx} && prettier --write *.{json,css,less,scss}"
+    "format": "eslint --fix src/**/*.{vue,js,jsx,ts,tsx} && prettier --write *.{json,css,less,scss}"
   },
   "keywords": [
     "typescript",
