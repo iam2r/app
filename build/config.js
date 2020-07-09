@@ -7,7 +7,7 @@ const { apps } = require("./const");
 
 module.exports = {
     titleMap: {
-        [apps.blog]: '',
+        [apps.test]: 'Study',
     },
     staticPath: path.resolve(__dirname, '../dist'),
     dev: {

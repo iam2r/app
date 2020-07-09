@@ -46,10 +46,13 @@ export class ResourceLoader {
     this.interator(res, (key: string, path: string) => {
       if (!resources[key]) pixiLoader.add(key, path);
     });
-    const fn = () => emitter.emit(Events.LOAD_PROGRESS, pixiLoader.progress);
-    pixiLoader.on("progress", fn).load(() => {
-      pixiLoader.off("progress", fn);
-      emitter.emit(Events.LOAD_COMPLETE);
-    });
+
+    pixiLoader
+      .load(() => {
+        emitter.emit(Events.LOAD_COMPLETE);
+      })
+      .onProgress.add(() =>
+        emitter.emit(Events.LOAD_PROGRESS, pixiLoader.progress)
+      );
   }
 }

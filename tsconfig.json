@@ -12,7 +12,7 @@
     "sourceMap": true,
     "baseUrl": ".",
     "types": ["webpack-env"],
-    "paths": { "@/*": ["src/*"], "app.root/*": ["src/apps/home/*"] },
+    "paths": { "@/*": ["src/*"], "app.root/*": ["src/apps/treasure-hunter/*"] },
     "lib": ["esnext", "dom", "dom.iterable", "scripthost"]
   },
   "exclude": ["node_modules"]
