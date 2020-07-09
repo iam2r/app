@@ -1,14 +1,3 @@
-export const updateUrl2Blob = (url: string, blob: string) => {
-  Array.from(document.styleSheets).forEach((styleSheet: CSSStyleSheet) => {
-    Array.from(styleSheet.rules)
-      .filter((cssRule) => cssRule.cssText.includes(url))
-      .forEach(
-        (cssRule: CSSStyleRule) =>
-          (cssRule.style.backgroundImage = `url(${blob})`)
-      );
-  });
-};
-
 export const loadScripts = async (
   scripts: { id: string; url: string } | { id: string; url: string }[],
   parallel = false
@@ -140,5 +129,16 @@ export const updateObject = (
 
       ob[k] = null;
     }
+  });
+};
+
+export const updateUrl2Blob = (url: string, blob: string) => {
+  Array.from(document.styleSheets).forEach((styleSheet: CSSStyleSheet) => {
+    Array.from(styleSheet.rules)
+      .filter((cssRule) => cssRule.cssText.includes(url))
+      .forEach(
+        (cssRule: CSSStyleRule) =>
+          (cssRule.style.backgroundImage = `url(${blob})`)
+      );
   });
 };
