@@ -1,31 +1,25 @@
 export default class JSXUtils {
   static h(type: string, props: { [key: string]: any } | string, children) {
     if (Array.isArray(props) || typeof props === "string") {
+      //react h 函数
       children = props;
       props = {};
     }
-    props.children = children ? [...children] : [];
 
+    children = children ? children.flat() : []; //[[li,li,li]] ==> [li,li,li],二维数组展开
+    children = children instanceof Array ? children : [children];
     return {
       type,
       props,
+      children,
     };
   }
 
   static createElement(vdom: any): HTMLElement | Text {
-    if (typeof vdom === "string") {
-      return document.createTextNode(vdom);
-    }
-
-    const { type, props } = vdom;
-    let {
-      props: { children },
-    } = vdom;
-
+    if (typeof vdom === "string") return document.createTextNode(vdom);
+    const { type, props, children } = vdom;
     const element = document.createElement(type);
     JSXUtils.setProps(element, props);
-    children = children || [];
-    children = children instanceof Array ? children : [children];
     children
       .map(JSXUtils.createElement)
       .forEach(element.appendChild.bind(element));
