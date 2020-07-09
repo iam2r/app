@@ -62,10 +62,10 @@ export default class App extends tsx.Component<any> {
     const second = Math.floor((ms - day * dd - hour * hh - minute * mi) / ss);
     const milliSecond = ms - day * dd - hour * hh - minute * mi - second * ss;
 
-    let strDay = day < 10 ? "0" + day : "" + day; //天
-    let strHour = hour < 10 ? "0" + hour : "" + hour; //小时
-    let strMinute = minute < 10 ? "0" + minute : "" + minute; //分钟
-    let strSecond = second < 10 ? "0" + second : "" + second; //秒
+    const strDay = day < 10 ? "0" + day : "" + day; //天
+    const strHour = hour < 10 ? "0" + hour : "" + hour; //小时
+    const strMinute = minute < 10 ? "0" + minute : "" + minute; //分钟
+    const strSecond = second < 10 ? "0" + second : "" + second; //秒
     let strMilliSecond =
       milliSecond < 10 ? "0" + milliSecond : "" + milliSecond; //毫秒
     strMilliSecond =

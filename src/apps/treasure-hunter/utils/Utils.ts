@@ -5,8 +5,8 @@ export const setCookie = (name: string, value: any, days: number) => {
 };
 
 export const getCookie = (name: string) => {
-  let arr,
-    reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
+  let arr;
+  const reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
   if ((arr = document.cookie.match(reg))) return decodeURIComponent(arr[2]);
   else return null;
 };
@@ -42,9 +42,9 @@ export default class Utils {
     value = Number.parseFloat(value.toFixed(6));
     value = Math.floor(value * 100) / 100;
     const str = value.toFixed(fractionDigets);
-    let arr = str.split("."),
-      p = arr[0],
+    const arr = str.split("."),
       temp = [];
+    let p = arr[0];
     arr[1] = arr[1] || "";
     while (p.length > 2) {
       const len = p.length - 3;

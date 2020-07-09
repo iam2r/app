@@ -122,62 +122,6 @@ export const loadFont = (tools: any, families: string[]) => {
 export const $typeof = (target: any) =>
   Object.prototype.toString.call(target).slice(8, -1).toLowerCase();
 
-export const h = (
-  type: string,
-  props: { [key: string]: any },
-  children: any
-) => {
-  props.children = children ? [...children] : [];
-  return {
-    type,
-    props,
-  };
-};
-
-export const createElement = (vdom: any) => {
-  if (typeof vdom === "string") {
-    return document.createTextNode(vdom);
-  }
-  const { type, props } = vdom;
-  let {
-    props: { children },
-  } = vdom;
-
-  const element = document.createElement(type);
-  setProps(element, props);
-  children = children || [];
-  children = children instanceof Array ? children : [children];
-  children.map(createElement).forEach(element.appendChild.bind(element));
-  return;
-};
-
-export const setProps = (
-  element: HTMLElement,
-  props: { [key: string]: any }
-) => {
-  for (const key in props) {
-    if (key == "children") continue;
-    const value = props[key];
-    if (typeof value === "object") {
-      switch (key) {
-        case "style":
-          let cssText = "";
-          for (const prop in value) {
-            const style = value[prop];
-            cssText += `${prop}:${style};`;
-          }
-          element.setAttribute(key, cssText);
-          break;
-        default:
-          setProps(element, value);
-          break;
-      }
-    } else {
-      element.setAttribute(key, value);
-    }
-  }
-};
-
 export const updateObject = (
   obj: { [key: string]: any },
   ...objArr: { [key: string]: any }[]

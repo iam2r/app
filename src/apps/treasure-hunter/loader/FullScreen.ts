@@ -58,8 +58,8 @@ export default class FullScreen {
   }
 
   private doClick(e: any) {
-    let target = e.target,
-      ev;
+    const target = e.target;
+    let ev;
     if (!/(SELECT|INPUT|TEXTAREA)/i.test(target.tagName)) {
       ev = document.createEvent("MouseEvents");
       ev.initMouseEvent(

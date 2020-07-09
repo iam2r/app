@@ -4,7 +4,7 @@ export default class JSXUtils {
       children = props;
       props = {};
     }
-    props.children = children ? [].concat.apply([], children) : [];
+    props.children = children ? [...children] : [];
 
     return {
       type,
@@ -17,9 +17,8 @@ export default class JSXUtils {
       return document.createTextNode(vdom);
     }
 
+    const { type, props } = vdom;
     let {
-      type,
-      props,
       props: { children },
     } = vdom;
 
@@ -34,14 +33,14 @@ export default class JSXUtils {
   }
 
   static setProps(element: HTMLElement, props: { [key: string]: any }) {
-    for (let key in props) {
+    for (const key in props) {
       if (key == "children") continue;
       const value = props[key];
       if (typeof value === "object") {
         switch (key) {
           case "style":
             let cssText = "";
-            for (let prop in value) {
+            for (const prop in value) {
               const style = value[prop];
               cssText += `${prop}:${style};`;
             }
