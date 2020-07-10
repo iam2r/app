@@ -18,8 +18,8 @@ switch (process.env.APP_NAME) {
       autoprefixer: {},
       "postcss-px2rem-exclude": {
         remUnit: 100,
-        exclude:/_adapter/
-      }
+        exclude: /_adapter/,
+      },
     };
     break;
   default:
