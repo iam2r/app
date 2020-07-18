@@ -8,13 +8,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
-      uses: actions/checkout@master
+      uses: actions/checkout@v2
 
     - name: Build
       run: yarn && yarn run build:modern --tiny && yarn run build:modern --app treasure-hunter --tiny && yarn run build:modern --app img2font --tiny && yarn run build:modern --app birthday --tiny && yarn run build:modern --app test-react --tiny
     
     - name: Deploy
-      uses: peaceiris/actions-gh-pages@v2
+      uses: peaceiris/actions-gh-pages@v3
       env:
         PERSONAL_TOKEN: ${{ secrets.ACCESS_TOKEN }}
         PUBLISH_BRANCH: gh-pages
