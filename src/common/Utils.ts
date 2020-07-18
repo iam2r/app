@@ -89,6 +89,23 @@ export const loadImage = (url: string, isBlob: boolean = false) => {
   });
 };
 
+export const loadImage2Blob = (url: string) => {
+  return new Promise((resolve, reject) => {
+    const xhr = new XMLHttpRequest();
+    xhr.open("GET", url, true);
+    xhr.onload = function () {
+      if (this.readyState == 4 && this.status == 200) {
+        const blob = URL.createObjectURL(this.response);
+        resolve(blob);
+      } else {
+        reject();
+      }
+    };
+    xhr.responseType = "blob";
+    xhr.send();
+  });
+};
+
 export const loadFont = (tools: any, families: string[]) => {
   const observers = [];
   families.forEach((str: string) => {

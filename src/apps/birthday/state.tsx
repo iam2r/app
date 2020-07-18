@@ -9,6 +9,7 @@ interface State {
 declare module "vue/types/vue" {
   interface Vue {
     $state: State;
+    _uid: number;
   }
 }
 

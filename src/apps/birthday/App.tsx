@@ -1,18 +1,14 @@
 import { VNode } from "vue";
-import { Component, Watch } from "vue-property-decorator";
+import { Component, Watch, Ref } from "vue-property-decorator";
 import * as tsx from "vue-tsx-support";
 import { TweenLite, Linear, gsap } from "gsap";
-import { Swiper, SwiperSlide } from "vue-awesome-swiper";
+import MySwiper from "app.root/components/swiper";
 import LandInAnimation from "./modules/LandInAnimation";
+import SwiperClass from "swiper";
 import "./App.scss";
 gsap.ticker.lagSmoothing(0, null);
 
-@Component({
-  components: {
-    Swiper,
-    SwiperSlide,
-  },
-})
+@Component
 export default class App extends tsx.Component<any> {
   private birthDate: number = +new Date(`2020/9/19`);
   private revolution: number = 3600 * 24 * 1000; //一圈的毫秒数
@@ -27,6 +23,7 @@ export default class App extends tsx.Component<any> {
   private test: boolean = false;
   private slideIndex: number = -1;
   private lanInItem: LandInAnimation;
+  private showTips: boolean = false;
   private swiperOptions: any = {
     direction: "vertical",
     on: {
@@ -34,9 +31,8 @@ export default class App extends tsx.Component<any> {
     },
   };
 
-  private get mySwiper() {
-    return (this.$refs.mySwiper as any).swiperInstance;
-  }
+  @Ref()
+  private readonly mySwiper!: MySwiper;
 
   private get sceneStyle() {
     return {
@@ -90,7 +86,13 @@ export default class App extends tsx.Component<any> {
     }
   }
 
-  protected created() {}
+  @Watch("slideIndex")
+  @Watch("isBirthDay")
+  protected onArrowTipsStatusChange() {
+    this.$nextTick(() => {
+      this.showTips = !this.mySwiper.swiperInstance.isEnd;
+    });
+  }
 
   protected mounted() {
     this.slideIndex = 0;
@@ -106,13 +108,13 @@ export default class App extends tsx.Component<any> {
     return new LandInAnimation(
       this.$el.querySelector(".land-in-p") as HTMLElement,
       {
-        content: `Hi,XXX。<br>今天是你的生日哦。送你一份电子礼物~<br>Hi,XXX。<br>今天是你的生日哦。送你一份电子礼物~<br>Hi,XXX。<br>今天是你的生日哦。送你一份电子礼物~<br>Hi,XXX。<br>今天是你的生日哦。送你一份电子礼物~<br>Hi,XXX。<br>今天是你的生日哦。送你一份电子礼物~<br>Hi,XXX。<br>今天是你的生日哦。送你一份电子礼物~<br>Hi,XXX。<br>今天是你的生日哦。送你一份电子礼物~<br>Hi,XXX。<br>今天是你的生日哦。送你一份电子礼物~<br>Hi,XXX。<br>今天是你的生日哦。送你一份电子礼物~<br>Hi,XXX。<br>今天是你的生日哦。送你一份电子礼物~<br>Hi,XXX。<br>今天是你的生日哦。送你一份电子礼物~<br>`,
+        content: `Hi,XXX。<br>寒窗苦参凡尘坎坷，<br>春秋却忘夏衾冬葛。<br>世间冷暖与思念如何物？<br>与你我如何物？<br>盼泪眼望穿天地，<br>求知己如若斯人。<br>长途漫漫，<br>乞相伴而行。<br>诞辰快乐。`,
       }
     );
   }
 
   private onSlideChangeTransitionEnd() {
-    this.slideIndex = this.mySwiper.activeIndex;
+    this.slideIndex = this.mySwiper.swiperInstance.activeIndex;
   }
 
   private initCountDown() {
@@ -260,72 +262,67 @@ export default class App extends tsx.Component<any> {
 
   private page1Dom(): VNode {
     return (
-      <swiper-slide>
-        <div class="page-one">
-          <v-touch
-            onTap={() => {
-              this.test = !this.test;
-            }}
-            class="test-box"
-          >
-            Click To Test
-          </v-touch>
-          {this.startsDom()}
-          {this.countdownDom()}
-          {this.startTextDom()}
-          <v-touch
-            class={["scene", this.active ? "active" : ""]}
-            style={this.sceneStyle}
-            onTap={() => {
-              this.doActive();
-            }}
-          >
-            {this.snailDom()}
-            <div class="ground">
-              <div class="earth">
-                <div class="map-wrapper"></div>
-                <div class="earth-shadow"></div>
-              </div>
+      <div class="page-one">
+        <v-touch
+          onTap={() => {
+            this.test = !this.test;
+          }}
+          class="test-box"
+        >
+          Click To Test
+        </v-touch>
+        {this.startsDom()}
+        {this.countdownDom()}
+        {this.startTextDom()}
+        <v-touch
+          class={["scene", this.active ? "active" : ""]}
+          style={this.sceneStyle}
+          onTap={() => {
+            this.doActive();
+          }}
+        >
+          {this.snailDom()}
+          <div class="ground">
+            <div class="earth">
+              <div class="map-wrapper"></div>
+              <div class="earth-shadow"></div>
             </div>
-          </v-touch>
-        </div>
-      </swiper-slide>
+          </div>
+        </v-touch>
+      </div>
     );
   }
 
   private page2Dom(): VNode {
     return (
-      <swiper-slide>
-        <div class="page-two">
-          <p
-            class="land-in-p"
-            onClick={() => {
-              this.lanInItem && this.lanInItem.skip();
-            }}
-          ></p>
-        </div>
-      </swiper-slide>
+      <div class="page-two">
+        <p
+          class="land-in-p"
+          onClick={() => {
+            this.lanInItem && this.lanInItem.skip();
+          }}
+        ></p>
+      </div>
     );
   }
 
   private page3Dom(): VNode {
-    return <swiper-slide>page3</swiper-slide>;
+    return <div class="page-three">page3</div>;
   }
 
   protected render(): VNode {
     return (
       <div id="app">
-        <swiper ref="mySwiper" options={this.swiperOptions}>
-          {this.page1Dom()}
-          {this.isBirthDay ? [this.page2Dom(), this.page3Dom()] : null}
-        </swiper>
-
-        <span
-          v-show={
-            this.isBirthDay && (!this.mySwiper.isEnd || this.slideIndex == 0)
-          }
-          class="swiper-tip"
-        ></span>
+        <MySwiper
+          ref="mySwiper"
+          options={this.swiperOptions}
+          length={this.isBirthDay ? 3 : 1}
+          scopedSlots={{
+            default: (i) =>
+              [this.page1Dom(), this.page2Dom(), this.page3Dom()][i],
+          }}
+        />
+        {<span v-show={this.showTips} class="swiper-tip"></span>}
       </div>
     );
   }

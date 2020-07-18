@@ -1,10 +1,12 @@
 import Vue from "vue";
 import App from "./App";
 import state from "./state";
-import VuePlugin from "./VuePlugin";
 import { loadFont, loadImage, loadJson, updateUrl2Blob } from "@/common/Utils";
 import { emitter } from "app.root/context";
-Vue.use(VuePlugin);
+const VueTouch = require("vue-touch");
+
+Vue.config.productionTip = false;
+Vue.use(VueTouch, { name: "v-touch" });
 
 const loadImages = async (imagesList: any) => {
   for (let index = 0; index < imagesList.length; index++) {
