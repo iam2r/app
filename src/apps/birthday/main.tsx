@@ -2,7 +2,7 @@ import Vue from "vue";
 import App from "./App";
 import state from "./state";
 import { loadFont, loadImage, loadJson, updateUrl2Blob } from "@/common/Utils";
-import { emitter } from "app.root/context";
+import { emitter } from "@/apps/birthday/context";
 const VueTouch = require("vue-touch");
 
 Vue.config.productionTip = false;

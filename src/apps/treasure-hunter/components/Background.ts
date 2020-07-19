@@ -1,6 +1,6 @@
 import { Sprite, Texture } from "pixi.js";
-import { resolution, emitter } from "app.root/context";
-import { Events } from "app.root/const";
+import { resolution, emitter } from "@/apps/treasure-hunter/context";
+import { Events } from "@/apps/treasure-hunter/const";
 export default class Background extends Sprite {
   constructor(texture?: Texture) {
     super(texture);

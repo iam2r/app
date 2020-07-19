@@ -1,8 +1,12 @@
 import { Filter } from "pixi.js";
-import context, { resolution, config, emitter } from "app.root/context";
-import KeyBoard from "app.root/utils/KeyBoard";
-import { Events, ScreenState } from "app.root/const";
-import store from "app.root/main/store";
+import context, {
+  resolution,
+  config,
+  emitter,
+} from "@/apps/treasure-hunter/context";
+import KeyBoard from "@/apps/treasure-hunter/utils/KeyBoard";
+import { Events, ScreenState } from "@/apps/treasure-hunter/const";
+import store from "@/apps/treasure-hunter/main/store";
 
 enum spineBoyAnimation {
   AIM = "aim",

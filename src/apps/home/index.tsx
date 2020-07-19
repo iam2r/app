@@ -1,3 +1,3 @@
-import Preloading from "app.root/preloading/Preloading";
+import Preloading from "@/apps/home/preloading/Preloading";
 new Preloading();
-import(/* webpackChunkName: "main-async" */ "app.root/main");
+import(/* webpackChunkName: "main-async" */ "@/apps/home/main");

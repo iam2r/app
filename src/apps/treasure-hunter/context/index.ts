@@ -1,7 +1,7 @@
 import Vue from "Vue";
 import { Application } from "pixi.js";
-import Scence from "app.root/main/Scence";
-import { IResourceMap } from "app.root/resource/IResource";
+import Scence from "@/apps/treasure-hunter/main/Scence";
+import { IResourceMap } from "@/apps/treasure-hunter/resource/IResource";
 import { EventEmitter } from "events";
 import { Device } from "./Device";
 import { Resolution } from "./Resolution";

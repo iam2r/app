@@ -1,4 +1,4 @@
-import { ScreenState } from "app.root/const";
+import { ScreenState } from "@/apps/treasure-hunter/const";
 
 export class Device {
   public version: string;

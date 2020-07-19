@@ -1,5 +1,5 @@
 import { Sprite } from "pixi.js";
-import { Resources } from "app.root/resource";
+import { Resources } from "@/apps/treasure-hunter/resource";
 export default class Door extends Sprite {
   constructor() {
     super();

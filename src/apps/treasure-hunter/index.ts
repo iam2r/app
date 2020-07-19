@@ -1,10 +1,10 @@
 (async () => {
   const { Loader } = await import(
-    /* webpackChunkName: "loader" */ "app.root/loader/Loader"
+    /* webpackChunkName: "loader" */ "@/apps/treasure-hunter/loader/Loader"
   );
   new Loader()
     .once("load", () => {
-      import(/* webpackChunkName: "main" */ "app.root/main");
+      import(/* webpackChunkName: "main" */ "@/apps/treasure-hunter/main");
     })
     .load();
 })();

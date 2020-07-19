@@ -1,39 +1,26 @@
-process.env.NODE_ENV = 'development';
-const fs = require('fs-extra');
-const path = require("path");
+process.env.NODE_ENV = "development";
 const baseConfig = require("./webpack.base");
 const merge = require("webpack-merge");
 const config = require("./config");
 const utils = require("./utils");
-const AutoDllPlugin = require('autodll-webpack-plugin');
-const prettier = require('prettier');
-const {
-  HotModuleReplacementPlugin,
-  NoEmitOnErrorsPlugin,
-} = require("webpack");
+const AutoDllPlugin = require("autodll-webpack-plugin");
+const prettier = require("prettier");
+const { HotModuleReplacementPlugin, NoEmitOnErrorsPlugin } = require("webpack");
 
-let tsConfig = require("../tsconfig.json");
-tsConfig.compilerOptions.paths['app.root/*'] = [`src/apps/${process.env.APP_NAME}/*`];
-fs.writeFileSync(path.resolve(__dirname, `../tsconfig.json`), prettier.format(JSON.stringify(tsConfig), {
-  semi: false,
-  parser: "json"
-}));
+const plugins = [new HotModuleReplacementPlugin(), new NoEmitOnErrorsPlugin()];
 
-
-const plugins = [
-  new HotModuleReplacementPlugin(),
-  new NoEmitOnErrorsPlugin(),
-];
-
-utils.isDll() && plugins.push(new AutoDllPlugin({
-  inject: true, // will inject the DLL bundle to index.html
-  debug: true,
-  filename: '[name]_[contenthash:8].js',
-  path: './dll',
-  entry: {
-    vendor: utils.getDllVendor()
-  }
-}))
+utils.isDll() &&
+  plugins.push(
+    new AutoDllPlugin({
+      inject: true, // will inject the DLL bundle to index.html
+      debug: true,
+      filename: "[name]_[contenthash:8].js",
+      path: "./dll",
+      entry: {
+        vendor: utils.getDllVendor(),
+      },
+    })
+  );
 
 module.exports = merge(baseConfig, {
   devtool: "cheap-module-eval-source-map", // 指定加source-map的方式
@@ -44,18 +31,18 @@ module.exports = merge(baseConfig, {
     disableHostCheck: true,
     contentBase: config.staticPath, //静态文件根目录
     port: config.dev.port, // 端口
-    host: '0.0.0.0',
+    host: "0.0.0.0",
     useLocalIp: true,
     writeToDisk: utils.isWriteToDisk(),
     historyApiFallback: true, //html5 history API
     overlay: true,
     compress: false, // 服务器返回浏览器的时候是否启动gzip压缩
-    proxy: config.dev.proxy
+    proxy: config.dev.proxy,
   },
   watchOptions: {
     ignored: /node_modules/, //忽略不用监听变更的目录
     aggregateTimeout: 500, //防止重复保存频繁重新编译,500毫米内重复保存不打包
-    poll: 1000 //每秒询问的文件变更的次数
+    poll: 1000, //每秒询问的文件变更的次数
   },
-  plugins
-});;
+  plugins,
+});

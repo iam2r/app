@@ -1,6 +1,6 @@
 import { abc } from "./untils";
 const $app = document.querySelector("#app");
-// import lazyTest from "app.root/dynamic/component";
+// import lazyTest from "@/apps/img2font/dynamic/component";
 require("@/webfonts/myfont.font.js");
 
 const $div = document.createElement("div");

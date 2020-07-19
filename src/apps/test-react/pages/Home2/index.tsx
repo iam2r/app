@@ -1,6 +1,6 @@
 import styles from "./styles.module.scss";
-import Count from "app.root/components/Count";
-import { useStore } from "app.root/hooks";
+import Count from "@/apps/test-react/components/Count";
+import { useStore } from "@/apps/test-react/hooks";
 const Home = (props: any) => {
   const { state } = useStore();
 

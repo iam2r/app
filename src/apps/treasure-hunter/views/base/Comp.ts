@@ -1,5 +1,5 @@
 import { Component, Vue } from "vue-property-decorator";
-import { ScreenState } from "app.root/const";
+import { ScreenState } from "@/apps/treasure-hunter/const";
 import { IComp } from "./IComp";
 
 @Component

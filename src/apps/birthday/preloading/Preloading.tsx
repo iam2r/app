@@ -1,5 +1,5 @@
 import "./Preloading.scss";
-import { emitter } from "app.root/context";
+import { emitter } from "@/apps/birthday/context";
 import JSXUtils from "@/common/JSXUtils";
 
 export default class Preloading {

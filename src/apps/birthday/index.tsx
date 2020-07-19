@@ -1,5 +1,4 @@
 import "./styles/_adapter.scss";
-import Preloading from "app.root/preloading/Preloading";
-
+import Preloading from "@/apps/birthday/preloading/Preloading";
 new Preloading();
-import(/* webpackChunkName: "main-async" */ "app.root/main");
+import(/* webpackChunkName: "main-async" */ "@/apps/birthday/main");

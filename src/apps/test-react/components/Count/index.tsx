@@ -1,5 +1,5 @@
 import styles from "./styles.module.scss";
-import { useStore } from "app.root/hooks";
+import { useStore } from "@/apps/test-react/hooks";
 const CountApp = (props) => {
   const {
     state,

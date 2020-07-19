@@ -29,6 +29,7 @@ process.env.BUILD_MODE = (() => {
     }
   }
 })();
+
 process.env.APP_NAME = utils.getAppName(Object.values(apps)[0]);
 process.env.APP_ROOT = path.resolve(
   __dirname,

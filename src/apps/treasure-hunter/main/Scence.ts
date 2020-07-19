@@ -1,12 +1,12 @@
-import { Events, ScreenState } from "app.root/const";
-import context, { emitter } from "app.root/context";
-import Background from "app.root/components/Background";
-import Explorer from "app.root/components/Explorer";
-import Door from "app.root/components/Door";
-import SpineBoy from "app.root/components/SpineBoy";
-import Fighter from "app.root/components/Fighter";
-import ParallaxScroller from "app.root/components/ParallaxScroller";
-import { Resources } from "app.root/resource";
+import { Events, ScreenState } from "@/apps/treasure-hunter/const";
+import context, { emitter } from "@/apps/treasure-hunter/context";
+import Background from "@/apps/treasure-hunter/components/Background";
+import Explorer from "@/apps/treasure-hunter/components/Explorer";
+import Door from "@/apps/treasure-hunter/components/Door";
+import SpineBoy from "@/apps/treasure-hunter/components/SpineBoy";
+import Fighter from "@/apps/treasure-hunter/components/Fighter";
+import ParallaxScroller from "@/apps/treasure-hunter/components/ParallaxScroller";
+import { Resources } from "@/apps/treasure-hunter/resource";
 import store from "./store";
 import Size from "./Size";
 

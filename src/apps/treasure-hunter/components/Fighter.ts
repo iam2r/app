@@ -1,6 +1,6 @@
 import { AnimatedSprite, Texture } from "pixi.js";
-import { config, emitter, resolution } from "app.root/context";
-import { Events } from "app.root/const";
+import { config, emitter, resolution } from "@/apps/treasure-hunter/context";
+import { Events } from "@/apps/treasure-hunter/const";
 
 export default class Fighter extends AnimatedSprite {
   constructor(

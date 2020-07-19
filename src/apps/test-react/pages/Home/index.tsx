@@ -1,8 +1,9 @@
 import styles from "./styles.module.scss";
-import Count from "app.root/components/Count";
-import { useStore } from "app.root/hooks";
+import Count from "@/apps/test-react/components/Count";
+import VideoObject from "@/apps/test-react/components/VideoObject";
+import { useStore } from "@/apps/test-react/hooks";
 import { useState, useMemo, useRef, useEffect } from "react";
-import NoSleep from "app.root/nosleep";
+import NoSleep from "@/apps/test-react/nosleep";
 const noSleep = new NoSleep();
 const Home = (props: any) => {
   const { state } = useStore();
@@ -28,7 +29,8 @@ const Home = (props: any) => {
 
   return (
     <div className={styles.welcome} ref={el}>
-      <Count> </Count>
+      {/* <Count> </Count> */}
+      <VideoObject />
       <div>
         <button onClick={enable}>开启</button>
         <button onClick={disable}>关闭</button>

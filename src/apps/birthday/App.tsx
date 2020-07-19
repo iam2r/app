@@ -2,9 +2,8 @@ import { VNode } from "vue";
 import { Component, Watch, Ref } from "vue-property-decorator";
 import * as tsx from "vue-tsx-support";
 import { TweenLite, Linear, gsap } from "gsap";
-import MySwiper from "app.root/components/swiper";
+import MySwiper from "@/apps/birthday/components/swiper";
 import LandInAnimation from "./modules/LandInAnimation";
-import SwiperClass from "swiper";
 import "./App.scss";
 gsap.ticker.lagSmoothing(0, null);
 

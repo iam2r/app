@@ -1,11 +1,11 @@
 import { Sprite, Texture } from "pixi.js";
-import { Resources } from "app.root/resource";
-import { config, emitter } from "app.root/context";
-import KeyBoard from "app.root/utils/KeyBoard";
-import context from "app.root/context";
-import { Events } from "app.root/const";
-import store from "app.root/main/store";
-import Drag from "app.root/utils/Drag";
+import { Resources } from "@/apps/treasure-hunter/resource";
+import { config, emitter } from "@/apps/treasure-hunter/context";
+import KeyBoard from "@/apps/treasure-hunter/utils/KeyBoard";
+import context from "@/apps/treasure-hunter/context";
+import { Events } from "@/apps/treasure-hunter/const";
+import store from "@/apps/treasure-hunter/main/store";
+import Drag from "@/apps/treasure-hunter/utils/Drag";
 
 export default class Explorer extends Sprite {
   private keyBoardList: { [key: string]: KeyBoard } = {};

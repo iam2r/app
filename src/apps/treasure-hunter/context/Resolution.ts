@@ -1,5 +1,5 @@
-import { ScreenState, Events } from "app.root/const";
-import Size from "app.root/main/Size";
+import { ScreenState, Events } from "@/apps/treasure-hunter/const";
+import Size from "@/apps/treasure-hunter/main/Size";
 import { emitter, device } from "./";
 import config from "./config";
 

@@ -1,6 +1,6 @@
 import { HashRouter, Route, Switch, Redirect } from "react-router-dom";
-import routes from "app.root/router";
-import { useCreateStore, Provider } from "app.root/hooks";
+import routes from "@/apps/test-react/router";
+import { useCreateStore, Provider } from "@/apps/test-react/hooks";
 
 const App = () => {
   const store = useCreateStore();

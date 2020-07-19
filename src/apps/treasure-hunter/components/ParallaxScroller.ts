@@ -1,7 +1,7 @@
 import { Sprite, Container } from "pixi.js";
-import { resolution, emitter } from "app.root/context";
-import { Resources } from "app.root/resource";
-import { Events } from "app.root/const";
+import { resolution, emitter } from "@/apps/treasure-hunter/context";
+import { Resources } from "@/apps/treasure-hunter/resource";
+import { Events } from "@/apps/treasure-hunter/const";
 export default class ParallaxScroller extends Container {
   constructor() {
     super();

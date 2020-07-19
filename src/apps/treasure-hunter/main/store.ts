@@ -1,7 +1,7 @@
 import Vue from "vue";
 import Vuex, { Store, StoreOptions } from "vuex";
-import Bump from "app.root/libs/bump.js";
-import { config } from "app.root/context";
+import Bump from "@/apps/treasure-hunter/libs/bump.js";
+import { config } from "@/apps/treasure-hunter/context";
 
 Vue.use(Vuex);
 

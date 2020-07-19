@@ -1,8 +1,8 @@
-import { EventEmitter } from "events";
+import EventEmitter from "@/common/EventEmitter";
 import querystring from "querystring";
-import { Events } from "app.root/const";
+import { Events } from "@/apps/treasure-hunter/const";
 import FullScreen from "./FullScreen";
-import { emitter, resolution, device } from "app.root/context";
+import { emitter, resolution, device } from "@/apps/treasure-hunter/context";
 import "./Loader.scss";
 
 export class Loader extends EventEmitter {
