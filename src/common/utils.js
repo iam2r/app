@@ -1,360 +1,343 @@
-/**
- * 存储localStorage
- */
-export const setStore = (name, content) => {
-  if (!name) return;
-  if (typeof content !== "string") {
-    content = JSON.stringify(content);
-  }
-  window.localStorage.setItem(name, content);
-};
-
-/**
- * 获取localStorage
- */
-export const getStore = (name) => {
-  if (!name) return;
-  return window.localStorage.getItem(name);
-};
-
-/**
- * 删除localStorage
- */
-export const removeStore = (name) => {
-  if (!name) return;
-  window.localStorage.removeItem(name);
-};
-
-/**
- * 写cookies
- */
-export const setCookie = (name, value, time) => {
-  const strsec = getsec(time);
-  const exp = new Date();
-  exp.setTime(exp.getTime() + strsec * 1);
-  document.cookie =
-    name + "=" + escape(value) + ";expires=" + exp.toGMTString();
-};
-
-/**
- * 读取cookies
- */
-export const getCookie = (name) => {
-  let arr,
-    reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
-  if ((arr = document.cookie.match(reg))) return arr[2];
-  else return null;
-};
-
-/**
- * 删除cookies
- */
-export const delCookie = (name) => {
-  const exp = new Date();
-  exp.setTime(exp.getTime() - 1);
-  const cval = getCookie(name);
-  if (cval != null)
-    document.cookie = name + "=" + cval + ";expires=" + exp.toGMTString();
-};
-
-/**
- * 生成随机字符串(可指定长度)
- * @param len
- * @returns {string}
- */
-export const randomString = (len) => {
-  len = len || 8;
-  const $chars = "ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz2345678";
-  /****默认去掉了容易混淆的字符oOLl,9gq,Vv,Uu,I1****/
-  const maxPos = $chars.length;
-  let pwd = "";
-  for (let i = 0; i < len; i++) {
-    pwd += $chars.charAt(Math.floor(Math.random() * maxPos));
-  }
-  return pwd;
-};
-
-/**
- * randomWord 产生任意长度随机字母数字组合
- * @param randomFlag 是否任意长度 min-任意长度最小位[固定位数] max-任意长度最大位
- * @param min
- * @param max
- * @returns {string}
- * 调用方法:
- * 生成 3 - 32 位随即字符串
- * randomWord(true,3,32);    例如：olyOXUF5oDsuMmXl3Mi48
- * 生成 32 位随机字符串
- * randomWord(false,32);     例如：fjpnWj29Bb8boiXbLeDF0nxkR4aYcLRl
- */
-export const randomWord = (randomFlag, min, max) => {
-  let str = "",
-    range = min,
-    arr = [
-      "0",
-      "1",
-      "2",
-      "3",
-      "4",
-      "5",
-      "6",
-      "7",
-      "8",
-      "9",
-      "a",
-      "b",
-      "c",
-      "d",
-      "e",
-      "f",
-      "g",
-      "h",
-      "i",
-      "j",
-      "k",
-      "l",
-      "m",
-      "n",
-      "o",
-      "p",
-      "q",
-      "r",
-      "s",
-      "t",
-      "u",
-      "v",
-      "w",
-      "x",
-      "y",
-      "z",
-      "A",
-      "B",
-      "C",
-      "D",
-      "E",
-      "F",
-      "G",
-      "H",
-      "I",
-      "J",
-      "K",
-      "L",
-      "M",
-      "N",
-      "O",
-      "P",
-      "Q",
-      "R",
-      "S",
-      "T",
-      "U",
-      "V",
-      "W",
-      "X",
-      "Y",
-      "Z",
-    ];
-
-  // 随机产生
-  if (randomFlag) {
-    range = Math.round(Math.random() * (max - min)) + min;
-  }
-  for (let i = 0; i < range; i++) {
-    const pos = Math.round(Math.random() * (arr.length - 1));
-    str += arr[pos];
-  }
-  return str;
-};
-
-/**
- * 获取url后参数
- */
-export const getRequest = () => {
-  const url = location.search; //获取url中"?"符后的字串
-  const theRequest = new Object();
-  if (url.indexOf("?") != -1) {
-    const str = url.substr(1);
-    const strs = str.split("&");
-    for (let i = 0; i < strs.length; i++) {
-      theRequest[strs[i].split("=")[0]] = strs[i].split("=")[1];
+"use strict";
+var __awaiter =
+  (this && this.__awaiter) ||
+  function (thisArg, _arguments, P, generator) {
+    function adopt(value) {
+      return value instanceof P
+        ? value
+        : new P(function (resolve) {
+            resolve(value);
+          });
     }
-  }
-  return theRequest;
-};
-
-/**
- * 生成随机颜色值
- */
-export const getRandomColor = () => {
-  const rgb = [];
-  for (let i = 0; i < 3; ++i) {
-    let color = Math.floor(Math.random() * 256).toString(16);
-    color = color.length === 1 ? "0" + color : color;
-    rgb.push(color);
-  }
-  return "#" + rgb.join("");
-};
-
-/**
- * 验证身份证号
- * @param el 号码输入input
- * @returns {boolean}
- */
-export const checkCardNo = (el) => {
-  const txtval = el.value;
-  const reg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
-  return reg.test(txtval);
-};
-
-/**
- * 获取字符串字节长度
- * @param {String}
- * @returns {Boolean}
- */
-export const checkLength = (v) => {
-  let realLength = 0;
-  const len = v.length;
-  for (let i = 0; i < len; i++) {
-    const charCode = v.charCodeAt(i);
-    if (charCode >= 0 && charCode <= 128) realLength += 1;
-    else realLength += 2;
-  }
-  return realLength;
-};
-
-/**
- * 判断微信浏览器
- * @returns {Boolean}
- */
-export const isWeiXin = () => {
-  const ua = window.navigator.userAgent.toLowerCase();
-  if (ua.match(/MicroMessenger/i) == "micromessenger") {
-    return true;
-  } else {
-    return false;
-  }
-};
-
-/**
- * 浏览器判断
- * 用法示例——多套页面判断是否显示移动端：
- *   let ua = parseUA();
- *   if (!ua.mobile) {
- *       location.href = './pc.html';
- *   }
- */
-export const parseUA = () => {
-  const u = navigator.userAgent;
-  const u2 = navigator.userAgent.toLowerCase();
-  return {
-    //移动终端浏览器版本信息
-    trident: u.indexOf("Trident") > -1,
-    //IE内核
-    presto: u.indexOf("Presto") > -1,
-    //opera内核
-    webKit: u.indexOf("AppleWebKit") > -1,
-    //苹果、谷歌内核
-    gecko: u.indexOf("Gecko") > -1 && u.indexOf("KHTML") == -1,
-    //火狐内核
-    mobile: !!u.match(/AppleWebKit.*Mobile.*/),
-    //是否为移动终端
-    ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/),
-    //ios终端
-    android: u.indexOf("Android") > -1 || u.indexOf("Linux") > -1,
-    //android终端或uc浏览器
-    iPhone: u.indexOf("iPhone") > -1,
-    //是否为iPhone或者QQHD浏览器
-    iPad: u.indexOf("iPad") > -1,
-    //是否iPad
-    webApp: u.indexOf("Safari") == -1,
-    //是否web应该程序，没有头部与底部
-    iosv: u.substr(u.indexOf("iPhone OS") + 9, 3),
-    weixin: u2.match(/MicroMessenger/i) == "micromessenger",
-    ali: u.indexOf("AliApp") > -1,
+    return new (P || (P = Promise))(function (resolve, reject) {
+      function fulfilled(value) {
+        try {
+          step(generator.next(value));
+        } catch (e) {
+          reject(e);
+        }
+      }
+      function rejected(value) {
+        try {
+          step(generator["throw"](value));
+        } catch (e) {
+          reject(e);
+        }
+      }
+      function step(result) {
+        result.done
+          ? resolve(result.value)
+          : adopt(result.value).then(fulfilled, rejected);
+      }
+      step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
   };
-};
-
-/**
- * 生成UUID
- * @returns {string}
- */
-export const generateUUID = () => {
-  let d = new Date().getTime();
-  const uuid = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(
-    /[xy]/g,
-    function (c) {
-      const r = (d + Math.random() * 16) % 16 | 0;
-      d = Math.floor(d / 16);
-      return (c === "x" ? r : (r & 0x7) | 0x8).toString(16);
+var __generator =
+  (this && this.__generator) ||
+  function (thisArg, body) {
+    var _ = {
+        label: 0,
+        sent: function () {
+          if (t[0] & 1) throw t[1];
+          return t[1];
+        },
+        trys: [],
+        ops: [],
+      },
+      f,
+      y,
+      t,
+      g;
+    return (
+      (g = { next: verb(0), throw: verb(1), return: verb(2) }),
+      typeof Symbol === "function" &&
+        (g[Symbol.iterator] = function () {
+          return this;
+        }),
+      g
+    );
+    function verb(n) {
+      return function (v) {
+        return step([n, v]);
+      };
     }
-  );
-  return uuid;
+    function step(op) {
+      if (f) throw new TypeError("Generator is already executing.");
+      while (_)
+        try {
+          if (
+            ((f = 1),
+            y &&
+              (t =
+                op[0] & 2
+                  ? y["return"]
+                  : op[0]
+                  ? y["throw"] || ((t = y["return"]) && t.call(y), 0)
+                  : y.next) &&
+              !(t = t.call(y, op[1])).done)
+          )
+            return t;
+          if (((y = 0), t)) op = [op[0] & 2, t.value];
+          switch (op[0]) {
+            case 0:
+            case 1:
+              t = op;
+              break;
+            case 4:
+              _.label++;
+              return { value: op[1], done: false };
+            case 5:
+              _.label++;
+              y = op[1];
+              op = [0];
+              continue;
+            case 7:
+              op = _.ops.pop();
+              _.trys.pop();
+              continue;
+            default:
+              if (
+                !((t = _.trys), (t = t.length > 0 && t[t.length - 1])) &&
+                (op[0] === 6 || op[0] === 2)
+              ) {
+                _ = 0;
+                continue;
+              }
+              if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) {
+                _.label = op[1];
+                break;
+              }
+              if (op[0] === 6 && _.label < t[1]) {
+                _.label = t[1];
+                t = op;
+                break;
+              }
+              if (t && _.label < t[2]) {
+                _.label = t[2];
+                _.ops.push(op);
+                break;
+              }
+              if (t[2]) _.ops.pop();
+              _.trys.pop();
+              continue;
+          }
+          op = body.call(thisArg, _);
+        } catch (e) {
+          op = [6, e];
+          y = 0;
+        } finally {
+          f = t = 0;
+        }
+      if (op[0] & 5) throw op[1];
+      return { value: op[0] ? op[1] : void 0, done: true };
+    }
+  };
+var _this = this;
+exports.__esModule = true;
+exports.updateUrl2Blob = exports.updateObject = exports.$typeof = exports.loadFont = exports.loadImage2Blob = exports.loadImage = exports.loadSound = exports.loadJson = exports.loadScripts = void 0;
+exports.loadScripts = function (scripts, parallel) {
+  if (parallel === void 0) {
+    parallel = false;
+  }
+  return __awaiter(void 0, void 0, void 0, function () {
+    var loadScript, result, index, _a, _b;
+    return __generator(this, function (_c) {
+      switch (_c.label) {
+        case 0:
+          scripts = Array.isArray(scripts) ? scripts : [scripts];
+          loadScript = function (script) {
+            return new Promise(function (resolve, reject) {
+              var $script = document.createElement("script");
+              var $fjs = document.querySelector("script");
+              for (var key in script) {
+                $script.setAttribute(key, script[key]);
+              }
+              $fjs.parentNode.insertBefore($script, $fjs);
+              $script.onload = function () {
+                resolve($script);
+              };
+            });
+          };
+          if (!parallel) return [3 /*break*/, 1];
+          return [
+            2 /*return*/,
+            Promise.all(
+              scripts.map(function (script) {
+                return loadScript(script);
+              })
+            ),
+          ];
+        case 1:
+          result = [];
+          index = 0;
+          _c.label = 2;
+        case 2:
+          if (!(index < scripts.length)) return [3 /*break*/, 5];
+          _a = result;
+          _b = index;
+          return [4 /*yield*/, loadScript(scripts[index])];
+        case 3:
+          _a[_b] = _c.sent();
+          _c.label = 4;
+        case 4:
+          index++;
+          return [3 /*break*/, 2];
+        case 5:
+          return [2 /*return*/, result];
+      }
+    });
+  });
 };
-
-/**
- * 删除左右两端的空格
- * @param str
- * @returns {string | * | void}
- */
-export const trim = (str) => str.replace(/(^\s*)|(\s*$)/g, "");
-
-/**
- * 找出对象数组中某属性的最大值
- * @param array
- * @param item
- * @returns val
- */
-export const maxValueInObjArrForKey = (array, key) =>
-  Math.max(...array.map((item) => item[key]));
-
-/**
- * 判断当前网络环境
- */
-export const isWifi = () => {
-  try {
-    let wifi = true;
-    const ua = window.navigator.userAgent;
-    const con = window.navigator.connection;
-    // 如果是微信
-    if (/MicroMessenger/.test(ua)) {
-      if (ua.indexOf("WIFI") >= 0) {
-        return true;
+exports.loadJson = function (url) {
+  return new Promise(function (resolve, reject) {
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", url);
+    xhr.send();
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState == 4 && xhr.status == 200) {
+        resolve(JSON.parse(xhr.response));
+      }
+    };
+  });
+};
+exports.loadSound = function (url) {
+  return new Promise(function (resolve, reject) {
+    var media = new Audio();
+    media.oncanplay = function () {
+      resolve(media);
+    };
+    media.onerror = function () {
+      reject("load error:" + url);
+    };
+    media.src = url;
+    if (navigator.userAgent.match(/iPhone|iPod|iPad/i) != null) {
+      setTimeout(function () {
+        //兼容ios不触发oncanplay
+        media.load();
+      }, 0);
+    }
+  });
+};
+exports.loadImage = function (url, isBlob) {
+  if (isBlob === void 0) {
+    isBlob = false;
+  }
+  return new Promise(function (resolve, reject) {
+    if (isBlob) {
+      var xhr_1 = new XMLHttpRequest();
+      xhr_1.open("GET", url, true);
+      xhr_1.responseType = "blob";
+      xhr_1.onreadystatechange = function () {
+        if (xhr_1.readyState == 4 && xhr_1.status == 200) {
+          resolve(URL.createObjectURL(xhr_1.response));
+        }
+      };
+      xhr_1.send();
+    } else {
+      var img_1 = new Image();
+      img_1.onload = function () {
+        resolve(img_1);
+      };
+      img_1.onerror = function () {
+        reject("load error:" + url);
+      };
+      img_1.src = url;
+    }
+  });
+};
+exports.loadImage2Blob = function (url) {
+  return new Promise(function (resolve, reject) {
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", url, true);
+    xhr.onload = function () {
+      if (this.readyState == 4 && this.status == 200) {
+        var blob = URL.createObjectURL(this.response);
+        resolve(blob);
       } else {
-        wifi = false;
+        reject();
       }
-      // 如果支持navigator.connection
-    } else if (con) {
-      const network = con.type;
-      if (network !== "wifi" && network !== "2" && network !== "unknown") {
-        wifi = false;
+    };
+    xhr.responseType = "blob";
+    xhr.send();
+  });
+};
+exports.loadFont = function (tools, families) {
+  var observers = [];
+  families.forEach(function (str) {
+    var strModel = str.split(":");
+    var family = strModel[0];
+    var variations = strModel[1] ? strModel[1].split(",") : ["n4"];
+    variations.forEach(function (variation) {
+      var match = variation.match(/^([nio])([1-9])$/i);
+      if (match) {
+        var style =
+          match[1] == "n" ? "normal" : match[1] == "i" ? "italic" : "oblique";
+        var weight = parseInt(match[2], 10) + "00";
+        observers.push(
+          new tools(family, { style: style, weight: weight }).load()
+        );
       }
+    });
+  });
+  return Promise.all(observers);
+};
+exports.$typeof = function (target) {
+  return Object.prototype.toString.call(target).slice(8, -1).toLowerCase();
+};
+exports.updateObject = function (obj) {
+  var objArr = [];
+  for (var _i = 1; _i < arguments.length; _i++) {
+    objArr[_i - 1] = arguments[_i];
+  }
+  if (!objArr) return;
+  objArr.forEach(function (ob) {
+    for (var k in ob) {
+      if (obj[k] instanceof Array) {
+        obj[k] = ob[k];
+      } else if (typeof obj[k] === "object") {
+        _this.updateObject(obj[k], ob[k]);
+      } else {
+        obj[k] = ob[k];
+      }
+      ob[k] = null;
     }
-    return wifi;
-  } catch (e) {
-    return false;
+  });
+};
+exports.updateUrl2Blob = function (url, blob) {
+  Array.from(document.styleSheets).forEach(function (styleSheet) {
+    Array.from(styleSheet.rules)
+      .filter(function (cssRule) {
+        return cssRule.cssText.includes(url);
+      })
+      .forEach(function (cssRule) {
+        return (cssRule.style.backgroundImage = "url(" + blob + ")");
+      });
+  });
+};
+
+export const loadScripts = async (scripts, parallel = false) => {
+  scripts = Array.isArray(scripts) ? scripts : [scripts];
+
+  const loadScript = (script) =>
+    new Promise((resolve, reject) => {
+      const $script = document.createElement("script");
+      const $fjs = document.querySelector("script");
+      for (const key in script) {
+        $script.setAttribute(key, script[key]);
+      }
+      $fjs.parentNode.insertBefore($script, $fjs);
+      $script.onload = () => {
+        resolve($script);
+      };
+    });
+
+  if (parallel) {
+    return Promise.all(scripts.map((script) => loadScript(script)));
+  } else {
+    const result = [];
+    for (let index = 0; index < scripts.length; index++) {
+      result[index] = await loadScript(scripts[index]);
+    }
+    return result;
   }
 };
-
-/**
- * 首字母大写
- * @param str
- * @returns {string}
- */
-export const fistLetterUpper = (str) => {
-  return str.charAt(0).toUpperCase() + str.slice(1);
-};
-
-/**
- * 过滤非法字符串
- */
-export const illegalFilter = (str) => {
-  const regEn = /[`~!@#$%^&*()_+<>?:"{},.\/;'[\]]/im;
-  const regCn = /[·！#￥（——）：；“”‘、，|《。》？、【】[\]]/im;
-
-  if (regEn.test(str) || regCn.test(str)) return false;
-  return true;
-};
-
-export const isMobile = () =>
-  navigator.userAgent.match(
-    /(phone|pad|pod|iPhone|iPod|ios|iPad|android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i
-  );

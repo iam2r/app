@@ -1,16 +1,30 @@
 export const loadScripts = async (
-  scripts: { id: string; url: string } | { id: string; url: string }[],
+  scripts:
+    | { id: string; src: string; [key: string]: string }
+    | { id: string; src: string; [key: string]: string }[],
   parallel = false
 ) => {
   scripts = Array.isArray(scripts) ? scripts : [scripts];
-
-  const loadScript = (script: { id: string; url: string }) =>
+  const loadScript = (script: {
+    id: string;
+    src: string;
+    [key: string]: string;
+  }) =>
     new Promise((resolve, reject) => {
       const $script = document.createElement("script");
       const $fjs = document.querySelector("script");
-      $script.id = script.id;
-      $script.src = script.url;
+      for (const key in script) {
+        $script.setAttribute(key, script[key]);
+      }
       $fjs.parentNode.insertBefore($script, $fjs);
+
+      if (
+        Object.keys(script).includes("for") &&
+        Object.keys(script).includes("event")
+      ) {
+        resolve($script);
+      }
+
       $script.onload = () => {
         resolve($script);
       };

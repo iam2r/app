@@ -45,9 +45,9 @@ inherit(SubType, SurperType);
 const att = [];
 
 loadScripts([
-  { id: "jsencrypt", url: "./libs/hik/jsencrypt.min.js" },
-  { id: "jsWebControl", url: "./libs/hik/jsWebControl-1.0.0.min.js" },
-]).then(() => {});
+  { id: "jsencrypt", src: "./libs/hik/jsencrypt.min.js" },
+  { id: "jsWebControl", src: "./libs/hik/jsWebControl-1.0.0.min.js" },
+]).then(([script1, script2]) => {});
 
 const render = (h) => (
   <div>
