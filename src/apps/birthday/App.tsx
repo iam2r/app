@@ -11,18 +11,18 @@ gsap.ticker.lagSmoothing(0, null);
 export default class App extends tsx.Component<any> {
   private birthDate: number = +new Date(`2020/9/19`);
   private revolution: number = 3600 * 24 * 1000; //一圈的毫秒数
-  private active: boolean = false;
-  private sceneRotate: number = 0;
-  private sceneScale: number = 1;
-  private sceneTranslateY: number = 7;
-  private isSceneAnimating: boolean = false;
-  private countDown: number = 0;
+  private active = false;
+  private sceneRotate = 0;
+  private sceneScale = 1;
+  private sceneTranslateY = 7;
+  private isSceneAnimating = false;
+  private countDown = 0;
   private countDownTimer: any;
   private snailRotateTween: TweenLite;
-  private test: boolean = false;
-  private slideIndex: number = -1;
+  private test = false;
+  private slideIndex = -1;
   private lanInItem: LandInAnimation;
-  private showTips: boolean = false;
+  private showTips = false;
   private swiperOptions: any = {
     direction: "vertical",
     on: {

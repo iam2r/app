@@ -1,7 +1,7 @@
 import JSXUtils from "@/common/JSXUtils";
 import "./index.scss";
 
-const Link = (h) => (
+const Link = () => (
   <link
     href="https://cdn.bootcss.com/font-awesome/5.11.2/css/all.css"
     rel="stylesheet"
@@ -12,7 +12,7 @@ document
   .querySelector("head")
   .appendChild(JSXUtils.createElement((Link as any)(JSXUtils.h)));
 
-const App = (h) => {
+const App = () => {
   return (
     <nav class="navtab">
       <ul>

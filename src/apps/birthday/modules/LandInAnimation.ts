@@ -4,7 +4,7 @@ export interface LandInAnimationOptions {
 }
 export default class LandInAnimation {
   private $el: HTMLElement;
-  private splitSymbol: string = "<br>";
+  private splitSymbol = "<br>";
   private text: string;
   private items: HTMLElement[] = [];
   constructor(el: string | HTMLElement, options: LandInAnimationOptions) {

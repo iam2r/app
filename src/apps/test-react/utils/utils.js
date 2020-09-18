@@ -35,7 +35,9 @@ export const Storage = {
     data = typeof data === "object" ? JSON.stringify(data) : data.toString();
     try {
       window.localStorage.setItem(name, data);
-    } catch (e) {}
+    } catch (e) {
+      console.log(e);
+    }
   },
 
   getItem(name, isObj) {
@@ -55,7 +57,9 @@ export const Storage = {
   removeItem(name) {
     try {
       window.localStorage.removeItem(name);
-    } catch (e) {}
+    } catch (e) {
+      console.log(e);
+    }
   },
 };
 

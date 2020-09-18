@@ -3,7 +3,7 @@ const lazyLoad = ({
   component,
   loading,
 }: {
-  component: Function;
+  component: any;
   loading?: any;
 }) => (props: any) => {
   const [state, setState] = useState({ component: null });

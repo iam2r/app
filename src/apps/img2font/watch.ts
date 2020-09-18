@@ -30,10 +30,10 @@ class Dep {
 class Watcher {
   public obj: any;
   public key: string | number;
-  public handler: Function;
+  public handler: () => void;
   public val: any; //val变量判断值是否有变化
   public depIds: any = {};
-  constructor(obj: object, key: string | number, handler: Function) {
+  constructor(obj: any, key: string | number, handler: () => void) {
     this.obj = obj;
     this.key = key;
     this.handler = handler;
@@ -62,7 +62,7 @@ class Observer {
     Object.keys(obj).forEach((key) => this.defineReactive(obj, key, obj[key]));
   }
 
-  defineReactive(obj: object, key: string | number, val: any) {
+  defineReactive(obj: any, key: string | number, val: any) {
     //这里用到了观察者(订阅/发布)模式,它定义了一种一对多的关系，让多个观察者监听一个主题对象，这个主题对象的状态发生改变时会通知所有观察者对象，观察者对象就可以更新自己的状态。
     //实例化一个主题对象，对象中有空的观察者列表
     const dep = new Dep();
@@ -77,7 +77,7 @@ class Observer {
         // Watcher实例在实例化过程中，会读取data中的某个属性，从而触发当前get方法
         const watcher = Dep.target;
         if (watcher) {
-          if (!watcher.depIds.hasOwnProperty(dep.id)) {
+          if (Object.prototype.hasOwnProperty.call(!watcher.depIds, dep.id)) {
             dep.addSub(watcher);
             watcher.depIds[dep.id] = dep;
           }
@@ -127,14 +127,14 @@ data.a = "ddd";
 
 class EventEmitter {
   private handlers: any = {};
-  on(eventType: string, handler: Function) {
+  on(eventType: string, handler: () => void) {
     if (!(eventType in this.handlers)) {
       this.handlers[eventType] = [];
     }
     this.handlers[eventType].push(handler);
     return this;
   }
-  once(eventType: string, handler: Function) {
+  once(eventType: string, handler: () => void) {
     const offFun = (...rest: any[]) => {
       handler.call(this, ...rest);
       this.off(eventType, offFun);
@@ -145,15 +145,17 @@ class EventEmitter {
   emit(eventType: string, ...rest: any[]) {
     const currentEvent = this.handlers[eventType];
     currentEvent &&
-      currentEvent.forEach((handler: Function) => handler.call(this, ...rest));
+      currentEvent.forEach((handler: () => void) =>
+        handler.call(this, ...rest)
+      );
     return this;
   }
-  off(eventType: string, handler: Function) {
+  off(eventType: string, handler: () => void) {
     let currentEvent = this.handlers[eventType];
     const offHandler = handler;
     currentEvent =
       currentEvent &&
-      currentEvent.filter((handler: Function) => offHandler != handler);
+      currentEvent.filter((handler: () => void) => offHandler != handler);
     return this;
   }
 }
@@ -167,14 +169,18 @@ class EventEmitter {
 // Publisher.emit('a', '我是第1次参数1', '我是第1次参数2');
 
 const newObj = new Proxy([0, 1, 2, 3], {
-  get: (target: any, key: string | number, receiver: Function) => {
+  get: (target: any, key: string | number, receiver: () => void) => {
     console.log(`getting ${key}!`);
     return Reflect.get(target, key, receiver);
   },
-  set: (target: any, key: string | number, value: any, receiver: Function) => {
+  set: (
+    target: any,
+    key: string | number,
+    value: any,
+    receiver: () => void
+  ) => {
     console.log(target, key, value, receiver);
-    if (key === "text") {
-    }
+
     return Reflect.set(target, key, value, receiver);
   },
 });

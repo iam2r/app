@@ -1,5 +1,9 @@
 export default class KeyBoard {
-  constructor(keyCode: number | number[], press: Function, release?: Function) {
+  constructor(
+    keyCode: number | number[],
+    press: () => void,
+    release?: () => void
+  ) {
     this.keyCodes = typeof keyCode == "number" ? [keyCode] : keyCode;
     this.press = press;
     this.release = release;
@@ -7,8 +11,8 @@ export default class KeyBoard {
   }
   public isDown = false;
   private keyCodes: number[];
-  private press: Function;
-  private release: Function;
+  private press: () => void;
+  private release: () => void;
 
   private initEvents(remove?: boolean) {
     const eventType = remove

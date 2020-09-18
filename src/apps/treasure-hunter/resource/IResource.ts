@@ -1,5 +1,5 @@
 export interface IResource {
-  [key: string]: string | string[] | object;
+  [key: string]: string | string[];
 }
 
 export interface IResourceSound extends IResource {

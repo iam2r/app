@@ -22,11 +22,17 @@ export class ResourceLoader {
     this.loadResource(res);
   }
 
-  protected loadJson() {}
+  protected loadJson() {
+    console.log("loadJson");
+  }
 
-  protected loadFonts() {}
+  protected loadFonts() {
+    console.log("loadFonts");
+  }
 
-  protected loadSounds() {}
+  protected loadSounds() {
+    console.log("loadSounds");
+  }
 
   private interator(res: IResource, cb: (key: string, path: string) => void) {
     for (const k in res) {

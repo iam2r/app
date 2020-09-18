@@ -1,6 +1,6 @@
 import { debounce } from "lodash";
 export const Debounce = (wait: number, options?: any) => (
-  target: Object,
+  target: any,
   propertyKey: string | symbol,
   descriptor: any
 ) => {

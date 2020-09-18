@@ -38,6 +38,7 @@ module.exports = merge(baseConfig, {
     overlay: true,
     compress: false, // 服务器返回浏览器的时候是否启动gzip压缩
     proxy: config.dev.proxy,
+    quiet: true,
   },
   watchOptions: {
     ignored: /node_modules/, //忽略不用监听变更的目录

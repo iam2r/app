@@ -60,8 +60,6 @@ export default class SwiperSlides extends tsx<
     });
   }
 
-  protected beforeDestroy() {}
-
   private hackAutoPlay() {
     this.swiper.el.onmouseover = () => {
       this.swiper.autoplay && this.swiper.autoplay.stop();

@@ -230,6 +230,9 @@ const plugins = [
     PIXI: "pixi.js",
   }),
   new FriendlyErrorsWebpackPlugin({
+    compilationSuccessInfo: {
+      messages: [`Project is running at http://192.168.1.7:8081/`],
+    },
     additionalTransformers: [transformer],
     additionalFormatters: [formatter],
   }),

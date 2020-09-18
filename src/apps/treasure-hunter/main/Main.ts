@@ -9,6 +9,7 @@ import context, { emitter, config } from "@/apps/treasure-hunter/context";
 import Scence from "./Scence";
 import router from "./router";
 import store from "./store";
+import VueTouch from "vue-touch";
 
 export interface IOptions {
   resource: IResourceMap;
@@ -56,7 +57,6 @@ export default class Main {
   }
 
   private initVue() {
-    const VueTouch = require("vue-touch");
     Vue.config.productionTip = false;
     Vue.use(VueTouch, { name: "v-touch" });
 

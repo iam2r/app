@@ -76,7 +76,7 @@ export const loadSound = (url: string) => {
   });
 };
 
-export const loadImage = (url: string, isBlob: boolean = false) => {
+export const loadImage = (url: string, isBlob = false) => {
   return new Promise((resolve, reject) => {
     if (isBlob) {
       const xhr = new XMLHttpRequest();

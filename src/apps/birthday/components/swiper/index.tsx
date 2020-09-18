@@ -1,4 +1,4 @@
-import { Component, Prop, Emit, Watch, Ref } from "vue-property-decorator";
+import { Component, Prop, Emit, Ref } from "vue-property-decorator";
 import { Component as tsx } from "vue-tsx-support";
 import SwiperClass, { SwiperOptions } from "swiper";
 
@@ -58,8 +58,6 @@ export default class MySwiper extends tsx<
       this.updateScroll();
     });
   }
-
-  protected beforeDestroy() {}
 
   @Emit("setTranslate")
   private onSetTranslate(translate: number) {

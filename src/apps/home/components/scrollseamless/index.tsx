@@ -45,7 +45,7 @@ export default class ScrollSeamless extends tsx<
   @Prop({ default: 1000 })
   private delay: ScrollSeamlessProps["delay"];
 
-  private paused: boolean = true;
+  private paused = true;
 
   private get swiper(): any {
     return (this.$refs.swiper as any).swiper;

@@ -57,7 +57,7 @@ export default class Preloading {
       );
   }
 
-  protected render(h: Function) {
+  protected render(h: any) {
     return (
       <div id="loading-box">
         <div class="sk-cube-grid">

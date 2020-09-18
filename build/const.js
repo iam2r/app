@@ -6,7 +6,6 @@ module.exports = {
     test_react: "test-react",
     treasure_hunter: "treasure-hunter",
     birthday: "birthday",
-    test: "test",
     neteasecloud: "neteasecloud",
   },
 };

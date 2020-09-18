@@ -1,5 +1,9 @@
 export default class JSXUtils {
-  static h(type: string, props: { [key: string]: any } | string, children) {
+  static h(
+    type: string,
+    props: { [key: string]: any } | string,
+    children: any
+  ) {
     if (Array.isArray(props) || typeof props === "string") {
       //react h 函数
       children = props;
@@ -32,7 +36,7 @@ export default class JSXUtils {
       const value = props[key];
       if (typeof value === "object") {
         switch (key) {
-          case "style":
+          case "style": {
             let cssText = "";
             for (const prop in value) {
               const style = value[prop];
@@ -40,9 +44,12 @@ export default class JSXUtils {
             }
             element.setAttribute(key, cssText);
             break;
-          default:
+          }
+
+          default: {
             JSXUtils.setProps(element, value);
             break;
+          }
         }
       } else {
         element.setAttribute(key, value);
