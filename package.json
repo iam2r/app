@@ -102,7 +102,7 @@
     "react-router-dom": "^5.2.0",
     "regenerator-runtime": "^0.13.3",
     "resize-observer-polyfill": "^1.5.1",
-    "swiper": "5.3.7",
+    "swiper": "6.5.1",
     "vant": "^2.4.2",
     "vconsole": "^3.3.4",
     "vue": "^2.6.10",
